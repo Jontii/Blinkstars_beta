@@ -26,7 +26,7 @@ interface SettingsProviderProps {
 const defaultSettings: Settings = {
   direction: 'ltr',
   responsiveFontSizes: true,
-  theme: THEMES.ONE_DARK
+  theme: THEMES.LIGHT
 };
 
 export const restoreSettings = (): Settings | null => {
