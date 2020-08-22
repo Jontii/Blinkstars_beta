@@ -22,7 +22,7 @@ const HomeView: FC = () => {
     >
       <Hero />
       <Features />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <FAQS />
     </Page>
   );

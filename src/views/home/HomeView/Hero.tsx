@@ -13,6 +13,7 @@ import {
 import type { Theme } from 'src/theme';
 import { Link as RouterLink } from 'react-router-dom';
 
+
 interface HeroProps {
   className?: string;
 }
@@ -95,7 +96,7 @@ const Hero: FC<HeroProps> = ({ className, ...rest }) => {
                   variant="body1"
                   color="textSecondary"
                 >
-                                    Blinkstars is the first of its kind to bring Influencer Marketing to the B2B industry. B2B companies are now realizing the value of collaborating with influential experts for marketing purposes.
+                Blinkstars is the first of its kind to bring Influencer Marketing to the B2B industry. B2B companies are now realizing the value of collaborating with influential experts for marketing purposes.
                 </Typography>
               </Box>
               <Box mt={3}>
@@ -166,7 +167,7 @@ const Hero: FC<HeroProps> = ({ className, ...rest }) => {
               <div className={classes.image}>
                 <img
                   alt="Presentation"
-                  src="/static/home/dark-light.png"
+                  src={`${process.env.PUBLIC_URL}/static/home/dark-light.png`}
                 />
               </div>
             </Box>

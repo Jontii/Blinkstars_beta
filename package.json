@@ -3,7 +3,6 @@
   "author": "DeviasIO",
   "licence": "UNLICENSED",
   "version": "3.1.0",
-  "homepage": "https://jontii.github.io/Blinkstars_beta",
   "private": true,
   "scripts": {
     "lint": "eslint ./src",
@@ -133,5 +132,6 @@
     "prettier": "^1.19.1",
     "typescript": "^3.9.7"
   },
-  "proxy": "https://api.blinkstars.com"
+  "proxy": "https://api.blinkstars.com",
+  "homepage": "https://jontii.github.io/Blinkstars_beta/"
 }
