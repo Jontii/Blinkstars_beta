@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "09e541d5074e857f937cb819e6fdcee9",
+    "revision": "09ba613c35ecbb6f5d2013a180f8faf4",
     "url": "/Blinkstars_beta/index.html"
   },
   {
@@ -12,7 +12,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Blinkstars_beta/static/css/20.21e275b0.chunk.css"
   },
   {
-    "revision": "dc0812ab151ca88aa951",
+    "revision": "f5461651ce53369c8be0",
     "url": "/Blinkstars_beta/static/css/main.2b289f01.chunk.css"
   },
   {
@@ -396,8 +396,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Blinkstars_beta/static/js/9.b4ed5a67.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "dc0812ab151ca88aa951",
-    "url": "/Blinkstars_beta/static/js/main.7a3c701b.chunk.js"
+    "revision": "f5461651ce53369c8be0",
+    "url": "/Blinkstars_beta/static/js/main.c37559a7.chunk.js"
   },
   {
     "revision": "ba5faefc7bac1f373ef4",
