@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "48be96ec627b629c7c689def4a7364c4",
+    "revision": "09e541d5074e857f937cb819e6fdcee9",
     "url": "/Blinkstars_beta/index.html"
   },
   {
@@ -12,7 +12,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Blinkstars_beta/static/css/20.21e275b0.chunk.css"
   },
   {
-    "revision": "c9f8ff1b5e0c3f1651c3",
+    "revision": "dc0812ab151ca88aa951",
     "url": "/Blinkstars_beta/static/css/main.2b289f01.chunk.css"
   },
   {
@@ -32,16 +32,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Blinkstars_beta/static/js/10.9ebc5f75.chunk.js"
   },
   {
-    "revision": "a91de8ba440ebc35b96d",
-    "url": "/Blinkstars_beta/static/js/11.298bc442.chunk.js"
+    "revision": "947695af9b50c456b395",
+    "url": "/Blinkstars_beta/static/js/11.bf2448f7.chunk.js"
   },
   {
     "revision": "d3bc5e1dbb63ff4ebe86",
     "url": "/Blinkstars_beta/static/js/12.16461657.chunk.js"
   },
   {
-    "revision": "848deaf08c3a964b9617",
-    "url": "/Blinkstars_beta/static/js/13.56e3c6e9.chunk.js"
+    "revision": "f5ff980f08dcc6d41b20",
+    "url": "/Blinkstars_beta/static/js/13.76cc818a.chunk.js"
   },
   {
     "revision": "66cd4c74713bfecd7a1c",
@@ -84,16 +84,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Blinkstars_beta/static/js/20.61eabf3b.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "27e1e7fcb9e0d9f6489f",
-    "url": "/Blinkstars_beta/static/js/21.e83a78ee.chunk.js"
+    "revision": "f5aaca9149e0c44e30e5",
+    "url": "/Blinkstars_beta/static/js/21.6eb8f64e.chunk.js"
   },
   {
     "revision": "d1cd5158eb783cf92a91",
     "url": "/Blinkstars_beta/static/js/22.f067b5fe.chunk.js"
   },
   {
-    "revision": "f9b2e8e63e75c571c920",
-    "url": "/Blinkstars_beta/static/js/23.acc20a1a.chunk.js"
+    "revision": "e511e6b90be11e269645",
+    "url": "/Blinkstars_beta/static/js/23.71a3f77a.chunk.js"
   },
   {
     "revision": "8ffa390a00f579738199",
@@ -104,8 +104,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Blinkstars_beta/static/js/25.e497e36c.chunk.js"
   },
   {
-    "revision": "acc6781c9d7e82b2118b",
-    "url": "/Blinkstars_beta/static/js/26.80feee65.chunk.js"
+    "revision": "6e537e8632d0f63e4478",
+    "url": "/Blinkstars_beta/static/js/26.d0d5cde6.chunk.js"
   },
   {
     "revision": "e9f827cbf88726c0f640",
@@ -128,16 +128,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Blinkstars_beta/static/js/30.3d3c8807.chunk.js"
   },
   {
-    "revision": "514c4ed2c460e994945c",
-    "url": "/Blinkstars_beta/static/js/31.877bc768.chunk.js"
+    "revision": "8771248bad5fdb401ca6",
+    "url": "/Blinkstars_beta/static/js/31.126b6294.chunk.js"
   },
   {
     "revision": "c25ef31f2c8aa883c4bb",
     "url": "/Blinkstars_beta/static/js/32.6be74d4b.chunk.js"
   },
   {
-    "revision": "66dd5fbf41f7d13cc6fe",
-    "url": "/Blinkstars_beta/static/js/33.7c5d873d.chunk.js"
+    "revision": "d8dfc38437bc5bde3614",
+    "url": "/Blinkstars_beta/static/js/33.236f3952.chunk.js"
   },
   {
     "revision": "07d191c4a05fdbfe19b0",
@@ -184,8 +184,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Blinkstars_beta/static/js/41.c2d9e258.chunk.js"
   },
   {
-    "revision": "0c68b6a7339b196e29e2",
-    "url": "/Blinkstars_beta/static/js/42.78504ac3.chunk.js"
+    "revision": "55aebaed5c7993b457ee",
+    "url": "/Blinkstars_beta/static/js/42.d326da14.chunk.js"
   },
   {
     "revision": "6c23f2e5aaa32563cfc0",
@@ -204,8 +204,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Blinkstars_beta/static/js/45.1d8b3771.chunk.js"
   },
   {
-    "revision": "1a8255a5f0bd4132bfee",
-    "url": "/Blinkstars_beta/static/js/46.c30f2100.chunk.js"
+    "revision": "4692b11e8971db7eb0e4",
+    "url": "/Blinkstars_beta/static/js/46.75077616.chunk.js"
   },
   {
     "revision": "9b5f2026bef6a3a9d76d",
@@ -344,8 +344,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Blinkstars_beta/static/js/75.cb2fd226.chunk.js"
   },
   {
-    "revision": "3f7f64598161f23feded",
-    "url": "/Blinkstars_beta/static/js/76.eccc9c04.chunk.js"
+    "revision": "2eeabf1a386a6bd927af",
+    "url": "/Blinkstars_beta/static/js/76.c2d9aea3.chunk.js"
   },
   {
     "revision": "29f6ee3955e9f4f11591",
@@ -376,8 +376,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Blinkstars_beta/static/js/81.fda092a4.chunk.js"
   },
   {
-    "revision": "0e71a935bda76caffcb0",
-    "url": "/Blinkstars_beta/static/js/82.b5767585.chunk.js"
+    "revision": "024c0bb488ef202a3ec0",
+    "url": "/Blinkstars_beta/static/js/82.01d5c4dd.chunk.js"
   },
   {
     "revision": "9853aa2949fec2dce1db",
@@ -396,11 +396,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Blinkstars_beta/static/js/9.b4ed5a67.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c9f8ff1b5e0c3f1651c3",
-    "url": "/Blinkstars_beta/static/js/main.ba154821.chunk.js"
+    "revision": "dc0812ab151ca88aa951",
+    "url": "/Blinkstars_beta/static/js/main.7a3c701b.chunk.js"
   },
   {
-    "revision": "594ead6cdcd5dc988ca5",
-    "url": "/Blinkstars_beta/static/js/runtime-main.8b8ec782.js"
+    "revision": "ba5faefc7bac1f373ef4",
+    "url": "/Blinkstars_beta/static/js/runtime-main.e54e5537.js"
   }
 ]);
