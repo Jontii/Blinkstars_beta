@@ -9,7 +9,7 @@ const JWT_EXPIRES_IN = '2 days';
 const users = [
   {
     id: '5e86809283e28b96d2d38537',
-    avatar: '/static/images/avatars/avatar_6.png',
+    avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_6.png`,
     canHire: false,
     country: 'USA',
     email: 'influencer@influencer.io',
@@ -23,7 +23,7 @@ const users = [
   },
   {
     id: '5e86809283e28b96d2d38537',
-    avatar: '/static/images/avatars/avatar_2.png',
+    avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_2.png`,
     canHire: false,
     country: 'USA',
     email: 'company@amd.io',

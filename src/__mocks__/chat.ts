@@ -11,7 +11,7 @@ import type {
 let contacts: Contact[] = [
   {
     id: '5e8891ab188cd2855e6029b7',
-    avatar: '/static/images/avatars/avatar_1.png',
+    avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_1.png`,
     isActive: true,
     lastActivity: moment()
       .toDate()
@@ -21,7 +21,7 @@ let contacts: Contact[] = [
   },
   {
     id: '5e887a62195cc5aef7e8ca5d',
-    avatar: '/static/images/avatars/avatar_2.png',
+    avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_2.png`,
     isActive: false,
     lastActivity: moment()
       .subtract(2, 'hours')
@@ -32,7 +32,7 @@ let contacts: Contact[] = [
   },
   {
     id: '5e887ac47eed253091be10cb',
-    avatar: '/static/images/avatars/avatar_3.png',
+    avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_3.png`,
     isActive: false,
     lastActivity: moment()
       .subtract(15, 'minutes')
@@ -43,7 +43,7 @@ let contacts: Contact[] = [
   },
   {
     id: '5e887b209c28ac3dd97f6db5',
-    avatar: '/static/images/avatars/avatar_4.png',
+    avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_4.png`,
     isActive: true,
     lastActivity: moment()
       .toDate()
@@ -53,7 +53,7 @@ let contacts: Contact[] = [
   },
   {
     id: '5e887b7602bdbc4dbb234b27',
-    avatar: '/static/images/avatars/avatar_5.png',
+    avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_5.png`,
     isActive: true,
     lastActivity: moment()
       .toDate()
@@ -63,7 +63,7 @@ let contacts: Contact[] = [
   },
   {
     id: '5e86805e2bafd54f66cc95c3',
-    avatar: '/static/images/avatars/avatar_7.png',
+    avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_7.png`,
     isActive: false,
     lastActivity: moment()
       .subtract(2, 'days')
@@ -74,7 +74,7 @@ let contacts: Contact[] = [
   },
   {
     id: '5e887a1fbefd7938eea9c981',
-    avatar: '/static/images/avatars/avatar_8.png',
+    avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_8.png`,
     isActive: false,
     lastActivity: moment()
       .subtract(6, 'hours')
@@ -85,7 +85,7 @@ let contacts: Contact[] = [
   },
   {
     id: '5e887d0b3d090c1b8f162003',
-    avatar: '/static/images/avatars/avatar_9.png',
+    avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.png`,
     isActive: true,
     lastActivity: moment()
       .toDate()
@@ -95,7 +95,7 @@ let contacts: Contact[] = [
   },
   {
     id: '5e88792be2d4cfb4bf0971d9',
-    avatar: '/static/images/avatars/avatar_10.png',
+    avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_10.png`,
     isActive: true,
     lastActivity: moment()
       .toDate()
@@ -105,7 +105,7 @@ let contacts: Contact[] = [
   },
   {
     id: '5e8877da9a65442b11551975',
-    avatar: '/static/images/avatars/avatar_11.png',
+    avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_11.png`,
     isActive: true,
     lastActivity: moment()
       .toDate()
@@ -115,7 +115,7 @@ let contacts: Contact[] = [
   },
   {
     id: '5e8680e60cba5019c5ca6fda',
-    avatar: '/static/images/avatars/avatar_12.png',
+    avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_12.png`,
     isActive: true,
     lastActivity: moment()
       .toDate()
@@ -187,7 +187,7 @@ let threads: Thread[] = [
       {
         id: '5e867f2dba984a3f78b33526',
         attachments: [],
-        body: '/static/images/projects/project_4.png',
+        body: `${process.env.PUBLIC_URL}/static/images/projects/project_4.png`,
         contentType: 'image',
         createdAt: moment()
           .subtract(1, 'minute')
@@ -199,13 +199,13 @@ let threads: Thread[] = [
     participants: [
       {
         id: '5e86809283e28b96d2d38537',
-        avatar: '/static/images/avatars/avatar_6.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_6.png`,
         name: 'Katarina Smith',
         username: 'katarina.smith'
       },
       {
         id: '5e86805e2bafd54f66cc95c3',
-        avatar: '/static/images/avatars/avatar_7.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_7.png`,
         name: 'Adam Denisov',
         username: 'adam.denisov'
       }
@@ -253,19 +253,19 @@ let threads: Thread[] = [
     participants: [
       {
         id: '5e86809283e28b96d2d38537',
-        avatar: '/static/images/avatars/avatar_6.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_6.png`,
         name: 'Katarina Smith',
         username: 'katarina.smith'
       },
       {
         id: '5e8680e60cba5019c5ca6fda',
-        avatar: '/static/images/avatars/avatar_12.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_12.png`,
         name: 'Merrile Burgett',
         username: 'merrile.burgett'
       },
       {
         id: '5e8891ab188cd2855e6029b7',
-        avatar: '/static/images/avatars/avatar_1.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_1.png`,
         name: 'Cooper Murray',
         username: 'cooper.murray'
       }
@@ -436,7 +436,7 @@ mock.onPost('/api/chat/messages/new').reply((request) => {
     // On server get current user from request
     const user = {
       id: '5e86809283e28b96d2d38537',
-      avatar: '/static/images/avatars/avatar_6.png',
+      avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_6.png`,
       name: 'Katarina Smith',
       username: 'katarina.smith'
     };

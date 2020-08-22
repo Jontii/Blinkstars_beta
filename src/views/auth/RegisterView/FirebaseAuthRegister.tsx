@@ -64,7 +64,7 @@ const FirebaseAuthRegister: FC<FirebaseAuthRegisterProps> = ({ className, ...res
         <img
           alt="Google"
           className={classes.providerIcon}
-          src="/static/images/google.svg"
+          src={`${process.env.PUBLIC_URL}/static/images/google.svg`}
         />
         Register with Google
       </Button>

@@ -62,7 +62,7 @@ const FirebaseAuthLogin: FC<FirebaseAuthLoginProps> = ({ className, ...rest }) =
         <img
           alt="Google"
           className={classes.providerIcon}
-          src="/static/images/google.svg"
+          src={`${process.env.PUBLIC_URL}/static/images/google.svg`}
         />
         Sign in with Google
       </Button>

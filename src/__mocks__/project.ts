@@ -8,7 +8,7 @@ mock.onGet('/api/projects/overview/projects').reply(() => {
       id: '5e8dcf105a6732b3ed82cf7a',
       author: {
         id: '5e86809283e28b96d2d38537',
-        avatar: '/static/images/avatars/avatar_6.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_6.png`,
         name: 'Katarina Smith'
       },
       budget: 2394.00,
@@ -17,7 +17,7 @@ mock.onGet('/api/projects/overview/projects').reply(() => {
       isLiked: true,
       likesCount: 57,
       location: 'Europe',
-      image: '/static/images/projects/project_3.png',
+      image: `${process.env.PUBLIC_URL}/static/images/projects/project_3.png`,
       rating: 3,
       membersCount: 5,
       technology: 'Angular JS',
@@ -48,7 +48,7 @@ mock.onGet('/api/projects/projects').reply(() => {
       id: '5e8dcef8f95685ce21f16f3d',
       author: {
         id: '5e887b7602bdbc4dbb234b27',
-        avatar: '/static/images/avatars/avatar_5.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_5.png`,
         name: 'Anje Keizer'
       },
       budget: 6125.00,
@@ -57,7 +57,7 @@ mock.onGet('/api/projects/projects').reply(() => {
       isLiked: true,
       likesCount: 7,
       location: 'Europe',
-      image: '/static/images/projects/project_1.png',
+      image: `${process.env.PUBLIC_URL}/static/images/projects/project_1.png`,
       rating: 5,
       membersCount: 2,
       title: 'Telia new phone',
@@ -71,7 +71,7 @@ mock.onGet('/api/projects/projects').reply(() => {
       id: '5e8dcf076c50b9d8e756a5a2',
       author: {
         id: '5e887d0b3d090c1b8f162003',
-        avatar: '/static/images/avatars/avatar_9.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.png`,
         name: 'Emilee Simchenko'
       },
       budget: 4205.00,
@@ -80,7 +80,7 @@ mock.onGet('/api/projects/projects').reply(() => {
       isLiked: true,
       likesCount: 12,
       location: 'Europe',
-      image: '/static/images/projects/project_2.png',
+      image: `${process.env.PUBLIC_URL}/static/images/projects/project_2.png`,
       rating: 4.5,
       membersCount: 3,
       title: 'Volvo new car model',
@@ -94,7 +94,7 @@ mock.onGet('/api/projects/projects').reply(() => {
       id: '5e8dcf105a6732b3ed82cf7a',
       author: {
         id: '5e88792be2d4cfb4bf0971d9',
-        avatar: '/static/images/avatars/avatar_10.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_10.png`,
         name: 'Elliott Stone'
       },
       budget: 2394.00,
@@ -103,7 +103,7 @@ mock.onGet('/api/projects/projects').reply(() => {
       isLiked: true,
       likesCount: 18,
       location: 'Europe',
-      image: '/static/images/projects/project_3.png',
+      image: `${process.env.PUBLIC_URL}/static/images/projects/project_3.png`,
       rating: 4.7,
       membersCount: 8,
       title: 'Apple new Iphone',
@@ -117,13 +117,13 @@ mock.onGet('/api/projects/projects').reply(() => {
       id: '5e8dcf1cc7155d0e947dc27f',
       author: {
         id: '5e8877da9a65442b11551975',
-        avatar: '/static/images/avatars/avatar_11.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_11.png`,
         name: 'Shen Zhi'
       },
       budget: 2784.00,
       caption: 'We\'re looking for experienced Developers and Product Designers to come aboard and help us build succesful businesses through software.',
       currency: '$',
-      image: '/static/images/projects/project_4.png',
+      image: `${process.env.PUBLIC_URL}/static/images/projects/project_4.png`,
       isLiked: false,
       likesCount: 1,
       location: 'Europe',
@@ -140,7 +140,7 @@ mock.onGet('/api/projects/projects').reply(() => {
       id: '5e8dcf252313876001e83221',
       author: {
         id: '5e887ac47eed253091be10cb',
-        avatar: '/static/images/avatars/avatar_3.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_3.png`,
         name: 'Cao Yu'
       },
       budget: 5835.00,
@@ -149,7 +149,7 @@ mock.onGet('/api/projects/projects').reply(() => {
       isLiked: false,
       likesCount: 7,
       location: 'Europe',
-      image: '/static/images/projects/project_5.jpg',
+      image: `${process.env.PUBLIC_URL}/static/images/projects/project_5.jpg`,
       rating: 5,
       membersCount: 2,
       title: 'H&M new clothing line',
@@ -163,7 +163,7 @@ mock.onGet('/api/projects/projects').reply(() => {
       id: '5e8dcf4250d77c954b04902e',
       author: {
         id: '5e887b7602bdbc4dbb234b27',
-        avatar: '/static/images/avatars/avatar_5.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_5.png`,
         name: 'Anje Keizer'
       },
       budget: 4255.00,
@@ -245,9 +245,9 @@ mock.onGet('/api/projects/projects/1').reply(() => {
     applicants: [
       {
         id: '5e887a62195cc5aef7e8ca5d',
-        avatar: '/static/images/avatars/avatar_2.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_2.png`,
         commonConnections: 12,
-        cover: '/static/images/covers/cover_2.jpg',
+        cover: `${process.env.PUBLIC_URL}/static/images/covers/cover_2.jpg`,
         labels: [
           'User Experience',
           'FrontEnd development',
@@ -259,9 +259,9 @@ mock.onGet('/api/projects/projects/1').reply(() => {
       },
       {
         id: '5e887ac47eed253091be10cb',
-        avatar: '/static/images/avatars/avatar_3.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_3.png`,
         commonConnections: 5,
-        cover: '/static/images/covers/cover_3.jpg',
+        cover: `${process.env.PUBLIC_URL}/static/images/covers/cover_3.jpg`,
         labels: [
           'User Interface',
           'FullStack development',
@@ -272,9 +272,9 @@ mock.onGet('/api/projects/projects/1').reply(() => {
       },
       {
         id: '5e86809283e28b96d2d38537',
-        avatar: '/static/images/avatars/avatar_6.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_6.png`,
         commonConnections: 17,
-        cover: '/static/images/covers/cover_1.jpg',
+        cover: `${process.env.PUBLIC_URL}/static/images/covers/cover_1.jpg`,
         labels: [
           'BackEnd development',
           'Firebase',
@@ -286,7 +286,7 @@ mock.onGet('/api/projects/projects/1').reply(() => {
     ],
     author: {
       id: '5e887d0b3d090c1b8f162003',
-      avatar: '/static/images/avatars/avatar_9.png',
+      avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.png`,
       name: 'Emilee Simchenko'
     },
     budget: 12500.00,
@@ -311,7 +311,7 @@ The project has been created in Sketch so let me know if there are any problems 
         mimeType: 'image/png',
         name: 'example-project1.jpg',
         size: 1024 * 1024 * 3,
-        url: '/static/images/projects/project_4.png'
+        url: `${process.env.PUBLIC_URL}/static/images/projects/project_4.png`
       },
       {
         id: '5e8dd0784431995a30eb2586',
@@ -325,7 +325,7 @@ The project has been created in Sketch so let me know if there are any problems 
         mimeType: 'image/png',
         name: 'example-project2.jpg',
         size: 1024 * 1024 * 2,
-        url: '/static/images/projects/project_1.png'
+        url: `${process.env.PUBLIC_URL}/static/images/projects/project_1.png`
       }
     ],
     isActive: true,
@@ -334,19 +334,19 @@ The project has been created in Sketch so let me know if there are any problems 
     members: [
       {
         id: '5e887a62195cc5aef7e8ca5d',
-        avatar: '/static/images/avatars/avatar_2.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_2.png`,
         bio: 'Influencer',
         name: 'Ekaterina Tankova'
       },
       {
         id: '5e887ac47eed253091be10cb',
-        avatar: '/static/images/avatars/avatar_3.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_3.png`,
         bio: 'Influencer',
         name: 'Cao Yu'
       },
       {
         id: '5e887b7602bdbc4dbb234b27',
-        avatar: '/static/images/avatars/avatar_6.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_6.png`,
         bio: 'Influencer',
         name: 'Katarina Smith'
       }
@@ -356,7 +356,7 @@ The project has been created in Sketch so let me know if there are any problems 
       {
         id: '5f0366cd843161f193ebadd4',
         author: {
-          avatar: '/static/images/avatars/avatar_2.png',
+          avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_2.png`,
           name: 'Ekaterina Tankova'
         },
         comment: 'Great company, providing an awesome & easy to use product.',
@@ -369,7 +369,7 @@ The project has been created in Sketch so let me know if there are any problems 
       {
         id: 'to33twsyjphcfj55y3t07261',
         author: {
-          avatar: '/static/images/avatars/avatar_7.png',
+          avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_7.png`,
           name: 'Adam Denisov',
         },
         comment: 'Not the best people managers, poor management skills, poor career development programs. Communication from corporate & leadership isn\'t always clear and is sometime one-sided. Low pay compared to FANG.',
@@ -382,7 +382,7 @@ The project has been created in Sketch so let me know if there are any problems 
       {
         id: '6z9dwxjzkqbmxuluxx2681jd',
         author: {
-          avatar: '/static/images/avatars/avatar_3.png',
+          avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_3.png`,
           name: 'Cao Yu',
         },
         comment: 'I have been working with this company full-time. Great for the work life balance. Cons, decentralized decision making process across the organization.',

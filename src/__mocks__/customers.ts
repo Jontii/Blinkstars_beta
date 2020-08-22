@@ -11,7 +11,7 @@ mock.onGet('/api/customers').reply(() => {
   const customers: Customer[] = [
     {
       id: '5e887ac47eed253091be10cb',
-      avatar: '/static/images/avatars/avatar_3.png',
+      avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_3.png`,
       city: 'Cleveland',
       country: 'USA',
       currency: '$',
@@ -31,7 +31,7 @@ mock.onGet('/api/customers').reply(() => {
     },
     {
       id: '5e887b209c28ac3dd97f6db5',
-      avatar: '/static/images/avatars/avatar_4.png',
+      avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_4.png`,
       city: 'Atlanta',
       country: 'USA',
       currency: '$',
@@ -51,7 +51,7 @@ mock.onGet('/api/customers').reply(() => {
     },
     {
       id: '5e887b7602bdbc4dbb234b27',
-      avatar: '/static/images/avatars/avatar_5.png',
+      avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_5.png`,
       city: 'North Canton',
       country: 'USA',
       currency: '$',
@@ -71,7 +71,7 @@ mock.onGet('/api/customers').reply(() => {
     },
     {
       id: '5e86809283e28b96d2d38537',
-      avatar: '/static/images/avatars/avatar_6.png',
+      avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_6.png`,
       city: 'Madrid',
       country: 'Spain',
       currency: '$',
@@ -91,7 +91,7 @@ mock.onGet('/api/customers').reply(() => {
     },
     {
       id: '5e86805e2bafd54f66cc95c3',
-      avatar: '/static/images/avatars/avatar_7.png',
+      avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_7.png`,
       city: 'San Diego',
       country: 'USA',
       currency: '$',
@@ -111,7 +111,7 @@ mock.onGet('/api/customers').reply(() => {
     },
     {
       id: '5e887a1fbefd7938eea9c981',
-      avatar: '/static/images/avatars/avatar_8.png',
+      avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_8.png`,
       city: 'Berkeley',
       country: 'USA',
       currency: '$',
@@ -131,7 +131,7 @@ mock.onGet('/api/customers').reply(() => {
     },
     {
       id: '5e887d0b3d090c1b8f162003',
-      avatar: '/static/images/avatars/avatar_9.png',
+      avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_9.png`,
       currency: '$',
       email: 'emilee.simchenko@devias.io',
       hasAcceptedMarketing: true,
@@ -151,7 +151,7 @@ mock.onGet('/api/customers').reply(() => {
     },
     {
       id: '5e88792be2d4cfb4bf0971d9',
-      avatar: '/static/images/avatars/avatar_10.png',
+      avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_10.png`,
       city: 'Los Angeles',
       country: 'USA',
       currency: '$',
@@ -171,7 +171,7 @@ mock.onGet('/api/customers').reply(() => {
     },
     {
       id: '5e8877da9a65442b11551975',
-      avatar: '/static/images/avatars/avatar_11.png',
+      avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_11.png`,
       city: 'Murray',
       country: 'USA',
       email: 'shen.zhi@devias.io',
@@ -190,7 +190,7 @@ mock.onGet('/api/customers').reply(() => {
     },
     {
       id: '5e8680e60cba5019c5ca6fda',
-      avatar: '/static/images/avatars/avatar_12.png',
+      avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_12.png`,
       city: 'Salt Lake City',
       country: 'USA',
       currency: '$',

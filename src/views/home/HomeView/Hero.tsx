@@ -161,7 +161,7 @@ const Hero: FC<HeroProps> = ({ className, ...rest }) => {
               <div className={classes.shape}>
                 <img
                   alt="Shapes"
-                  src="/static/home/shapes.svg"
+                  src={`${process.env.PUBLIC_URL}/static/home/shapes.svg`}
                 />
               </div>
               <div className={classes.image}>

@@ -65,7 +65,7 @@ const NotFoundView: FC = () => {
           <img
             alt="Under development"
             className={classes.image}
-            src="/static/images/undraw_page_not_found_su7k.svg"
+            src={`${process.env.PUBLIC_URL}/static/images/undraw_page_not_found_su7k.svg`}
           />
         </Box>
         <Box

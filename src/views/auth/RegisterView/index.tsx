@@ -22,9 +22,9 @@ import FirebaseAuthRegister from './FirebaseAuthRegister';
 import JWTRegister from './JWTRegister';
 
 const methodIcons = {
-  'Auth0': '/static/images/auth0.svg',
-  'FirebaseAuth': '/static/images/firebase.svg',
-  'JWT': '/static/images/jwt.svg'
+  'Auth0': `${process.env.PUBLIC_URL}/static/images/auth0.svg`,
+  'FirebaseAuth': `${process.env.PUBLIC_URL}/static/images/firebase.svg`,
+  'JWT': `${process.env.PUBLIC_URL}/static/images/jwt.svg`
 };
 
 const useStyles = makeStyles((theme: Theme) => ({

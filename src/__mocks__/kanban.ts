@@ -59,7 +59,7 @@ const board: Board = {
           message: 'This is a comment'
         }
       ],
-      cover: '/static/images/projects/project_3.png',
+      cover: `${process.env.PUBLIC_URL}/images/projects/project_3.png`,
       description: 'Duis condimentum lacus finibus felis pellentesque, ac auctor nibh fermentum. Duis sed dui ante. Phasellus id eros tincidunt, dictum lorem vitae, pellentesque sem. Aenean eu enim sit amet mauris rhoncus mollis. Sed enim turpis, porta a felis et, luctus faucibus nisi. Phasellus et metus fermentum, ultrices arcu aliquam, facilisis justo. Cras nunc nunc, elementum sed euismod ut, maximus eget nibh. Phasellus condimentum lorem neque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce sagittis pharetra eleifend. Suspendisse potenti.',
       due: moment()
         .add(7, 'days')
@@ -142,27 +142,27 @@ const board: Board = {
   members: [
     {
       id: '5e887a62195cc5aef7e8ca5d',
-      avatar: '/static/images/avatars/avatar_2.png',
+      avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_2.png`,
       name: 'Ekaterina Tankova',
     },
     {
       id: '5e887ac47eed253091be10cb',
-      avatar: '/static/images/avatars/avatar_3.png',
+      avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_3.png`,
       name: 'Cao Yu'
     },
     {
       id: '5e887b209c28ac3dd97f6db5',
-      avatar: '/static/images/avatars/avatar_4.png',
+      avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_4.png`,
       name: 'Alex Richardson'
     },
     {
       id: '5e887b7602bdbc4dbb234b27',
-      avatar: '/static/images/avatars/avatar_5.png',
+      avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_5.png`,
       name: 'Anje Keizer'
     },
     {
       id: '5e86809283e28b96d2d38537',
-      avatar: '/static/images/avatars/avatar_6.png',
+      avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_6.png`,
       name: 'Katarina Smith'
     }
   ]

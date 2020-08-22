@@ -9,7 +9,7 @@ const Logo: FC<LogoProps> = (props) => {
   return (
     <img
       alt="Logo"
-      src="/static/logo.svg"
+      src={`${process.env.PUBLIC_URL}/static/logo.svg`}
       {...props}
     />
   );

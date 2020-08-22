@@ -98,7 +98,7 @@ const PricingView: FC = () => {
                 <img
                   alt="Product"
                   className={classes.productImage}
-                  src="/static/images/products/product_standard.svg"
+                  src={`${process.env.PUBLIC_URL}/static/images/products/product_standard.svg`}
                 />
                 <Typography
                   component="h3"
@@ -171,7 +171,7 @@ const PricingView: FC = () => {
                 <img
                   alt="Product"
                   className={classes.productImage}
-                  src="/static/images/products/product_premium--outlined.svg"
+                  src={`${process.env.PUBLIC_URL}/static/images/products/product_premium--outlined.svg`}
                 />
                 <Typography
                   component="h3"
@@ -244,7 +244,7 @@ const PricingView: FC = () => {
                 <img
                   alt="Product"
                   className={classes.productImage}
-                  src="/static/images/products/product_extended.svg"
+                  src={`${process.env.PUBLIC_URL}/static/images/products/product_extended.svg`}
                 />
                 <Typography
                   component="h3"

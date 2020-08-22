@@ -108,7 +108,7 @@ Ekaterina Tankova
     from: {
       name: 'Ekaterina Tankova',
       email: 'ekaterina.tankova@devias.io',
-      avatar: '/static/images/avatars/avatar_2.png'
+      avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_2.png`
     },
     to: [
       {
@@ -135,7 +135,7 @@ Hey, nice projects! I really liked the one in react. What's your quote on kinda 
     from: {
       name: 'Adam Denisov',
       email: 'adam.denisov@devias.io',
-      avatar: '/static/images/avatars/avatar_7.png'
+      avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_7.png`
     },
     to: [
       {
@@ -162,7 +162,7 @@ Dear Shen, Your flight is coming up soon. Please don’t forget to check in for 
     from: {
       name: 'Miller Edwards',
       email: 'miller.edwards@devias.io',
-      avatar: '/static/images/avatars/avatar_8.png'
+      avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_8.png`
     },
     to: [
       {
@@ -189,7 +189,7 @@ My market leading client has another fantastic opportunity for an experienced So
     from: {
       name: 'Cao Yu',
       email: 'cao.yu@devias.io',
-      avatar: '/static/images/avatars/avatar_3.png'
+      avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_3.png`
     },
     to: [
       {

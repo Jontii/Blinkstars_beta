@@ -9,10 +9,10 @@ import type {
 mock.onGet('/api/social/profile').reply(() => {
   const profile: Profile = {
     id: '5e86809283e28b96d2d38537',
-    avatar: '/static/images/avatars/avatar_6.png',
+    avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_6.png`,
     bio: 'Product Designer',
     connectedStatus: 'not_connected',
-    cover: '/static/images/covers/cover_1.jpg',
+    cover: `${process.env.PUBLIC_URL}/static/images/covers/cover_1.jpg`,
     currentCity: 'Bucharest',
     currentJob: {
       company: 'Devias IO',
@@ -36,28 +36,28 @@ mock.onGet('/api/social/connections').reply(() => {
   const connections: Connection[] = [
     {
       id: '5e887ac47eed253091be10cb',
-      avatar: '/static/images/avatars/avatar_3.png',
+      avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_3.png`,
       commonConnections: 10,
       name: 'Cao Yu',
       status: 'rejected'
     },
     {
       id: '5e887b209c28ac3dd97f6db5',
-      avatar: '/static/images/avatars/avatar_4.png',
+      avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_4.png`,
       commonConnections: 8,
       name: 'Alex Richardson',
       status: 'pending'
     },
     {
       id: '5e86805e2bafd54f66cc95c3',
-      avatar: '/static/images/avatars/avatar_7.png',
+      avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_7.png`,
       commonConnections: 5,
       name: 'Adam Denisov',
       status: 'not_connected'
     },
     {
       id: '5e887a1fbefd7938eea9c981',
-      avatar: '/static/images/avatars/avatar_8.png',
+      avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_8.png`,
       commonConnections: 1,
       name: 'Miller Edwards',
       status: 'connected'
@@ -73,7 +73,7 @@ mock.onGet('/api/social/posts').reply(() => {
       id: '5e887faca2b7a1ddce01221a',
       author: {
         id: '5e86809283e28b96d2d38537',
-        avatar: '/static/images/avatars/avatar_6.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_6.png`,
         name: 'Katarina Smith'
       },
       comments: [
@@ -81,7 +81,7 @@ mock.onGet('/api/social/posts').reply(() => {
           id: '5e887fc17162ba254da30771',
           author: {
             id: '5e887b7602bdbc4dbb234b27',
-            avatar: '/static/images/avatars/avatar_5.png',
+            avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_5.png`,
             name: 'Anje Keizer'
           },
           createdAt: moment()
@@ -94,7 +94,7 @@ mock.onGet('/api/social/posts').reply(() => {
           id: '5e887fc759bebe8d5d54a2e5',
           author: {
             id: '5e887a1fbefd7938eea9c981',
-            avatar: '/static/images/avatars/avatar_8.png',
+            avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_8.png`,
             name: 'Miller Edwards'
           },
           createdAt: moment()
@@ -110,14 +110,14 @@ mock.onGet('/api/social/posts').reply(() => {
         .getTime(),
       isLiked: true,
       likes: 24,
-      media: '/static/images/posts/post_1.png',
+      media: `${process.env.PUBLIC_URL}/static/images/posts/post_1.png`,
       message: 'Just made this home screen for a project, what-cha thinkin?'
     },
     {
       id: '5e887faf03e78a5359765636',
       author: {
         id: '5e86809283e28b96d2d38537',
-        avatar: '/static/images/avatars/avatar_6.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_6.png`,
         name: 'Katarina Smith'
       },
       comments: [
@@ -125,7 +125,7 @@ mock.onGet('/api/social/posts').reply(() => {
           id: '5e887fde4992eca63b9e9ef5',
           author: {
             id: '5e8877da9a65442b11551975',
-            avatar: '/static/images/avatars/avatar_11.png',
+            avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_11.png`,
             name: 'Shen Zhi'
           },
           createdAt: moment()
@@ -138,7 +138,7 @@ mock.onGet('/api/social/posts').reply(() => {
           id: '5e887feb11b7add1ebfcca78',
           author: {
             id: '5e887b209c28ac3dd97f6db5',
-            avatar: '/static/images/avatars/avatar_4.png',
+            avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_4.png`,
             name: 'Alex Richardson'
           },
           createdAt: moment()
@@ -167,7 +167,7 @@ mock.onGet('/api/social/feed').reply(() => {
       id: '5e887fa38598b6fe61667757',
       author: {
         id: '5e88792be2d4cfb4bf0971d9',
-        avatar: '/static/images/avatars/avatar_10.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_10.png`,
         name: 'Elliott Stone'
       },
       comments: [
@@ -175,7 +175,7 @@ mock.onGet('/api/social/feed').reply(() => {
           id: '5e887fb6c648772b52f860a8',
           author: {
             id: '5e8680e60cba5019c5ca6fda',
-            avatar: '/static/images/avatars/avatar_12.png',
+            avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_12.png`,
             name: 'Merrile Burgett'
           },
           createdAt: moment()
@@ -197,7 +197,7 @@ mock.onGet('/api/social/feed').reply(() => {
       id: '5e887faca2b7a1ddce01221a',
       author: {
         id: '5e86809283e28b96d2d38537',
-        avatar: '/static/images/avatars/avatar_6.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_6.png`,
         name: 'Katarina Zhi'
       },
       comments: [
@@ -205,7 +205,7 @@ mock.onGet('/api/social/feed').reply(() => {
           id: '5e887fc17162ba254da30771',
           author: {
             id: '5e887b7602bdbc4dbb234b27',
-            avatar: '/static/images/avatars/avatar_5.png',
+            avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_5.png`,
             name: 'Anje Keizer'
           },
           createdAt: moment()
@@ -218,7 +218,7 @@ mock.onGet('/api/social/feed').reply(() => {
           id: '5e887fc759bebe8d5d54a2e5',
           author: {
             id: '5e887a1fbefd7938eea9c981',
-            avatar: '/static/images/avatars/avatar_8.png',
+            avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_8.png`,
             name: 'Miller Edwards'
           },
           createdAt: moment()
@@ -234,14 +234,14 @@ mock.onGet('/api/social/feed').reply(() => {
         .getTime(),
       isLiked: true,
       likes: 24,
-      media: '/static/images/posts/post_1.png',
+      media: `${process.env.PUBLIC_URL}/static/images/posts/post_1.png`,
       message: 'Just made this home screen for a project, what-cha thinkin?'
     },
     {
       id: '5e887faf03e78a5359765636',
       author: {
         id: '5e86809283e28b96d2d38537',
-        avatar: '/static/images/avatars/avatar_6.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_6.png`,
         name: 'Katarina Smith'
       },
       comments: [
@@ -250,7 +250,7 @@ mock.onGet('/api/social/feed').reply(() => {
           author: {
             id: '5e8877da9a65442b11551975',
             name: 'Shen Zhi',
-            avatar: '/static/images/avatars/avatar_11.png'
+            avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_11.png`
           },
           createdAt: moment()
             .subtract(3, 'hours')
@@ -263,7 +263,7 @@ mock.onGet('/api/social/feed').reply(() => {
           author: {
             id: '5e887b209c28ac3dd97f6db5',
             name: 'Alex Richardson',
-            avatar: '/static/images/avatars/avatar_4.png'
+            avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_4.png`
           },
           createdAt: moment()
             .subtract(2, 'hours')

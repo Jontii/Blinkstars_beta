@@ -20,7 +20,7 @@ mock.onGet('/api/reports/customer-activity').reply(() => {
         .getTime(),
       customer: {
         id: '5e887a62195cc5aef7e8ca5d',
-        avatar: '/static/images/avatars/avatar_2.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_2.png`,
         name: 'Ekaterina Tankova',
       },
       description: 'Created account',
@@ -35,7 +35,7 @@ mock.onGet('/api/reports/customer-activity').reply(() => {
       customer: {
         id: '5e887ac47eed253091be10cb',
         name: 'Cao Yu',
-        avatar: '/static/images/avatars/avatar_3.png'
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_3.png`
       },
       description: 'Subscription Purchase',
       type: 'payment'
@@ -49,7 +49,7 @@ mock.onGet('/api/reports/customer-activity').reply(() => {
       customer: {
         id: '5e887b209c28ac3dd97f6db5',
         name: 'Alex Richardson',
-        avatar: '/static/images/avatars/avatar_4.png'
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_4.png`
       },
       description: 'Submitted a ticket',
       type: 'ticket_create'
@@ -63,7 +63,7 @@ mock.onGet('/api/reports/customer-activity').reply(() => {
       customer: {
         id: '5e887b7602bdbc4dbb234b27',
         name: 'Anje Keizer',
-        avatar: '/static/images/avatars/avatar_5.png'
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_5.png`
       },
       description: 'Subscription Purchase',
       type: 'payment'
@@ -77,7 +77,7 @@ mock.onGet('/api/reports/customer-activity').reply(() => {
       customer: {
         id: '5e86809283e28b96d2d38537',
         name: 'Katarina Smith',
-        avatar: '/static/images/avatars/avatar_6.png'
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_6.png`
       },
       description: 'Subscription Purchase',
       type: 'payment'
@@ -218,7 +218,7 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
     {
       id: '5eff24e675e7b3cba23e4be7',
       author: {
-        avatar: '/static/images/avatars/avatar_5.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_5.png`,
         name: 'Anje Keizer'
       },
       budget: 12500,
@@ -235,7 +235,7 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
     {
       id: '5eff24e98e2c9107e95cb827',
       author: {
-        avatar: '/static/images/avatars/avatar_9.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.png`,
         name: 'Emilee Simchenko'
       },
       budget: 15750,
@@ -252,7 +252,7 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
     {
       id: '5eff24f0d97353e3576d3c26',
       author: {
-        avatar: '/static/images/avatars/avatar_10.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_10.png`,
         name: 'Elliott Stone'
       },
       budget: 15750,
@@ -269,7 +269,7 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
     {
       id: '5eff24f737bc6b191dd9bf58',
       author: {
-        avatar: '/static/images/avatars/avatar_11.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_11.png`,
         name: 'Shen Zhi'
       },
       budget: 12500,
@@ -286,7 +286,7 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
     {
       id: '5eff24fb29fc5e37bdab3b2d',
       author: {
-        avatar: '/static/images/avatars/avatar_3.png',
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_3.png`,
         name: 'Cao Yu'
       },
       budget: 15750,
@@ -316,11 +316,11 @@ mock.onGet('/api/reports/latest-tasks').reply(() => {
         .getTime(),
       members: [
         {
-          avatar: '/static/images/avatars/avatar_2.png',
+          avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_2.png`,
           name: 'Ekaterina Tankova'
         },
         {
-          avatar: '/static/images/avatars/avatar_3.png',
+          avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_3.png`,
           name: 'Cao Yu'
         }
       ],
@@ -335,15 +335,15 @@ mock.onGet('/api/reports/latest-tasks').reply(() => {
         .getTime(),
       members: [
         {
-          avatar: '/static/images/avatars/avatar_8.png',
+          avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_8.png`,
           name: 'Miller Edwards'
         },
         {
-          avatar: '/static/images/avatars/avatar_10.png',
+          avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_10.png`,
           name: 'Elliott Stone'
         },
         {
-          avatar: '/static/images/avatars/avatar_12.png',
+          avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_12.png`,
           name: 'Merrile Burgett'
         }
       ],
@@ -356,7 +356,7 @@ mock.onGet('/api/reports/latest-tasks').reply(() => {
         .getTime(),
       members: [
         {
-          avatar: '/static/images/avatars/avatar_7.png',
+          avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_7.png`,
           name: 'Adam Denisov'
         }
       ],
@@ -367,11 +367,11 @@ mock.onGet('/api/reports/latest-tasks').reply(() => {
       deadline: null,
       members: [
         {
-          avatar: '/static/images/avatars/avatar_2.png',
+          avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_2.png`,
           name: 'Ekaterina Tankova'
         },
         {
-          avatar: '/static/images/avatars/avatar_10.png',
+          avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_10.png`,
           name: 'Elliott Stone'
         }
       ],
@@ -382,15 +382,15 @@ mock.onGet('/api/reports/latest-tasks').reply(() => {
       deadline: null,
       members: [
         {
-          avatar: '/static/images/avatars/avatar_5.png',
+          avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_5.png`,
           name: 'Anje Keizer'
         },
         {
-          avatar: '/static/images/avatars/avatar_2.png',
+          avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_2.png`,
           name: 'Ekaterina Tankova'
         },
         {
-          avatar: '/static/images/avatars/avatar_6.png',
+          avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_6.png`,
           name: 'Katarina Smith'
         }
       ],
@@ -401,7 +401,7 @@ mock.onGet('/api/reports/latest-tasks').reply(() => {
       deadline: null,
       members: [
         {
-          avatar: '/static/images/avatars/avatar_8.png',
+          avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_8.png`,
           name: 'Miller Edwards'
         }
       ],
@@ -418,7 +418,7 @@ mock.onGet('/api/reports/profitable-products').reply(() => {
       id: '5eff2512c6f8737d08325676',
       conversionRate: 93,
       currency: '$',
-      image: '/static/images/products/product_standard.svg',
+      image: `${process.env.PUBLIC_URL}/static/images/products/product_standard.svg`,
       name: 'Freelancer Basic Subscription',
       price: 5.00,
       subscriptions: 13153
@@ -427,7 +427,7 @@ mock.onGet('/api/reports/profitable-products').reply(() => {
       id: '5eff2516247f9a6fcca9f151',
       conversionRate: 76,
       currency: '$',
-      image: '/static/images/products/product_standard.svg',
+      image: `${process.env.PUBLIC_URL}/static/images/products/product_standard.svg`,
       name: 'Freelancer Extra Subscription',
       price: 15.00,
       subscriptions: 10300
@@ -436,7 +436,7 @@ mock.onGet('/api/reports/profitable-products').reply(() => {
       id: '5eff251a3bb9ab7290640f18',
       conversionRate: 60,
       currency: '$',
-      image: '/static/images/products/product_premium.svg',
+      image: `${process.env.PUBLIC_URL}/static/images/products/product_premium.svg`,
       name: 'Agency Basic Subscription',
       price: 25.00,
       subscriptions: 5300
@@ -445,7 +445,7 @@ mock.onGet('/api/reports/profitable-products').reply(() => {
       id: '5eff251e297fd17f0dc18a8b',
       conversionRate: 46,
       currency: '$',
-      image: '/static/images/products/product_extended.svg',
+      image: `${process.env.PUBLIC_URL}/static/images/products/product_extended.svg`,
       name: 'Enterprise Basic Subscription',
       price: 205.00,
       subscriptions: 1203
@@ -454,7 +454,7 @@ mock.onGet('/api/reports/profitable-products').reply(() => {
       id: '5eff2524ef813f061b3ea39f',
       conversionRate: 41,
       currency: '$',
-      image: '/static/images/products/product_extended.svg',
+      image: `${process.env.PUBLIC_URL}/static/images/products/product_extended.svg`,
       name: 'Enterprise Extra Subscription',
       price: 500.00,
       subscriptions: 254

@@ -107,7 +107,7 @@ const InvoicePDF: FC<InvoicePDFProps> = ({ invoice }) => {
         <View style={styles.header}>
           <View>
             <Image
-              source="/static/logo.jpg"
+              source={`${process.env.PUBLIC_URL}/static/logo.jpg`}
               style={styles.brand}
             />
             <Text style={styles.h5}>
