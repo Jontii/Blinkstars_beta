@@ -1,8 +1,7 @@
-import React from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import { Grid, makeStyles } from '@material-ui/core';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import ApplicantCard from './ApplicantCard';
 
 interface ApplicantsProps {
@@ -14,7 +13,11 @@ const useStyles = makeStyles(() => ({
   root: {}
 }));
 
-const Applicants: FC<ApplicantsProps> = ({ className, applicants, ...rest }) => {
+const Applicants: FC<ApplicantsProps> = ({
+  className,
+  applicants,
+  ...rest
+}) => {
   const classes = useStyles();
 
   return (
@@ -24,13 +27,8 @@ const Applicants: FC<ApplicantsProps> = ({ className, applicants, ...rest }) => 
       spacing={3}
       {...rest}
     >
-      {applicants.map((applicant) => (
-        <Grid
-          item
-          key={applicant.id}
-          lg={4}
-          xs={12}
-        >
+      {applicants.map(applicant => (
+        <Grid item key={applicant.id} lg={4} xs={12}>
           <ApplicantCard applicant={applicant} />
         </Grid>
       ))}

@@ -1,11 +1,6 @@
-import React from 'react';
-import type { FC } from 'react';
-import {
-  Box,
-  LinearProgress,
-  makeStyles
-} from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import { Box, LinearProgress, makeStyles } from '@material-ui/core';
+import React, { FC } from 'react';
+import { Theme } from 'src/theme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -34,6 +29,6 @@ const SlashScreen: FC = () => {
       </Box>
     </div>
   );
-}
+};
 
 export default SlashScreen;

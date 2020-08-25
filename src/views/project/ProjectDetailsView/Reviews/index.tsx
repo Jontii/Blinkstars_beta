@@ -1,10 +1,9 @@
-import React from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core';
-import type { Theme } from 'src/theme';
-import type { ProjectReview } from 'src/types/project';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { Theme } from 'src/theme';
+import { ProjectReview } from 'src/types/project';
 import OverallReviews from './OverallReviews';
 import ReviewCard from './ReviewCard';
 
@@ -20,24 +19,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const Reviews: FC<ReviewsProps> = ({
-  className,
-  reviews,
-  ...rest
-}) => {
+const Reviews: FC<ReviewsProps> = ({ className, reviews, ...rest }) => {
   const classes = useStyles();
-  let rating = reviews.reduce((acc, review) => acc + review.value, 0) / reviews.length;
+  let rating =
+    reviews.reduce((acc, review) => acc + review.value, 0) / reviews.length;
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <OverallReviews
-        rating={rating}
-        reviewsCount={reviews.length}
-      />
-      {reviews.map((review) => (
+    <div className={clsx(classes.root, className)} {...rest}>
+      <OverallReviews rating={rating} reviewsCount={reviews.length} />
+      {reviews.map(review => (
         <ReviewCard
           className={classes.review}
           key={review.id}

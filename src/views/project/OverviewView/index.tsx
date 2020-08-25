@@ -1,16 +1,11 @@
-import React from 'react';
-import type { FC } from 'react';
-import {
-  Box,
-  Container,
-  makeStyles
-} from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import { Box, Container, makeStyles } from '@material-ui/core';
+import React, { FC } from 'react';
 import Page from 'src/components/Page';
+import { Theme } from 'src/theme';
 import Header from './Header';
-import Statistics from './Statistics';
 import Notifications from './Notifications';
 import Projects from './Projects';
+import Statistics from './Statistics';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -24,10 +19,7 @@ const OverviewView: FC = () => {
   const classes = useStyles();
 
   return (
-    <Page
-      className={classes.root}
-      title="Overview"
-    >
+    <Page className={classes.root} title="Overview">
       <Container maxWidth="lg">
         <Header />
         <Box mt={3}>

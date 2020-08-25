@@ -1,12 +1,3 @@
-import React, {
-  useState,
-  useCallback
-} from 'react';
-import type { FC } from 'react';
-import clsx from 'clsx';
-import { useDropzone } from 'react-dropzone';
-import PerfectScrollbar from 'react-perfect-scrollbar';
-import PropTypes from 'prop-types';
 import {
   Box,
   Button,
@@ -16,13 +7,18 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  makeStyles,
   Tooltip,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import type { Theme } from 'src/theme';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC, useCallback, useState } from 'react';
+import { useDropzone } from 'react-dropzone';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import { Theme } from 'src/theme';
 import bytesToSize from 'src/utils/bytesToSize';
 
 interface FilesDropzoneProps {
@@ -72,8 +68,8 @@ const FilesDropzone: FC<FilesDropzoneProps> = ({ className, ...rest }) => {
   const classes = useStyles();
   const [files, setFiles] = useState<any[]>([]);
 
-  const handleDrop = useCallback((acceptedFiles) => {
-    setFiles((prevFiles) => [...prevFiles].concat(acceptedFiles));
+  const handleDrop = useCallback(acceptedFiles => {
+    setFiles(prevFiles => [...prevFiles].concat(acceptedFiles));
   }, []);
 
   const handleRemoveAll = () => {
@@ -85,10 +81,7 @@ const FilesDropzone: FC<FilesDropzoneProps> = ({ className, ...rest }) => {
   });
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <div className={clsx(classes.root, className)} {...rest}>
       <div
         className={clsx({
           [classes.dropZone]: true,
@@ -101,25 +94,16 @@ const FilesDropzone: FC<FilesDropzoneProps> = ({ className, ...rest }) => {
           <img
             alt="Select file"
             className={classes.image}
-            src={`${process.env.PUBLIC_URL}/static/images/undraw_add_file2_gvbb.svg`}
+            src="/static/images/undraw_add_file2_gvbb.svg"
           />
         </div>
         <div>
-          <Typography
-            gutterBottom
-            variant="h3"
-          >
+          <Typography gutterBottom variant="h3">
             Select files
           </Typography>
           <Box mt={2}>
-            <Typography
-              color="textPrimary"
-              variant="body1"
-            >
-              Drop files here or click
-              {' '}
-              <Link underline="always">browse</Link>
-              {' '}
+            <Typography color="textPrimary" variant="body1">
+              Drop files here or click <Link underline="always">browse</Link>{' '}
               thorough your machine
             </Typography>
           </Box>
@@ -130,10 +114,7 @@ const FilesDropzone: FC<FilesDropzoneProps> = ({ className, ...rest }) => {
           <PerfectScrollbar options={{ suppressScrollX: true }}>
             <List className={classes.list}>
               {files.map((file, i) => (
-                <ListItem
-                  divider={i < files.length - 1}
-                  key={i}
-                >
+                <ListItem divider={i < files.length - 1} key={i}>
                   <ListItemIcon>
                     <FileCopyIcon />
                   </ListItemIcon>
@@ -152,17 +133,10 @@ const FilesDropzone: FC<FilesDropzoneProps> = ({ className, ...rest }) => {
             </List>
           </PerfectScrollbar>
           <div className={classes.actions}>
-            <Button
-              onClick={handleRemoveAll}
-              size="small"
-            >
+            <Button onClick={handleRemoveAll} size="small">
               Remove all
             </Button>
-            <Button
-              color="secondary"
-              size="small"
-              variant="contained"
-            >
+            <Button color="secondary" size="small" variant="contained">
               Upload files
             </Button>
           </div>

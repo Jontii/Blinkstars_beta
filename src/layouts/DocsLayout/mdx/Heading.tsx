@@ -1,8 +1,7 @@
-import React from 'react';
-import type { FC, ReactNode } from 'react';
+import { makeStyles, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import { Typography, makeStyles } from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import React, { FC, ReactNode } from 'react';
+import { Theme } from 'src/theme';
 
 interface HeadingProps {
   children?: ReactNode;
@@ -36,11 +35,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const Heading: FC<HeadingProps> = ({
-  children,
-  variant,
-  ...rest
-}) => {
+const Heading: FC<HeadingProps> = ({ children, variant, ...rest }) => {
   const classes = useStyles();
 
   return (
@@ -53,7 +48,7 @@ const Heading: FC<HeadingProps> = ({
       {children}
     </Typography>
   );
-}
+};
 
 Heading.propTypes = {
   children: PropTypes.node,

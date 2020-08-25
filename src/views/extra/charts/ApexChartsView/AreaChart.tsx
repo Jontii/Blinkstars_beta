@@ -1,12 +1,6 @@
-import React from 'react';
-import type { FC } from 'react';
+import { Card, CardContent, Typography, useTheme } from '@material-ui/core';
+import React, { FC } from 'react';
 import Chart from 'react-apexcharts';
-import {
-  Card,
-  CardContent,
-  Typography,
-  useTheme
-} from '@material-ui/core';
 
 const AreaChart: FC = () => {
   const theme = useTheme();
@@ -100,10 +94,7 @@ const AreaChart: FC = () => {
   return (
     <Card>
       <CardContent>
-        <Typography
-          variant="h4"
-          color="textPrimary"
-        >
+        <Typography variant="h4" color="textPrimary">
           Sales
         </Typography>
         <Chart

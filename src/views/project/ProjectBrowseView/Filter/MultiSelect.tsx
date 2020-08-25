@@ -1,19 +1,15 @@
-import React, {
-  useState,
-  useRef
-} from 'react';
-import type { FC, ChangeEvent } from 'react';
-import PropTypes from 'prop-types';
 import {
   Button,
   Checkbox,
   FormControlLabel,
+  makeStyles,
   Menu,
-  MenuItem,
-  makeStyles
+  MenuItem
 } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import type { Theme } from 'src/theme';
+import PropTypes from 'prop-types';
+import React, { ChangeEvent, FC, useRef, useState } from 'react';
+import { Theme } from 'src/theme';
 
 interface MultiSelectProps {
   label: string;
@@ -58,7 +54,7 @@ const MultiSelect: FC<MultiSelectProps> = ({
     if (event.target.checked) {
       newValue.push(event.target.value);
     } else {
-      newValue = newValue.filter((item) => item !== event.target.value);
+      newValue = newValue.filter(item => item !== event.target.value);
     }
 
     if (onChange) {
@@ -68,10 +64,7 @@ const MultiSelect: FC<MultiSelectProps> = ({
 
   return (
     <>
-      <Button
-        onClick={handleMenuOpen}
-        ref={anchorRef}
-      >
+      <Button onClick={handleMenuOpen} ref={anchorRef}>
         {label}
         <ArrowDropDownIcon />
       </Button>
@@ -82,20 +75,17 @@ const MultiSelect: FC<MultiSelectProps> = ({
         open={openMenu}
         PaperProps={{ style: { width: 250 } }}
       >
-        {options.map((option) => (
-          <MenuItem
-            className={classes.menuItem}
-            key={option}
-          >
+        {options.map(option => (
+          <MenuItem className={classes.menuItem} key={option}>
             <FormControlLabel
               className={classes.formControlLabel}
-              control={(
+              control={
                 <Checkbox
                   checked={value.indexOf(option) > -1}
                   onChange={handleOptionToggle}
                   value={option}
                 />
-              )}
+              }
               label={option}
             />
           </MenuItem>

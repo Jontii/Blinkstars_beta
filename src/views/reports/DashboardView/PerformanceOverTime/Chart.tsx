@@ -1,14 +1,9 @@
-import React from 'react';
-import type { FC } from 'react';
+import { fade, makeStyles, useTheme } from '@material-ui/core';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import { Line } from 'react-chartjs-2';
-import {
-  fade,
-  makeStyles,
-  useTheme
-} from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import { Theme } from 'src/theme';
 
 interface ChartProps {
   className?: string;
@@ -129,14 +124,8 @@ const Chart: FC<ChartProps> = ({
   };
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <Line
-        data={data}
-        options={options}
-      />
+    <div className={clsx(classes.root, className)} {...rest}>
+      <Line data={data} options={options} />
     </div>
   );
 };

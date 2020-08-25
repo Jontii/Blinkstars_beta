@@ -1,24 +1,23 @@
-import React, { useState } from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Avatar,
   Box,
   Button,
+  colors,
   Container,
   Hidden,
   IconButton,
+  makeStyles,
   Tooltip,
-  Typography,
-  colors,
-  makeStyles
+  Typography
 } from '@material-ui/core';
 import AddPhotoIcon from '@material-ui/icons/AddPhotoAlternate';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import type { Theme } from 'src/theme';
-import type { Profile } from 'src/types/social';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC, useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import { Theme } from 'src/theme';
+import { Profile } from 'src/types/social';
 
 interface HeaderProps {
   className?: string;
@@ -40,7 +39,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       left: 0,
       height: '100%',
       width: '100%',
-      backgroundImage: 'linear-gradient(-180deg, rgba(0,0,0,0.00) 58%, rgba(0,0,0,0.32) 100%)'
+      backgroundImage:
+        'linear-gradient(-180deg, rgba(0,0,0,0.00) 58%, rgba(0,0,0,0.32) 100%)'
     },
     '&:hover': {
       '& $changeButton': {
@@ -78,17 +78,18 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Header: FC<HeaderProps> = ({ className, profile, ...rest }) => {
   const classes = useStyles();
-  const [connectedStatus, setConnectedStatus] = useState<string>(profile.connectedStatus);
+  const [connectedStatus, setConnectedStatus] = useState<string>(
+    profile.connectedStatus
+  );
 
   const handleConnectToggle = (): void => {
-    setConnectedStatus((prevConnectedStatus) => (prevConnectedStatus === 'not_connected' ? 'pending' : 'not_connected'));
+    setConnectedStatus(prevConnectedStatus =>
+      prevConnectedStatus === 'not_connected' ? 'pending' : 'not_connected'
+    );
   };
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <div className={clsx(classes.root, className)} {...rest}>
       <div
         className={classes.cover}
         style={{ backgroundImage: `url(${profile.cover})` }}
@@ -102,28 +103,17 @@ const Header: FC<HeaderProps> = ({ className, profile, ...rest }) => {
         </Button>
       </div>
       <Container maxWidth="lg">
-        <Box
-          position="relative"
-          mt={1}
-          display="flex"
-          alignItems="center"
-        >
+        <Box position="relative" mt={1} display="flex" alignItems="center">
           <Avatar
             alt="Person"
             className={classes.avatar}
             src={profile.avatar}
           />
           <Box marginLeft="160px">
-            <Typography
-              variant="overline"
-              color="textSecondary"
-            >
+            <Typography variant="overline" color="textSecondary">
               {profile.bio}
             </Typography>
-            <Typography
-              variant="h4"
-              color="textPrimary"
-            >
+            <Typography variant="h4" color="textPrimary">
               {profile.name}
             </Typography>
           </Box>

@@ -1,4 +1,4 @@
-export type ConnectionStatus = 
+export type ConnectionStatus =
   | 'connected'
   | 'not_connected'
   | 'pending'

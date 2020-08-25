@@ -1,25 +1,24 @@
-import React from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Box,
   Breadcrumbs,
   Button,
   Grid,
   Link,
+  makeStyles,
   SvgIcon,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import {
-  PlusCircle as PlusCircleIcon,
   Download as DownloadIcon,
+  PlusCircle as PlusCircleIcon,
   Upload as UploadIcon
 } from 'react-feather';
-import type { Theme } from 'src/theme';
+import { Link as RouterLink } from 'react-router-dom';
+import { Theme } from 'src/theme';
 
 interface HeaderProps {
   className?: string;
@@ -67,32 +66,30 @@ const Header: FC<HeaderProps> = ({ className, ...rest }) => {
           >
             Management
           </Link>
-          <Typography
-            variant="body1"
-            color="textPrimary"
-          >
+          <Typography variant="body1" color="textPrimary">
             Customers
           </Typography>
         </Breadcrumbs>
-        <Typography
-          variant="h3"
-          color="textPrimary"
-        >
+        <Typography variant="h3" color="textPrimary">
           All Customers
         </Typography>
         <Box mt={2}>
-          <Button startIcon={
-            <SvgIcon fontSize="small">
-              <UploadIcon />
-            </SvgIcon>
-          }>
+          <Button
+            startIcon={
+              <SvgIcon fontSize="small">
+                <UploadIcon />
+              </SvgIcon>
+            }
+          >
             Import
           </Button>
-          <Button startIcon={
-            <SvgIcon fontSize="small">
-              <DownloadIcon />
-            </SvgIcon>
-          }>
+          <Button
+            startIcon={
+              <SvgIcon fontSize="small">
+                <DownloadIcon />
+              </SvgIcon>
+            }
+          >
             Export
           </Button>
         </Box>

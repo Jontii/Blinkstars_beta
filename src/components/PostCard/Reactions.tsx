@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Box,
-  IconButton,
-  Tooltip,
-  Typography,
   colors,
-  makeStyles
+  IconButton,
+  makeStyles,
+  Tooltip,
+  Typography
 } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ShareIcon from '@material-ui/icons/Share';
-import type { Post } from 'src/types/social';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC, useState } from 'react';
+import { Post } from 'src/types/social';
 
 interface ReactionsProps {
   className?: string;
@@ -37,25 +36,19 @@ const Reactions: FC<ReactionsProps> = ({ className, post, ...rest }) => {
 
   const handleLike = (): void => {
     setLiked(true);
-    setLikes((prevLikes) => prevLikes + 1);
+    setLikes(prevLikes => prevLikes + 1);
   };
 
   const handleUnlike = (): void => {
     setLiked(false);
-    setLikes((prevLikes) => prevLikes - 1);
+    setLikes(prevLikes => prevLikes - 1);
   };
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <div className={clsx(classes.root, className)} {...rest}>
       {isLiked ? (
         <Tooltip title="Unlike">
-          <IconButton
-            className={classes.likedButton}
-            onClick={handleUnlike}
-          >
+          <IconButton className={classes.likedButton} onClick={handleUnlike}>
             <FavoriteIcon fontSize="small" />
           </IconButton>
         </Tooltip>
@@ -66,10 +59,7 @@ const Reactions: FC<ReactionsProps> = ({ className, post, ...rest }) => {
           </IconButton>
         </Tooltip>
       )}
-      <Typography
-        color="textSecondary"
-        variant="h6"
-      >
+      <Typography color="textSecondary" variant="h6">
         {likes}
       </Typography>
       <Box flexGrow={1} />

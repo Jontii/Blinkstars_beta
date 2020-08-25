@@ -1,30 +1,22 @@
-import React, { useState } from 'react';
-import type { FC, ChangeEvent } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { useSnackbar } from 'notistack';
 import {
   Box,
   Button,
   Checkbox,
   IconButton,
+  makeStyles,
   SvgIcon,
   TextField,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
+import clsx from 'clsx';
+import { useSnackbar } from 'notistack';
+import PropTypes from 'prop-types';
+import React, { ChangeEvent, FC, useState } from 'react';
 import { Trash as TrashIcon } from 'react-feather';
-import type { Theme } from 'src/theme';
+import { deleteCheckItem, updateCheckItem } from 'src/slices/kanban';
 import { useDispatch } from 'src/store';
-import {
-  updateCheckItem,
-  deleteCheckItem
-} from 'src/slices/kanban';
-import type {
-  Card,
-  Checklist,
-  CheckItem as CheckItemType
-} from 'src/types/kanban';
+import { Theme } from 'src/theme';
+import { Card, CheckItem as CheckItemType, Checklist } from 'src/types/kanban';
 
 interface CheckItemProps {
   className?: string;
@@ -80,18 +72,17 @@ const CheckItem: FC<CheckItemProps> = ({
   const { enqueueSnackbar } = useSnackbar();
   const [name, setName] = useState<string>(checkItem.name);
 
-  const handleStateChange = async (event: ChangeEvent<HTMLInputElement>): Promise<void> => {
+  const handleStateChange = async (
+    event: ChangeEvent<HTMLInputElement>
+  ): Promise<void> => {
     try {
       event.persist();
 
       const state = event.target.checked ? 'complete' : 'incomplete';
 
-      await dispatch(updateCheckItem(
-        card.id,
-        checklist.id,
-        checkItem.id,
-        { state }
-      ));
+      await dispatch(
+        updateCheckItem(card.id, checklist.id, checkItem.id, { state })
+      );
       enqueueSnackbar('Check item updated', {
         variant: 'success'
       });
@@ -110,12 +101,9 @@ const CheckItem: FC<CheckItemProps> = ({
 
   const handleSave = async (): Promise<void> => {
     try {
-      await dispatch(updateCheckItem(
-        card.id,
-        checklist.id,
-        checkItem.id,
-        { name }
-      ));
+      await dispatch(
+        updateCheckItem(card.id, checklist.id, checkItem.id, { name })
+      );
       onEditComplete();
       enqueueSnackbar('Check item updated', {
         variant: 'success'
@@ -135,11 +123,7 @@ const CheckItem: FC<CheckItemProps> = ({
 
   const handleDelete = async (): Promise<void> => {
     try {
-      await dispatch(deleteCheckItem(
-        card.id,
-        checklist.id,
-        checkItem.id
-      ));
+      await dispatch(deleteCheckItem(card.id, checklist.id, checkItem.id));
       enqueueSnackbar('Check item deleted', {
         variant: 'success'
       });
@@ -152,10 +136,7 @@ const CheckItem: FC<CheckItemProps> = ({
   };
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <div className={clsx(classes.root, className)} {...rest}>
       <Checkbox
         checked={checkItem.state === 'complete'}
         onChange={handleStateChange}
@@ -178,20 +159,13 @@ const CheckItem: FC<CheckItemProps> = ({
             >
               Save
             </Button>
-            <Button
-              size="small"
-              onClick={handleCancel}
-            >
+            <Button size="small" onClick={handleCancel}>
               Cancel
             </Button>
           </Box>
         </Box>
       ) : (
-        <Box
-          display="flex"
-          alignItems="center"
-          flexGrow={1}
-        >
+        <Box display="flex" alignItems="center" flexGrow={1}>
           <Typography
             onClick={onEditInit}
             color="textPrimary"
@@ -200,10 +174,7 @@ const CheckItem: FC<CheckItemProps> = ({
           >
             {checkItem.name}
           </Typography>
-          <IconButton
-            onClick={handleDelete}
-            className={classes.deleteButton}
-          >
+          <IconButton onClick={handleDelete} className={classes.deleteButton}>
             <SvgIcon fontSize="small">
               <TrashIcon />
             </SvgIcon>

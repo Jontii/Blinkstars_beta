@@ -1,30 +1,26 @@
-import React from 'react';
-import type { FC, ChangeEvent } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Box,
   Checkbox,
   Hidden,
   IconButton,
   Input,
-  Paper,
-  Tooltip,
-  Typography,
   makeStyles,
-  SvgIcon
+  Paper,
+  SvgIcon,
+  Tooltip,
+  Typography
 } from '@material-ui/core';
-import RefreshIcon from '@material-ui/icons/Refresh';
-import MoreIcon from '@material-ui/icons/MoreVert';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-import {
-  Search as SearchIcon,
-  Menu as MenuIcon
-} from 'react-feather';
-import type { Theme } from 'src/theme';
-import { useDispatch } from 'src/store';
+import MoreIcon from '@material-ui/icons/MoreVert';
+import RefreshIcon from '@material-ui/icons/Refresh';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { ChangeEvent, FC } from 'react';
+import { Menu as MenuIcon, Search as SearchIcon } from 'react-feather';
 import { openSidebar } from 'src/slices/mail';
+import { useDispatch } from 'src/store';
+import { Theme } from 'src/theme';
 
 interface ToolbarProps {
   className?: string;
@@ -72,16 +68,14 @@ const Toolbar: FC<ToolbarProps> = ({
     dispatch(openSidebar());
   };
 
-  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => (event.target.checked ? onSelectAll() : onDeselectAll());
+  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) =>
+    event.target.checked ? onSelectAll() : onDeselectAll();
 
   const selectedAllMails = selectedMails === mails && mails > 0;
   const selectedSomeMails = selectedMails > 0 && selectedMails < mails;
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <div className={clsx(classes.root, className)} {...rest}>
       <Hidden mdUp>
         <IconButton onClick={handleOpenSidebar}>
           <SvgIcon fontSize="small">
@@ -90,31 +84,19 @@ const Toolbar: FC<ToolbarProps> = ({
         </IconButton>
       </Hidden>
       <Hidden smDown>
-        <Box
-          display="flex"
-          alignItems="center"
-        >
+        <Box display="flex" alignItems="center">
           <Checkbox
             checked={selectedAllMails}
             indeterminate={selectedSomeMails}
             onChange={handleCheckboxChange}
           />
-          <Typography
-            variant="h6"
-            color="textPrimary"
-          >
+          <Typography variant="h6" color="textPrimary">
             Select all
           </Typography>
         </Box>
         <Box flexGrow={1} />
-        <Paper
-          className={classes.searchContainer}
-          variant="outlined"
-        >
-          <SvgIcon
-            color="action"
-            fontSize="small"
-          >
+        <Paper className={classes.searchContainer} variant="outlined">
+          <SvgIcon color="action" fontSize="small">
             <SearchIcon />
           </SvgIcon>
           <Input
@@ -133,10 +115,7 @@ const Toolbar: FC<ToolbarProps> = ({
             <MoreIcon fontSize="small" />
           </IconButton>
         </Tooltip>
-        <Box
-          display="flex"
-          alignItems="center"
-        >
+        <Box display="flex" alignItems="center">
           <Tooltip title="Next page">
             <IconButton>
               <KeyboardArrowLeftIcon fontSize="small" />
@@ -144,18 +123,8 @@ const Toolbar: FC<ToolbarProps> = ({
           </Tooltip>
           {mails > 0 && (
             <>
-              <Typography
-                noWrap
-                variant="body2"
-                color="textSecondary"
-              >
-                1 -
-                {' '}
-                {mails}
-                {' '}
-                of
-                {' '}
-                {mails}
+              <Typography noWrap variant="body2" color="textSecondary">
+                1 - {mails} of {mails}
               </Typography>
               <Tooltip title="Previous page">
                 <IconButton>

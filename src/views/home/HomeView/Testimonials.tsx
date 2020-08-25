@@ -1,15 +1,14 @@
-import React from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Avatar,
   Box,
   Container,
-  Typography,
-  makeStyles
+  makeStyles,
+  Typography
 } from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { Theme } from 'src/theme';
 
 interface TestimonialsProps {
   className?: string;
@@ -30,10 +29,7 @@ const Testimonials: FC<TestimonialsProps> = ({ className, ...rest }) => {
   const classes = useStyles();
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <div className={clsx(classes.root, className)} {...rest}>
       <Container maxWidth="md">
         <Typography
           variant="h2"
@@ -45,18 +41,10 @@ const Testimonials: FC<TestimonialsProps> = ({ className, ...rest }) => {
           <br />
           They will save you time.&quot;
         </Typography>
-        <Box
-          mt={6}
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Avatar src={`${process.env.PUBLIC_URL}/static/home/olivier.png`} />
+        <Box mt={6} display="flex" justifyContent="center" alignItems="center">
+          <Avatar src="/static/home/olivier.png" />
           <Box ml={2}>
-            <Typography
-              variant="body1"
-              color="textPrimary"
-            >
+            <Typography variant="body1" color="textPrimary">
               Olivier Tassinari
               <Typography
                 color="textSecondary"

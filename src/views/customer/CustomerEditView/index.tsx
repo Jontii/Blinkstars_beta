@@ -1,19 +1,10 @@
-import React, {
-  useState,
-  useCallback,
-  useEffect
-} from 'react';
-import type { FC } from 'react';
-import {
-  Box,
-  Container,
-  makeStyles
-} from '@material-ui/core';
-import axios from 'src/utils/axios';
-import type { Theme } from 'src/theme';
+import { Box, Container, makeStyles } from '@material-ui/core';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import Page from 'src/components/Page';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import type { Customer } from 'src/types/customer';
+import { Theme } from 'src/theme';
+import { Customer } from 'src/types/customer';
+import axios from 'src/utils/axios';
 import CustomerEditForm from './CustomerEditForm';
 import Header from './Header';
 
@@ -33,8 +24,10 @@ const CustomerEditView: FC = () => {
 
   const getCustomer = useCallback(async () => {
     try {
-      const response = await axios.get<{ customer: Customer; }>('/api/customers/1');
-    
+      const response = await axios.get<{ customer: Customer }>(
+        '/api/customers/1'
+      );
+
       if (isMountedRef.current) {
         setCustomer(response.data.customer);
       }
@@ -52,10 +45,7 @@ const CustomerEditView: FC = () => {
   }
 
   return (
-    <Page
-      className={classes.root}
-      title="Customer Edit"
-    >
+    <Page className={classes.root} title="Customer Edit">
       <Container maxWidth={false}>
         <Header />
       </Container>

@@ -1,10 +1,3 @@
-import React, {
-  useRef,
-  useState,
-  useEffect
-} from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import {
   Avatar,
   Box,
@@ -14,21 +7,23 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
+  makeStyles,
   Popover,
   SvgIcon,
   Tooltip,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import {
   Bell as BellIcon,
-  Package as PackageIcon,
   MessageCircle as MessageIcon,
+  Package as PackageIcon,
   Truck as TruckIcon
 } from 'react-feather';
-import type { Theme } from 'src/theme';
-import { useDispatch, useSelector } from 'src/store';
+import { Link as RouterLink } from 'react-router-dom';
 import { getNotifications } from 'src/slices/notification';
+import { useDispatch, useSelector } from 'src/store';
+import { Theme } from 'src/theme';
 
 const iconsMap = {
   order_placed: PackageIcon,
@@ -48,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Notifications: FC = () => {
   const classes = useStyles();
-  const { notifications } = useSelector((state) => state.notifications);
+  const { notifications } = useSelector(state => state.notifications);
   const ref = useRef<any>(null);
   const dispatch = useDispatch();
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -68,11 +63,7 @@ const Notifications: FC = () => {
   return (
     <>
       <Tooltip title="Notifications">
-        <IconButton
-          color="inherit"
-          ref={ref}
-          onClick={handleOpen}
-        >
+        <IconButton color="inherit" ref={ref} onClick={handleOpen}>
           <SvgIcon>
             <BellIcon />
           </SvgIcon>
@@ -89,26 +80,20 @@ const Notifications: FC = () => {
         open={isOpen}
       >
         <Box p={2}>
-          <Typography
-            variant="h5"
-            color="textPrimary"
-          >
+          <Typography variant="h5" color="textPrimary">
             Notifications
           </Typography>
         </Box>
         {notifications.length === 0 ? (
           <Box p={2}>
-            <Typography
-              variant="h6"
-              color="textPrimary"
-            >
+            <Typography variant="h6" color="textPrimary">
               There are no notifications
             </Typography>
           </Box>
         ) : (
           <>
             <List disablePadding>
-              {notifications.map((notification) => {
+              {notifications.map(notification => {
                 const Icon = iconsMap[notification.type];
 
                 return (
@@ -119,9 +104,7 @@ const Notifications: FC = () => {
                     to="#"
                   >
                     <ListItemAvatar>
-                      <Avatar
-                        className={classes.icon}
-                      >
+                      <Avatar className={classes.icon}>
                         <SvgIcon fontSize="small">
                           <Icon />
                         </SvgIcon>
@@ -129,23 +112,18 @@ const Notifications: FC = () => {
                     </ListItemAvatar>
                     <ListItemText
                       primary={notification.title}
-                      primaryTypographyProps={{ variant: 'subtitle2', color: 'textPrimary' }}
+                      primaryTypographyProps={{
+                        variant: 'subtitle2',
+                        color: 'textPrimary'
+                      }}
                       secondary={notification.description}
                     />
                   </ListItem>
                 );
               })}
             </List>
-            <Box
-              p={1}
-              display="flex"
-              justifyContent="center"
-            >
-              <Button
-                component={RouterLink}
-                size="small"
-                to="#"
-              >
+            <Box p={1} display="flex" justifyContent="center">
+              <Button component={RouterLink} size="small" to="#">
                 Mark all as read
               </Button>
             </Box>

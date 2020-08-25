@@ -15,8 +15,7 @@ import {
 import { KeyboardDatePicker } from '@material-ui/pickers';
 import clsx from 'clsx';
 import { Formik } from 'formik';
-import PropTypes from 'prop-types';
-import React, { useEffect, useState, FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Plus as PlusIcon } from 'react-feather';
 import FilesDropzone from 'src/components/FilesDropzone';
 import QuillEditor from 'src/components/QuillEditor';

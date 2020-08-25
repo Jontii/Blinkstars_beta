@@ -1,14 +1,3 @@
-import React, { useState } from 'react';
-import type {
-  FC,
-  ChangeEvent
-} from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import clsx from 'clsx';
-import moment from 'moment';
-import numeral from 'numeral';
-import PropTypes from 'prop-types';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   Box,
   Card,
@@ -16,6 +5,7 @@ import {
   Checkbox,
   Divider,
   IconButton,
+  makeStyles,
   SvgIcon,
   Table,
   TableBody,
@@ -23,16 +13,19 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
-import {
-  Edit as EditIcon,
-  ArrowRight as ArrowRightIcon
-} from 'react-feather';
-import Label from 'src/components/Label';
+import clsx from 'clsx';
+import moment from 'moment';
+import numeral from 'numeral';
+import PropTypes from 'prop-types';
+import React, { ChangeEvent, FC, useState } from 'react';
+import { ArrowRight as ArrowRightIcon, Edit as EditIcon } from 'react-feather';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import { Link as RouterLink } from 'react-router-dom';
 import GenericMoreButton from 'src/components/GenericMoreButton';
-import type { Order, OrderStatus } from 'src/types/order';
+import Label from 'src/components/Label';
+import { Order, OrderStatus } from 'src/types/order';
 import BulkOperations from './BulkOperations';
 
 interface ResultsProps {
@@ -62,14 +55,14 @@ const getStatusLabel = (paymentStatus: OrderStatus): JSX.Element => {
 
   const { text, color }: any = map[paymentStatus];
 
-  return (
-    <Label color={color}>
-      {text}
-    </Label>
-  );
+  return <Label color={color}>{text}</Label>;
 };
 
-const applyPagination = (orders: Order[], page: number, limit: number): Order[] => {
+const applyPagination = (
+  orders: Order[],
+  page: number,
+  limit: number
+): Order[] => {
   return orders.slice(page * limit, page * limit + limit);
 };
 
@@ -83,17 +76,24 @@ const Results: FC<ResultsProps> = ({ className, orders, ...rest }) => {
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(10);
 
-  const handleSelectAllOrders = (event: ChangeEvent<HTMLInputElement>): void => {
-    setSelectedOrders(event.target.checked
-      ? orders.map((order) => order.id)
-      : []);
+  const handleSelectAllOrders = (
+    event: ChangeEvent<HTMLInputElement>
+  ): void => {
+    setSelectedOrders(
+      event.target.checked ? orders.map(order => order.id) : []
+    );
   };
 
-  const handleSelectOneOrder = (event: ChangeEvent<HTMLInputElement>, orderId: string): void => {
+  const handleSelectOneOrder = (
+    event: ChangeEvent<HTMLInputElement>,
+    orderId: string
+  ): void => {
     if (!selectedOrders.includes(orderId)) {
-      setSelectedOrders((prevSelected) => [...prevSelected, orderId]);
+      setSelectedOrders(prevSelected => [...prevSelected, orderId]);
     } else {
-      setSelectedOrders((prevSelected) => prevSelected.filter((id) => id !== orderId));
+      setSelectedOrders(prevSelected =>
+        prevSelected.filter(id => id !== orderId)
+      );
     }
   };
 
@@ -107,34 +107,18 @@ const Results: FC<ResultsProps> = ({ className, orders, ...rest }) => {
 
   const paginatedOrders = applyPagination(orders, page, limit);
   const enableBulkOperations = selectedOrders.length > 0;
-  const selectedSomeOrders = selectedOrders.length > 0 && selectedOrders.length < orders.length;
+  const selectedSomeOrders =
+    selectedOrders.length > 0 && selectedOrders.length < orders.length;
   const selectedAllOrders = selectedOrders.length === orders.length;
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <Typography
-        color="textSecondary"
-        gutterBottom
-        variant="body2"
-      >
-        {orders.length}
-        {' '}
-        Records found. Page
-        {' '}
-        {page + 1}
-        {' '}
-        of
-        {' '}
+    <div className={clsx(classes.root, className)} {...rest}>
+      <Typography color="textSecondary" gutterBottom variant="body2">
+        {orders.length} Records found. Page {page + 1} of{' '}
         {Math.ceil(orders.length / limit)}
       </Typography>
       <Card>
-        <CardHeader
-          action={<GenericMoreButton />}
-          title="Orders"
-        />
+        <CardHeader action={<GenericMoreButton />} title="Orders" />
         <Divider />
         <PerfectScrollbar>
           <Box minWidth={1150}>
@@ -148,28 +132,16 @@ const Results: FC<ResultsProps> = ({ className, orders, ...rest }) => {
                       onChange={handleSelectAllOrders}
                     />
                   </TableCell>
-                  <TableCell>
-                    Number
-                  </TableCell>
-                  <TableCell>
-                    Customer
-                  </TableCell>
-                  <TableCell>
-                    Method
-                  </TableCell>
-                  <TableCell>
-                    Total
-                  </TableCell>
-                  <TableCell>
-                    Status
-                  </TableCell>
-                  <TableCell align="right">
-                    Actions
-                  </TableCell>
+                  <TableCell>Number</TableCell>
+                  <TableCell>Customer</TableCell>
+                  <TableCell>Method</TableCell>
+                  <TableCell>Total</TableCell>
+                  <TableCell>Status</TableCell>
+                  <TableCell align="right">Actions</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {paginatedOrders.map((order) => {
+                {paginatedOrders.map(order => {
                   const isOrderSelected = selectedOrders.includes(order.id);
 
                   return (
@@ -180,31 +152,28 @@ const Results: FC<ResultsProps> = ({ className, orders, ...rest }) => {
                       <TableCell padding="checkbox">
                         <Checkbox
                           checked={isOrderSelected}
-                          onChange={(event) => handleSelectOneOrder(event, order.id)}
+                          onChange={event =>
+                            handleSelectOneOrder(event, order.id)
+                          }
                           value={isOrderSelected}
                         />
                       </TableCell>
                       <TableCell>
                         {order.number}
-                        <Typography
-                          variant="body2"
-                          color="textSecondary"
-                        >
-                          {moment(order.createdAt).format('DD MMM YYYY | hh:mm')}
+                        <Typography variant="body2" color="textSecondary">
+                          {moment(order.createdAt).format(
+                            'DD MMM YYYY | hh:mm'
+                          )}
                         </Typography>
                       </TableCell>
+                      <TableCell>{order.customer.name}</TableCell>
+                      <TableCell>{order.paymentMethod}</TableCell>
                       <TableCell>
-                        {order.customer.name}
+                        {numeral(order.totalAmount).format(
+                          `${order.currency}0,0.00`
+                        )}
                       </TableCell>
-                      <TableCell>
-                        {order.paymentMethod}
-                      </TableCell>
-                      <TableCell>
-                        {numeral(order.totalAmount).format(`${order.currency}0,0.00`)}
-                      </TableCell>
-                      <TableCell>
-                        {getStatusLabel(order.status)}
-                      </TableCell>
+                      <TableCell>{getStatusLabel(order.status)}</TableCell>
                       <TableCell align="right">
                         <IconButton>
                           <SvgIcon fontSize="small">
@@ -237,10 +206,7 @@ const Results: FC<ResultsProps> = ({ className, orders, ...rest }) => {
           rowsPerPageOptions={[5, 10, 25]}
         />
       </Card>
-      <BulkOperations
-        open={enableBulkOperations}
-        selected={selectedOrders}
-      />
+      <BulkOperations open={enableBulkOperations} selected={selectedOrders} />
     </div>
   );
 };

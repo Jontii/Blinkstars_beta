@@ -1,16 +1,15 @@
-import React from 'react';
-import type { FC } from 'react';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   Box,
   Card,
-  CardHeader,
   CardContent,
+  CardHeader,
   Divider,
   makeStyles
 } from '@material-ui/core';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import GenericMoreButton from 'src/components/GenericMoreButton';
 import Chart from './Chart';
 
@@ -25,7 +24,10 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const PerformanceOverTime: FC<PerformanceOverTimeProps> = ({ className, ...rest }) => {
+const PerformanceOverTime: FC<PerformanceOverTimeProps> = ({
+  className,
+  ...rest
+}) => {
   const classes = useStyles();
   const performance = {
     thisWeek: {
@@ -56,10 +58,7 @@ const PerformanceOverTime: FC<PerformanceOverTimeProps> = ({ className, ...rest 
   };
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardHeader
         action={<GenericMoreButton />}
         title="Performance Over Time"
@@ -67,10 +66,7 @@ const PerformanceOverTime: FC<PerformanceOverTimeProps> = ({ className, ...rest 
       <Divider />
       <CardContent>
         <PerfectScrollbar>
-          <Box
-            height={375}
-            minWidth={500}
-          >
+          <Box height={375} minWidth={500}>
             <Chart
               className={classes.chart}
               data={performance.thisYear.data}

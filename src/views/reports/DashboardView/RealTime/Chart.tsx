@@ -1,10 +1,9 @@
-import React from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { Bar } from 'react-chartjs-2';
 import { makeStyles, useTheme } from '@material-ui/core';
-import type { Theme } from 'src/theme'; 
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { Bar } from 'react-chartjs-2';
+import { Theme } from 'src/theme';
 
 interface ChartProps {
   className?: string;
@@ -95,7 +94,7 @@ const Chart: FC<ChartProps> = ({
       callbacks: {
         legend: () => {},
         title: () => {},
-        label: (tooltipItem) => {
+        label: tooltipItem => {
           const label = `Views: ${tooltipItem.yLabel}`;
 
           return label;
@@ -105,14 +104,8 @@ const Chart: FC<ChartProps> = ({
   };
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <Bar
-        data={data}
-        options={options}
-      />
+    <div className={clsx(classes.root, className)} {...rest}>
+      <Bar data={data} options={options} />
     </div>
   );
 };

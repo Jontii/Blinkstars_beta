@@ -1,23 +1,23 @@
-import React, {FC} from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Box,
   Button,
   Card,
   CardHeader,
   Divider,
+  makeStyles,
   Table,
   TableBody,
   TableCell,
   TableRow,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import ReceiptIcon from '@material-ui/icons/ReceiptOutlined';
-import type { Theme } from 'src/theme';
-import type { Customer } from 'src/types/customer';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { Theme } from 'src/theme';
+import { Customer } from 'src/types/customer';
 
 interface InvoicesProps {
   customer: Customer;
@@ -31,18 +31,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const Invoices: FC<InvoicesProps> = ({
-  customer,
-  className,
-  ...rest
-}) => {
+const Invoices: FC<InvoicesProps> = ({ customer, className, ...rest }) => {
   const classes = useStyles();
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardHeader title="Invoices/Billing" />
       <Divider />
       <Table>
@@ -52,36 +45,23 @@ const Invoices: FC<InvoicesProps> = ({
               Credit Card
             </TableCell>
             <TableCell>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-              >
+              <Typography variant="body2" color="textSecondary">
                 {customer.creditCard}
               </Typography>
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell className={classes.fontWeightMedium}>
-              Paid
-            </TableCell>
+            <TableCell className={classes.fontWeightMedium}>Paid</TableCell>
             <TableCell>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-              >
+              <Typography variant="body2" color="textSecondary">
                 2 ($50.00)
               </Typography>
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell className={classes.fontWeightMedium}>
-              Draft
-            </TableCell>
+            <TableCell className={classes.fontWeightMedium}>Draft</TableCell>
             <TableCell>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-              >
+              <Typography variant="body2" color="textSecondary">
                 1 ($5.00)
               </Typography>
             </TableCell>
@@ -91,23 +71,15 @@ const Invoices: FC<InvoicesProps> = ({
               Unpaid/Due
             </TableCell>
             <TableCell>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-              >
+              <Typography variant="body2" color="textSecondary">
                 1 ($12.00)
               </Typography>
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell className={classes.fontWeightMedium}>
-              Refunded
-            </TableCell>
+            <TableCell className={classes.fontWeightMedium}>Refunded</TableCell>
             <TableCell>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-              >
+              <Typography variant="body2" color="textSecondary">
                 0 ($0.00)
               </Typography>
             </TableCell>
@@ -117,28 +89,16 @@ const Invoices: FC<InvoicesProps> = ({
               Gross Income
             </TableCell>
             <TableCell>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-              >
+              <Typography variant="body2" color="textSecondary">
                 $1,200.00
               </Typography>
             </TableCell>
           </TableRow>
         </TableBody>
       </Table>
-      <Box
-        p={1}
-        display="flex"
-        flexDirection="column"
-        alignItems="flex-start"
-      >
-        <Button startIcon={<AttachMoneyIcon />}>
-          Create Invoice
-        </Button>
-        <Button startIcon={<ReceiptIcon />}>
-          Resend Due Invoices
-        </Button>
+      <Box p={1} display="flex" flexDirection="column" alignItems="flex-start">
+        <Button startIcon={<AttachMoneyIcon />}>Create Invoice</Button>
+        <Button startIcon={<ReceiptIcon />}>Resend Due Invoices</Button>
       </Box>
     </Card>
   );

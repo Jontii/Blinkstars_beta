@@ -1,24 +1,20 @@
-import React, {
-  useRef,
-  useState
-} from 'react';
-import type { FC, ChangeEvent } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Avatar,
   Box,
   Button,
   IconButton,
+  makeStyles,
   Paper,
   TextareaAutosize,
-  Tooltip,
-  makeStyles
+  Tooltip
 } from '@material-ui/core';
-import AttachFileIcon from '@material-ui/icons/AttachFile';
 import AddPhotoIcon from '@material-ui/icons/AddPhotoAlternate';
-import type { Theme } from 'src/theme';
+import AttachFileIcon from '@material-ui/icons/AttachFile';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { ChangeEvent, FC, useRef, useState } from 'react';
 import useAuth from 'src/hooks/useAuth';
+import { Theme } from 'src/theme';
 
 interface MailReplyProps {
   className?: string;
@@ -69,19 +65,9 @@ const MailReply: FC<MailReplyProps> = ({ className, ...rest }) => {
   };
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <Avatar
-        alt="Person"
-        className={classes.avatar}
-        src={user.avatar}
-      />
-      <Paper
-        className={classes.textareaContainer}
-        variant="outlined"
-      >
+    <div className={clsx(classes.root, className)} {...rest}>
+      <Avatar alt="Person" className={classes.avatar} src={user.avatar} />
+      <Paper className={classes.textareaContainer} variant="outlined">
         <TextareaAutosize
           className={classes.textarea}
           onChange={handleChange}
@@ -89,11 +75,7 @@ const MailReply: FC<MailReplyProps> = ({ className, ...rest }) => {
           rows={3}
           value={value}
         />
-        <Box
-          display="flex"
-          alignItems="center"
-          mt={2}
-        >
+        <Box display="flex" alignItems="center" mt={2}>
           <Button
             color="secondary"
             variant="contained"
@@ -121,14 +103,10 @@ const MailReply: FC<MailReplyProps> = ({ className, ...rest }) => {
           </Tooltip>
         </Box>
       </Paper>
-      <input
-        className={classes.fileInput}
-        ref={fileInputRef}
-        type="file"
-      />
+      <input className={classes.fileInput} ref={fileInputRef} type="file" />
     </div>
   );
-}
+};
 
 MailReply.propTypes = {
   className: PropTypes.string

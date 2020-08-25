@@ -1,19 +1,18 @@
-import React from 'react';
-import type { FC } from 'react';
-import clsx from 'clsx';
-import * as Yup from 'yup';
-import PropTypes from 'prop-types';
-import { Formik } from 'formik';
 import {
   Box,
   Button,
   FormHelperText,
-  TextField,
-  makeStyles
+  makeStyles,
+  TextField
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
+import clsx from 'clsx';
+import { Formik } from 'formik';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import useAuth from 'src/hooks/useAuth';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import * as Yup from 'yup';
 
 interface JWTLoginProps {
   className?: string;
@@ -25,6 +24,7 @@ const useStyles = makeStyles(() => ({
 
 const JWTLogin: FC<JWTLoginProps> = ({ className, ...rest }) => {
   const classes = useStyles();
+  // @ts-ignore
   const { login } = useAuth() as any;
   const isMountedRef = useIsMountedRef();
 
@@ -36,14 +36,13 @@ const JWTLogin: FC<JWTLoginProps> = ({ className, ...rest }) => {
         submit: null
       }}
       validationSchema={Yup.object().shape({
-        email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
+        email: Yup.string()
+          .email('Must be a valid email')
+          .max(255)
+          .required('Email is required'),
         password: Yup.string().max(255).required('Password is required')
       })}
-      onSubmit={async (values, {
-        setErrors,
-        setStatus,
-        setSubmitting
-      }) => {
+      onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
           await login(values.email, values.password);
 
@@ -105,9 +104,7 @@ const JWTLogin: FC<JWTLoginProps> = ({ className, ...rest }) => {
           />
           {errors.submit && (
             <Box mt={3}>
-              <FormHelperText error>
-                {errors.submit}
-              </FormHelperText>
+              <FormHelperText error>{errors.submit}</FormHelperText>
             </Box>
           )}
           <Box mt={2}>
@@ -123,17 +120,14 @@ const JWTLogin: FC<JWTLoginProps> = ({ className, ...rest }) => {
             </Button>
           </Box>
           <Box mt={2}>
-            <Alert
-              severity="info"
-            >
+            <Alert severity="info">
               <div>
-                Use
-                {' '}
-                <b>influencer@influencer.io for influencer or company@amd.io for business</b>
-                {' '}
-                and password
-                {' '}
-                <b>Password123</b>
+                Use{' '}
+                <b>
+                  influencer@influencer.io for influencer or company@amd.io for
+                  business
+                </b>{' '}
+                and password <b>Password123</b>
               </div>
             </Alert>
           </Box>
@@ -144,7 +138,7 @@ const JWTLogin: FC<JWTLoginProps> = ({ className, ...rest }) => {
 };
 
 JWTLogin.propTypes = {
-  className: PropTypes.string,
+  className: PropTypes.string
 };
 
 export default JWTLogin;

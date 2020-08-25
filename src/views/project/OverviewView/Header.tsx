@@ -1,18 +1,17 @@
-import React from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Box,
   Button,
   Grid,
   Hidden,
-  Typography,
-  makeStyles
+  makeStyles,
+  Typography
 } from '@material-ui/core';
 import BarChartIcon from '@material-ui/icons/BarChart';
-import type { Theme } from 'src/theme';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import useAuth from 'src/hooks/useAuth';
+import { Theme } from 'src/theme';
 
 interface HeaderProps {
   className?: string;
@@ -34,39 +33,16 @@ const Header: FC<HeaderProps> = ({ className, ...rest }) => {
   const { user } = useAuth();
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <Grid
-        alignItems="center"
-        container
-        justify="space-between"
-        spacing={3}
-      >
-        <Grid
-          item
-          md={6}
-          xs={12}
-        >
-          <Typography
-            variant="overline"
-            color="textSecondary"
-          >
+    <div className={clsx(classes.root, className)} {...rest}>
+      <Grid alignItems="center" container justify="space-between" spacing={3}>
+        <Grid item md={6} xs={12}>
+          <Typography variant="overline" color="textSecondary">
             Overview
           </Typography>
-          <Typography
-            variant="h3"
-            color="textPrimary"
-          >
-            Good Morning,
-            {' '}
-            {user.name}
+          <Typography variant="h3" color="textPrimary">
+            Good Morning, {user.name}
           </Typography>
-          <Typography
-            variant="subtitle1"
-            color="textPrimary"
-          >
+          <Typography variant="subtitle1" color="textPrimary">
             Here’s what’s happening with your projects today
           </Typography>
           <Box mt={2}>
@@ -80,14 +56,11 @@ const Header: FC<HeaderProps> = ({ className, ...rest }) => {
           </Box>
         </Grid>
         <Hidden smDown>
-          <Grid
-            item
-            md={6}
-          >
+          <Grid item md={6}>
             <img
               alt="Cover"
               className={classes.image}
-              src={`${process.env.PUBLIC_URL}/static/images/undraw_growth_analytics_8btt.svg`}
+              src="/static/images/undraw_growth_analytics_8btt.svg"
             />
           </Grid>
         </Hidden>

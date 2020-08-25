@@ -1,10 +1,3 @@
-import React from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import * as Yup from 'yup';
-import { Formik } from 'formik';
-import { useSnackbar } from 'notistack';
 import {
   Box,
   Button,
@@ -14,10 +7,16 @@ import {
   Divider,
   FormHelperText,
   Grid,
-  TextField,
-  makeStyles
+  makeStyles,
+  TextField
 } from '@material-ui/core';
+import clsx from 'clsx';
+import { Formik } from 'formik';
+import { useSnackbar } from 'notistack';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import wait from 'src/utils/wait';
+import * as Yup from 'yup';
 
 interface SecurityProps {
   className?: string;
@@ -47,12 +46,10 @@ const Security: FC<SecurityProps> = ({ className, ...rest }) => {
           .oneOf([Yup.ref('password'), null], 'Passwords must match')
           .required('Required')
       })}
-      onSubmit={async (values, {
-        resetForm,
-        setErrors,
-        setStatus,
-        setSubmitting
-      }) => {
+      onSubmit={async (
+        values,
+        { resetForm, setErrors, setStatus, setSubmitting }
+      ) => {
         try {
           // NOTE: Make API request
           await wait(500);
@@ -80,23 +77,12 @@ const Security: FC<SecurityProps> = ({ className, ...rest }) => {
         values
       }) => (
         <form onSubmit={handleSubmit}>
-          <Card
-            className={clsx(classes.root, className)}
-            {...rest}
-          >
+          <Card className={clsx(classes.root, className)} {...rest}>
             <CardHeader title="Change Password" />
             <Divider />
             <CardContent>
-              <Grid
-                container
-                spacing={3}
-              >
-                <Grid
-                  item
-                  md={4}
-                  sm={6}
-                  xs={12}
-                >
+              <Grid container spacing={3}>
+                <Grid item md={4} sm={6} xs={12}>
                   <TextField
                     error={Boolean(touched.password && errors.password)}
                     fullWidth
@@ -110,16 +96,15 @@ const Security: FC<SecurityProps> = ({ className, ...rest }) => {
                     variant="outlined"
                   />
                 </Grid>
-                <Grid
-                  item
-                  md={4}
-                  sm={6}
-                  xs={12}
-                >
+                <Grid item md={4} sm={6} xs={12}>
                   <TextField
-                    error={Boolean(touched.passwordConfirm && errors.passwordConfirm)}
+                    error={Boolean(
+                      touched.passwordConfirm && errors.passwordConfirm
+                    )}
                     fullWidth
-                    helperText={touched.passwordConfirm && errors.passwordConfirm}
+                    helperText={
+                      touched.passwordConfirm && errors.passwordConfirm
+                    }
                     label="Password Confirmation"
                     name="passwordConfirm"
                     onBlur={handleBlur}
@@ -132,18 +117,12 @@ const Security: FC<SecurityProps> = ({ className, ...rest }) => {
               </Grid>
               {errors.submit && (
                 <Box mt={3}>
-                  <FormHelperText error>
-                    {errors.submit}
-                  </FormHelperText>
+                  <FormHelperText error>{errors.submit}</FormHelperText>
                 </Box>
               )}
             </CardContent>
             <Divider />
-            <Box
-              p={2}
-              display="flex"
-              justifyContent="flex-end"
-            >
+            <Box p={2} display="flex" justifyContent="flex-end">
               <Button
                 color="secondary"
                 disabled={isSubmitting}

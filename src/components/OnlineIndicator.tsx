@@ -1,8 +1,7 @@
-import React from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import { colors, makeStyles } from '@material-ui/core';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 
 interface OnlineIndicatorProps {
   className?: string;
@@ -10,7 +9,7 @@ interface OnlineIndicatorProps {
   status: 'online' | 'offline' | 'away' | 'busy';
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'inline-block',
     borderRadius: '50%',
@@ -66,11 +65,6 @@ const OnlineIndicator: FC<OnlineIndicatorProps> = ({
   );
 };
 
-OnlineIndicator.propTypes = {
-  className: PropTypes.string,
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  status: PropTypes.oneOf(['online', 'offline', 'away', 'busy'])
-};
 
 OnlineIndicator.defaultProps = {
   size: 'medium',

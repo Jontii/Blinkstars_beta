@@ -1,24 +1,23 @@
-import React from 'react';
-import type { FC } from 'react';
-import { NavLink as RouterLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import {
-  ListItem,
   ButtonBase,
-  Typography,
-  makeStyles
+  ListItem,
+  makeStyles,
+  Typography
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DraftsIcon from '@material-ui/icons/Drafts';
-import LabelIcon from '@material-ui/icons/Label';
-import SendIcon from '@material-ui/icons/Send';
-import StarIcon from '@material-ui/icons/Star';
 import InboxIcon from '@material-ui/icons/Inbox';
+import LabelIcon from '@material-ui/icons/Label';
+import LabelImportantIcon from '@material-ui/icons/LabelImportant';
 import MailIcon from '@material-ui/icons/Mail';
 import ReportIcon from '@material-ui/icons/Report';
-import LabelImportantIcon from '@material-ui/icons/LabelImportant';
-import type { Theme } from 'src/theme';
-import type { Label } from 'src/types/mail';
+import SendIcon from '@material-ui/icons/Send';
+import StarIcon from '@material-ui/icons/Star';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { NavLink as RouterLink } from 'react-router-dom';
+import { Theme } from 'src/theme';
+import { Label } from 'src/types/mail';
 
 interface LabelItemProps {
   label: Label;
@@ -96,7 +95,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: theme.spacing(1, 0)
   },
   icon: {
-    marginRight: theme.spacing(1),
+    marginRight: theme.spacing(1)
   },
   text: {
     fontWeight: 'inherit',
@@ -110,35 +109,24 @@ const LabelItem: FC<LabelItemProps> = ({ label, ...rest }) => {
   const Icon = getIcon(label);
   const to = getTo(label);
   const color = getColor(label);
-  const displayUnreadCount = Boolean(label.unreadCount && label.unreadCount > 0);
+  const displayUnreadCount = Boolean(
+    label.unreadCount && label.unreadCount > 0
+  );
 
   return (
-    <ListItem
-      className={classes.root}
-      {...rest}
-    >
+    <ListItem className={classes.root} {...rest}>
       <ButtonBase
         activeClassName={classes.active}
         component={RouterLink}
         to={to}
         className={classes.content}
       >
-        <Icon
-          className={classes.icon}
-          color="inherit"
-          style={{ color }}
-        />
-        <Typography
-          className={classes.text}
-          variant="body2"
-        >
+        <Icon className={classes.icon} color="inherit" style={{ color }} />
+        <Typography className={classes.text} variant="body2">
           {label.name}
         </Typography>
         {displayUnreadCount && (
-          <Typography
-            color="inherit"
-            variant="caption"
-          >
+          <Typography color="inherit" variant="caption">
             {label.unreadCount}
           </Typography>
         )}

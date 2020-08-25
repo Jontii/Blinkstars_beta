@@ -1,20 +1,16 @@
-import React, {
-  useState,
-  useEffect
-} from 'react';
-import type { FC } from 'react';
-import Cookies from 'js-cookie';
 import {
   Box,
   Button,
+  makeStyles,
   Paper,
   Portal,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
-import useSettings from 'src/hooks/useSettings';
-import type { Theme } from 'src/theme';
+import Cookies from 'js-cookie';
+import React, { FC, useEffect, useState } from 'react';
 import { THEMES } from 'src/constants';
+import useSettings from 'src/hooks/useSettings';
+import { Theme } from 'src/theme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -59,37 +55,17 @@ const SettingsNotification: FC = () => {
 
   return (
     <Portal>
-      <Paper
-        className={classes.root}
-        elevation={3}
-      >
-        <Typography
-          variant="h4"
-          color="textPrimary"
-          gutterBottom
-        >
+      <Paper className={classes.root} elevation={3}>
+        <Typography variant="h4" color="textPrimary" gutterBottom>
           Settings Updated
         </Typography>
-        <Typography
-          variant="body2"
-          color="textSecondary"
-        >
-          We automatically updated your settings.
-          You change the settings any time from your dashboard settings.
+        <Typography variant="body2" color="textSecondary">
+          We automatically updated your settings. You change the settings any
+          time from your dashboard settings.
         </Typography>
-        <Box
-          mt={2}
-          display="flex"
-          justifyContent="space-between"
-        >
-          <Button onClick={handleClose}>
-            Close
-          </Button>
-          <Button
-            color="secondary"
-            variant="contained"
-            onClick={handleSwitch}
-          >
+        <Box mt={2} display="flex" justifyContent="space-between">
+          <Button onClick={handleClose}>Close</Button>
+          <Button color="secondary" variant="contained" onClick={handleSwitch}>
             Switch
           </Button>
         </Box>

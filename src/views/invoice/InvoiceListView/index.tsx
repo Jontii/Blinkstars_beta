@@ -1,19 +1,10 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback
-} from 'react';
-import type { FC } from 'react';
-import {
-  Box,
-  Container,
-  makeStyles
-} from '@material-ui/core';
-import type { Theme } from 'src/theme';
-import axios from 'src/utils/axios';
+import { Box, Container, makeStyles } from '@material-ui/core';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import Page from 'src/components/Page';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import type { Invoice } from 'src/types/invoice';
+import { Theme } from 'src/theme';
+import { Invoice } from 'src/types/invoice';
+import axios from 'src/utils/axios';
 import Header from './Header';
 import Results from './Results';
 
@@ -33,7 +24,9 @@ const InvoiceListView: FC = () => {
 
   const getInvoices = useCallback(async () => {
     try {
-      const response = await axios.get<{ invoices: Invoice[]; }>('/api/invoices');
+      const response = await axios.get<{ invoices: Invoice[] }>(
+        '/api/invoices'
+      );
 
       if (isMountedRef.current) {
         setInvoices(response.data.invoices);
@@ -48,10 +41,7 @@ const InvoiceListView: FC = () => {
   }, [getInvoices]);
 
   return (
-    <Page
-      className={classes.root}
-      title="Invoice List"
-    >
+    <Page className={classes.root} title="Invoice List">
       <Container maxWidth={false}>
         <Header />
         <Box mt={3}>

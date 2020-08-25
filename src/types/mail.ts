@@ -11,12 +11,12 @@ export interface Mail {
     name: string;
     email: string;
     avatar: string | null;
-  },
+  };
   to: {
     name: string;
     email: string;
     avatar: string | null;
-  }[],
+  }[];
   createdAt: number;
 }
 

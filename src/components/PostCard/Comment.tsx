@@ -1,18 +1,11 @@
-import React from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { Avatar, Box, Link, makeStyles, Typography } from '@material-ui/core';
 import clsx from 'clsx';
 import moment from 'moment';
-import {
-  Avatar,
-  Box,
-  Link,
-  Typography,
-  makeStyles
-} from '@material-ui/core';
-import type { Theme } from 'src/theme';
-import type { PostComment } from 'src/types/social';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import { Theme } from 'src/theme';
+import { PostComment } from 'src/types/social';
 
 interface CommentProps {
   className?: string;
@@ -33,10 +26,7 @@ const Comment: FC<CommentProps> = ({ className, comment, ...rest }) => {
   const classes = useStyles();
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <div className={clsx(classes.root, className)} {...rest}>
       <Avatar
         alt="Person"
         component={RouterLink}
@@ -50,31 +40,16 @@ const Comment: FC<CommentProps> = ({ className, comment, ...rest }) => {
         bgcolor="background.dark"
         className={classes.bubble}
       >
-        <Box
-          display="flex"
-          alignItems="center"
-          mb={1}
-        >
-          <Link
-            color="textPrimary"
-            component={RouterLink}
-            to="#"
-            variant="h6"
-          >
+        <Box display="flex" alignItems="center" mb={1}>
+          <Link color="textPrimary" component={RouterLink} to="#" variant="h6">
             {comment.author.name}
           </Link>
           <Box flexGrow={1} />
-          <Typography
-            color="textSecondary"
-            variant="caption"
-          >
+          <Typography color="textSecondary" variant="caption">
             {moment(comment.createdAt).fromNow()}
           </Typography>
         </Box>
-        <Typography
-          variant="body1"
-          color="textPrimary"
-        >
+        <Typography variant="body1" color="textPrimary">
           {comment.message}
         </Typography>
       </Box>

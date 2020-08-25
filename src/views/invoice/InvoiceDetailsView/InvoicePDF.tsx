@@ -1,17 +1,16 @@
-import React from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import moment from 'moment';
-import numeral from 'numeral';
 import {
   Document,
-  Page,
-  View,
-  Text,
   Image,
-  StyleSheet
+  Page,
+  StyleSheet,
+  Text,
+  View
 } from '@react-pdf/renderer';
-import type { Invoice } from 'src/types/invoice';
+import moment from 'moment';
+import numeral from 'numeral';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { Invoice } from 'src/types/invoice';
 
 interface InvoicePDFProps {
   invoice: Invoice;
@@ -106,92 +105,52 @@ const InvoicePDF: FC<InvoicePDFProps> = ({ invoice }) => {
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
           <View>
-            <Image
-              source={`${process.env.PUBLIC_URL}/static/logo.jpg`}
-              style={styles.brand}
-            />
-            <Text style={styles.h5}>
-              www.devias.io
-            </Text>
+            <Image source="/static/logo.jpg" style={styles.brand} />
+            <Text style={styles.h5}>www.devias.io</Text>
           </View>
           <View>
-            <Text style={styles.h1}>
-              {invoice.status}
-            </Text>
-            <Text style={styles.h5}>
-              Invoice #
-              {invoice.id}
-            </Text>
+            <Text style={styles.h1}>{invoice.status}</Text>
+            <Text style={styles.h5}>Invoice #{invoice.id}</Text>
           </View>
         </View>
         <View style={styles.company}>
           <View>
-            <Text style={styles.body1}>
-              Street King William, 123
-            </Text>
-            <Text style={styles.body1}>
-              Level 2, C, 442456
-            </Text>
-            <Text style={styles.body1}>
-              San Francisco, CA, USA
-            </Text>
+            <Text style={styles.body1}>Street King William, 123</Text>
+            <Text style={styles.body1}>Level 2, C, 442456</Text>
+            <Text style={styles.body1}>San Francisco, CA, USA</Text>
           </View>
           <View>
-            <Text style={styles.body1}>
-              Company No. 4675933
-            </Text>
-            <Text style={styles.body1}>
-              EU VAT No. 949 67545 45
-            </Text>
+            <Text style={styles.body1}>Company No. 4675933</Text>
+            <Text style={styles.body1}>EU VAT No. 949 67545 45</Text>
           </View>
           <View>
-            <Text style={styles.body1}>
-              Email: accounts@devias.io
-            </Text>
-            <Text style={styles.body1}>
-              Tel: (+40) 652 3456 23
-            </Text>
+            <Text style={styles.body1}>Email: accounts@devias.io</Text>
+            <Text style={styles.body1}>Tel: (+40) 652 3456 23</Text>
           </View>
         </View>
         <View style={styles.references}>
           <View>
-            <Text style={[styles.h5, styles.mb1]}>
-              Due Date
-            </Text>
+            <Text style={[styles.h5, styles.mb1]}>Due Date</Text>
             <Text style={styles.body1}>
               {moment(invoice.dueDate).format('DD MMM YYYY')}
             </Text>
           </View>
           <View>
-            <Text style={[styles.h5, styles.mb1]}>
-              Date of issue
-            </Text>
+            <Text style={[styles.h5, styles.mb1]}>Date of issue</Text>
             <Text style={styles.body1}>
               {moment(invoice.issueDate).format('DD MMM YYYY')}
             </Text>
           </View>
           <View>
-            <Text style={[styles.h5, styles.mb1]}>
-              Number
-            </Text>
-            <Text style={styles.body1}>
-              {invoice.number}
-            </Text>
+            <Text style={[styles.h5, styles.mb1]}>Number</Text>
+            <Text style={styles.body1}>{invoice.number}</Text>
           </View>
         </View>
         <View style={styles.billing}>
-          <Text style={[styles.h5, styles.mb1]}>
-            Billed to
-          </Text>
-          <Text style={styles.body1}>
-            Tracey Herman
-          </Text>
-          <Text style={styles.body1}>
-            Countdown Grey Lynn
-          </Text>
-          <Text style={styles.body1}>
-            6934656584231
-          </Text>
+          <Text style={[styles.h5, styles.mb1]}>Billed to</Text>
+          <Text style={styles.body1}>Tracey Herman</Text>
+          <Text style={styles.body1}>Countdown Grey Lynn</Text>
+          <Text style={styles.body1}>6934656584231</Text>
           <Text style={styles.body1}>
             271 Richmond Rd, Grey Lynn, Auckland 1022, New Zealand
           </Text>
@@ -201,33 +160,26 @@ const InvoicePDF: FC<InvoicePDFProps> = ({ invoice }) => {
             <View style={styles.tableHeader}>
               <View style={styles.tableRow}>
                 <View style={styles.tableCell1}>
-                  <Text style={styles.h6}>
-                    Description
-                  </Text>
+                  <Text style={styles.h6}>Description</Text>
                 </View>
                 <View style={styles.tableCellN} />
                 <View style={styles.tableCellN}>
-                  <Text style={[styles.h6, styles.alignRight]}>
-                    Price
-                  </Text>
+                  <Text style={[styles.h6, styles.alignRight]}>Price</Text>
                 </View>
               </View>
             </View>
             <View style={styles.tableBody}>
-              {invoice.items.map((item) => (
-                <View
-                  style={styles.tableRow}
-                  key={item.id}
-                >
+              {invoice.items.map(item => (
+                <View style={styles.tableRow} key={item.id}>
                   <View style={styles.tableCell1}>
-                    <Text style={styles.body2}>
-                      {item.description}
-                    </Text>
+                    <Text style={styles.body2}>{item.description}</Text>
                   </View>
                   <View style={styles.tableCellN} />
                   <View style={styles.tableCellN}>
                     <Text style={[styles.body2, styles.alignRight]}>
-                      {numeral(item.unitAmount).format(`${item.currency}0,0.00`)}
+                      {numeral(item.unitAmount).format(
+                        `${item.currency}0,0.00`
+                      )}
                     </Text>
                   </View>
                 </View>
@@ -235,39 +187,39 @@ const InvoicePDF: FC<InvoicePDFProps> = ({ invoice }) => {
               <View style={styles.tableRow}>
                 <View style={styles.tableCell1} />
                 <View style={styles.tableCellN}>
-                  <Text style={styles.body2}>
-                    Subtotal
-                  </Text>
+                  <Text style={styles.body2}>Subtotal</Text>
                 </View>
                 <View style={styles.tableCellN}>
                   <Text style={[styles.body2, styles.alignRight]}>
-                    {numeral(invoice.subtotalAmount).format(`${invoice.currency}0,0.00`)}
+                    {numeral(invoice.subtotalAmount).format(
+                      `${invoice.currency}0,0.00`
+                    )}
                   </Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
                 <View style={styles.tableCell1} />
                 <View style={styles.tableCellN}>
-                  <Text style={styles.body2}>
-                    Taxes
-                  </Text>
+                  <Text style={styles.body2}>Taxes</Text>
                 </View>
                 <View style={styles.tableCellN}>
                   <Text style={[styles.body2, styles.alignRight]}>
-                    {numeral(invoice.taxAmount).format(`${invoice.currency}0,0.00`)}
+                    {numeral(invoice.taxAmount).format(
+                      `${invoice.currency}0,0.00`
+                    )}
                   </Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
                 <View style={styles.tableCell1} />
                 <View style={styles.tableCellN}>
-                  <Text style={styles.body2}>
-                    Total
-                  </Text>
+                  <Text style={styles.body2}>Total</Text>
                 </View>
                 <View style={styles.tableCellN}>
                   <Text style={[styles.body2, styles.alignRight]}>
-                    {numeral(invoice.totalAmount).format(`${invoice.currency}0,0.00`)}
+                    {numeral(invoice.totalAmount).format(
+                      `${invoice.currency}0,0.00`
+                    )}
                   </Text>
                 </View>
               </View>
@@ -275,9 +227,7 @@ const InvoicePDF: FC<InvoicePDFProps> = ({ invoice }) => {
           </View>
         </View>
         <View style={styles.notes}>
-          <Text style={[styles.h5, styles.mb1]}>
-            Notes
-          </Text>
+          <Text style={[styles.h5, styles.mb1]}>Notes</Text>
           <Text style={styles.body1}>
             Please make sure you have the right bank registration number as I
             had issues before and make sure you guys cover transfer expenses.
@@ -286,7 +236,7 @@ const InvoicePDF: FC<InvoicePDFProps> = ({ invoice }) => {
       </Page>
     </Document>
   );
-}
+};
 
 InvoicePDF.propTypes = {
   // @ts-ignore

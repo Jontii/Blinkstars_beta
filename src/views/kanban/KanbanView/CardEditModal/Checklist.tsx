@@ -1,28 +1,21 @@
-import React, { useState } from 'react';
-import type { FC, ChangeEvent } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { useSnackbar } from 'notistack';
 import {
   Box,
   Button,
   LinearProgress,
-  Typography,
-  TextField,
+  makeStyles,
   SvgIcon,
-  makeStyles
+  TextField,
+  Typography
 } from '@material-ui/core';
+import clsx from 'clsx';
+import { useSnackbar } from 'notistack';
+import PropTypes from 'prop-types';
+import React, { ChangeEvent, FC, useState } from 'react';
 import { List as ListIcon } from 'react-feather';
-import type { Theme } from 'src/theme';
+import { deleteChecklist, updateChecklist } from 'src/slices/kanban';
 import { useDispatch } from 'src/store';
-import {
-  updateChecklist,
-  deleteChecklist
-} from 'src/slices/kanban';
-import type {
-  Card,
-  Checklist as ChecklistType
-} from 'src/types/kanban';
+import { Theme } from 'src/theme';
+import { Card, Checklist as ChecklistType } from 'src/types/kanban';
 import CheckItem from './CheckItem';
 import CheckItemAdd from './CheckItemAdd';
 
@@ -114,24 +107,16 @@ const Checklist: FC<ChecklistProps> = ({
   };
 
   const totalCheckItems = checklist.checkItems.length;
-  const completedCheckItems = (checklist.checkItems.filter((checkItem) => checkItem.state === 'complete')).length;
-  const completePercentage = totalCheckItems === 0
-    ? 100
-    : (completedCheckItems / totalCheckItems) * 100;
+  const completedCheckItems = checklist.checkItems.filter(
+    checkItem => checkItem.state === 'complete'
+  ).length;
+  const completePercentage =
+    totalCheckItems === 0 ? 100 : (completedCheckItems / totalCheckItems) * 100;
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <Box
-        display="flex"
-      >
-        <SvgIcon
-          fontSize="small"
-          color="action"
-          className={classes.listIcon}
-        >
+    <div className={clsx(classes.root, className)} {...rest}>
+      <Box display="flex">
+        <SvgIcon fontSize="small" color="action" className={classes.listIcon}>
           <ListIcon />
         </SvgIcon>
         {editingName ? (
@@ -151,20 +136,13 @@ const Checklist: FC<ChecklistProps> = ({
               >
                 Save
               </Button>
-              <Button
-                size="small"
-                onClick={handleNameCancel}
-              >
+              <Button size="small" onClick={handleNameCancel}>
                 Cancel
               </Button>
             </Box>
           </Box>
         ) : (
-          <Box
-            display="flex"
-            alignItems="center"
-            flexGrow={1}
-          >
+          <Box display="flex" alignItems="center" flexGrow={1}>
             <Typography
               variant="h4"
               color="textPrimary"
@@ -173,31 +151,17 @@ const Checklist: FC<ChecklistProps> = ({
               {checklist.name}
             </Typography>
             <Box flexGrow={1} />
-            <Button
-              size="small"
-              onClick={handleDelete}
-            >
+            <Button size="small" onClick={handleDelete}>
               Delete
             </Button>
           </Box>
         )}
       </Box>
-      <Box
-        mt={1}
-        display="flex"
-        alignItems="center"
-      >
-        <Typography
-          variant="caption"
-          color="textSecondary"
-        >
-          {Math.round(completePercentage)}
-          %
+      <Box mt={1} display="flex" alignItems="center">
+        <Typography variant="caption" color="textSecondary">
+          {Math.round(completePercentage)}%
         </Typography>
-        <Box
-          ml={2}
-          flexGrow={1}
-        >
+        <Box ml={2} flexGrow={1}>
           <LinearProgress
             variant="determinate"
             value={completePercentage}
@@ -206,7 +170,7 @@ const Checklist: FC<ChecklistProps> = ({
         </Box>
       </Box>
       <Box mt={3}>
-        {checklist.checkItems.map((checkItem) => (
+        {checklist.checkItems.map(checkItem => (
           <CheckItem
             editing={editingCheckItem === checkItem.id}
             checkItem={checkItem}
@@ -219,14 +183,8 @@ const Checklist: FC<ChecklistProps> = ({
           />
         ))}
       </Box>
-      <Box
-        mt={1}
-        ml={6}
-      >
-        <CheckItemAdd
-          card={card}
-          checklist={checklist}
-        />
+      <Box mt={1} ml={6}>
+        <CheckItemAdd card={card} checklist={checklist} />
       </Box>
     </div>
   );

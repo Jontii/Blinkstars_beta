@@ -10,10 +10,7 @@ export interface CustomerActivity {
   type: string;
 }
 
-export type OrderStatus =
-  | 'complete'
-  | 'pending'
-  | 'rejected';
+export type OrderStatus = 'complete' | 'pending' | 'rejected';
 
 export interface Order {
   id: string;
@@ -44,7 +41,7 @@ export interface Project {
   author: {
     avatar: string | null;
     name: string;
-  },
+  };
   budget: number;
   createdAt: number;
   currency: string;

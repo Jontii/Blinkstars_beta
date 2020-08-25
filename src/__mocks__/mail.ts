@@ -1,7 +1,7 @@
-import moment from 'moment';
 import { colors } from '@material-ui/core';
+import moment from 'moment';
+import { Label, Mail } from 'src/types/mail';
 import mock from 'src/utils/mock';
-import type { Mail, Label } from 'src/types/mail';
 
 const labels: Label[] = [
   {
@@ -117,9 +117,7 @@ Ekaterina Tankova
         avatar: null
       }
     ],
-    createdAt: moment()
-      .toDate()
-      .getTime()
+    createdAt: moment().toDate().getTime()
   },
   {
     id: '5e86bcbd8406cd3055f2b6c8',
@@ -144,9 +142,7 @@ Hey, nice projects! I really liked the one in react. What's your quote on kinda 
         avatar: null
       }
     ],
-    createdAt: moment()
-      .toDate()
-      .getTime()
+    createdAt: moment().toDate().getTime()
   },
   {
     id: '5e86bcb9fee1ec12453fa13b',
@@ -171,9 +167,7 @@ Dear Shen, Your flight is coming up soon. Please don’t forget to check in for 
         avatar: null
       }
     ],
-    createdAt: moment()
-      .toDate()
-      .getTime()
+    createdAt: moment().toDate().getTime()
   },
   {
     id: '5e86bcb5575181a5e527e24f',
@@ -198,9 +192,7 @@ My market leading client has another fantastic opportunity for an experienced So
         avatar: null
       }
     ],
-    createdAt: moment()
-      .toDate()
-      .getTime()
+    createdAt: moment().toDate().getTime()
   }
 ];
 
@@ -211,13 +203,13 @@ const filterMails = (
   customLabel?: string
 ): Mail[] => {
   if (customLabel) {
-    const label = labels.find((_label) => _label.name === customLabel);
+    const label = labels.find(_label => _label.name === customLabel);
 
     if (!label) {
       return [];
     }
 
-    return mails.filter((mail) => mail.labelIds.includes(label.id));
+    return mails.filter(mail => mail.labelIds.includes(label.id));
   }
 
   if (systemLabel === 'all') {
@@ -225,18 +217,22 @@ const filterMails = (
   }
 
   // "Starred" can be both folder and filter
-  if (['starred', 'important'].includes(systemLabel)) {
+  if (systemLabel && ['starred', 'important'].includes(systemLabel)) {
     if (systemLabel === 'starred') {
-      return mails.filter((mail) => mail.isStarred);
+      return mails.filter(mail => mail.isStarred);
     }
 
     if (systemLabel === 'important') {
-      return mails.filter((mail) => mail.isImportant);
+      return mails.filter(mail => mail.isImportant);
     }
   }
 
-  if (['inbox', 'sent', 'drafts', 'trash', 'spam', 'starred'].includes(systemLabel)) {
-    return mails.filter((mail) => mail.folder === systemLabel);
+  if (systemLabel && 
+    ['inbox', 'sent', 'drafts', 'trash', 'spam', 'starred'].includes(
+      systemLabel
+    )
+  ) {
+    return mails.filter(mail => mail.folder === systemLabel);
   }
 
   return [];
@@ -244,15 +240,10 @@ const filterMails = (
 
 mock.onGet('/api/mail/labels').reply(200, { labels });
 
-mock.onGet('/api/mail/mails').reply((config) => {
+mock.onGet('/api/mail/mails').reply(config => {
   try {
     const { systemLabel, customLabel } = config.params;
-    const filteredMails = filterMails(
-      mails,
-      labels,
-      systemLabel,
-      customLabel
-    );
+    const filteredMails = filterMails(mails, labels, systemLabel, customLabel);
 
     return [200, { mails: filteredMails }];
   } catch (err) {
@@ -261,10 +252,10 @@ mock.onGet('/api/mail/mails').reply((config) => {
   }
 });
 
-mock.onGet('/api/mail/mail').reply((config) => {
+mock.onGet('/api/mail/mail').reply(config => {
   try {
     const { mailId } = config.params;
-    const mail = mails.find((_mail) => _mail.id === mailId);
+    const mail = mails.find(_mail => _mail.id === mailId);
 
     if (!mail) {
       return [404, { message: 'Mail not found' }];

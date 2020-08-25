@@ -1,11 +1,3 @@
-import React, { useState } from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import moment from 'moment';
-// @ts-ignore
-import { Lightbox } from 'react-modal-image';
 import {
   Avatar,
   Box,
@@ -15,14 +7,21 @@ import {
   CardMedia,
   Divider,
   Link,
-  Typography,
-  makeStyles
+  makeStyles,
+  Typography
 } from '@material-ui/core';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import type { Post } from 'src/types/social';
-import Reactions from './Reactions';
+import clsx from 'clsx';
+import moment from 'moment';
+import PropTypes from 'prop-types';
+import React, { FC, useState } from 'react';
+// @ts-ignore
+import { Lightbox } from 'react-modal-image';
+import { Link as RouterLink } from 'react-router-dom';
+import { Post } from 'src/types/social';
 import Comment from './Comment';
 import CommentAdd from './CommentAdd';
+import Reactions from './Reactions';
 
 interface PostCardProps {
   className?: string;
@@ -42,29 +41,23 @@ const useStyles = makeStyles(() => ({
 
 const PostCard: FC<PostCardProps> = ({ className, post, ...rest }) => {
   const classes = useStyles();
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
 
   return (
     <>
-      <Card
-        className={clsx(classes.root, className)}
-        {...rest}
-      >
+      <Card className={clsx(classes.root, className)} {...rest}>
         <CardHeader
-          avatar={(
+          avatar={
             <Avatar
               alt="Person"
               component={RouterLink}
               src={post.author.avatar}
               to="#"
             />
-          )}
+          }
           disableTypography
-          subheader={(
-            <Box
-              display="flex"
-              alignItems="center"
-            >
+          subheader={
+            <Box display="flex" alignItems="center">
               <AccessTimeIcon fontSize="small" />
               <Typography
                 variant="caption"
@@ -74,8 +67,8 @@ const PostCard: FC<PostCardProps> = ({ className, post, ...rest }) => {
                 {moment(post.createdAt).fromNow()}
               </Typography>
             </Box>
-          )}
-          title={(
+          }
+          title={
             <Link
               color="textPrimary"
               component={RouterLink}
@@ -84,38 +77,27 @@ const PostCard: FC<PostCardProps> = ({ className, post, ...rest }) => {
             >
               {post.author.name}
             </Link>
-          )}
+          }
         />
         <Box px={3} pb={2}>
-          <Typography
-            variant="body1"
-            color="textPrimary"
-          >
+          <Typography variant="body1" color="textPrimary">
             {post.message}
           </Typography>
           {post.media && (
-          <Box mt={2}>
-            <CardActionArea onClick={() => setSelectedImage(post.media)}>
-              <CardMedia
-                className={classes.media}
-                image={post.media}
-              />
-            </CardActionArea>
-          </Box>
+            <Box mt={2}>
+              <CardActionArea onClick={() => setSelectedImage(post.media)}>
+                <CardMedia className={classes.media} image={post.media} />
+              </CardActionArea>
+            </Box>
           )}
-          <Box
-            mt={2}
-          >
+          <Box mt={2}>
             <Reactions post={post} />
           </Box>
           <Box my={2}>
             <Divider />
           </Box>
-          {post.comments.map((comment) => (
-            <Comment
-              comment={comment}
-              key={comment.id}
-            />
+          {post.comments.map(comment => (
+            <Comment comment={comment} key={comment.id} />
           ))}
           <Box my={2}>
             <Divider />
@@ -126,7 +108,7 @@ const PostCard: FC<PostCardProps> = ({ className, post, ...rest }) => {
       {selectedImage && (
         <Lightbox
           large={selectedImage}
-          onClose={() => setSelectedImage(null)}
+          onClose={() => setSelectedImage(undefined)}
         />
       )}
     </>

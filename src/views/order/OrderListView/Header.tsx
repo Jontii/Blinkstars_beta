@@ -1,25 +1,24 @@
-import React from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Box,
   Breadcrumbs,
   Button,
   Grid,
   Link,
+  makeStyles,
   SvgIcon,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import {
-  PlusCircle as PlusCircleIcon,
   Download as DownloadIcon,
+  PlusCircle as PlusCircleIcon,
   Upload as UploadIcon
 } from 'react-feather';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import type { Theme } from 'src/theme';
+import { Link as RouterLink } from 'react-router-dom';
+import { Theme } from 'src/theme';
 
 interface HeaderProps {
   className?: string;
@@ -67,17 +66,11 @@ const Header: FC<HeaderProps> = ({ className, ...rest }) => {
           >
             Management
           </Link>
-          <Typography
-            variant="body1"
-            color="textPrimary"
-          >
+          <Typography variant="body1" color="textPrimary">
             Orders
           </Typography>
         </Breadcrumbs>
-        <Typography
-          variant="h3"
-          color="textPrimary"
-        >
+        <Typography variant="h3" color="textPrimary">
           All Orders
         </Typography>
         <Box mt={2}>

@@ -1,18 +1,17 @@
-import React, { useEffect } from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import { useLocation } from 'react-router-dom';
 import {
-  Drawer,
-  Hidden,
   Box,
-  List,
   Button,
   Divider,
+  Drawer,
+  Hidden,
+  List,
   makeStyles
 } from '@material-ui/core';
-import { useDispatch, useSelector } from 'src/store';
+import PropTypes from 'prop-types';
+import React, { FC, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { closeSidebar, openCompose } from 'src/slices/mail';
+import { useDispatch, useSelector } from 'src/store';
 import LabelItem from './LabelItem';
 
 interface SidebarProps {
@@ -40,7 +39,7 @@ const Sidebar: FC<SidebarProps> = ({ containerRef }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const location = useLocation();
-  const { labels, isSidebarOpen } = useSelector((state) => state.mail);
+  const { labels, isSidebarOpen } = useSelector(state => state.mail);
 
   const handleCloseSidebar = (): void => {
     dispatch(closeSidebar());
@@ -59,10 +58,7 @@ const Sidebar: FC<SidebarProps> = ({ containerRef }) => {
 
   const content = (
     <div>
-      <Box
-        px={3}
-        py={2}
-      >
+      <Box px={3} py={2}>
         <Button
           color="secondary"
           fullWidth
@@ -73,16 +69,10 @@ const Sidebar: FC<SidebarProps> = ({ containerRef }) => {
         </Button>
       </Box>
       <Divider />
-      <Box
-        py={2}
-        pr={2}
-      >
+      <Box py={2} pr={2}>
         <List>
-          {labels.map((label) => (
-            <LabelItem
-              key={label.id}
-              label={label}
-            />
+          {labels.map(label => (
+            <LabelItem key={label.id} label={label} />
           ))}
         </List>
       </Box>

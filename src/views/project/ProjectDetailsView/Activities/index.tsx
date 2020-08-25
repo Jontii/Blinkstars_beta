@@ -1,11 +1,10 @@
-import React from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import moment from 'moment';
+import { makeStyles, Typography } from '@material-ui/core';
 import clsx from 'clsx';
-import { Typography, makeStyles } from '@material-ui/core';
-import type { Theme } from 'src/theme';
-import type { ProjectActivity } from 'src/types/project';
+import moment from 'moment';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { Theme } from 'src/theme';
+import { ProjectActivity } from 'src/types/project';
 import Activity from './Activity';
 
 interface ActivitiesProps {
@@ -40,7 +39,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const Activities: FC<ActivitiesProps> = ({ activities, className, ...rest }) => {
+const Activities: FC<ActivitiesProps> = ({
+  activities,
+  className,
+  ...rest
+}) => {
   const classes = useStyles();
   const todayItems = [];
   const lastWeekItems = [];
@@ -55,19 +58,12 @@ const Activities: FC<ActivitiesProps> = ({ activities, className, ...rest }) => 
   }
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <Typography
-        className={classes.title}
-        variant="h3"
-        color="textPrimary"
-      >
+    <div className={clsx(classes.root, className)} {...rest}>
+      <Typography className={classes.title} variant="h3" color="textPrimary">
         Today
       </Typography>
       <div className={classes.group}>
-        {todayItems.map((activity) => (
+        {todayItems.map(activity => (
           <Activity
             activity={activity}
             className={classes.activity}
@@ -76,14 +72,10 @@ const Activities: FC<ActivitiesProps> = ({ activities, className, ...rest }) => 
         ))}
       </div>
       <div className={classes.group}>
-        <Typography
-          className={classes.title}
-          variant="h3"
-          color="textPrimary"
-        >
+        <Typography className={classes.title} variant="h3" color="textPrimary">
           Last week
         </Typography>
-        {lastWeekItems.map((activity) => (
+        {lastWeekItems.map(activity => (
           <Activity
             activity={activity}
             className={classes.activity}

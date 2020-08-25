@@ -1,19 +1,10 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback
-} from 'react';
-import type { FC } from 'react';
-import {
-  Box,
-  Container,
-  makeStyles
-} from '@material-ui/core';
-import type { Theme } from 'src/theme';
-import axios from 'src/utils/axios';
+import { Box, Container, makeStyles } from '@material-ui/core';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import Page from 'src/components/Page';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import type { Product } from 'src/types/product';
+import { Theme } from 'src/theme';
+import { Product } from 'src/types/product';
+import axios from 'src/utils/axios';
 import Header from './Header';
 import Results from './Results';
 
@@ -33,7 +24,9 @@ const ProductListView: FC = () => {
 
   const getProducts = useCallback(async () => {
     try {
-      const response = await axios.get<{ products: Product[]; }>('/api/products');
+      const response = await axios.get<{ products: Product[] }>(
+        '/api/products'
+      );
 
       if (isMountedRef.current) {
         setProducts(response.data.products);
@@ -48,10 +41,7 @@ const ProductListView: FC = () => {
   }, [getProducts]);
 
   return (
-    <Page
-      className={classes.root}
-      title="Product List"
-    >
+    <Page className={classes.root} title="Product List">
       <Container maxWidth={false}>
         <Header />
         {products && (

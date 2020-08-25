@@ -1,15 +1,14 @@
-import React from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Box,
   Button,
   Container,
-  Typography,
-  makeStyles
+  makeStyles,
+  Typography
 } from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { Theme } from 'src/theme';
 
 interface CTAProps {
   className?: string;
@@ -30,31 +29,15 @@ const CTA: FC<CTAProps> = ({ className, ...rest }) => {
   const classes = useStyles();
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <div className={clsx(classes.root, className)} {...rest}>
       <Container maxWidth="lg">
-        <Typography
-          variant="h1"
-          align="center"
-          color="textPrimary"
-        >
+        <Typography variant="h1" align="center" color="textPrimary">
           Ready to start building?
         </Typography>
-        <Typography
-          variant="h1"
-          align="center"
-          color="secondary"
-        >
+        <Typography variant="h1" align="center" color="secondary">
           Download Devias Material Kit today.
         </Typography>
-        <Box
-          mt={6}
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-        >
+        <Box mt={6} display="flex" justifyContent="center" alignItems="center">
           <Button
             color="secondary"
             component="a"

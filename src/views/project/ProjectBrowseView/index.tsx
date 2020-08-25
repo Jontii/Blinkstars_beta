@@ -1,21 +1,12 @@
-import React, {
-  useCallback,
-  useState,
-  useEffect
-} from 'react';
-import type { FC } from 'react';
-import {
-  Box,
-  Container,
-  makeStyles
-} from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import { Box, Container, makeStyles } from '@material-ui/core';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import Page from 'src/components/Page';
-import axios from 'src/utils/axios';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import type { Project } from 'src/types/project';
-import Header from './Header';
+import { Theme } from 'src/theme';
+import { Project } from 'src/types/project';
+import axios from 'src/utils/axios';
 import Filter from './Filter';
+import Header from './Header';
 import Results from './Results';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -34,8 +25,10 @@ const ProjectBrowseView: FC = () => {
 
   const getProjects = useCallback(async () => {
     try {
-      const response = await axios.get<{ projects: Project[]; }>('/api/projects/projects');
-  
+      const response = await axios.get<{ projects: Project[] }>(
+        '/api/projects/projects'
+      );
+
       if (isMountedRef.current) {
         setProjects(response.data.projects);
       }
@@ -49,10 +42,7 @@ const ProjectBrowseView: FC = () => {
   }, [getProjects]);
 
   return (
-    <Page
-      className={classes.root}
-      title="Project List"
-    >
+    <Page className={classes.root} title="Project List">
       <Container maxWidth="lg">
         <Header />
         <Box mt={3}>
@@ -64,6 +54,6 @@ const ProjectBrowseView: FC = () => {
       </Container>
     </Page>
   );
-}
+};
 
 export default ProjectBrowseView;

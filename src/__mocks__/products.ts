@@ -1,6 +1,6 @@
 import moment from 'moment';
+import { Product } from 'src/types/product';
 import mock from 'src/utils/mock';
-import type { Product } from 'src/types/product';
 
 let products: Product[] = [
   {
@@ -8,10 +8,7 @@ let products: Product[] = [
     attributes: ['Cotton'],
     category: 'dress',
     currency: '$',
-    createdAt: moment()
-      .subtract(1, 'days')
-      .toDate()
-      .getTime(),
+    createdAt: moment().subtract(1, 'days').toDate().getTime(),
     image: null,
     inventoryType: 'in_stock',
     isAvailable: true,
@@ -19,10 +16,7 @@ let products: Product[] = [
     name: 'Charlie Tulip Dress',
     price: 23.99,
     quantity: 85,
-    updatedAt: moment()
-      .subtract(6, 'hours')
-      .toDate()
-      .getTime(),
+    updatedAt: moment().subtract(6, 'hours').toDate().getTime(),
     variants: 2
   },
   {
@@ -30,16 +24,13 @@ let products: Product[] = [
     attributes: ['Cotton'],
     category: 'dress',
     currency: '$',
-    createdAt: moment()
-      .subtract(3, 'days')
-      .toDate()
-      .getTime(),
+    createdAt: moment().subtract(3, 'days').toDate().getTime(),
     image: null,
     inventoryType: 'out_of_stock',
     isAvailable: false,
     isShippable: true,
     name: 'Kate Leopard Dress',
-    price: 95.00,
+    price: 95.0,
     quantity: 0,
     updatedAt: moment()
       .subtract(2, 'days')
@@ -53,16 +44,13 @@ let products: Product[] = [
     attributes: ['Variety of styles'],
     category: 'jewelry',
     currency: '$',
-    createdAt: moment()
-      .subtract(6, 'days')
-      .toDate()
-      .getTime(),
+    createdAt: moment().subtract(6, 'days').toDate().getTime(),
     image: null,
     inventoryType: 'in_stock',
     isAvailable: true,
     isShippable: false,
     name: 'Layering Bracelets Collection',
-    price: 155.00,
+    price: 155.0,
     quantity: 48,
     updatedAt: moment()
       .subtract(1, 'days')
@@ -76,10 +64,7 @@ let products: Product[] = [
     attributes: ['Polyester and Spandex'],
     category: 'blouse',
     currency: '$',
-    createdAt: moment()
-      .subtract(12, 'days')
-      .toDate()
-      .getTime(),
+    createdAt: moment().subtract(12, 'days').toDate().getTime(),
     image: null,
     inventoryType: 'limited',
     isAvailable: false,

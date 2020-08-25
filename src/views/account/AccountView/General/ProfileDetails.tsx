@@ -1,8 +1,3 @@
-import React from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Avatar,
   Box,
@@ -11,11 +6,15 @@ import {
   CardActions,
   CardContent,
   Link,
-  Typography,
-  makeStyles
+  makeStyles,
+  Typography
 } from '@material-ui/core';
-import type { Theme } from 'src/theme';
-import type { User } from 'src/types/user';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import { Theme } from 'src/theme';
+import { User } from 'src/types/user';
 
 interface ProfileDetailsProps {
   className?: string;
@@ -33,14 +32,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const ProfileDetails: FC<ProfileDetailsProps> = ({ className, user, ...rest }) => {
+const ProfileDetails: FC<ProfileDetailsProps> = ({
+  className,
+  user,
+  ...rest
+}) => {
   const classes = useStyles();
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardContent>
         <Box
           display="flex"
@@ -48,10 +48,7 @@ const ProfileDetails: FC<ProfileDetailsProps> = ({ className, user, ...rest }) =
           flexDirection="column"
           textAlign="center"
         >
-          <Avatar
-            className={classes.avatar}
-            src={user.avatar}
-          />
+          <Avatar className={classes.avatar} src={user.avatar} />
           <Typography
             className={classes.name}
             color="textPrimary"
@@ -60,26 +57,16 @@ const ProfileDetails: FC<ProfileDetailsProps> = ({ className, user, ...rest }) =
           >
             {user.name}
           </Typography>
-          <Typography
-            color="textPrimary"
-            variant="body1"
-          >
-            Your tier:
-            {' '}
-            <Link
-              component={RouterLink}
-              to="#"
-            >
+          <Typography color="textPrimary" variant="body1">
+            Your tier:{' '}
+            <Link component={RouterLink} to="#">
               {user.tier}
             </Link>
           </Typography>
         </Box>
       </CardContent>
       <CardActions>
-        <Button
-          fullWidth
-          variant="text"
-        >
+        <Button fullWidth variant="text">
           Remove picture
         </Button>
       </CardActions>

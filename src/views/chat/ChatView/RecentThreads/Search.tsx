@@ -1,26 +1,21 @@
-import React, { forwardRef } from 'react';
-import type {
-  ChangeEvent,
-  FC,
-  FocusEvent
-} from 'react';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
 import {
   Avatar,
   Box,
   ClickAwayListener,
   Input,
-  SvgIcon,
   List,
   ListItem,
-  ListItemText,
   ListItemAvatar,
-  Typography,
-  makeStyles
+  ListItemText,
+  makeStyles,
+  SvgIcon,
+  Typography
 } from '@material-ui/core';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { ChangeEvent, FC, FocusEvent, forwardRef } from 'react';
 import { Search as SearchIcon } from 'react-feather';
-import type { Theme } from 'src/theme';
+import { Theme } from 'src/theme';
 
 interface SearchProps {
   className?: string;
@@ -57,91 +52,90 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const Search: FC<SearchProps> = forwardRef(({
-  className,
-  isFocused,
-  onChange,
-  onClickAway,
-  onFocus,
-  onSelect,
-  query,
-  results,
-  ...rest
-}, ref) => {
-  const classes = useStyles();
+const Search: FC<SearchProps> = forwardRef(
+  (
+    {
+      className,
+      isFocused,
+      onChange,
+      onClickAway,
+      onFocus,
+      onSelect,
+      query,
+      results,
+      ...rest
+    },
+    ref
+  ) => {
+    const classes = useStyles();
 
-  const displayResults = query && isFocused;
+    const displayResults = query && isFocused;
 
-  const handleSelect = (result: any): void => {
-    if (onSelect) {
-      onSelect(result);
-    }
-  };
+    const handleSelect = (result: any): void => {
+      if (onSelect) {
+        onSelect(result);
+      }
+    };
 
-  return (
-    <ClickAwayListener onClickAway={onClickAway}>
-      <div
-        className={clsx(classes.root, className)}
-        // @ts-ignore
-        ref={ref}
-        {...rest}
-      >
-        <div className={classes.search}>
-          <SvgIcon
-            fontSize="small"
-            color="action"
-          >
-            <SearchIcon />
-          </SvgIcon>
-          <Input
-            className={classes.searchInput}
-            disableUnderline
-            onChange={onChange}
-            onFocus={onFocus}
-            placeholder="Search contacts"
-            value={query}
-          />
-        </div>
-        {displayResults && (
-          <Box mt={2}>
-            <Typography
-              variant="h6"
-              color="textSecondary"
-            >
-              Contacts
-            </Typography>
-            <List>
-              {results.map((result) => {
-                return (
-                  <ListItem
-                    button
-                    key={result.id}
-                    onClick={() => handleSelect(result)}
-                  >
-                    <ListItemAvatar>
-                      <Avatar
-                        src={result.avatar}
-                        className={classes.avatar}
+    return (
+      <ClickAwayListener onClickAway={onClickAway}>
+        <div
+          className={clsx(classes.root, className)}
+          // @ts-ignore
+          ref={ref}
+          {...rest}
+        >
+          <div className={classes.search}>
+            <SvgIcon fontSize="small" color="action">
+              <SearchIcon />
+            </SvgIcon>
+            <Input
+              className={classes.searchInput}
+              disableUnderline
+              onChange={onChange}
+              onFocus={onFocus}
+              placeholder="Search contacts"
+              value={query}
+            />
+          </div>
+          {displayResults && (
+            <Box mt={2}>
+              <Typography variant="h6" color="textSecondary">
+                Contacts
+              </Typography>
+              <List>
+                {results.map(result => {
+                  return (
+                    <ListItem
+                      button
+                      key={result.id}
+                      onClick={() => handleSelect(result)}
+                    >
+                      <ListItemAvatar>
+                        <Avatar
+                          src={result.avatar}
+                          className={classes.avatar}
+                        />
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={result.name}
+                        primaryTypographyProps={{
+                          noWrap: true,
+                          variant: 'h6',
+                          color: 'textPrimary'
+                        }}
                       />
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={result.name}
-                      primaryTypographyProps={{
-                        noWrap: true,
-                        variant: 'h6',
-                        color: 'textPrimary'
-                      }}
-                    />
-                  </ListItem>
-                );
-              })}
-            </List>
-          </Box>
-        )}
-      </div>
-    </ClickAwayListener>
-  );
-});
+                    </ListItem>
+                  );
+                })}
+              </List>
+            </Box>
+          )}
+        </div>
+      </ClickAwayListener>
+    );
+  }
+);
 
 Search.propTypes = {
   className: PropTypes.string,

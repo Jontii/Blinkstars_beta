@@ -1,24 +1,23 @@
-import React from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import {
   AppBar,
   Box,
-  Toolbar,
   Hidden,
   IconButton,
   Link,
-  makeStyles
+  makeStyles,
+  Toolbar
 } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import { Menu as MenuIcon } from 'react-feather';
+import { Link as RouterLink } from 'react-router-dom';
 import Logo from 'src/components/Logo';
 
 interface TopBarProps {
   onMobileNavOpen?: () => void;
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.default,
     color: theme.palette.text.primary,
@@ -41,10 +40,7 @@ const TopBar: FC<TopBarProps> = ({ onMobileNavOpen }) => {
     <AppBar className={classes.root}>
       <Toolbar className={classes.toolbar}>
         <Hidden lgUp>
-          <IconButton
-            color="inherit"
-            onClick={onMobileNavOpen}
-          >
+          <IconButton color="inherit" onClick={onMobileNavOpen}>
             <MenuIcon />
           </IconButton>
         </Hidden>
@@ -53,10 +49,7 @@ const TopBar: FC<TopBarProps> = ({ onMobileNavOpen }) => {
             <Logo />
           </RouterLink>
         </Hidden>
-        <Box
-          ml={2}
-          flexGrow={1}
-        />
+        <Box ml={2} flexGrow={1} />
         <Link
           className={classes.link}
           color="textSecondary"

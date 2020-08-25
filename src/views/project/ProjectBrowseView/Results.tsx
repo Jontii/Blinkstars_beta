@@ -1,30 +1,22 @@
-import React, {
-  useState,
-  useRef
-} from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Box,
   Button,
   Grid,
   ListItemText,
+  makeStyles,
   Menu,
   MenuItem,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
-import {
-  ToggleButtonGroup,
-  ToggleButton,
-  Pagination
-} from '@material-ui/lab';
-import ViewModuleIcon from '@material-ui/icons/ViewModule';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import type { Theme } from 'src/theme';
-import type { Project } from 'src/types/project';
+import ViewModuleIcon from '@material-ui/icons/ViewModule';
+import { Pagination, ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC, useRef, useState } from 'react';
 import ProjectCard from 'src/components/ProjectCard';
+import { Theme } from 'src/theme';
+import { Project } from 'src/types/project';
 
 interface ResultsProps {
   className?: string;
@@ -77,10 +69,7 @@ const Results: FC<ResultsProps> = ({ className, projects, ...rest }) => {
   };
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <div className={clsx(classes.root, className)} {...rest}>
       <Box
         display="flex"
         alignItems="center"
@@ -88,21 +77,10 @@ const Results: FC<ResultsProps> = ({ className, projects, ...rest }) => {
         flexWrap="wrap"
         mb={2}
       >
-        <Typography
-          className={classes.title}
-          variant="h5"
-          color="textPrimary"
-        >
-          Showing
-          {' '}
-          {projects.length}
-          {' '}
-          projects
+        <Typography className={classes.title} variant="h5" color="textPrimary">
+          Showing {projects.length} projects
         </Typography>
-        <Box
-          display="flex"
-          alignItems="center"
-        >
+        <Box display="flex" alignItems="center">
           <Button
             className={classes.sortButton}
             onClick={handleSortOpen}
@@ -123,11 +101,8 @@ const Results: FC<ResultsProps> = ({ className, projects, ...rest }) => {
           </ToggleButtonGroup>
         </Box>
       </Box>
-      <Grid
-        container
-        spacing={3}
-      >
-        {projects.map((project) => (
+      <Grid container spacing={3}>
+        {projects.map(project => (
           <Grid
             item
             key={project.id}
@@ -139,11 +114,7 @@ const Results: FC<ResultsProps> = ({ className, projects, ...rest }) => {
           </Grid>
         ))}
       </Grid>
-      <Box
-        mt={6}
-        display="flex"
-        justifyContent="center"
-      >
+      <Box mt={6} display="flex" justifyContent="center">
         <Pagination count={3} />
       </Box>
       <Menu
@@ -153,11 +124,8 @@ const Results: FC<ResultsProps> = ({ className, projects, ...rest }) => {
         elevation={1}
       >
         {['Most recent', 'Popular', 'Price high', 'Price low', 'On sale'].map(
-          (option) => (
-            <MenuItem
-              key={option}
-              onClick={() => handleSortSelect(option)}
-            >
+          option => (
+            <MenuItem key={option} onClick={() => handleSortSelect(option)}>
               <ListItemText primary={option} />
             </MenuItem>
           )
@@ -165,7 +133,7 @@ const Results: FC<ResultsProps> = ({ className, projects, ...rest }) => {
       </Menu>
     </div>
   );
-}
+};
 
 Results.propTypes = {
   className: PropTypes.string,

@@ -1,21 +1,20 @@
-import React from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Box,
-  Card,
-  CardHeader,
-  CardContent,
   Button,
+  Card,
+  CardContent,
+  CardHeader,
   Divider,
-  Typography,
-  makeStyles
+  makeStyles,
+  Typography
 } from '@material-ui/core';
-import NotInterestedIcon from '@material-ui/icons/NotInterested';
-import GetAppIcon from '@material-ui/icons/GetApp';
 import DeleteIcon from '@material-ui/icons/DeleteOutline';
-import type { Theme } from 'src/theme';
+import GetAppIcon from '@material-ui/icons/GetApp';
+import NotInterestedIcon from '@material-ui/icons/NotInterested';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { Theme } from 'src/theme';
 
 interface OtherActionsProps {
   className?: string;
@@ -36,41 +35,21 @@ const OtherActions: FC<OtherActionsProps> = ({ className, ...rest }) => {
   const classes = useStyles();
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardHeader title="Other actions" />
       <Divider />
       <CardContent>
-        <Box
-          display="flex"
-          flexDirection="column"
-          alignItems="flex-start"
-        >
-          <Button startIcon={<NotInterestedIcon />}>
-            Close Account
-          </Button>
-          <Button startIcon={<GetAppIcon />}>
-            Export Data
-          </Button>
+        <Box display="flex" flexDirection="column" alignItems="flex-start">
+          <Button startIcon={<NotInterestedIcon />}>Close Account</Button>
+          <Button startIcon={<GetAppIcon />}>Export Data</Button>
         </Box>
-        <Box
-          mt={1}
-          mb={2}
-        >
-          <Typography
-            variant="body2"
-            color="textSecondary"
-          >
-            Remove this customer’s data if he requested that, if not please
-            be aware that what has been deleted can never brough back
+        <Box mt={1} mb={2}>
+          <Typography variant="body2" color="textSecondary">
+            Remove this customer’s data if he requested that, if not please be
+            aware that what has been deleted can never brough back
           </Typography>
         </Box>
-        <Button
-          className={classes.deleteAction}
-          startIcon={<DeleteIcon />}
-        >
+        <Button className={classes.deleteAction} startIcon={<DeleteIcon />}>
           Delete Account
         </Button>
       </CardContent>

@@ -1,50 +1,44 @@
 import '@fullcalendar/core/main.css';
-import '@fullcalendar/daygrid/main.css';
-import '@fullcalendar/timegrid/main.css';
-import '@fullcalendar/list/main.css';
-import React, {
-  useState,
-  useRef,
-  useEffect
-} from 'react';
-import type { FC } from 'react';
-import moment from 'moment';
-import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
+import '@fullcalendar/daygrid/main.css';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
+import '@fullcalendar/list/main.css';
+import FullCalendar from '@fullcalendar/react';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import '@fullcalendar/timegrid/main.css';
 import timelinePlugin from '@fullcalendar/timeline';
 import {
   Container,
   Dialog,
+  makeStyles,
   Paper,
-  useTheme,
   useMediaQuery,
-  makeStyles
+  useTheme
 } from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import moment from 'moment';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import Page from 'src/components/Page';
-import type { Event, View } from 'src/types/calendar';
-import { useDispatch, useSelector } from 'src/store';
-import type { RootState } from 'src/store';
 import {
+  closeModal,
   getEvents,
-  updateEvent,
+  openModal,
   selectEvent,
   selectRange,
-  openModal,
-  closeModal
+  updateEvent
 } from 'src/slices/calendar';
+import { RootState, useDispatch, useSelector } from 'src/store';
+import { Theme } from 'src/theme';
+import { Event, View } from 'src/types/calendar';
+import AddEditEventForm from './AddEditEventForm';
 import Header from './Header';
 import Toolbar from './Toolbar';
-import AddEditEventForm from './AddEditEventForm';
 
 const selectedEventSelector = (state: RootState): Event | null => {
   const { events, selectedEventId } = state.calendar;
 
   if (selectedEventId) {
-    return events.find((_event) => _event.id === selectedEventId);
+    return events.find(_event => _event.id === selectedEventId);
   } else {
     return null;
   }
@@ -129,7 +123,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       ...theme.typography.h6
     },
     '& .fc-unthemed .fc-list-item:hover td': {
-      backgroundColor: theme.palette.background.dark,
+      backgroundColor: theme.palette.background.dark
     },
     '& .fc-unthemed .fc-list-item-title': {
       ...theme.typography.body1
@@ -146,10 +140,14 @@ const CalendarView: FC = () => {
   const theme = useTheme<Theme>();
   const mobileDevice = useMediaQuery(theme.breakpoints.down('sm'));
   const dispatch = useDispatch();
-  const { events, isModalOpen, selectedRange } = useSelector((state) => state.calendar);
+  const { events, isModalOpen, selectedRange } = useSelector(
+    state => state.calendar
+  );
   const selectedEvent = useSelector(selectedEventSelector);
   const [date, setDate] = useState<Date>(moment().toDate());
-  const [view, setView] = useState<View>(mobileDevice ? 'listWeek' : 'dayGridMonth');
+  const [view, setView] = useState<View>(
+    mobileDevice ? 'listWeek' : 'dayGridMonth'
+  );
 
   const handleDateToday = (): void => {
     const calendarEl = calendarRef.current;
@@ -217,11 +215,13 @@ const CalendarView: FC = () => {
 
   const handleEventResize = async ({ event }: any): Promise<void> => {
     try {
-      await dispatch(updateEvent(event.id, {
-        allDay: event.allDay,
-        start: event.start,
-        end: event.end
-      }));
+      await dispatch(
+        updateEvent(event.id, {
+          allDay: event.allDay,
+          start: event.start,
+          end: event.end
+        })
+      );
     } catch (err) {
       console.error(err);
     }
@@ -229,11 +229,13 @@ const CalendarView: FC = () => {
 
   const handleEventDrop = async ({ event }: any): Promise<void> => {
     try {
-      await dispatch(updateEvent(event.id, {
-        allDay: event.allDay,
-        start: event.start,
-        end: event.end
-      }));
+      await dispatch(
+        updateEvent(event.id, {
+          allDay: event.allDay,
+          start: event.start,
+          end: event.end
+        })
+      );
     } catch (err) {
       console.error(err);
     }
@@ -260,10 +262,7 @@ const CalendarView: FC = () => {
   }, [mobileDevice]);
 
   return (
-    <Page
-      className={classes.root}
-      title="Calendar"
-    >
+    <Page className={classes.root} title="Calendar">
       <Container maxWidth={false}>
         <Header onAddClick={handleAddClick} />
         <Toolbar

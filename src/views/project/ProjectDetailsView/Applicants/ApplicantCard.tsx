@@ -1,27 +1,24 @@
-import React from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Avatar,
   Box,
+  Button,
   Card,
   CardContent,
   CardMedia,
   Chip,
   Divider,
   Link,
-  Typography,
   makeStyles,
   SvgIcon,
-  Button
+  Typography
 } from '@material-ui/core';
-import type { Theme } from 'src/theme';
-import type { ProjectApplicant } from 'src/types/project';
-import {
-  UserCheck
-} from 'react-feather';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { UserCheck } from 'react-feather';
+import { Link as RouterLink } from 'react-router-dom';
+import { Theme } from 'src/theme';
+import { ProjectApplicant } from 'src/types/project';
 interface ApplicantCardProps {
   className?: string;
   applicant: ProjectApplicant;
@@ -50,25 +47,18 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const ApplicantCard: FC<ApplicantCardProps> = ({ className, applicant, ...rest }) => {
+const ApplicantCard: FC<ApplicantCardProps> = ({
+  className,
+  applicant,
+  ...rest
+}) => {
   const classes = useStyles();
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <CardMedia
-        className={classes.media}
-        image={applicant.cover}
-      />
+    <Card className={clsx(classes.root, className)} {...rest}>
+      <CardMedia className={classes.media} image={applicant.cover} />
       <CardContent className={classes.content}>
-        <Box
-          mt={-4}
-          mb={2}
-          display="flex"
-          justifyContent="center"
-        >
+        <Box mt={-4} mb={2} display="flex" justifyContent="center">
           <Avatar
             alt="Applicant"
             className={classes.avatar}
@@ -88,19 +78,13 @@ const ApplicantCard: FC<ApplicantCardProps> = ({ className, applicant, ...rest }
         >
           {applicant.name}
         </Link>
-        <Typography
-          align="center"
-          variant="body2"
-          color="textSecondary"
-        >
-          {applicant.commonConnections}
-          {' '}
-          previous campaigns
+        <Typography align="center" variant="body2" color="textSecondary">
+          {applicant.commonConnections} previous campaigns
         </Typography>
         <Box my={2}>
           <Divider />
         </Box>
-        {applicant.labels.map((label) => (
+        {applicant.labels.map(label => (
           <Chip
             key={label}
             className={classes.chip}
@@ -112,25 +96,24 @@ const ApplicantCard: FC<ApplicantCardProps> = ({ className, applicant, ...rest }
           <Divider />
         </Box>
         <Box display="flex" justifyContent="center">
-
-<Button
-          className={classes.action}
-          // onClick={handleApplyModalOpen}
-          variant="contained"
-          color="secondary"
-          startIcon={
-            <SvgIcon fontSize="small">
-              <UserCheck />
-            </SvgIcon>
-          }
-        >
-          Select for campaign
-        </Button>
-            </Box>
+          <Button
+            className={classes.action}
+            // onClick={handleApplyModalOpen}
+            variant="contained"
+            color="secondary"
+            startIcon={
+              <SvgIcon fontSize="small">
+                <UserCheck />
+              </SvgIcon>
+            }
+          >
+            Select for campaign
+          </Button>
+        </Box>
       </CardContent>
     </Card>
   );
-}
+};
 
 ApplicantCard.propTypes = {
   className: PropTypes.string,

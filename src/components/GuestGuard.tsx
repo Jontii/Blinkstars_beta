@@ -1,7 +1,6 @@
-import React from 'react';
-import type { FC, ReactNode } from 'react';
-import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import React, { FC, ReactNode } from 'react';
+import { Redirect } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
 interface GuestGuardProps {
@@ -15,11 +14,7 @@ const GuestGuard: FC<GuestGuardProps> = ({ children }) => {
     return <Redirect to="/app/account" />;
   }
 
-  return (
-    <>
-      {children}
-    </>
-  );
+  return <>{children}</>;
 };
 
 GuestGuard.propTypes = {

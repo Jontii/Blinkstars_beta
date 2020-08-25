@@ -1,12 +1,3 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback
-} from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Box,
   Button,
@@ -15,13 +6,17 @@ import {
   CardHeader,
   Divider,
   Link,
+  makeStyles,
   Paper,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
-import type { Theme } from 'src/theme';
-import axios from 'src/utils/axios';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC, useCallback, useEffect, useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import { Theme } from 'src/theme';
+import axios from 'src/utils/axios';
 
 interface SubscriptionProps {
   className?: string;
@@ -84,44 +79,28 @@ const Subscription: FC<SubscriptionProps> = ({ className, ...rest }) => {
   }
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardHeader title="Manage your subscription" />
       <Divider />
       <CardContent>
         <Paper variant="outlined">
           <Box className={classes.overview}>
             <div>
-              <Typography
-                display="inline"
-                variant="h4"
-                color="textPrimary"
-              >
+              <Typography display="inline" variant="h4" color="textPrimary">
                 {subscription.currency}
                 {subscription.price}
               </Typography>
-              <Typography
-                display="inline"
-                variant="subtitle1"
-              >
+              <Typography display="inline" variant="subtitle1">
                 /mo
               </Typography>
             </div>
-            <Box
-              display="flex"
-              alignItems="center"
-            >
+            <Box display="flex" alignItems="center">
               <img
                 alt="Product"
                 className={classes.productImage}
-                src={`${process.env.PUBLIC_URL}/static/images/products/product_premium.svg`}
+                src="/static/images/products/product_premium.svg"
               />
-              <Typography
-                variant="overline"
-                color="textSecondary"
-              >
+              <Typography variant="overline" color="textSecondary">
                 {subscription.name}
               </Typography>
             </Box>
@@ -129,79 +108,45 @@ const Subscription: FC<SubscriptionProps> = ({ className, ...rest }) => {
           <Divider />
           <Box className={classes.details}>
             <div>
-              <Typography
-                variant="body2"
-                color="textPrimary"
-              >
+              <Typography variant="body2" color="textPrimary">
                 {`${subscription.proposalsLeft} proposals left`}
               </Typography>
-              <Typography
-                variant="body2"
-                color="textPrimary"
-              >
+              <Typography variant="body2" color="textPrimary">
                 {`${subscription.templatesLeft} templates`}
               </Typography>
             </div>
             <div>
-              <Typography
-                variant="body2"
-                color="textPrimary"
-              >
+              <Typography variant="body2" color="textPrimary">
                 {`${subscription.invitesLeft} invites left`}
               </Typography>
-              <Typography
-                variant="body2"
-                color="textPrimary"
-              >
+              <Typography variant="body2" color="textPrimary">
                 {`${subscription.adsLeft} ads left`}
               </Typography>
             </div>
             <div>
               {subscription.hasAnalytics && (
-                <Typography
-                  variant="body2"
-                  color="textPrimary"
-                >
+                <Typography variant="body2" color="textPrimary">
                   Analytics dashboard
                 </Typography>
               )}
               {subscription.hasEmailAlerts && (
-                <Typography
-                  variant="body2"
-                  color="textPrimary"
-                >
+                <Typography variant="body2" color="textPrimary">
                   Email alerts
                 </Typography>
               )}
             </div>
           </Box>
         </Paper>
-        <Box
-          mt={2}
-          display="flex"
-          justifyContent="flex-end"
-        >
-          <Button
-            size="small"
-            color="secondary"
-            variant="contained"
-          >
+        <Box mt={2} display="flex" justifyContent="flex-end">
+          <Button size="small" color="secondary" variant="contained">
             Upgrade plan
           </Button>
         </Box>
         <Box mt={2}>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-          >
-            The refunds don&apos;t work once you have the subscription, but you can
-            always
-            {' '}
-            <Link
-              color="secondary"
-              component={RouterLink}
-              to="#"
-            >
+          <Typography variant="body2" color="textSecondary">
+            The refunds don&apos;t work once you have the subscription, but you
+            can always{' '}
+            <Link color="secondary" component={RouterLink} to="#">
               Cancel your subscription
             </Link>
             .

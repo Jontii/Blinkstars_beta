@@ -1,21 +1,12 @@
-import React, { useState } from 'react';
-import type {
-  FC,
-  ChangeEvent,
-  KeyboardEvent
-} from 'react';
-import PropTypes from 'prop-types';
+import { Avatar, makeStyles, TextField } from '@material-ui/core';
 import clsx from 'clsx';
 import { useSnackbar } from 'notistack';
-import {
-  Avatar,
-  TextField,
-  makeStyles
-} from '@material-ui/core';
-import type { Theme } from 'src/theme';
-import { useDispatch } from 'src/store';
+import PropTypes from 'prop-types';
+import React, { ChangeEvent, FC, KeyboardEvent, useState } from 'react';
 import useAuth from 'src/hooks/useAuth';
 import { addComment } from 'src/slices/kanban';
+import { useDispatch } from 'src/store';
+import { Theme } from 'src/theme';
 
 interface CommentAddProps {
   className?: string;
@@ -44,7 +35,9 @@ const CommentAdd: FC<CommentAddProps> = ({ cardId, className, ...rest }) => {
     setMessage(event.target.value);
   };
 
-  const handleKeyUp = async (event: KeyboardEvent<HTMLInputElement>): Promise<void> => {
+  const handleKeyUp = async (
+    event: KeyboardEvent<HTMLInputElement>
+  ): Promise<void> => {
     try {
       event.persist();
 
@@ -64,14 +57,8 @@ const CommentAdd: FC<CommentAddProps> = ({ cardId, className, ...rest }) => {
   };
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <Avatar
-        alt="Person"
-        src={user.avatar}
-      />
+    <div className={clsx(classes.root, className)} {...rest}>
+      <Avatar alt="Person" src={user.avatar} />
       <TextField
         fullWidth
         className={classes.field}
@@ -83,7 +70,7 @@ const CommentAdd: FC<CommentAddProps> = ({ cardId, className, ...rest }) => {
       />
     </div>
   );
-}
+};
 
 CommentAdd.propTypes = {
   cardId: PropTypes.string.isRequired,

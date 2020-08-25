@@ -1,10 +1,3 @@
-import React, {
-  useState,
-  useRef
-} from 'react';
-import type { FC, ChangeEvent } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Box,
   Card,
@@ -12,15 +5,18 @@ import {
   Divider,
   IconButton,
   Input,
+  makeStyles,
   Paper,
-  Tooltip,
-  makeStyles
+  Tooltip
 } from '@material-ui/core';
-import SendIcon from '@material-ui/icons/Send';
 import AddPhotoIcon from '@material-ui/icons/AddPhotoAlternate';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
+import SendIcon from '@material-ui/icons/Send';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { ChangeEvent, FC, useRef, useState } from 'react';
 import useAuth from 'src/hooks/useAuth';
-import type { Theme } from 'src/theme';
+import { Theme } from 'src/theme';
 
 interface PostAddProps {
   className?: string;
@@ -44,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const PostAdd: FC<PostAddProps> = ({ className, ...rest } ) => {
+const PostAdd: FC<PostAddProps> = ({ className, ...rest }) => {
   const classes = useStyles();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [value, setValue] = useState<string>('');
@@ -56,28 +52,20 @@ const PostAdd: FC<PostAddProps> = ({ className, ...rest } ) => {
   };
 
   const handleAttach = (): void => {
-    fileInputRef.current.click();
+    if(fileInputRef && fileInputRef.current)
+      fileInputRef.current.click()
   };
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardContent>
-        <Box
-          display="flex"
-          alignItems="center"
-        >
-          <Paper
-            className={classes.inputContainer}
-            variant="outlined"
-          >
+        <Box display="flex" alignItems="center">
+          <Paper className={classes.inputContainer} variant="outlined">
             <Input
               disableUnderline
               fullWidth
               onChange={handleChange}
-              placeholder={`What's on your mind, ${user.name}`}
+              placeholder={`What's on your mind, ${user?.name}`}
             />
           </Paper>
           <Tooltip title="Send">
@@ -87,26 +75,16 @@ const PostAdd: FC<PostAddProps> = ({ className, ...rest } ) => {
           </Tooltip>
           <Divider className={classes.divider} />
           <Tooltip title="Attach image">
-            <IconButton
-              edge="end"
-              onClick={handleAttach}
-            >
+            <IconButton edge="end" onClick={handleAttach}>
               <AddPhotoIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="Attach file">
-            <IconButton
-              edge="end"
-              onClick={handleAttach}
-            >
+            <IconButton edge="end" onClick={handleAttach}>
               <AttachFileIcon />
             </IconButton>
           </Tooltip>
-          <input
-            className={classes.fileInput}
-            ref={fileInputRef}
-            type="file"
-          />
+          <input className={classes.fileInput} ref={fileInputRef} type="file" />
         </Box>
       </CardContent>
     </Card>

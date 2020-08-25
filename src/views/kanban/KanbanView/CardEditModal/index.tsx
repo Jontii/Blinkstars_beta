@@ -1,49 +1,44 @@
-import React from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import { useSnackbar } from 'notistack';
 import {
   Box,
   Dialog,
   Divider,
   Grid,
-  Typography,
-  makeStyles,
   IconButton,
-  SvgIcon
+  makeStyles,
+  SvgIcon,
+  Typography
 } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import {
-  XCircle as CloseIcon,
-  Eye as EyeIcon,
-  EyeOff as EyeOffIcon,
-  ArrowRight as ArrowRightIcon,
   Archive as ArchiveIcon,
+  ArrowRight as ArrowRightIcon,
   CheckSquare as CheckIcon,
   Copy as CopyIcon,
-  Users as UsersIcon,
+  Eye as EyeIcon,
+  EyeOff as EyeOffIcon,
   File as FileIcon,
-  Layout as LayoutIcon
+  Layout as LayoutIcon,
+  Users as UsersIcon,
+  XCircle as CloseIcon
 } from 'react-feather';
-import type { Theme } from 'src/theme';
+import { addChecklist, deleteCard, updateCard } from 'src/slices/kanban';
 import { useDispatch } from 'src/store';
-import {
-  deleteCard,
-  updateCard,
-  addChecklist
-} from 'src/slices/kanban';
-import type { Card, List } from 'src/types/kanban';
-import Details from './Details';
+import { Theme } from 'src/theme';
+import { Card, List } from 'src/types/kanban';
+import ActionButton from './ActionButton';
 import Checklist from './Checklist';
 import Comment from './Comment';
 import CommentAdd from './CommentAdd';
-import ActionButton from './ActionButton';
+import Details from './Details';
 
 interface CardEditModalProps {
   className?: string;
   card: Card;
   list: List;
   onClose?: () => void;
-  open: boolean; 
+  open: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -129,27 +124,11 @@ const CardEditModal: FC<CardEditModalProps> = ({
   };
 
   return (
-    <Dialog
-      onClose={onClose}
-      open={open}
-      maxWidth="md"
-      fullWidth
-      {...rest}
-    >
+    <Dialog onClose={onClose} open={open} maxWidth="md" fullWidth {...rest}>
       <div className={classes.root}>
-        <Box
-          display="flex"
-          justifyContent="space-between"
-        >
-          <Typography
-            variant="body2"
-            color="textSecondary"
-          >
-            in list
-            {' '}
-            <span className={classes.listName}>
-              {list.name}
-            </span>
+        <Box display="flex" justifyContent="space-between">
+          <Typography variant="body2" color="textSecondary">
+            in list <span className={classes.listName}>{list.name}</span>
           </Typography>
           <IconButton onClick={onClose}>
             <SvgIcon>
@@ -157,22 +136,12 @@ const CardEditModal: FC<CardEditModalProps> = ({
             </SvgIcon>
           </IconButton>
         </Box>
-        <Grid
-          container
-          spacing={5}
-        >
-          <Grid
-            item
-            xs={12}
-            sm={8}
-          >
-            <Details
-              card={card}
-              list={list}
-            />
+        <Grid container spacing={5}>
+          <Grid item xs={12} sm={8}>
+            <Details card={card} list={list} />
             {card.checklists.length > 0 && (
               <Box mt={5}>
-                {card.checklists.map((checklist) => (
+                {card.checklists.map(checklist => (
                   <Checklist
                     key={checklist.id}
                     card={card}
@@ -183,107 +152,61 @@ const CardEditModal: FC<CardEditModalProps> = ({
               </Box>
             )}
             <Box mt={3}>
-              <Typography
-                variant="h4"
-                color="textPrimary"
-              >
+              <Typography variant="h4" color="textPrimary">
                 Activity
               </Typography>
               <Box mt={2}>
                 <CommentAdd cardId={card.id} />
                 {card.comments.length > 0 && (
                   <Box mt={3}>
-                    {card.comments.map((comment) => (
-                      <Comment
-                        key={comment.id}
-                        comment={comment}
-                      />
+                    {card.comments.map(comment => (
+                      <Comment key={comment.id} comment={comment} />
                     ))}
                   </Box>
                 )}
               </Box>
             </Box>
           </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={4}
-          >
-            <Typography
-              variant="overline"
-              color="textSecondary"
-            >
+          <Grid item xs={12} sm={4}>
+            <Typography variant="overline" color="textSecondary">
               Add to card
             </Typography>
-            <ActionButton
-              icon={<CheckIcon />}
-              onClick={handleAddChecklist}
-            >
+            <ActionButton icon={<CheckIcon />} onClick={handleAddChecklist}>
               Checklist
             </ActionButton>
-            <ActionButton
-              icon={<UsersIcon />}
-              disabled
-            >
+            <ActionButton icon={<UsersIcon />} disabled>
               Members
             </ActionButton>
-            <ActionButton
-              icon={<UsersIcon />}
-              disabled
-            >
+            <ActionButton icon={<UsersIcon />} disabled>
               Labels
             </ActionButton>
-            <ActionButton
-              icon={<FileIcon />}
-              disabled
-            >
+            <ActionButton icon={<FileIcon />} disabled>
               Attachments
             </ActionButton>
             <Box mt={3}>
-              <Typography
-                variant="overline"
-                color="textSecondary"
-              >
+              <Typography variant="overline" color="textSecondary">
                 Actions
               </Typography>
-              <ActionButton
-                icon={<ArrowRightIcon />}
-                disabled
-              >
+              <ActionButton icon={<ArrowRightIcon />} disabled>
                 Move
               </ActionButton>
-              <ActionButton
-                icon={<CopyIcon />}
-                disabled
-              >
+              <ActionButton icon={<CopyIcon />} disabled>
                 Copy
               </ActionButton>
-              <ActionButton
-                icon={<LayoutIcon />}
-                disabled
-              >
+              <ActionButton icon={<LayoutIcon />} disabled>
                 Make Template
               </ActionButton>
               {card.isSubscribed ? (
-                <ActionButton
-                  icon={<EyeOffIcon />}
-                  onClick={handleUnsubscribe}
-                >
+                <ActionButton icon={<EyeOffIcon />} onClick={handleUnsubscribe}>
                   Unwatch
                 </ActionButton>
               ) : (
-                <ActionButton
-                  icon={<EyeIcon />}
-                  onClick={handleSubscribe}
-                >
+                <ActionButton icon={<EyeIcon />} onClick={handleSubscribe}>
                   Watch
                 </ActionButton>
               )}
               <Divider />
-              <ActionButton
-                icon={<ArchiveIcon />}
-                onClick={handleDelete}
-              >
+              <ActionButton icon={<ArchiveIcon />} onClick={handleDelete}>
                 Archive
               </ActionButton>
             </Box>

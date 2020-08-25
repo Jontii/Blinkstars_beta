@@ -1,7 +1,3 @@
-import React from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Avatar,
   Button,
@@ -16,8 +12,11 @@ import {
   ListItemText,
   makeStyles
 } from '@material-ui/core';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { ProjectMember } from 'src/types/project';
 import getInitials from 'src/utils/getInitials';
-import type { ProjectMember } from 'src/types/project';
 
 interface MembersProps {
   className?: string;
@@ -38,10 +37,7 @@ const Members: FC<MembersProps> = ({ className, members, ...rest }) => {
   const classes = useStyles();
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardHeader
         className={classes.header}
         title="Campaign Applicants"
@@ -51,16 +47,10 @@ const Members: FC<MembersProps> = ({ className, members, ...rest }) => {
       />
       <CardContent className={classes.content}>
         <List>
-          {members.map((member) => (
-            <ListItem
-              disableGutters
-              key={member.id}
-            >
+          {members.map(member => (
+            <ListItem disableGutters key={member.id}>
               <ListItemAvatar>
-                <Avatar
-                  alt="Author"
-                  src={member.avatar}
-                >
+                <Avatar alt="Author" src={member.avatar}>
                   {getInitials(member.name)}
                 </Avatar>
               </ListItemAvatar>
@@ -75,9 +65,7 @@ const Members: FC<MembersProps> = ({ className, members, ...rest }) => {
       </CardContent>
       <Divider />
       <CardActions>
-        <Button fullWidth>
-          Manage applicants
-        </Button>
+        <Button fullWidth>Manage applicants</Button>
       </CardActions>
     </Card>
   );

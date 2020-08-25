@@ -1,17 +1,16 @@
-import React from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Box,
   Card,
   CardContent,
   Grid,
-  Typography,
-  makeStyles
+  makeStyles,
+  Typography
 } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
-import type { Theme } from 'src/theme';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { Theme } from 'src/theme';
 
 interface OverallReviewsProps {
   className?: string;
@@ -36,29 +35,16 @@ const OverallReviews: FC<OverallReviewsProps> = ({
   const classes = useStyles();
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardContent>
-        <Grid
-          alignItems="center"
-          container
-          spacing={3}
-        >
+        <Grid alignItems="center" container spacing={3}>
           <Grid item>
-            <Typography
-              variant="h5"
-              color="textPrimary"
-            >
+            <Typography variant="h5" color="textPrimary">
               Overall Reviews
             </Typography>
           </Grid>
           <Grid item>
-            <Box
-              display="flex"
-              alignItems="center"
-            >
+            <Box display="flex" alignItems="center">
               <Rating value={rating} />
               <Typography
                 className={classes.rating}
@@ -70,13 +56,8 @@ const OverallReviews: FC<OverallReviewsProps> = ({
             </Box>
           </Grid>
           <Grid item>
-            <Typography
-              color="textSecondary"
-              variant="body2"
-            >
-              {reviewsCount}
-              {' '}
-              reviews in total
+            <Typography color="textSecondary" variant="body2">
+              {reviewsCount} reviews in total
             </Typography>
           </Grid>
         </Grid>

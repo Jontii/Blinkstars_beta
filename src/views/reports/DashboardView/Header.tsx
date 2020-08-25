@@ -1,24 +1,20 @@
-import React, {
-  useRef,
-  useState
-} from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Breadcrumbs,
   Button,
   Grid,
   Link,
+  makeStyles,
   Menu,
   MenuItem,
   SvgIcon,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC, useRef, useState } from 'react';
 import { Calendar as CalendarIcon } from 'react-feather';
+import { Link as RouterLink } from 'react-router-dom';
 
 interface HeaderProps {
   className?: string;
@@ -74,17 +70,11 @@ const Header: FC<HeaderProps> = ({ className, ...rest }) => {
           >
             Dashboard
           </Link>
-          <Typography
-            variant="body1"
-            color="textPrimary"
-          >
+          <Typography variant="body1" color="textPrimary">
             Reports
           </Typography>
         </Breadcrumbs>
-        <Typography
-          variant="h3"
-          color="textPrimary"
-        >
+        <Typography variant="h3" color="textPrimary">
           Here&apos;s what&apos;s happening
         </Typography>
       </Grid>
@@ -114,7 +104,7 @@ const Header: FC<HeaderProps> = ({ className, ...rest }) => {
             horizontal: 'center'
           }}
         >
-          {timeRanges.map((_timeRange) => (
+          {timeRanges.map(_timeRange => (
             <MenuItem
               key={_timeRange.value}
               onClick={() => setTimeRange(_timeRange.text)}

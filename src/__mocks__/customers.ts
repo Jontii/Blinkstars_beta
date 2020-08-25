@@ -1,11 +1,11 @@
 import moment from 'moment';
-import mock from 'src/utils/mock';
-import type {
+import {
   Customer,
   CustomerEmail,
-  Invoice,
-  CustomerLog
+  CustomerLog,
+  Invoice
 } from 'src/types/customer';
+import mock from 'src/utils/mock';
 
 mock.onGet('/api/customers').reply(() => {
   const customers: Customer[] = [
@@ -21,7 +21,7 @@ mock.onGet('/api/customers').reply(() => {
       isReturning: true,
       name: 'Cao Yu',
       state: 'Ohio',
-      totalAmountSpent: 300.00,
+      totalAmountSpent: 300.0,
       totalOrders: 3,
       updatedAt: moment()
         .subtract(1, 'days')
@@ -41,7 +41,7 @@ mock.onGet('/api/customers').reply(() => {
       isReturning: false,
       name: 'Alex Richardson',
       state: 'Georgia',
-      totalAmountSpent: 0.00,
+      totalAmountSpent: 0.0,
       totalOrders: 0,
       updatedAt: moment()
         .subtract(2, 'days')
@@ -61,7 +61,7 @@ mock.onGet('/api/customers').reply(() => {
       isReturning: false,
       name: 'Anje Keizer',
       state: 'Ohio',
-      totalAmountSpent: 5600.00,
+      totalAmountSpent: 5600.0,
       totalOrders: 6,
       updatedAt: moment()
         .subtract(2, 'days')
@@ -81,7 +81,7 @@ mock.onGet('/api/customers').reply(() => {
       isReturning: true,
       name: 'Katarina Smith',
       state: 'Madrid',
-      totalAmountSpent: 500.00,
+      totalAmountSpent: 500.0,
       totalOrders: 1,
       updatedAt: moment()
         .subtract(2, 'days')
@@ -100,7 +100,7 @@ mock.onGet('/api/customers').reply(() => {
       isProspect: true,
       isReturning: false,
       name: 'Adam Denisov',
-      totalAmountSpent: 0.00,
+      totalAmountSpent: 0.0,
       totalOrders: 0,
       state: 'California',
       updatedAt: moment()
@@ -121,7 +121,7 @@ mock.onGet('/api/customers').reply(() => {
       isReturning: false,
       name: 'Miller Edwards',
       state: 'California',
-      totalAmountSpent: 0.00,
+      totalAmountSpent: 0.0,
       totalOrders: 0,
       updatedAt: moment()
         .subtract(4, 'days')
@@ -141,7 +141,7 @@ mock.onGet('/api/customers').reply(() => {
       country: 'USA',
       name: 'Emilee Simchenko',
       state: 'Nevada',
-      totalAmountSpent: 100.00,
+      totalAmountSpent: 100.0,
       totalOrders: 4,
       updatedAt: moment()
         .subtract(4, 'days')
@@ -161,7 +161,7 @@ mock.onGet('/api/customers').reply(() => {
       isReturning: true,
       name: 'Elliott Stone',
       state: 'California',
-      totalAmountSpent: 1000.00,
+      totalAmountSpent: 1000.0,
       totalOrders: 2,
       updatedAt: moment()
         .subtract(5, 'days')
@@ -180,7 +180,7 @@ mock.onGet('/api/customers').reply(() => {
       isReturning: false,
       name: 'Shen Zhi',
       state: 'Utah',
-      totalAmountSpent: 0.00,
+      totalAmountSpent: 0.0,
       totalOrders: 0,
       updatedAt: moment()
         .subtract(6, 'days')
@@ -200,7 +200,7 @@ mock.onGet('/api/customers').reply(() => {
       isReturning: true,
       name: 'Merrile Burgett',
       state: 'Utah',
-      totalAmountSpent: 200.00,
+      totalAmountSpent: 200.0,
       totalOrders: 7,
       updatedAt: moment()
         .subtract(9, 'days')
@@ -269,9 +269,7 @@ mock.onGet('/api/customers/1/invoices').reply(() => {
       id: '5ece2cef3e562cbd61996259',
       currency: '$',
       description: 'Freelancer Subscription (12/05/2019 - 11/06/2019)',
-      issueDate: moment()
-        .toDate()
-        .getTime(),
+      issueDate: moment().toDate().getTime(),
       paymentMethod: 'Credit Card',
       status: 'paid',
       value: 5.25
@@ -280,9 +278,7 @@ mock.onGet('/api/customers/1/invoices').reply(() => {
       id: '5ece2cf461b9484866f2968c',
       currency: '$',
       description: 'Freelancer Subscription (12/05/2019 - 11/06/2019)',
-      issueDate: moment()
-        .toDate()
-        .getTime(),
+      issueDate: moment().toDate().getTime(),
       paymentMethod: 'Credit Card',
       status: 'paid',
       value: 5.25

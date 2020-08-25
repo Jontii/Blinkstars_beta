@@ -1,21 +1,20 @@
-import React from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import moment from 'moment';
 import {
   Avatar,
   IconButton,
   ListItem,
   ListItemProps,
   ListItemText,
-  Tooltip,
-  makeStyles
+  makeStyles,
+  Tooltip
 } from '@material-ui/core';
-import { AvatarGroup } from '@material-ui/lab';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
-import type { Theme } from 'src/theme';
-import type { Task } from 'src/types/reports';
+import { AvatarGroup } from '@material-ui/lab';
+import clsx from 'clsx';
+import moment from 'moment';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { Theme } from 'src/theme';
+import { Task } from 'src/types/reports';
 
 interface TaskItemProps extends ListItemProps {
   className?: string;
@@ -45,30 +44,21 @@ const TaskItem: FC<TaskItemProps> = ({ className, task, ...rest }) => {
   }
 
   return (
-    <ListItem
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <ListItem className={clsx(classes.root, className)} {...rest}>
       <ListItemText
         primary={task.title}
         primaryTypographyProps={{ variant: 'h6', noWrap: true }}
         secondary={deadline}
       />
       <AvatarGroup max={3}>
-        {task.members.map((member) => (
-          <Tooltip
-            key={member.name}
-            title="View"
-          >
+        {task.members.map(member => (
+          <Tooltip key={member.name} title="View">
             <Avatar src={member.avatar} />
           </Tooltip>
         ))}
       </AvatarGroup>
       <Tooltip title="View task">
-        <IconButton
-          className={classes.viewButton}
-          edge="end"
-        >
+        <IconButton className={classes.viewButton} edge="end">
           <OpenInNewIcon fontSize="small" />
         </IconButton>
       </Tooltip>

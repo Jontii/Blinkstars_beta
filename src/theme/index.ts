@@ -1,15 +1,11 @@
-import _ from 'lodash';
+import { colors, createMuiTheme, responsiveFontSizes } from '@material-ui/core';
+import { Theme as MuiTheme } from '@material-ui/core/styles/createMuiTheme';
 import {
-  colors,
-  createMuiTheme,
-  responsiveFontSizes
-} from '@material-ui/core';
-import type { Theme as MuiTheme } from '@material-ui/core/styles/createMuiTheme';
-import type { Shadows as MuiShadows } from '@material-ui/core/styles/shadows';
-import type {
   Palette as MuiPalette,
   TypeBackground as MuiTypeBackground
 } from '@material-ui/core/styles/createPalette';
+import { Shadows as MuiShadows } from '@material-ui/core/styles/shadows';
+import _ from 'lodash';
 import { THEMES } from 'src/constants';
 import { softShadows, strongShadows } from './shadows';
 import typography from './typography';
@@ -35,7 +31,7 @@ interface ThemeConfig {
   theme?: string;
 }
 
-interface ThemeOptions { 
+interface ThemeOptions {
   name?: string;
   direction?: Direction;
   typography?: Record<string, any>;
@@ -166,7 +162,7 @@ const themesOptions: ThemeOptions[] = [
 ];
 
 export const createTheme = (config: ThemeConfig = {}): Theme => {
-  let themeOptions = themesOptions.find((theme) => theme.name === config.theme);
+  let themeOptions = themesOptions.find(theme => theme.name === config.theme);
 
   if (!themeOptions) {
     console.warn(new Error(`The theme ${config.theme} is not valid`));
@@ -174,12 +170,7 @@ export const createTheme = (config: ThemeConfig = {}): Theme => {
   }
 
   let theme = createMuiTheme(
-    _.merge(
-      {},
-      baseOptions,
-      themeOptions,
-      { direction: config.direction }
-    )
+    _.merge({}, baseOptions, themeOptions, { direction: config.direction })
   );
 
   if (config.responsiveFontSizes) {
@@ -187,4 +178,4 @@ export const createTheme = (config: ThemeConfig = {}): Theme => {
   }
 
   return theme as Theme;
-}
+};

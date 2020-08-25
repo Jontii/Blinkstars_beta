@@ -1,18 +1,17 @@
-import React from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import {
   Box,
   Breadcrumbs,
   Container,
   Grid,
   Link,
-  Typography,
-  makeStyles
+  makeStyles,
+  Typography
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import type { Theme } from 'src/theme';
+import React, { FC } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import Page from 'src/components/Page';
+import { Theme } from 'src/theme';
 import AreaChart from './AreaChart';
 import LineChart from './LineChart';
 import RadialChart from './RadialChart';
@@ -30,10 +29,7 @@ const ApexChartsView: FC = () => {
   const classes = useStyles();
 
   return (
-    <Page
-      className={classes.root}
-      title="ApexCharts"
-    >
+    <Page className={classes.root} title="ApexCharts">
       <Container maxWidth="lg">
         <Breadcrumbs
           separator={<NavigateNextIcon fontSize="small" />}
@@ -55,42 +51,22 @@ const ApexChartsView: FC = () => {
           >
             Extra
           </Link>
-          <Typography
-            variant="body1"
-            color="textPrimary"
-          >
+          <Typography variant="body1" color="textPrimary">
             Charts
           </Typography>
         </Breadcrumbs>
-        <Typography
-          variant="h3"
-          color="textPrimary"
-        >
+        <Typography variant="h3" color="textPrimary">
           ApexCharts
         </Typography>
         <Box mt={3}>
-          <Grid
-            container
-            spacing={3}
-          >
-            <Grid
-              item
-              xs={12}
-            >
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
               <LineChart />
             </Grid>
-            <Grid
-              item
-              xs={12}
-              md={8}
-            >
+            <Grid item xs={12} md={8}>
               <AreaChart />
             </Grid>
-            <Grid
-              item
-              xs={12}
-              md={4}
-            >
+            <Grid item xs={12} md={4}>
               <RadialChart />
             </Grid>
           </Grid>

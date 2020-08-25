@@ -1,25 +1,24 @@
-import React, { useState } from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import moment from 'moment';
 import {
   Box,
   Button,
   Grid,
+  makeStyles,
   SvgIcon,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
+import clsx from 'clsx';
+import moment from 'moment';
+import PropTypes from 'prop-types';
+import React, { FC, useState } from 'react';
 import {
-  Share2 as ShareIcon,
-  Check as CheckIcon,
-  Calendar as CalendarIcon,
   AlertTriangle as AlertIcon,
-  Send as SendIcon
+  Calendar as CalendarIcon,
+  Check as CheckIcon,
+  Send as SendIcon,
+  Share2 as ShareIcon
 } from 'react-feather';
-import type { Theme } from 'src/theme';
-import type { Project } from 'src/types/project';
+import { Theme } from 'src/theme';
+import { Project } from 'src/types/project';
 import ApplyModal from './ApplyModal';
 
 interface HeaderProps {
@@ -66,10 +65,7 @@ const Header: FC<HeaderProps> = ({ className, project, ...rest }) => {
       {...rest}
     >
       <Grid item>
-        <Typography
-          variant="h3"
-          color="textPrimary"
-        >
+        <Typography variant="h3" color="textPrimary">
           {project.title}
         </Typography>
         <Box
@@ -80,32 +76,18 @@ const Header: FC<HeaderProps> = ({ className, project, ...rest }) => {
           flexWrap="wrap"
         >
           <div className={classes.badge}>
-            <SvgIcon
-              fontSize="small"
-              className={classes.badgeIcon}
-            >
-              {project.isActive ? <CheckIcon /> : <AlertIcon /> }
+            <SvgIcon fontSize="small" className={classes.badgeIcon}>
+              {project.isActive ? <CheckIcon /> : <AlertIcon />}
             </SvgIcon>
-            <Typography
-              variant="body2"
-              color="inherit"
-              component="span"
-            >
+            <Typography variant="body2" color="inherit" component="span">
               {project.isActive ? 'Active' : 'Inactive'}
             </Typography>
           </div>
           <div className={classes.badge}>
-            <SvgIcon
-              fontSize="small"
-              className={classes.badgeIcon}
-            >
+            <SvgIcon fontSize="small" className={classes.badgeIcon}>
               <CalendarIcon />
             </SvgIcon>
-            <Typography
-              variant="body2"
-              color="inherit"
-              component="span"
-            >
+            <Typography variant="body2" color="inherit" component="span">
               {`Deadline ${moment(project.endDate).fromNow()}`}
             </Typography>
           </div>
@@ -127,7 +109,7 @@ const Header: FC<HeaderProps> = ({ className, project, ...rest }) => {
           onClick={handleApplyModalOpen}
           variant="contained"
           color="secondary"
-          disabled  
+          disabled
           startIcon={
             <SvgIcon fontSize="small">
               <SendIcon />

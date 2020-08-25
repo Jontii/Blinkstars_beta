@@ -1,22 +1,13 @@
-import React, { useState } from 'react';
-import type {
-  FC,
-  ChangeEvent
-} from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import clsx from 'clsx';
-import numeral from 'numeral';
-import PropTypes from 'prop-types';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   Box,
   Button,
   Card,
   Checkbox,
-  InputAdornment,
   FormControlLabel,
   IconButton,
+  InputAdornment,
   Link,
+  makeStyles,
   SvgIcon,
   Table,
   TableBody,
@@ -24,18 +15,23 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  TextField,
-  makeStyles
+  TextField
 } from '@material-ui/core';
+import clsx from 'clsx';
+import numeral from 'numeral';
+import PropTypes from 'prop-types';
+import React, { ChangeEvent, FC, useState } from 'react';
 import {
-  Image as ImageIcon,
-  Edit as EditIcon,
   ArrowRight as ArrowRightIcon,
+  Edit as EditIcon,
+  Image as ImageIcon,
   Search as SearchIcon
 } from 'react-feather';
-import type { Theme } from 'src/theme';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import { Link as RouterLink } from 'react-router-dom';
 import Label from 'src/components/Label';
-import type { Product, InventoryType } from 'src/types/product';
+import { Theme } from 'src/theme';
+import { InventoryType, Product } from 'src/types/product';
 
 interface ResultsProps {
   className?: string;
@@ -124,15 +120,15 @@ const getInventoryLabel = (inventoryType: InventoryType): JSX.Element => {
 
   const { text, color }: any = map[inventoryType];
 
-  return (
-    <Label color={color}>
-      {text}
-    </Label>
-  );
+  return <Label color={color}>{text}</Label>;
 };
 
-const applyFilters = (products: Product[], query: string, filters: Filters): Product[] => {
-  return products.filter((product) => {
+const applyFilters = (
+  products: Product[],
+  query: string,
+  filters: Filters
+): Product[] => {
+  return products.filter(product => {
     let matches = true;
 
     if (query && !product.name.toLowerCase().includes(query.toLowerCase())) {
@@ -153,7 +149,10 @@ const applyFilters = (products: Product[], query: string, filters: Filters): Pro
       }
     }
 
-    if (filters.inStock && !['in_stock', 'limited'].includes(product.inventoryType)) {
+    if (
+      filters.inStock &&
+      !['in_stock', 'limited'].includes(product.inventoryType)
+    ) {
       matches = false;
     }
 
@@ -165,7 +164,11 @@ const applyFilters = (products: Product[], query: string, filters: Filters): Pro
   });
 };
 
-const applyPagination = (products: Product[], page: number, limit: number): Product[] => {
+const applyPagination = (
+  products: Product[],
+  page: number,
+  limit: number
+): Product[] => {
   return products.slice(page * limit, page * limit + limit);
 };
 
@@ -243,13 +246,15 @@ const Results: FC<ResultsProps> = ({ className, products, ...rest }) => {
       value = event.target.value;
     }
 
-    setFilters((prevFilters) => ({
+    setFilters(prevFilters => ({
       ...prevFilters,
       category: value
     }));
   };
 
-  const handleAvailabilityChange = (event: ChangeEvent<HTMLInputElement>): void => {
+  const handleAvailabilityChange = (
+    event: ChangeEvent<HTMLInputElement>
+  ): void => {
     event.persist();
 
     let value = null;
@@ -258,7 +263,7 @@ const Results: FC<ResultsProps> = ({ className, products, ...rest }) => {
       value = event.target.value;
     }
 
-    setFilters((prevFilters) => ({
+    setFilters(prevFilters => ({
       ...prevFilters,
       availability: value
     }));
@@ -273,13 +278,15 @@ const Results: FC<ResultsProps> = ({ className, products, ...rest }) => {
       value = true;
     }
 
-    setFilters((prevFilters) => ({
+    setFilters(prevFilters => ({
       ...prevFilters,
       inStock: value
     }));
   };
 
-  const handleShippableChange = (event: ChangeEvent<HTMLInputElement>): void => {
+  const handleShippableChange = (
+    event: ChangeEvent<HTMLInputElement>
+  ): void => {
     event.persist();
 
     let value = null;
@@ -288,7 +295,7 @@ const Results: FC<ResultsProps> = ({ className, products, ...rest }) => {
       value = true;
     }
 
-    setFilters((prevFilters) => ({
+    setFilters(prevFilters => ({
       ...prevFilters,
       isShippable: value
     }));
@@ -299,17 +306,24 @@ const Results: FC<ResultsProps> = ({ className, products, ...rest }) => {
     setSort(event.target.value);
   };
 
-  const handleSelectAllProducts = (event: ChangeEvent<HTMLInputElement>): void => {
-    setSelectedProducts(event.target.checked
-      ? products.map((product) => product.id)
-      : []);
+  const handleSelectAllProducts = (
+    event: ChangeEvent<HTMLInputElement>
+  ): void => {
+    setSelectedProducts(
+      event.target.checked ? products.map(product => product.id) : []
+    );
   };
 
-  const handleSelectOneProduct = (event: ChangeEvent<HTMLInputElement>, productId: string): void => {
+  const handleSelectOneProduct = (
+    event: ChangeEvent<HTMLInputElement>,
+    productId: string
+  ): void => {
     if (!selectedProducts.includes(productId)) {
-      setSelectedProducts((prevSelected) => [...prevSelected, productId]);
+      setSelectedProducts(prevSelected => [...prevSelected, productId]);
     } else {
-      setSelectedProducts((prevSelected) => prevSelected.filter((id) => id !== productId));
+      setSelectedProducts(prevSelected =>
+        prevSelected.filter(id => id !== productId)
+      );
     }
   };
 
@@ -325,28 +339,20 @@ const Results: FC<ResultsProps> = ({ className, products, ...rest }) => {
   const filteredProducts = applyFilters(products, query, filters);
   const paginatedProducts = applyPagination(filteredProducts, page, limit);
   const enableBulkOperations = selectedProducts.length > 0;
-  const selectedSomeProducts = selectedProducts.length > 0 && selectedProducts.length < products.length;
+  const selectedSomeProducts =
+    selectedProducts.length > 0 && selectedProducts.length < products.length;
   const selectedAllProducts = selectedProducts.length === products.length;
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <Box p={2}>
-        <Box
-          display="flex"
-          alignItems="center"
-        >
+        <Box display="flex" alignItems="center">
           <TextField
             className={classes.queryField}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <SvgIcon
-                    fontSize="small"
-                    color="action"
-                  >
+                  <SvgIcon fontSize="small" color="action">
                     <SearchIcon />
                   </SvgIcon>
                 </InputAdornment>
@@ -367,21 +373,14 @@ const Results: FC<ResultsProps> = ({ className, products, ...rest }) => {
             value={sort}
             variant="outlined"
           >
-            {sortOptions.map((option) => (
-              <option
-                key={option.value}
-                value={option.value}
-              >
+            {sortOptions.map(option => (
+              <option key={option.value} value={option.value}>
                 {option.label}
               </option>
             ))}
           </TextField>
         </Box>
-        <Box
-          mt={3}
-          display="flex"
-          alignItems="center"
-        >
+        <Box mt={3} display="flex" alignItems="center">
           <TextField
             className={classes.categoryField}
             label="Category"
@@ -392,11 +391,8 @@ const Results: FC<ResultsProps> = ({ className, products, ...rest }) => {
             value={filters.category || 'all'}
             variant="outlined"
           >
-            {categoryOptions.map((categoryOption) => (
-              <option
-                key={categoryOption.id}
-                value={categoryOption.id}
-              >
+            {categoryOptions.map(categoryOption => (
+              <option key={categoryOption.id} value={categoryOption.id}>
                 {categoryOption.name}
               </option>
             ))}
@@ -411,35 +407,32 @@ const Results: FC<ResultsProps> = ({ className, products, ...rest }) => {
             value={filters.availability || 'all'}
             variant="outlined"
           >
-            {avalabilityOptions.map((avalabilityOption) => (
-              <option
-                key={avalabilityOption.id}
-                value={avalabilityOption.id}
-              >
+            {avalabilityOptions.map(avalabilityOption => (
+              <option key={avalabilityOption.id} value={avalabilityOption.id}>
                 {avalabilityOption.name}
               </option>
             ))}
           </TextField>
           <FormControlLabel
             className={classes.stockField}
-            control={(
+            control={
               <Checkbox
                 checked={!!filters.inStock}
                 onChange={handleStockChange}
                 name="inStock"
               />
-            )}
+            }
             label="In Stock"
           />
           <FormControlLabel
             className={classes.shippableField}
-            control={(
+            control={
               <Checkbox
                 checked={!!filters.isShippable}
                 onChange={handleShippableChange}
                 name="Shippable"
               />
-            )}
+            }
             label="Shippable"
           />
         </Box>
@@ -452,16 +445,10 @@ const Results: FC<ResultsProps> = ({ className, products, ...rest }) => {
               indeterminate={selectedSomeProducts}
               onChange={handleSelectAllProducts}
             />
-            <Button
-              variant="outlined"
-              className={classes.bulkAction}
-            >
+            <Button variant="outlined" className={classes.bulkAction}>
               Delete
             </Button>
-            <Button
-              variant="outlined"
-              className={classes.bulkAction}
-            >
+            <Button variant="outlined" className={classes.bulkAction}>
               Edit
             </Button>
           </div>
@@ -480,40 +467,26 @@ const Results: FC<ResultsProps> = ({ className, products, ...rest }) => {
                   />
                 </TableCell>
                 <TableCell />
-                <TableCell>
-                  Name
-                </TableCell>
-                <TableCell>
-                  Inventory
-                </TableCell>
-                <TableCell>
-                  Details
-                </TableCell>
-                <TableCell>
-                  Attributes
-                </TableCell>
-                <TableCell>
-                  Price
-                </TableCell>
-                <TableCell align="right">
-                  Actions
-                </TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Inventory</TableCell>
+                <TableCell>Details</TableCell>
+                <TableCell>Attributes</TableCell>
+                <TableCell>Price</TableCell>
+                <TableCell align="right">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {paginatedProducts.map((product) => {
+              {paginatedProducts.map(product => {
                 const isProductSelected = selectedProducts.includes(product.id);
 
                 return (
-                  <TableRow
-                    hover
-                    key={product.id}
-                    selected={isProductSelected}
-                  >
+                  <TableRow hover key={product.id} selected={isProductSelected}>
                     <TableCell padding="checkbox">
                       <Checkbox
                         checked={isProductSelected}
-                        onChange={(event) => handleSelectOneProduct(event, product.id)}
+                        onChange={event =>
+                          handleSelectOneProduct(event, product.id)
+                        }
                         value={isProductSelected}
                       />
                     </TableCell>
@@ -525,10 +498,7 @@ const Results: FC<ResultsProps> = ({ className, products, ...rest }) => {
                           className={classes.image}
                         />
                       ) : (
-                        <Box
-                          p={2}
-                          bgcolor="background.dark"
-                        >
+                        <Box p={2} bgcolor="background.dark">
                           <SvgIcon>
                             <ImageIcon />
                           </SvgIcon>
@@ -550,16 +520,17 @@ const Results: FC<ResultsProps> = ({ className, products, ...rest }) => {
                       {getInventoryLabel(product.inventoryType)}
                     </TableCell>
                     <TableCell>
-                      {product.quantity}
-                      {' '}
-                      in stock
-                      {product.variants > 1 && ` in ${product.variants} variants`}
+                      {product.quantity} in stock
+                      {product.variants > 1 &&
+                        ` in ${product.variants} variants`}
                     </TableCell>
                     <TableCell>
-                      {product.attributes.map((attr) => attr)}
+                      {product.attributes.map(attr => attr)}
                     </TableCell>
                     <TableCell>
-                      {numeral(product.price).format(`${product.currency}0,0.00`)}
+                      {numeral(product.price).format(
+                        `${product.currency}0,0.00`
+                      )}
                     </TableCell>
                     <TableCell align="right">
                       <IconButton>

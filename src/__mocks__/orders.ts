@@ -1,6 +1,6 @@
 import moment from 'moment';
+import { Order } from 'src/types/order';
 import mock from 'src/utils/mock';
-import type { Order } from 'src/types/order';
 
 mock.onGet('/api/orders').reply(() => {
   const orders: Order[] = [
@@ -18,7 +18,7 @@ mock.onGet('/api/orders').reply(() => {
       number: 'DEV-102',
       paymentMethod: 'CreditCard',
       status: 'pending',
-      totalAmount: 500.00
+      totalAmount: 500.0
     },
     {
       id: '5ecb8a738aa6f3e577c2b3ec',
@@ -34,7 +34,7 @@ mock.onGet('/api/orders').reply(() => {
       number: 'DEV-101',
       paymentMethod: 'PayPal',
       status: 'completed',
-      totalAmount: 500.00
+      totalAmount: 500.0
     },
     {
       id: '5ecb8a795e53f134013eba3b',
@@ -50,7 +50,7 @@ mock.onGet('/api/orders').reply(() => {
       number: 'DEV-100',
       paymentMethod: 'CreditCard',
       status: 'pending',
-      totalAmount: 500.00
+      totalAmount: 500.0
     },
     {
       id: '5ecb8a7f738cc572a9ce0277',
@@ -66,7 +66,7 @@ mock.onGet('/api/orders').reply(() => {
       number: 'DEV-99',
       paymentMethod: 'PayPal',
       status: 'completed',
-      totalAmount: 500.00
+      totalAmount: 500.0
     },
     {
       id: '5e86805e2bafd54f66cc95c3',
@@ -82,7 +82,7 @@ mock.onGet('/api/orders').reply(() => {
       number: 'DEV-98',
       paymentMethod: 'PayPal',
       status: 'completed',
-      totalAmount: 500.00
+      totalAmount: 500.0
     },
     {
       id: '5ecb8a85a850c16fa413849c',
@@ -98,7 +98,7 @@ mock.onGet('/api/orders').reply(() => {
       status: 'pending',
       number: 'DEV-97',
       paymentMethod: 'CreditCard',
-      totalAmount: 500.00
+      totalAmount: 500.0
     },
     {
       id: '5ecb8a8e69ba2e409ea0168f',
@@ -114,7 +114,7 @@ mock.onGet('/api/orders').reply(() => {
       number: 'DEV-96',
       paymentMethod: 'CreditCard',
       status: 'completed',
-      totalAmount: 500.00
+      totalAmount: 500.0
     },
     {
       id: '5ecb8a9341c68839d387e1c4',
@@ -130,7 +130,7 @@ mock.onGet('/api/orders').reply(() => {
       number: 'DEV-95',
       paymentMethod: 'PayPal',
       status: 'rejected',
-      totalAmount: 500.00
+      totalAmount: 500.0
     },
     {
       id: '5ecb8a984bfbb97c9ae458e8',
@@ -146,7 +146,7 @@ mock.onGet('/api/orders').reply(() => {
       number: 'DEV-94',
       paymentMethod: 'CreditCard',
       status: 'canceled',
-      totalAmount: 500.00
+      totalAmount: 500.0
     },
     {
       id: '5ecb8aa08d9127dba654ce7a',
@@ -163,7 +163,7 @@ mock.onGet('/api/orders').reply(() => {
       number: 'DEV-93',
       paymentMethod: 'PayPal',
       status: 'canceled',
-      totalAmount: 500.00
+      totalAmount: 500.0
     }
   ];
 
@@ -174,9 +174,7 @@ mock.onGet('/api/orders/1').reply(() => {
   const order: Order = {
     id: '5ecb8a6879877087d4aa2690',
     coupon: null,
-    createdAt: moment()
-      .toDate()
-      .getTime(),
+    createdAt: moment().toDate().getTime(),
     currency: '$',
     customer: {
       address1: 'Street John Wick, no. 7',
@@ -200,13 +198,13 @@ mock.onGet('/api/orders/1').reply(() => {
         currency: '$',
         name: 'Freelancer Subscription',
         quantity: 1,
-        unitAmount: 5.00
+        unitAmount: 5.0
       }
     ],
     number: 'DEV-103',
     paymentMethod: 'CreditCard',
     status: 'pending',
-    totalAmount: 500.00
+    totalAmount: 500.0
   };
 
   return [200, { order }];

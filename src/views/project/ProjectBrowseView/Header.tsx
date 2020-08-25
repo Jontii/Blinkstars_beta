@@ -1,19 +1,18 @@
-import React from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Breadcrumbs,
   Button,
   Grid,
   Link,
+  makeStyles,
   SvgIcon,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import { PlusCircle as PlusIcon } from 'react-feather';
+import { Link as RouterLink } from 'react-router-dom';
 
 interface HeaderProps {
   className?: string;
@@ -56,17 +55,11 @@ const Header: FC<HeaderProps> = ({ className, ...rest }) => {
           >
             Projects
           </Link>
-          <Typography
-            variant="body1"
-            color="textPrimary"
-          >
+          <Typography variant="body1" color="textPrimary">
             Browse
           </Typography>
         </Breadcrumbs>
-        <Typography
-          variant="h3"
-          color="textPrimary"
-        >
+        <Typography variant="h3" color="textPrimary">
           See the latest opportunities
         </Typography>
       </Grid>
@@ -87,7 +80,7 @@ const Header: FC<HeaderProps> = ({ className, ...rest }) => {
       </Grid>
     </Grid>
   );
-}
+};
 
 Header.propTypes = {
   className: PropTypes.string

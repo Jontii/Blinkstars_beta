@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
-import type { FC, ChangeEvent } from 'react';
 import {
   Box,
   Container,
   Divider,
+  makeStyles,
   Tab,
-  Tabs,
-  makeStyles
+  Tabs
 } from '@material-ui/core';
+import React, { ChangeEvent, FC, useState } from 'react';
 import Page from 'src/components/Page';
-import type { Theme } from 'src/theme';
-import Header from './Header';
+import { Theme } from 'src/theme';
 import General from './General';
-import Subscription from './Subscription';
+import Header from './Header';
 import Notifications from './Notifications';
 import Security from './Security';
+import Subscription from './Subscription';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -30,7 +29,7 @@ const AccountView: FC = () => {
   const [currentTab, setCurrentTab] = useState<string>('general');
 
   const tabs = [
-    { value: 'general', label: 'General' },
+    { value: 'general', label: 'General' }
     // { value: 'subscription', label: 'Subscription' },
     // { value: 'notifications', label: 'Notifications' },
     // { value: 'security', label: 'Security' }
@@ -41,10 +40,7 @@ const AccountView: FC = () => {
   };
 
   return (
-    <Page
-      className={classes.root}
-      title="Settings"
-    >
+    <Page className={classes.root} title="Settings">
       <Container maxWidth="lg">
         <Header />
         <Box mt={3}>
@@ -55,12 +51,8 @@ const AccountView: FC = () => {
             variant="scrollable"
             textColor="secondary"
           >
-            {tabs.map((tab) => (
-              <Tab
-                key={tab.value}
-                label={tab.label}
-                value={tab.value}
-              />
+            {tabs.map(tab => (
+              <Tab key={tab.value} label={tab.label} value={tab.value} />
             ))}
           </Tabs>
         </Box>

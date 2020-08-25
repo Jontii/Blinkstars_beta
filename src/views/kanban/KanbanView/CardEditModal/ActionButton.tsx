@@ -1,17 +1,7 @@
-import React from 'react';
-import type {
-  FC,
-  ReactElement,
-  ReactNode
-} from 'react';
+import { Button, ButtonProps, makeStyles, SvgIcon } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import {
-  Button,
-  SvgIcon,
-  makeStyles
-} from '@material-ui/core';
-import type { ButtonProps } from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import React, { FC, ReactElement, ReactNode } from 'react';
+import { Theme } from 'src/theme';
 
 interface ActionButtonProps extends ButtonProps {
   icon?: ReactElement;
@@ -33,11 +23,7 @@ const ActionButton: FC<ActionButtonProps> = ({
 }) => {
   const classes = useStyles();
 
-  const Icon = iconProp ? (
-    <SvgIcon fontSize="small">
-      {iconProp}
-    </SvgIcon>
-  ) : null;
+  const Icon = iconProp ? <SvgIcon fontSize="small">{iconProp}</SvgIcon> : null;
 
   return (
     <Button

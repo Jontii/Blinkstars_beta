@@ -1,9 +1,8 @@
-import React from 'react';
-import type { FC } from 'react';
+import { makeStyles } from '@material-ui/core';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import React, { FC } from 'react';
+import { Theme } from 'src/theme';
 
 interface CircularProgressProps {
   className?: string;
@@ -16,7 +15,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: 56
   },
   circle1: {
-    stroke: theme.palette.type === 'dark' ? 'rgba(0,0,0,0.15)' : 'rgba(0,0,0,0.05)',
+    stroke:
+      theme.palette.type === 'dark' ? 'rgba(0,0,0,0.15)' : 'rgba(0,0,0,0.05)',
     fill: 'none',
     strokeWidth: 4
   },
@@ -33,14 +33,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const CircularProgress: FC<CircularProgressProps> = ({ className, value, ...rest }) => {
+const CircularProgress: FC<CircularProgressProps> = ({
+  className,
+  value,
+  ...rest
+}) => {
   const classes = useStyles();
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <div className={clsx(classes.root, className)} {...rest}>
       <svg viewBox="0 0 36 36">
         <path
           className={classes.circle1}

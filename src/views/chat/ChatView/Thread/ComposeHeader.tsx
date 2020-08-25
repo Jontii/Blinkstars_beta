@@ -1,14 +1,3 @@
-import React, {
-  useState,
-  useRef
-} from 'react';
-import type {
-  ChangeEvent,
-  FC,
-  FocusEvent
-} from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Avatar,
   Box,
@@ -19,13 +8,16 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
+  makeStyles,
   Paper,
   Popper,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
-import type { Theme } from 'src/theme';
-import type { Contact } from 'src/types/chat';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { ChangeEvent, FC, FocusEvent, useRef, useState } from 'react';
+import { Theme } from 'src/theme';
+import { Contact } from 'src/types/chat';
 import axios from 'src/utils/axios';
 
 interface ComposeHeaderProps {
@@ -35,12 +27,15 @@ interface ComposeHeaderProps {
   recipients: any[];
 }
 
-const getFilteredSearchResults = (results: Contact[], recipients: any[]): any[] => {
+const getFilteredSearchResults = (
+  results: Contact[],
+  recipients: any[]
+): any[] => {
   const recipientIds = recipients.reduce((acc, recipient) => {
     return [...acc, recipient.id];
   }, []);
 
-  return results.filter((result) => !recipientIds.includes(result.id));
+  return results.filter(result => !recipientIds.includes(result.id));
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -86,24 +81,32 @@ const ComposeHeader: FC<ComposeHeaderProps> = ({
   const [isSearchFocused, setSearchFocused] = useState<boolean>(true);
   const [searchResults, setSearchResults] = useState<Contact[]>([]);
 
-  const filteredSearchResults = getFilteredSearchResults(searchResults, recipients);
+  const filteredSearchResults = getFilteredSearchResults(
+    searchResults,
+    recipients
+  );
   const displayResults = query && isSearchFocused;
 
-  const handleSearchChange = async (event: ChangeEvent<HTMLInputElement>): Promise<void> => {
+  const handleSearchChange = async (
+    event: ChangeEvent<HTMLInputElement>
+  ): Promise<void> => {
     try {
       event.persist();
 
       const { value } = event.target;
-  
+
       setQuery(value);
 
       if (value) {
-        const response = await axios.get<{ results: any[]; }>('/api/chat/search', {
-          params: {
-            query: value
+        const response = await axios.get<{ results: any[] }>(
+          '/api/chat/search',
+          {
+            params: {
+              query: value
+            }
           }
-        });
-    
+        );
+
         setSearchResults(response.data.results);
       } else {
         setSearchResults([]);
@@ -145,21 +148,12 @@ const ComposeHeader: FC<ComposeHeaderProps> = ({
   };
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <Typography
-        variant="body1"
-        color="textSecondary"
-      >
+    <div className={clsx(classes.root, className)} {...rest}>
+      <Typography variant="body1" color="textSecondary">
         To:
       </Typography>
-      <div
-        className={classes.container}
-        ref={containerRef}
-      >
-        {recipients.map((recipient) => (
+      <div className={classes.container} ref={containerRef}>
+        {recipients.map(recipient => (
           <Chip
             className={classes.recipient}
             color="primary"
@@ -170,7 +164,9 @@ const ComposeHeader: FC<ComposeHeaderProps> = ({
           />
         ))}
         <Input
-          className={clsx(classes.input, { [classes.compactInput]: recipients.length > 0 })}
+          className={clsx(classes.input, {
+            [classes.compactInput]: recipients.length > 0
+          })}
           disableUnderline
           onBlur={handleSearchBlur}
           onChange={handleSearchChange}
@@ -188,23 +184,11 @@ const ComposeHeader: FC<ComposeHeaderProps> = ({
           >
             <Paper className={classes.searchResults}>
               {filteredSearchResults.length === 0 ? (
-                <Box
-                  pb={2}
-                  pt={2}
-                  px={2}
-                  textAlign="center"
-                >
-                  <Typography
-                    color="textPrimary"
-                    gutterBottom
-                    variant="h4"
-                  >
+                <Box pb={2} pt={2} px={2} textAlign="center">
+                  <Typography color="textPrimary" gutterBottom variant="h4">
                     Nothing Found
                   </Typography>
-                  <Typography
-                    color="textSecondary"
-                    variant="body2"
-                  >
+                  <Typography color="textSecondary" variant="body2">
                     We couldn&apos;t find any matches for &quot;
                     {query}
                     &quot;. Try checking for typos or using complete words.
@@ -212,19 +196,13 @@ const ComposeHeader: FC<ComposeHeaderProps> = ({
                 </Box>
               ) : (
                 <>
-                  <Box
-                    px={2}
-                    pt={2}
-                  >
-                    <Typography
-                      color="textSecondary"
-                      variant="h6"
-                    >
+                  <Box px={2} pt={2}>
+                    <Typography color="textSecondary" variant="h6">
                       Contacts
                     </Typography>
                   </Box>
                   <List>
-                    {filteredSearchResults.map((result) => (
+                    {filteredSearchResults.map(result => (
                       <ListItem
                         button
                         key={result.id}
@@ -262,8 +240,8 @@ ComposeHeader.propTypes = {
 };
 
 ComposeHeader.defaultProps = {
-  onAddRecipient: () => { },
-  onRemoveRecipient: () => { },
+  onAddRecipient: () => {},
+  onRemoveRecipient: () => {},
   recipients: []
 };
 

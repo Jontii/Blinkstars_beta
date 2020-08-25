@@ -1,10 +1,3 @@
-import React, { useState } from 'react';
-import type { FC, ChangeEvent } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import clsx from 'clsx';
-import numeral from 'numeral';
-import PropTypes from 'prop-types';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   Avatar,
   Box,
@@ -15,6 +8,7 @@ import {
   IconButton,
   InputAdornment,
   Link,
+  makeStyles,
   SvgIcon,
   Tab,
   Table,
@@ -25,33 +19,34 @@ import {
   TableRow,
   Tabs,
   TextField,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
+import clsx from 'clsx';
+import numeral from 'numeral';
+import PropTypes from 'prop-types';
+import React, { ChangeEvent, FC, useState } from 'react';
 import {
-  Edit as EditIcon,
   ArrowRight as ArrowRightIcon,
+  Edit as EditIcon,
   Search as SearchIcon
 } from 'react-feather';
-import type { Theme } from 'src/theme';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import { Link as RouterLink } from 'react-router-dom';
+import { Theme } from 'src/theme';
+import { Customer } from 'src/types/customer';
 import getInitials from 'src/utils/getInitials';
-import type { Customer } from 'src/types/customer';
 
 interface ResultsProps {
   className?: string;
   customers: Customer[];
 }
 
-type Sort =
-  | 'updatedAt|desc'
-  | 'updatedAt|asc'
-  | 'orders|desc'
-  | 'orders|asc';
+type Sort = 'updatedAt|desc' | 'updatedAt|asc' | 'orders|desc' | 'orders|asc';
 
 interface SortOption {
-  value: Sort,
-  label: string
-};
+  value: Sort;
+  label: string;
+}
 
 const tabs = [
   {
@@ -91,15 +86,19 @@ const sortOptions: SortOption[] = [
   }
 ];
 
-const applyFilters = (customers: Customer[], query: string, filters: any): Customer[] => {
-  return customers.filter((customer) => {
+const applyFilters = (
+  customers: Customer[],
+  query: string,
+  filters: any
+): Customer[] => {
+  return customers.filter(customer => {
     let matches = true;
 
     if (query) {
       const properties = ['email', 'name'];
       let containsQuery = false;
 
-      properties.forEach((property) => {
+      properties.forEach(property => {
         if (customer[property].toLowerCase().includes(query.toLowerCase())) {
           containsQuery = true;
         }
@@ -110,7 +109,7 @@ const applyFilters = (customers: Customer[], query: string, filters: any): Custo
       }
     }
 
-    Object.keys(filters).forEach((key) => {
+    Object.keys(filters).forEach(key => {
       const value = filters[key];
 
       if (value && customer[key] !== value) {
@@ -122,11 +121,19 @@ const applyFilters = (customers: Customer[], query: string, filters: any): Custo
   });
 };
 
-const applyPagination = (customers: Customer[], page: number, limit: number): Customer[] => {
+const applyPagination = (
+  customers: Customer[],
+  page: number,
+  limit: number
+): Customer[] => {
   return customers.slice(page * limit, page * limit + limit);
 };
 
-const descendingComparator = (a: Customer, b: Customer, orderBy: string): number => {
+const descendingComparator = (
+  a: Customer,
+  b: Customer,
+  orderBy: string
+): number => {
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -145,7 +152,8 @@ const getComparator = (order: 'asc' | 'desc', orderBy: string) => {
 };
 
 const applySort = (customers: Customer[], sort: Sort): Customer[] => {
-  const [orderBy, order] = sort.split('|') as [string, 'asc' | 'desc'];
+  const [orderBy, order] = sort.split('|');
+  // @ts-ignore
   const comparator = getComparator(order, orderBy);
   const stabilizedThis = customers.map((el, index) => [el, index]);
 
@@ -160,7 +168,7 @@ const applySort = (customers: Customer[], sort: Sort): Customer[] => {
   });
 
   // @ts-ignore
-  return stabilizedThis.map((el) => el[0]);
+  return stabilizedThis.map(el => el[0]);
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -190,11 +198,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const Results: FC<ResultsProps> = ({
-  className,
-  customers,
-  ...rest
-}) => {
+const Results: FC<ResultsProps> = ({ className, customers, ...rest }) => {
   const classes = useStyles();
   const [currentTab, setCurrentTab] = useState<string>('all');
   const [selectedCustomers, setSelectedCustomers] = useState<string[]>([]);
@@ -232,20 +236,28 @@ const Results: FC<ResultsProps> = ({
 
   const handleSortChange = (event: ChangeEvent<HTMLInputElement>): void => {
     event.persist();
+    // @ts-ignore
     setSort(event.target.value as Sort);
   };
 
-  const handleSelectAllCustomers = (event: ChangeEvent<HTMLInputElement>): void => {
-    setSelectedCustomers(event.target.checked
-      ? customers.map((customer) => customer.id)
-      : []);
+  const handleSelectAllCustomers = (
+    event: ChangeEvent<HTMLInputElement>
+  ): void => {
+    setSelectedCustomers(
+      event.target.checked ? customers.map(customer => customer.id) : []
+    );
   };
 
-  const handleSelectOneCustomer = (event: ChangeEvent<HTMLInputElement>, customerId: string): void => {
+  const handleSelectOneCustomer = (
+    event: ChangeEvent<HTMLInputElement>,
+    customerId: string
+  ): void => {
     if (!selectedCustomers.includes(customerId)) {
-      setSelectedCustomers((prevSelected) => [...prevSelected, customerId]);
+      setSelectedCustomers(prevSelected => [...prevSelected, customerId]);
     } else {
-      setSelectedCustomers((prevSelected) => prevSelected.filter((id) => id !== customerId));
+      setSelectedCustomers(prevSelected =>
+        prevSelected.filter(id => id !== customerId)
+      );
     }
   };
 
@@ -261,14 +273,12 @@ const Results: FC<ResultsProps> = ({
   const sortedCustomers = applySort(filteredCustomers, sort);
   const paginatedCustomers = applyPagination(sortedCustomers, page, limit);
   const enableBulkOperations = selectedCustomers.length > 0;
-  const selectedSomeCustomers = selectedCustomers.length > 0 && selectedCustomers.length < customers.length;
+  const selectedSomeCustomers =
+    selectedCustomers.length > 0 && selectedCustomers.length < customers.length;
   const selectedAllCustomers = selectedCustomers.length === customers.length;
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <Tabs
         onChange={handleTabsChange}
         scrollButtons="auto"
@@ -276,30 +286,18 @@ const Results: FC<ResultsProps> = ({
         value={currentTab}
         variant="scrollable"
       >
-        {tabs.map((tab) => (
-          <Tab
-            key={tab.value}
-            value={tab.value}
-            label={tab.label}
-          />
+        {tabs.map(tab => (
+          <Tab key={tab.value} value={tab.value} label={tab.label} />
         ))}
       </Tabs>
       <Divider />
-      <Box
-        p={2}
-        minHeight={56}
-        display="flex"
-        alignItems="center"
-      >
+      <Box p={2} minHeight={56} display="flex" alignItems="center">
         <TextField
           className={classes.queryField}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <SvgIcon
-                  fontSize="small"
-                  color="action"
-                >
+                <SvgIcon fontSize="small" color="action">
                   <SearchIcon />
                 </SvgIcon>
               </InputAdornment>
@@ -320,11 +318,8 @@ const Results: FC<ResultsProps> = ({
           value={sort}
           variant="outlined"
         >
-          {sortOptions.map((option) => (
-            <option
-              key={option.value}
-              value={option.value}
-            >
+          {sortOptions.map(option => (
+            <option key={option.value} value={option.value}>
               {option.label}
             </option>
           ))}
@@ -338,16 +333,10 @@ const Results: FC<ResultsProps> = ({
               indeterminate={selectedSomeCustomers}
               onChange={handleSelectAllCustomers}
             />
-            <Button
-              variant="outlined"
-              className={classes.bulkAction}
-            >
+            <Button variant="outlined" className={classes.bulkAction}>
               Delete
             </Button>
-            <Button
-              variant="outlined"
-              className={classes.bulkAction}
-            >
+            <Button variant="outlined" className={classes.bulkAction}>
               Edit
             </Button>
           </div>
@@ -365,26 +354,18 @@ const Results: FC<ResultsProps> = ({
                     onChange={handleSelectAllCustomers}
                   />
                 </TableCell>
-                <TableCell>
-                  Name
-                </TableCell>
-                <TableCell>
-                  Location
-                </TableCell>
-                <TableCell>
-                  Orders
-                </TableCell>
-                <TableCell>
-                  Spent
-                </TableCell>
-                <TableCell align="right">
-                  Actions
-                </TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Location</TableCell>
+                <TableCell>Orders</TableCell>
+                <TableCell>Spent</TableCell>
+                <TableCell align="right">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {paginatedCustomers.map((customer) => {
-                const isCustomerSelected = selectedCustomers.includes(customer.id);
+              {paginatedCustomers.map(customer => {
+                const isCustomerSelected = selectedCustomers.includes(
+                  customer.id
+                );
 
                 return (
                   <TableRow
@@ -395,15 +376,14 @@ const Results: FC<ResultsProps> = ({
                     <TableCell padding="checkbox">
                       <Checkbox
                         checked={isCustomerSelected}
-                        onChange={(event) => handleSelectOneCustomer(event, customer.id)}
+                        onChange={event =>
+                          handleSelectOneCustomer(event, customer.id)
+                        }
                         value={isCustomerSelected}
                       />
                     </TableCell>
                     <TableCell>
-                      <Box
-                        display="flex"
-                        alignItems="center"
-                      >
+                      <Box display="flex" alignItems="center">
                         <Avatar
                           className={classes.avatar}
                           src={customer.avatar}
@@ -419,10 +399,7 @@ const Results: FC<ResultsProps> = ({
                           >
                             {customer.name}
                           </Link>
-                          <Typography
-                            variant="body2"
-                            color="textSecondary"
-                          >
+                          <Typography variant="body2" color="textSecondary">
                             {customer.email}
                           </Typography>
                         </div>
@@ -431,11 +408,11 @@ const Results: FC<ResultsProps> = ({
                     <TableCell>
                       {`${customer.city}, ${customer.state}, ${customer.country}`}
                     </TableCell>
+                    <TableCell>{customer.totalOrders}</TableCell>
                     <TableCell>
-                      {customer.totalOrders}
-                    </TableCell>
-                    <TableCell>
-                      {numeral(customer.totalAmountSpent).format(`${customer.currency}0,0.00`)}
+                      {numeral(customer.totalAmountSpent).format(
+                        `${customer.currency}0,0.00`
+                      )}
                     </TableCell>
                     <TableCell align="right">
                       <IconButton

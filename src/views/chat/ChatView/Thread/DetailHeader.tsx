@@ -1,24 +1,20 @@
-import React, {
-  useState,
-  useRef
-} from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
-  ListItemIcon,
-  ListItemText,
-  SvgIcon,
-  IconButton,
-  Menu,
-  MenuItem,
-  Tooltip,
   Avatar,
   Box,
+  IconButton,
+  ListItemIcon,
+  ListItemText,
   makeStyles,
+  Menu,
+  MenuItem,
+  SvgIcon,
+  Tooltip,
   Typography
 } from '@material-ui/core';
 import { AvatarGroup } from '@material-ui/lab';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC, useRef, useState } from 'react';
 import {
   Archive as ArchiveIcon,
   BellOff as BellOffIcon,
@@ -28,8 +24,8 @@ import {
   Slash as SlashIcon,
   Trash as TrashIcon
 } from 'react-feather';
-import type { Theme } from 'src/theme';
-import type { ThreadParticipant } from 'src/types/chat';
+import { Theme } from 'src/theme';
+import { ThreadParticipant } from 'src/types/chat';
 
 interface DetailHeaderProps {
   className?: string;
@@ -69,8 +65,12 @@ const DetailHeader: FC<DetailHeaderProps> = ({
 
   // We hardcode the current user ID because the mocked that is not in sync with the auth provider.
   // When implementing this app with a real database, replace this ID with the ID from Auth Context.
-  const otherParticipants = participants.filter((participant) => participant.id !== '5e86809283e28b96d2d38537');
-  const displayNames = otherParticipants.reduce((names, participant) => [...names, participant.name], []).join(', ');
+  const otherParticipants = participants.filter(
+    participant => participant.id !== '5e86809283e28b96d2d38537'
+  );
+  const displayNames = otherParticipants
+    .reduce((names, participant) => [...names, participant.name], [])
+    .join(', ');
 
   const handleMenuOpen = (): void => {
     setOpenMenu(true);
@@ -81,19 +81,15 @@ const DetailHeader: FC<DetailHeaderProps> = ({
   };
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <Box
-        alignItems="center"
-        display="flex"
-      >
+    <div className={clsx(classes.root, className)} {...rest}>
+      <Box alignItems="center" display="flex">
         <AvatarGroup
-          classes={{ avatar: otherParticipants.length > 1 ? classes.smallAvatar : null}}
+          classes={{
+            avatar: otherParticipants.length > 1 ? classes.smallAvatar : null
+          }}
           max={2}
         >
-          {otherParticipants.map((participant) => (
+          {otherParticipants.map(participant => (
             <Avatar
               alt="Person"
               key={participant.id}
@@ -101,10 +97,7 @@ const DetailHeader: FC<DetailHeaderProps> = ({
             />
           ))}
         </AvatarGroup>
-        <Typography
-          color="textPrimary"
-          variant="h5"
-        >
+        <Typography color="textPrimary" variant="h5">
           {displayNames}
         </Typography>
       </Box>
@@ -120,10 +113,7 @@ const DetailHeader: FC<DetailHeaderProps> = ({
         </SvgIcon>
       </IconButton>
       <Tooltip title="More options">
-        <IconButton
-          onClick={handleMenuOpen}
-          ref={moreRef}
-        >
+        <IconButton onClick={handleMenuOpen} ref={moreRef}>
           <SvgIcon fontSize="small">
             <MoreIcon />
           </SvgIcon>

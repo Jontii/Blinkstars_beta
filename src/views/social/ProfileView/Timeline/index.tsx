@@ -1,21 +1,12 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback
-} from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
+import { Box, Grid, makeStyles } from '@material-ui/core';
 import clsx from 'clsx';
-import {
-  Box,
-  Grid,
-  makeStyles
-} from '@material-ui/core';
-import axios from 'src/utils/axios';
-import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import PropTypes from 'prop-types';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import PostAdd from 'src/components/PostAdd';
 import PostCard from 'src/components/PostCard';
-import type { Profile, Post } from 'src/types/social';
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import { Post, Profile } from 'src/types/social';
+import axios from 'src/utils/axios';
 import About from './About';
 
 interface TimelineProps {
@@ -34,7 +25,7 @@ const Timeline: FC<TimelineProps> = ({ className, profile, ...rest }) => {
 
   const getPosts = useCallback(async () => {
     try {
-      const response = await axios.get<{ posts: Post[]; }>('/api/social/posts');
+      const response = await axios.get<{ posts: Post[] }>('/api/social/posts');
 
       if (isMountedRef.current) {
         setPosts(response.data.posts);
@@ -49,34 +40,15 @@ const Timeline: FC<TimelineProps> = ({ className, profile, ...rest }) => {
   }, [getPosts]);
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <Grid
-        container
-        spacing={3}
-      >
-        <Grid
-          item
-          xs={12}
-          md={6}
-          lg={4}
-        >
+    <div className={clsx(classes.root, className)} {...rest}>
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={6} lg={4}>
           <About profile={profile} />
         </Grid>
-        <Grid
-          item
-          xs={12}
-          md={6}
-          lg={8}
-        >
+        <Grid item xs={12} md={6} lg={8}>
           <PostAdd />
-          {posts.map((post) => (
-            <Box
-              mt={3}
-              key={post.id}
-            >
+          {posts.map(post => (
+            <Box mt={3} key={post.id}>
               <PostCard post={post} />
             </Box>
           ))}

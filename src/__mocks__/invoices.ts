@@ -1,6 +1,6 @@
 import moment from 'moment';
+import { Invoice } from 'src/types/invoice';
 import mock from 'src/utils/mock';
-import type { Invoice } from 'src/types/invoice';
 
 mock.onGet('/api/invoices').reply(() => {
   const invoices: Invoice[] = [
@@ -11,12 +11,9 @@ mock.onGet('/api/invoices').reply(() => {
         email: 'contact@anahenisky.io',
         name: 'Ana Henisky'
       },
-      issueDate: moment()
-        .subtract(1, 'hours')
-        .toDate()
-        .getTime(),
+      issueDate: moment().subtract(1, 'hours').toDate().getTime(),
       status: 'paid',
-      totalAmount: 55.50
+      totalAmount: 55.5
     },
     {
       id: '5ecb868ada8deedee0638502',
@@ -46,7 +43,7 @@ mock.onGet('/api/invoices').reply(() => {
         .toDate()
         .getTime(),
       status: 'canceled',
-      totalAmount: 781.50
+      totalAmount: 781.5
     },
     {
       id: '5ecb8682038e1ddf4e868764',
@@ -79,27 +76,22 @@ mock.onGet('/api/invoices/1').reply(() => {
       name: 'Ana Henisky',
       taxId: '6934656584231'
     },
-    dueDate: moment()
-      .toDate()
-      .getTime(),
-    issueDate: moment()
-      .subtract(1, 'hours')
-      .toDate()
-      .getTime(),
+    dueDate: moment().toDate().getTime(),
+    issueDate: moment().subtract(1, 'hours').toDate().getTime(),
     items: [
       {
         id: '5ecb8694db1760a701dfbf74',
         currency: '$',
         description: 'Freelancer Subscription (12/05/2019 - 11/06/2019)',
-        unitAmount: 55.50
+        unitAmount: 55.5
       }
     ],
     number: 'DEV-9483',
     status: 'paid',
-    subtotalAmount: 50.00,
-    taxAmount: 5.50,
-    totalAmount: 55.50
-  }
+    subtotalAmount: 50.0,
+    taxAmount: 5.5,
+    totalAmount: 55.5
+  };
 
   return [200, { invoice }];
 });

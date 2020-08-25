@@ -1,13 +1,7 @@
-import React from 'react';
-import type { FC } from 'react';
+import { Card, CardContent, Typography, useTheme } from '@material-ui/core';
+import React, { FC } from 'react';
 import Chart from 'react-apexcharts';
-import {
-  Card,
-  CardContent,
-  Typography,
-  useTheme
-} from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import { Theme } from 'src/theme';
 
 const RadialChart: FC = () => {
   const theme = useTheme<Theme>();
@@ -27,7 +21,7 @@ const RadialChart: FC = () => {
       plotOptions: {
         radialBar: {
           hollow: {
-            size: '60%',
+            size: '60%'
           },
           dataLabels: {
             name: {

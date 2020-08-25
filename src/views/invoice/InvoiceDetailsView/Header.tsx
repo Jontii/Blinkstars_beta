@@ -1,24 +1,23 @@
-import React, { useState } from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
 import {
-  Button,
-  Breadcrumbs,
   Box,
-  Link,
+  Breadcrumbs,
+  Button,
   Dialog,
   Grid,
-  Typography,
+  Hidden,
+  Link,
   makeStyles,
-  Hidden
+  Typography
 } from '@material-ui/core';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import type { Theme } from 'src/theme';
-import type { Invoice } from 'src/types/invoice';
+import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC, useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import { Theme } from 'src/theme';
+import { Invoice } from 'src/types/invoice';
 import InvoicePDF from './InvoicePDF';
 
 interface HeaderProps {
@@ -36,11 +35,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const Header:FC<HeaderProps> = ({
-  className,
-  invoice,
-  ...rest
-}) => {
+const Header: FC<HeaderProps> = ({ className, invoice, ...rest }) => {
   const classes = useStyles();
   const [viewPDF, setViewPDF] = useState<boolean>(false);
 
@@ -73,26 +68,17 @@ const Header:FC<HeaderProps> = ({
           >
             Management
           </Link>
-          <Typography
-            variant="body1"
-            color="textPrimary"
-          >
+          <Typography variant="body1" color="textPrimary">
             Invoices
           </Typography>
         </Breadcrumbs>
-        <Typography
-          variant="h3"
-          color="textPrimary"
-        >
+        <Typography variant="h3" color="textPrimary">
           Invoice Details
         </Typography>
       </Grid>
       <Grid item>
         <Hidden smDown>
-          <Button
-            className={classes.action}
-            onClick={() => setViewPDF(true)}
-          >
+          <Button className={classes.action} onClick={() => setViewPDF(true)}>
             Preview PDF
           </Button>
         </Hidden>
@@ -110,15 +96,8 @@ const Header:FC<HeaderProps> = ({
           </Button>
         </PDFDownloadLink>
         <Dialog fullScreen open={viewPDF}>
-          <Box
-            height="100%"
-            display="flex"
-            flexDirection="column"
-          >
-            <Box
-              bgcolor="common.white"
-              p={2}
-            >
+          <Box height="100%" display="flex" flexDirection="column">
+            <Box bgcolor="common.white" p={2}>
               <Button
                 variant="contained"
                 color="secondary"
@@ -129,11 +108,7 @@ const Header:FC<HeaderProps> = ({
               </Button>
             </Box>
             <Box flexGrow={1}>
-              <PDFViewer
-                width="100%"
-                height="100%"
-                style={{ border: 'none' }}
-              >
+              <PDFViewer width="100%" height="100%" style={{ border: 'none' }}>
                 <InvoicePDF invoice={invoice} />
               </PDFViewer>
             </Box>

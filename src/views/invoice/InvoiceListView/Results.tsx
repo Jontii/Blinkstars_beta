@@ -1,20 +1,14 @@
-import React, { useState } from 'react';
-import type { FC, ChangeEvent } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import clsx from 'clsx';
-import moment from 'moment';
-import numeral from 'numeral';
-import PropTypes from 'prop-types';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   Avatar,
   Box,
   Button,
   Card,
   Checkbox,
-  InputAdornment,
+  colors,
   IconButton,
+  InputAdornment,
   Link,
+  makeStyles,
   SvgIcon,
   Table,
   TableBody,
@@ -23,19 +17,24 @@ import {
   TablePagination,
   TableRow,
   TextField,
-  Typography,
-  colors,
-  makeStyles
+  Typography
 } from '@material-ui/core';
+import clsx from 'clsx';
+import moment from 'moment';
+import numeral from 'numeral';
+import PropTypes from 'prop-types';
+import React, { ChangeEvent, FC, useState } from 'react';
 import {
-  Edit as EditIcon,
   ArrowRight as ArrowRightIcon,
+  Edit as EditIcon,
   Search as SearchIcon
 } from 'react-feather';
-import type { Theme } from 'src/theme';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import { Link as RouterLink } from 'react-router-dom';
 import Label from 'src/components/Label';
+import { Theme } from 'src/theme';
+import { Invoice, InvoiceStatus } from 'src/types/invoice';
 import getInitials from 'src/utils/getInitials';
-import type { Invoice, InvoiceStatus } from 'src/types/invoice';
 
 interface ResultsProps {
   className?: string;
@@ -94,23 +93,25 @@ const getStatusLabel = (invoiceStatus: InvoiceStatus): JSX.Element => {
 
   const { text, color }: any = map[invoiceStatus];
 
-  return (
-    <Label color={color}>
-      {text}
-    </Label>
-  );
+  return <Label color={color}>{text}</Label>;
 };
 
-const applyFilters = (invoices: Invoice[], query: string, filters: Filters): Invoice[] => {
-  return invoices.filter((invoice) => {
+const applyFilters = (
+  invoices: Invoice[],
+  query: string,
+  filters: Filters
+): Invoice[] => {
+  return invoices.filter(invoice => {
     let matches = true;
 
     if (query) {
       const properties = ['name', 'email'];
       let containsQuery = false;
 
-      properties.forEach((property) => {
-        if (invoice.customer[property].toLowerCase().includes(query.toLowerCase())) {
+      properties.forEach(property => {
+        if (
+          invoice.customer[property].toLowerCase().includes(query.toLowerCase())
+        ) {
           containsQuery = true;
         }
       });
@@ -128,7 +129,11 @@ const applyFilters = (invoices: Invoice[], query: string, filters: Filters): Inv
   });
 };
 
-const applyPagination = (invoices: Invoice[], page: number, limit: number): Invoice[] => {
+const applyPagination = (
+  invoices: Invoice[],
+  page: number,
+  limit: number
+): Invoice[] => {
   return invoices.slice(page * limit, page * limit + limit);
 };
 
@@ -186,7 +191,7 @@ const Results: FC<ResultsProps> = ({ className, invoices, ...rest }) => {
       value = event.target.value;
     }
 
-    setFilters((prevFilters) => ({
+    setFilters(prevFilters => ({
       ...prevFilters,
       status: value
     }));
@@ -197,17 +202,24 @@ const Results: FC<ResultsProps> = ({ className, invoices, ...rest }) => {
     setSort(event.target.value);
   };
 
-  const handleSelectAllInvoices = (event: ChangeEvent<HTMLInputElement>): void => {
-    setSelectedInvoices(event.target.checked
-      ? invoices.map((invoice) => invoice.id)
-      : []);
+  const handleSelectAllInvoices = (
+    event: ChangeEvent<HTMLInputElement>
+  ): void => {
+    setSelectedInvoices(
+      event.target.checked ? invoices.map(invoice => invoice.id) : []
+    );
   };
 
-  const handleSelectOneInvoice = (event: ChangeEvent<HTMLInputElement>, invoiceId: string): void => {
+  const handleSelectOneInvoice = (
+    event: ChangeEvent<HTMLInputElement>,
+    invoiceId: string
+  ): void => {
     if (!selectedInvoices.includes(invoiceId)) {
-      setSelectedInvoices((prevSelected) => [...prevSelected, invoiceId]);
+      setSelectedInvoices(prevSelected => [...prevSelected, invoiceId]);
     } else {
-      setSelectedInvoices((prevSelected) => prevSelected.filter((id) => id !== invoiceId));
+      setSelectedInvoices(prevSelected =>
+        prevSelected.filter(id => id !== invoiceId)
+      );
     }
   };
 
@@ -223,28 +235,20 @@ const Results: FC<ResultsProps> = ({ className, invoices, ...rest }) => {
   const filteredInvoices = applyFilters(invoices, query, filters);
   const paginatedInvoices = applyPagination(filteredInvoices, page, limit);
   const enableBulkOperations = selectedInvoices.length > 0;
-  const selectedSomeInvoices = selectedInvoices.length > 0 && selectedInvoices.length < invoices.length;
+  const selectedSomeInvoices =
+    selectedInvoices.length > 0 && selectedInvoices.length < invoices.length;
   const selectedAllInvoices = selectedInvoices.length === invoices.length;
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <Box p={2}>
-        <Box
-          display="flex"
-          alignItems="center"
-        >
+        <Box display="flex" alignItems="center">
           <TextField
             className={classes.queryField}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <SvgIcon
-                    fontSize="small"
-                    color="action"
-                  >
+                  <SvgIcon fontSize="small" color="action">
                     <SearchIcon />
                   </SvgIcon>
                 </InputAdornment>
@@ -265,21 +269,14 @@ const Results: FC<ResultsProps> = ({ className, invoices, ...rest }) => {
             value={sort}
             variant="outlined"
           >
-            {sortOptions.map((option) => (
-              <option
-                key={option.value}
-                value={option.value}
-              >
+            {sortOptions.map(option => (
+              <option key={option.value} value={option.value}>
                 {option.label}
               </option>
             ))}
           </TextField>
         </Box>
-        <Box
-          mt={2}
-          display="flex"
-          alignItems="center"
-        >
+        <Box mt={2} display="flex" alignItems="center">
           <TextField
             className={classes.statusField}
             label="Status"
@@ -290,11 +287,8 @@ const Results: FC<ResultsProps> = ({ className, invoices, ...rest }) => {
             value={filters.status || 'all'}
             variant="outlined"
           >
-            {statusOptions.map((statusOption) => (
-              <option
-                key={statusOption.id}
-                value={statusOption.id}
-              >
+            {statusOptions.map(statusOption => (
+              <option key={statusOption.id} value={statusOption.id}>
                 {statusOption.name}
               </option>
             ))}
@@ -309,16 +303,10 @@ const Results: FC<ResultsProps> = ({ className, invoices, ...rest }) => {
               indeterminate={selectedSomeInvoices}
               onChange={handleSelectAllInvoices}
             />
-            <Button
-              variant="outlined"
-              className={classes.bulkAction}
-            >
+            <Button variant="outlined" className={classes.bulkAction}>
               Delete
             </Button>
-            <Button
-              variant="outlined"
-              className={classes.bulkAction}
-            >
+            <Button variant="outlined" className={classes.bulkAction}>
               Edit
             </Button>
           </div>
@@ -336,48 +324,31 @@ const Results: FC<ResultsProps> = ({ className, invoices, ...rest }) => {
                     onChange={handleSelectAllInvoices}
                   />
                 </TableCell>
-                <TableCell>
-                  Customer
-                </TableCell>
-                <TableCell>
-                  Status
-                </TableCell>
-                <TableCell>
-                  Amount
-                </TableCell>
-                <TableCell>
-                  ID
-                </TableCell>
-                <TableCell>
-                  Date
-                </TableCell>
-                <TableCell align="right">
-                  Actions
-                </TableCell>
+                <TableCell>Customer</TableCell>
+                <TableCell>Status</TableCell>
+                <TableCell>Amount</TableCell>
+                <TableCell>ID</TableCell>
+                <TableCell>Date</TableCell>
+                <TableCell align="right">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {paginatedInvoices.map((invoice) => {
+              {paginatedInvoices.map(invoice => {
                 const isInvoiceSelected = selectedInvoices.includes(invoice.id);
 
                 return (
-                  <TableRow
-                    hover
-                    key={invoice.id}
-                    selected={isInvoiceSelected}
-                  >
+                  <TableRow hover key={invoice.id} selected={isInvoiceSelected}>
                     <TableCell padding="checkbox">
                       <Checkbox
                         checked={isInvoiceSelected}
-                        onChange={(event) => handleSelectOneInvoice(event, invoice.id)}
+                        onChange={event =>
+                          handleSelectOneInvoice(event, invoice.id)
+                        }
                         value={isInvoiceSelected}
                       />
                     </TableCell>
                     <TableCell>
-                      <Box
-                        display="flex"
-                        alignItems="center"
-                      >
+                      <Box display="flex" alignItems="center">
                         <Avatar className={classes.avatar}>
                           {getInitials(invoice.customer.name)}
                         </Avatar>
@@ -391,32 +362,24 @@ const Results: FC<ResultsProps> = ({ className, invoices, ...rest }) => {
                           >
                             {invoice.customer.name}
                           </Link>
-                          <Typography
-                            variant="body2"
-                            color="textSecondary"
-                          >
+                          <Typography variant="body2" color="textSecondary">
                             {invoice.customer.email}
                           </Typography>
                         </Box>
                       </Box>
                     </TableCell>
+                    <TableCell>{getStatusLabel(invoice.status)}</TableCell>
                     <TableCell>
-                      {getStatusLabel(invoice.status)}
+                      {numeral(invoice.totalAmount).format(
+                        `${invoice.currency}0,0.00`
+                      )}
                     </TableCell>
-                    <TableCell>
-                      {numeral(invoice.totalAmount).format(`${invoice.currency}0,0.00`)}
-                    </TableCell>
-                    <TableCell>
-                      {invoice.id}
-                    </TableCell>
+                    <TableCell>{invoice.id}</TableCell>
                     <TableCell>
                       {moment(invoice.issueDate).format('DD/MM/YYYY')}
                     </TableCell>
                     <TableCell align="right">
-                      <IconButton
-                        component={RouterLink}
-                        to="#"
-                      >
+                      <IconButton component={RouterLink} to="#">
                         <SvgIcon fontSize="small">
                           <EditIcon />
                         </SvgIcon>

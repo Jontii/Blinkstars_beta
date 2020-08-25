@@ -1,9 +1,8 @@
-import React from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import { Doughnut } from 'react-chartjs-2';
 import { useTheme } from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { Doughnut } from 'react-chartjs-2';
+import { Theme } from 'src/theme';
 
 interface ChartProps {
   className?: string;
@@ -14,12 +13,12 @@ const Chart: FC<ChartProps> = ({ data: dataProp, ...rest }) => {
   const theme: Theme = useTheme();
 
   const data = {
-    datasets: dataProp.datasets.map(((dataset) => ({
+    datasets: dataProp.datasets.map(dataset => ({
       ...dataset,
       borderWidth: 8,
       borderColor: theme.palette.background.default,
       hoverBorderColor: theme.palette.background.default
-    }))),
+    })),
     labels: dataProp.labels
   };
 
@@ -58,13 +57,7 @@ const Chart: FC<ChartProps> = ({ data: dataProp, ...rest }) => {
     }
   };
 
-  return (
-    <Doughnut
-      data={data}
-      options={options}
-      {...rest}
-    />
-  );
+  return <Doughnut data={data} options={options} {...rest} />;
 };
 
 Chart.propTypes = {

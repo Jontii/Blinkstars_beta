@@ -1,8 +1,8 @@
-import React from 'react';
-import type { FC } from 'react';
+import React, { FC } from 'react';
 import { Helmet } from 'react-helmet';
 
-const GA_MEASUREMENT_ID: string | undefined = process.env.REACT_APP_GA_MEASUREMENT_ID;
+const GA_MEASUREMENT_ID: string | undefined =
+  process.env.REACT_APP_GA_MEASUREMENT_ID;
 
 const GoogleAnalytics: FC = () => {
   return (

@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
-import type { FC, ChangeEvent } from 'react';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import { useSnackbar } from 'notistack';
 import {
   Avatar,
   Box,
   Button,
   Dialog,
+  makeStyles,
   TextField,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import clsx from 'clsx';
+import { useSnackbar } from 'notistack';
+import PropTypes from 'prop-types';
+import React, { ChangeEvent, FC, useState } from 'react';
+import { Theme } from 'src/theme';
+import { ProjectAuthor } from 'src/types/project';
 import getInitials from 'src/utils/getInitials';
-import type { ProjectAuthor } from 'src/types/project';
 
 interface ApplyModalProps {
   author: ProjectAuthor;
@@ -59,15 +58,8 @@ const ApplyModal: FC<ApplyModalProps> = ({
   };
 
   return (
-    <Dialog
-      maxWidth="lg"
-      onClose={onClose}
-      open={open}
-    >
-      <div
-        className={clsx(classes.root, className)}
-        {...rest}
-      >
+    <Dialog maxWidth="lg" onClose={onClose} open={open}>
+      <div className={clsx(classes.root, className)} {...rest}>
         <Typography
           align="center"
           gutterBottom
@@ -76,13 +68,9 @@ const ApplyModal: FC<ApplyModalProps> = ({
         >
           The project requires an introduction
         </Typography>
-        <Typography
-          align="center"
-          variant="subtitle2"
-          color="textSecondary"
-        >
-          Write down a short note with your application regarding why you
-          think you&apos;d be a good fit for this position.
+        <Typography align="center" variant="subtitle2" color="textSecondary">
+          Write down a short note with your application regarding why you think
+          you&apos;d be a good fit for this position.
         </Typography>
         <Box mt={3}>
           <TextField
@@ -98,37 +86,21 @@ const ApplyModal: FC<ApplyModalProps> = ({
             value={value}
             variant="outlined"
           />
-          <Box
-            mt={6}
-            display="flex"
-            alignItems="center"
-          >
-            <Avatar
-              alt="Author"
-              src={author.avatar}
-            >
+          <Box mt={6} display="flex" alignItems="center">
+            <Avatar alt="Author" src={author.avatar}>
               {getInitials(author.name)}
             </Avatar>
             <Box ml={2}>
-              <Typography
-                variant="h3"
-                color="textPrimary"
-              >
+              <Typography variant="h3" color="textPrimary">
                 {author.name}
               </Typography>
-              <Typography
-                variant="subtitle2"
-                color="textPrimary"
-              >
+              <Typography variant="subtitle2" color="textPrimary">
                 {/* {author.bio} */}
               </Typography>
             </Box>
           </Box>
         </Box>
-        <Box
-          mt={3}
-          p={3}
-        >
+        <Box mt={3} p={3}>
           <Button
             onClick={handleApply}
             variant="contained"

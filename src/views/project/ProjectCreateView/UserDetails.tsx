@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
-import type { FC, FormEvent } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Box,
-  Paper,
-  FormHelperText,
-  Typography,
-  Radio,
   Button,
-  makeStyles
+  FormHelperText,
+  makeStyles,
+  Paper,
+  Radio,
+  Typography
 } from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC, FormEvent, useState } from 'react';
+import { Theme } from 'src/theme';
 
 interface UserDetailsProps {
   className?: string;
@@ -22,18 +21,20 @@ interface UserDetailsProps {
 const typeOptions = [
   {
     value: 'freelancer',
-    title: 'I\'m a freelancer',
-    description: 'I\'m looking for teamates to join in a personal project'
+    title: "I'm a freelancer",
+    description: "I'm looking for teamates to join in a personal project"
   },
   {
     value: 'projectOwner',
     title: 'I’m a project owner',
-    description: 'I\'m looking for freelancer or contractors to take care of my project'
+    description:
+      "I'm looking for freelancer or contractors to take care of my project"
   },
   {
     value: 'affiliate',
     title: 'I want to join affiliate',
-    description: 'I\'m looking for freelancer or contractors to take care of my project'
+    description:
+      "I'm looking for freelancer or contractors to take care of my project"
   }
 ];
 
@@ -67,9 +68,11 @@ const UserDetails: FC<UserDetailsProps> = ({
     setType(newType);
   };
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (
+    event: FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     event.preventDefault();
-    
+
     try {
       setSubmitting(true);
 
@@ -92,23 +95,17 @@ const UserDetails: FC<UserDetailsProps> = ({
       className={clsx(classes.root, className)}
       {...rest}
     >
-      <Typography
-        variant="h3"
-        color="textPrimary"
-      >
+      <Typography variant="h3" color="textPrimary">
         Please select one option
       </Typography>
       <Box mt={2}>
-        <Typography
-          variant="subtitle1"
-          color="textSecondary"
-        >
-          Proin tincidunt lacus sed ante efficitur efficitur.
-          Quisque aliquam fringilla velit sit amet euismod.
+        <Typography variant="subtitle1" color="textSecondary">
+          Proin tincidunt lacus sed ante efficitur efficitur. Quisque aliquam
+          fringilla velit sit amet euismod.
         </Typography>
       </Box>
       <Box mt={2}>
-        {typeOptions.map((typeOption) => (
+        {typeOptions.map(typeOption => (
           <Paper
             className={classes.typeOption}
             elevation={type === typeOption.value ? 10 : 1}
@@ -119,17 +116,10 @@ const UserDetails: FC<UserDetailsProps> = ({
               onClick={() => handleChange(typeOption.value)}
             />
             <Box ml={2}>
-              <Typography
-                gutterBottom
-                variant="h5"
-                color="textPrimary"
-              >
+              <Typography gutterBottom variant="h5" color="textPrimary">
                 {typeOption.title}
               </Typography>
-              <Typography
-                variant="body1"
-                color="textPrimary"
-              >
+              <Typography variant="body1" color="textPrimary">
                 {typeOption.description}
               </Typography>
             </Box>
@@ -138,20 +128,12 @@ const UserDetails: FC<UserDetailsProps> = ({
       </Box>
       {error && (
         <Box mt={2}>
-          <FormHelperText error>
-            {error}
-          </FormHelperText>
+          <FormHelperText error>{error}</FormHelperText>
         </Box>
       )}
-      <Box
-        mt={6}
-        display="flex"
-      >
+      <Box mt={6} display="flex">
         {onBack && (
-          <Button
-            onClick={onBack}
-            size="large"
-          >
+          <Button onClick={onBack} size="large">
             Previous
           </Button>
         )}

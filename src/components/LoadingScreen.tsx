@@ -1,12 +1,7 @@
-import React, { useEffect } from 'react';
-import type { FC } from 'react';
+import { Box, LinearProgress, makeStyles } from '@material-ui/core';
 import NProgress from 'nprogress';
-import {
-  Box,
-  LinearProgress,
-  makeStyles
-} from '@material-ui/core';
-import type { Theme } from 'src/theme'; 
+import React, { FC, useEffect } from 'react';
+import { Theme } from 'src/theme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

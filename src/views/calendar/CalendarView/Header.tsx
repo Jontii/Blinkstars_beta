@@ -1,20 +1,19 @@
-import React from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
 import {
-  Button,
   Breadcrumbs,
+  Button,
   Grid,
   Link,
+  makeStyles,
   SvgIcon,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import { PlusCircle as PlusCircleIcon } from 'react-feather';
-import type { Theme } from 'src/theme';
+import { Link as RouterLink } from 'react-router-dom';
+import { Theme } from 'src/theme';
 
 interface HeaderProps {
   className?: string;
@@ -31,11 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const Header: FC<HeaderProps> = ({
-  className,
-  onAddClick,
-  ...rest
-}) => {
+const Header: FC<HeaderProps> = ({ className, onAddClick, ...rest }) => {
   const classes = useStyles();
 
   return (
@@ -59,17 +54,11 @@ const Header: FC<HeaderProps> = ({
           >
             Dashboard
           </Link>
-          <Typography
-            variant="body1"
-            color="textPrimary"
-          >
+          <Typography variant="body1" color="textPrimary">
             Calendar
           </Typography>
         </Breadcrumbs>
-        <Typography
-          variant="h3"
-          color="textPrimary"
-        >
+        <Typography variant="h3" color="textPrimary">
           Here&apos;s what you planned
         </Typography>
       </Grid>
@@ -90,7 +79,7 @@ const Header: FC<HeaderProps> = ({
       </Grid>
     </Grid>
   );
-}
+};
 
 Header.propTypes = {
   className: PropTypes.string,

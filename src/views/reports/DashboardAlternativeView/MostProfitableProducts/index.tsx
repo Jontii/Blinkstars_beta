@@ -1,34 +1,29 @@
-import React, {
-  useCallback,
-  useEffect,
-  useState
-} from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import clsx from 'clsx';
-import numeral from 'numeral';
-import PerfectScrollbar from 'react-perfect-scrollbar';
-import PropTypes from 'prop-types';
 import {
   Box,
   Button,
   Card,
   CardHeader,
+  colors,
   Divider,
+  makeStyles,
   Table,
   TableBody,
   TableCell,
   TableRow,
-  Typography,
-  colors,
-  makeStyles
+  Typography
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import axios from 'src/utils/axios';
-import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import clsx from 'clsx';
+import numeral from 'numeral';
+import PropTypes from 'prop-types';
+import React, { FC, useCallback, useEffect, useState } from 'react';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import { Link as RouterLink } from 'react-router-dom';
 import GenericMoreButton from 'src/components/GenericMoreButton';
-import type { Theme } from 'src/theme';
-import type { Product } from 'src/types/reports';
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import { Theme } from 'src/theme';
+import { Product } from 'src/types/reports';
+import axios from 'src/utils/axios';
 import CircularProgress from './CircularProgress';
 
 interface MostProfitableProductsProps {
@@ -51,14 +46,19 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const MostProfitableProducts: FC<MostProfitableProductsProps> = ({ className, ...rest }) => {
+const MostProfitableProducts: FC<MostProfitableProductsProps> = ({
+  className,
+  ...rest
+}) => {
   const classes = useStyles();
   const isMountedRef = useIsMountedRef();
   const [products, setProducts] = useState<Product[]>([]);
 
   const getProducts = useCallback(async () => {
     try {
-      const response = await axios.get<{ products: Product[]; }>('/api/reports/profitable-products');
+      const response = await axios.get<{ products: Product[] }>(
+        '/api/reports/profitable-products'
+      );
 
       if (isMountedRef.current) {
         setProducts(response.data.products);
@@ -73,10 +73,7 @@ const MostProfitableProducts: FC<MostProfitableProductsProps> = ({ className, ..
   }, [getProducts]);
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardHeader
         action={<GenericMoreButton />}
         title="Most Profitable Products"
@@ -86,57 +83,38 @@ const MostProfitableProducts: FC<MostProfitableProductsProps> = ({ className, ..
         <Box minWidth={700}>
           <Table>
             <TableBody>
-              {products.map((product) => (
-                <TableRow
-                  hover
-                  key={product.id}
-                >
+              {products.map(product => (
+                <TableRow hover key={product.id}>
                   <TableCell>
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                    >
+                    <Box display="flex" alignItems="center">
                       <img
                         alt="Product"
                         className={classes.image}
                         src={product.image}
                       />
                       <Box ml={2}>
-                        <Typography
-                          variant="h6"
-                          color="textPrimary"
-                        >
+                        <Typography variant="h6" color="textPrimary">
                           {product.name}
                         </Typography>
-                        <Typography
-                          variant="body2"
-                          color="textSecondary"
-                        >
+                        <Typography variant="body2" color="textSecondary">
                           <span className={classes.subscriptions}>
                             {numeral(product.subscriptions).format('0,0')}
-                          </span>
-                          {' '}
+                          </span>{' '}
                           Active
                         </Typography>
                       </Box>
                     </Box>
                   </TableCell>
                   <TableCell>
-                    <Typography
-                      variant="h6"
-                      color="textPrimary"
-                    >
+                    <Typography variant="h6" color="textPrimary">
                       Price
                     </Typography>
-                    <Typography
-                      noWrap
-                      variant="body2"
-                      color="textSecondary"
-                    >
+                    <Typography noWrap variant="body2" color="textSecondary">
                       <span className={classes.value}>
-                        {numeral(product.price).format(`${product.currency}0,0.00`)}
-                      </span>
-                      {' '}
+                        {numeral(product.price).format(
+                          `${product.currency}0,0.00`
+                        )}
+                      </span>{' '}
                       monthly
                     </Typography>
                   </TableCell>
@@ -152,13 +130,9 @@ const MostProfitableProducts: FC<MostProfitableProductsProps> = ({ className, ..
                           variant="h6"
                           color="textPrimary"
                         >
-                          {product.conversionRate}
-                          %
+                          {product.conversionRate}%
                         </Typography>
-                        <Typography
-                          variant="body2"
-                          color="textSecondary"
-                        >
+                        <Typography variant="body2" color="textSecondary">
                           Conversion Rate
                         </Typography>
                       </Box>
@@ -171,11 +145,7 @@ const MostProfitableProducts: FC<MostProfitableProductsProps> = ({ className, ..
           </Table>
         </Box>
       </PerfectScrollbar>
-      <Box
-        p={2}
-        display="flex"
-        justifyContent="flex-end"
-      >
+      <Box p={2} display="flex" justifyContent="flex-end">
         <Button
           component={RouterLink}
           size="small"
@@ -187,7 +157,7 @@ const MostProfitableProducts: FC<MostProfitableProductsProps> = ({ className, ..
       </Box>
     </Card>
   );
-}
+};
 
 MostProfitableProducts.propTypes = {
   className: PropTypes.string

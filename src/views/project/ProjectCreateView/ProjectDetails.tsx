@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import * as Yup from 'yup';
-import { Formik } from 'formik';
 import {
   Box,
   Button,
   Chip,
   FormHelperText,
   IconButton,
+  makeStyles,
   SvgIcon,
   TextField,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
 import { KeyboardDatePicker } from '@material-ui/pickers';
+import clsx from 'clsx';
+import { Formik } from 'formik';
+import PropTypes from 'prop-types';
+import React, { FC, useState } from 'react';
 import { Plus as PlusIcon } from 'react-feather';
-import type { Theme } from 'src/theme';
+import { Theme } from 'src/theme';
+import * as Yup from 'yup';
 
 interface ProjectDetailsProps {
   className?: string;
@@ -61,16 +60,15 @@ const ProjectDetails: FC<ProjectDetailsProps> = ({
         submit: null
       }}
       validationSchema={Yup.object().shape({
-        projectName: Yup.string().min(3, 'Must be at least 3 characters').max(255).required('Required'),
+        projectName: Yup.string()
+          .min(3, 'Must be at least 3 characters')
+          .max(255)
+          .required('Required'),
         tags: Yup.array(),
         startDate: Yup.date(),
         endDate: Yup.date()
       })}
-      onSubmit={async (values, {
-        setErrors,
-        setStatus,
-        setSubmitting
-      }) => {
+      onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
           // Call API to store step data in server session
           // It is important to have it on server to be able to reuse it if user
@@ -105,19 +103,13 @@ const ProjectDetails: FC<ProjectDetailsProps> = ({
           className={clsx(classes.root, className)}
           {...rest}
         >
-          <Typography
-            variant="h3"
-            color="textPrimary"
-          >
+          <Typography variant="h3" color="textPrimary">
             Please select one option
           </Typography>
           <Box mt={2}>
-            <Typography
-              variant="subtitle1"
-              color="textSecondary"
-            >
-              Proin tincidunt lacus sed ante efficitur efficitur.
-              Quisque aliquam fringilla velit sit amet euismod.
+            <Typography variant="subtitle1" color="textSecondary">
+              Proin tincidunt lacus sed ante efficitur efficitur. Quisque
+              aliquam fringilla velit sit amet euismod.
             </Typography>
           </Box>
           <Box mt={2}>
@@ -132,17 +124,13 @@ const ProjectDetails: FC<ProjectDetailsProps> = ({
               value={values.projectName}
               variant="outlined"
             />
-            <Box
-              mt={3}
-              display="flex"
-              alignItems="center"
-            >
+            <Box mt={3} display="flex" alignItems="center">
               <TextField
                 fullWidth
                 label="Tags"
                 name="tags"
                 value={tag}
-                onChange={(event) => setTag(event.target.value)}
+                onChange={event => setTag(event.target.value)}
                 variant="outlined"
               />
               <IconButton
@@ -169,7 +157,7 @@ const ProjectDetails: FC<ProjectDetailsProps> = ({
                   label={tag}
                   className={classes.tag}
                   onDelete={() => {
-                    const newTags = values.tags.filter((t) => t !== tag);
+                    const newTags = values.tags.filter(t => t !== tag);
 
                     setFieldValue('tags', newTags);
                   }}
@@ -178,9 +166,7 @@ const ProjectDetails: FC<ProjectDetailsProps> = ({
             </Box>
             {Boolean(touched.tags && errors.tags) && (
               <Box mt={2}>
-                <FormHelperText error>
-                  {errors.tags}
-                </FormHelperText>
+                <FormHelperText error>{errors.tags}</FormHelperText>
               </Box>
             )}
             <Box mt={4}>
@@ -194,7 +180,7 @@ const ProjectDetails: FC<ProjectDetailsProps> = ({
                 onBlur={() => setFieldTouched('startDate')}
                 onClose={() => setFieldTouched('startDate')}
                 onAccept={() => setFieldTouched('startDate')}
-                onChange={(date) => setFieldValue('startDate', date)}
+                onChange={date => setFieldValue('startDate', date)}
               />
               <KeyboardDatePicker
                 className={classes.datePicker}
@@ -206,33 +192,23 @@ const ProjectDetails: FC<ProjectDetailsProps> = ({
                 onBlur={() => setFieldTouched('endDate')}
                 onClose={() => setFieldTouched('endDate')}
                 onAccept={() => setFieldTouched('endDate')}
-                onChange={(date) => setFieldValue('endDate', date)}
+                onChange={date => setFieldValue('endDate', date)}
               />
             </Box>
             {Boolean(touched.startDate && errors.startDate) && (
               <Box mt={2}>
-                <FormHelperText error>
-                  {errors.startDate}
-                </FormHelperText>
+                <FormHelperText error>{errors.startDate}</FormHelperText>
               </Box>
             )}
             {Boolean(touched.endDate && errors.endDate) && (
               <Box mt={2}>
-                <FormHelperText error>
-                  {errors.endDate}
-                </FormHelperText>
+                <FormHelperText error>{errors.endDate}</FormHelperText>
               </Box>
             )}
           </Box>
-          <Box
-            mt={6}
-            display="flex"
-          >
+          <Box mt={6} display="flex">
             {onBack && (
-              <Button
-                onClick={onBack}
-                size="large"
-              >
+              <Button onClick={onBack} size="large">
                 Previous
               </Button>
             )}
@@ -250,7 +226,6 @@ const ProjectDetails: FC<ProjectDetailsProps> = ({
         </form>
       )}
     </Formik>
-
   );
 };
 

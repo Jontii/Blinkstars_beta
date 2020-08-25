@@ -1,7 +1,6 @@
-import moment from 'moment';
 import { colors } from '@material-ui/core';
-import mock from 'src/utils/mock';
-import type {
+import moment from 'moment';
+import {
   CustomerActivity,
   Order,
   Product,
@@ -9,29 +8,24 @@ import type {
   Referral,
   Task
 } from 'src/types/reports';
+import mock from 'src/utils/mock';
 
 mock.onGet('/api/reports/customer-activity').reply(() => {
   const activities: CustomerActivity[] = [
     {
       id: '5e89140bcc768199d1e0dc49',
-      createdAt: moment()
-        .subtract(23, 'minutes')
-        .toDate()
-        .getTime(),
+      createdAt: moment().subtract(23, 'minutes').toDate().getTime(),
       customer: {
         id: '5e887a62195cc5aef7e8ca5d',
         avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_2.png`,
-        name: 'Ekaterina Tankova',
+        name: 'Ekaterina Tankova'
       },
       description: 'Created account',
       type: 'register'
     },
     {
       id: '5e891411b0290b175166cd32',
-      createdAt: moment()
-        .subtract(56, 'minutes')
-        .toDate()
-        .getTime(),
+      createdAt: moment().subtract(56, 'minutes').toDate().getTime(),
       customer: {
         id: '5e887ac47eed253091be10cb',
         name: 'Cao Yu',
@@ -42,10 +36,7 @@ mock.onGet('/api/reports/customer-activity').reply(() => {
     },
     {
       id: '5e89141633dc5e52c923ef27',
-      createdAt: moment()
-        .subtract(2, 'hours')
-        .toDate()
-        .getTime(),
+      createdAt: moment().subtract(2, 'hours').toDate().getTime(),
       customer: {
         id: '5e887b209c28ac3dd97f6db5',
         name: 'Alex Richardson',
@@ -56,10 +47,7 @@ mock.onGet('/api/reports/customer-activity').reply(() => {
     },
     {
       id: '5e89141bd975c7f33aee9f4b',
-      createdAt: moment()
-        .subtract(5, 'minutes')
-        .toDate()
-        .getTime(),
+      createdAt: moment().subtract(5, 'minutes').toDate().getTime(),
       customer: {
         id: '5e887b7602bdbc4dbb234b27',
         name: 'Anje Keizer',
@@ -70,10 +58,7 @@ mock.onGet('/api/reports/customer-activity').reply(() => {
     },
     {
       id: '5e891421d7945778863cf9ca',
-      createdAt: moment()
-        .subtract(5, 'minutes')
-        .toDate()
-        .getTime(),
+      createdAt: moment().subtract(5, 'minutes').toDate().getTime(),
       customer: {
         id: '5e86809283e28b96d2d38537',
         name: 'Katarina Smith',
@@ -116,7 +101,7 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
       items: 7,
       number: 'DEV-1042',
       status: 'pending',
-      totalAmount: 524.00
+      totalAmount: 524.0
     },
     {
       id: '5eff254e46b753a166e7d7af',
@@ -134,7 +119,7 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
       items: 8,
       number: 'DEV-1041',
       status: 'complete',
-      totalAmount: 693.00
+      totalAmount: 693.0
     },
     {
       id: '5eff2553e1c551e2e28a9205',
@@ -152,7 +137,7 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
       items: 4,
       number: 'DEV-1040',
       status: 'rejected',
-      totalAmount: 215.00
+      totalAmount: 215.0
     },
     {
       id: '5eff25590f3e28f013c39a0e',
@@ -170,7 +155,7 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
       items: 1,
       number: 'DEV-1039',
       status: 'pending',
-      totalAmount: 25.00
+      totalAmount: 25.0
     },
     {
       id: '5eff255f57499089243805d8',
@@ -188,7 +173,7 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
       items: 5,
       number: 'DEV-1038',
       status: 'complete',
-      totalAmount: 535.00
+      totalAmount: 535.0
     },
     {
       id: '5eff25658d416fc5adb96a3a',
@@ -206,7 +191,7 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
       items: 2,
       number: 'DEV-1037',
       status: 'complete',
-      totalAmount: 56.00
+      totalAmount: 56.0
     }
   ];
 
@@ -309,11 +294,7 @@ mock.onGet('/api/reports/latest-tasks').reply(() => {
   const tasks: Task[] = [
     {
       id: '5eff24b501ba5281ddb5378c',
-      deadline: moment()
-        .add(1, 'days')
-        .add(1, 'hour')
-        .toDate()
-        .getTime(),
+      deadline: moment().add(1, 'days').add(1, 'hour').toDate().getTime(),
       members: [
         {
           avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_2.png`,
@@ -328,11 +309,7 @@ mock.onGet('/api/reports/latest-tasks').reply(() => {
     },
     {
       id: '5eff24bb5bb3bd1beeddde78',
-      deadline: moment()
-        .add(2, 'day')
-        .add(1, 'hour')
-        .toDate()
-        .getTime(),
+      deadline: moment().add(2, 'day').add(1, 'hour').toDate().getTime(),
       members: [
         {
           avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_8.png`,
@@ -351,9 +328,7 @@ mock.onGet('/api/reports/latest-tasks').reply(() => {
     },
     {
       id: '5eff24c019175119993fc1ff',
-      deadline: moment()
-        .toDate()
-        .getTime(),
+      deadline: moment().toDate().getTime(),
       members: [
         {
           avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_7.png`,
@@ -420,7 +395,7 @@ mock.onGet('/api/reports/profitable-products').reply(() => {
       currency: '$',
       image: `${process.env.PUBLIC_URL}/static/images/products/product_standard.svg`,
       name: 'Freelancer Basic Subscription',
-      price: 5.00,
+      price: 5.0,
       subscriptions: 13153
     },
     {
@@ -429,7 +404,7 @@ mock.onGet('/api/reports/profitable-products').reply(() => {
       currency: '$',
       image: `${process.env.PUBLIC_URL}/static/images/products/product_standard.svg`,
       name: 'Freelancer Extra Subscription',
-      price: 15.00,
+      price: 15.0,
       subscriptions: 10300
     },
     {
@@ -438,7 +413,7 @@ mock.onGet('/api/reports/profitable-products').reply(() => {
       currency: '$',
       image: `${process.env.PUBLIC_URL}/static/images/products/product_premium.svg`,
       name: 'Agency Basic Subscription',
-      price: 25.00,
+      price: 25.0,
       subscriptions: 5300
     },
     {
@@ -447,7 +422,7 @@ mock.onGet('/api/reports/profitable-products').reply(() => {
       currency: '$',
       image: `${process.env.PUBLIC_URL}/static/images/products/product_extended.svg`,
       name: 'Enterprise Basic Subscription',
-      price: 205.00,
+      price: 205.0,
       subscriptions: 1203
     },
     {
@@ -456,7 +431,7 @@ mock.onGet('/api/reports/profitable-products').reply(() => {
       currency: '$',
       image: `${process.env.PUBLIC_URL}/static/images/products/product_extended.svg`,
       name: 'Enterprise Extra Subscription',
-      price: 500.00,
+      price: 500.0,
       subscriptions: 254
     }
   ];

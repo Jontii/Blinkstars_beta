@@ -1,26 +1,20 @@
-import React, { useEffect } from 'react';
-import type { FC } from 'react';
+import { Box, Divider, makeStyles } from '@material-ui/core';
+import React, { FC, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import {
-  Box,
-  Divider,
-  makeStyles
-} from '@material-ui/core';
-import type { Theme } from 'src/theme';
-import { useDispatch, useSelector } from 'src/store';
-import type { RootState } from 'src/store';
-import {
+  addRecipient,
+  getParticipants,
   getThread,
   markThreadAsSeen,
-  resetActiveThread,
-  getParticipants,
-  addRecipient,
-  removeRecipient
+  removeRecipient,
+  resetActiveThread
 } from 'src/slices/chat';
+import { RootState, useDispatch, useSelector } from 'src/store';
+import { Theme } from 'src/theme';
 import ComposeHeader from './ComposeHeader';
 import DetailHeader from './DetailHeader';
-import MessageList from './MessageList';
 import MessageComposer from './MessageComposer';
+import MessageList from './MessageList';
 
 const threadSelector = (state: RootState): any => {
   const { threads, activeThreadId } = state.chat;
@@ -52,8 +46,10 @@ const Thread: FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { threadKey } = useParams();
-  const { activeThreadId, participants, recipients } = useSelector((state) => state.chat);
-  const thread = useSelector((state) => threadSelector(state));
+  const { activeThreadId, participants, recipients } = useSelector(
+    state => state.chat
+  );
+  const thread = useSelector(state => threadSelector(state));
 
   // In our case there two possible routes
   // one that contains chat/new and one with a chat/:threadKey
@@ -100,7 +96,7 @@ const Thread: FC = () => {
       // If no thread key specifid, but an active thread id exists in the
       // store, reset that key. This means that the user navigated from details mode to compose
       if (activeThreadId) {
-        dispatch(resetActiveThread())
+        dispatch(resetActiveThread());
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -116,9 +112,7 @@ const Thread: FC = () => {
 
   return (
     <div className={classes.root}>
-      {mode === 'DETAIL' && (
-        <DetailHeader participants={participants} />
-      )}
+      {mode === 'DETAIL' && <DetailHeader participants={participants} />}
       {mode === 'COMPOSE' && (
         <ComposeHeader
           onAddRecipient={handleAddRecipient}
@@ -126,17 +120,11 @@ const Thread: FC = () => {
           recipients={recipients}
         />
       )}
-      <Box
-        flexGrow={1}
-        overflow="hidden"
-      >
+      <Box flexGrow={1} overflow="hidden">
         <MessageList thread={thread} />
       </Box>
       <Divider />
-      <MessageComposer
-        disabled
-        onSend={handleSendMessage}
-      />
+      <MessageComposer disabled onSend={handleSendMessage} />
     </div>
   );
 };

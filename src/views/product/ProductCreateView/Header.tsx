@@ -1,17 +1,16 @@
-import React from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Breadcrumbs,
   Button,
   Grid,
   Link,
-  Typography,
-  makeStyles
+  makeStyles,
+  Typography
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 
 interface HeaderProps {
   className?: string;
@@ -53,25 +52,16 @@ const Header: FC<HeaderProps> = ({ className, ...rest }) => {
           >
             Management
           </Link>
-          <Typography
-            variant="body1"
-            color="textPrimary"
-          >
+          <Typography variant="body1" color="textPrimary">
             Products
           </Typography>
         </Breadcrumbs>
-        <Typography
-          variant="h3"
-          color="textPrimary"
-        >
+        <Typography variant="h3" color="textPrimary">
           Create a new product
         </Typography>
       </Grid>
       <Grid item>
-        <Button
-          component={RouterLink}
-          to="/app/management/products"
-        >
+        <Button component={RouterLink} to="/app/management/products">
           Cancel
         </Button>
       </Grid>

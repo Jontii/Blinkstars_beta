@@ -1,19 +1,10 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback
-} from 'react';
-import type { FC } from 'react';
-import {
-  Box,
-  Container,
-  makeStyles
-} from '@material-ui/core';
-import axios from 'src/utils/axios';
-import type { Theme } from 'src/theme';
+import { Box, Container, makeStyles } from '@material-ui/core';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import Page from 'src/components/Page';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import type { Customer } from 'src/types/customer';
+import { Theme } from 'src/theme';
+import { Customer } from 'src/types/customer';
+import axios from 'src/utils/axios';
 import Header from './Header';
 import Results from './Results';
 
@@ -33,7 +24,9 @@ const CustomerListView: FC = () => {
 
   const getCustomers = useCallback(async () => {
     try {
-      const response = await axios.get<{ customers: Customer[]; }>('/api/customers');
+      const response = await axios.get<{ customers: Customer[] }>(
+        '/api/customers'
+      );
 
       if (isMountedRef.current) {
         setCustomers(response.data.customers);
@@ -48,10 +41,7 @@ const CustomerListView: FC = () => {
   }, [getCustomers]);
 
   return (
-    <Page
-      className={classes.root}
-      title="Customer List"
-    >
+    <Page className={classes.root} title="Customer List">
       <Container maxWidth={false}>
         <Header />
         <Box mt={3}>

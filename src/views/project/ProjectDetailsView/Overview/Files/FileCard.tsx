@@ -1,36 +1,32 @@
-import React, {
-  useRef,
-  useState
-} from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Button,
   Card,
   CardActions,
   CardContent,
   CardMedia,
+  colors,
   Divider,
   IconButton,
   ListItemIcon,
   ListItemText,
+  makeStyles,
   Menu,
   MenuItem,
   Tooltip,
-  Typography,
-  colors,
-  makeStyles
+  Typography
 } from '@material-ui/core';
-import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFileOutlined';
-import GetAppIcon from '@material-ui/icons/GetApp';
-import MoreIcon from '@material-ui/icons/MoreVert';
-import DeleteIcon from '@material-ui/icons/DeleteOutlined';
 import ArchiveIcon from '@material-ui/icons/ArchiveOutlined';
+import DeleteIcon from '@material-ui/icons/DeleteOutlined';
 import EditIcon from '@material-ui/icons/Edit';
-import type { Theme } from 'src/theme';
+import GetAppIcon from '@material-ui/icons/GetApp';
+import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFileOutlined';
+import MoreIcon from '@material-ui/icons/MoreVert';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC, useRef, useState } from 'react';
+import { Theme } from 'src/theme';
+import { ProjectFile } from 'src/types/project';
 import bytesToSize from 'src/utils/bytesToSize';
-import type { ProjectFile } from 'src/types/project';
 
 interface FileCardProps {
   className?: string;
@@ -81,15 +77,9 @@ const FileCard: FC<FileCardProps> = ({ className, file, ...rest }) => {
   };
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       {file.mimeType.includes('image/') ? (
-        <CardMedia
-          className={classes.media}
-          image={file.url}
-        />
+        <CardMedia className={classes.media} image={file.url} />
       ) : (
         <div className={classes.placeholder}>
           <InsertDriveFileIcon className={classes.insertDriveFileIcon} />
@@ -97,16 +87,10 @@ const FileCard: FC<FileCardProps> = ({ className, file, ...rest }) => {
       )}
       <CardContent className={classes.content}>
         <div>
-          <Typography
-            variant="h5"
-            color="textPrimary"
-          >
+          <Typography variant="h5" color="textPrimary">
             {file.name}
           </Typography>
-          <Typography
-            variant="subtitle2"
-            color="textPrimary"
-          >
+          <Typography variant="subtitle2" color="textPrimary">
             {bytesToSize(file.size)}
           </Typography>
         </div>
@@ -166,7 +150,7 @@ const FileCard: FC<FileCardProps> = ({ className, file, ...rest }) => {
       </Menu>
     </Card>
   );
-}
+};
 
 FileCard.propTypes = {
   className: PropTypes.string,

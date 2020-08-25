@@ -1,17 +1,9 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
-import type { FC } from 'react';
-import { useLocation } from 'react-router-dom';
-import { Link as RouterLink } from 'react-router-dom';
+import { Box, Drawer, Hidden, List, makeStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import {
-  Box,
-  Drawer,
-  Hidden,
-  List,
-  makeStyles
-} from '@material-ui/core';
+import React, { FC, useEffect } from 'react';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import Logo from 'src/components/Logo';
 import NavItem from './NavItem';
 
@@ -81,13 +73,16 @@ const items: Item[] = [
   }
 ];
 
-function renderNavItems({ items, depth = 0 }: { items: Item[], depth?: number }) {
+function renderNavItems({
+  items,
+  depth = 0
+}: {
+  items: Item[];
+  depth?: number;
+}) {
   return (
     <List disablePadding>
-      {items.reduce(
-        (acc, item) => reduceChildRoutes({ acc, item, depth }),
-        []
-      )}
+      {items.reduce((acc, item) => reduceChildRoutes({ acc, item, depth }), [])}
     </List>
   );
 }
@@ -103,11 +98,7 @@ function reduceChildRoutes({
 }) {
   if (item.items) {
     acc.push(
-      <NavItem
-        depth={depth}
-        key={item.href}
-        title={item.title}
-      >
+      <NavItem depth={depth} key={item.href} title={item.title}>
         {renderNavItems({
           items: item.items,
           depth: depth + 1
@@ -151,11 +142,7 @@ const NavBar: FC<NavBarProps> = ({ onMobileClose, openMobile }) => {
   }, [location.pathname]);
 
   const content = (
-    <Box
-      height="100%"
-      display="flex"
-      flexDirection="column"
-    >
+    <Box height="100%" display="flex" flexDirection="column">
       <Hidden lgUp>
         <Box p={2}>
           <RouterLink to="/">
@@ -163,9 +150,7 @@ const NavBar: FC<NavBarProps> = ({ onMobileClose, openMobile }) => {
           </RouterLink>
         </Box>
       </Hidden>
-      <Box p={2}>
-        {renderNavItems({ items })}
-      </Box>
+      <Box p={2}>{renderNavItems({ items })}</Box>
     </Box>
   );
 

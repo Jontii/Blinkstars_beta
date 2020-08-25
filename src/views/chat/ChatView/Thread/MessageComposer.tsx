@@ -1,29 +1,21 @@
-import React, {
-  useRef,
-  useState
-} from 'react';
-import type {
-  ChangeEvent,
-  FC,
-  KeyboardEvent
-} from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Avatar,
   Divider,
   IconButton,
   Input,
+  makeStyles,
   Paper,
   SvgIcon,
-  Tooltip,
-  makeStyles
+  Tooltip
 } from '@material-ui/core';
 import AddPhotoIcon from '@material-ui/icons/AddPhotoAlternate';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { ChangeEvent, FC, KeyboardEvent, useRef, useState } from 'react';
 import { Send as SendIcon } from 'react-feather';
-import type { Theme } from 'src/theme';
 import useAuth from 'src/hooks/useAuth';
+import { Theme } from 'src/theme';
 
 interface MessageComposerProps {
   className?: string;
@@ -91,18 +83,9 @@ const MessageComposer: FC<MessageComposerProps> = ({
   };
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <Avatar
-        alt="Person"
-        src={user.avatar}
-      />
-      <Paper
-        variant="outlined"
-        className={classes.inputContainer}
-      >
+    <div className={clsx(classes.root, className)} {...rest}>
+      <Avatar alt="Person" src={user.avatar} />
+      <Paper variant="outlined" className={classes.inputContainer}>
         <Input
           disableUnderline
           fullWidth
@@ -129,31 +112,19 @@ const MessageComposer: FC<MessageComposerProps> = ({
       <Divider className={classes.divider} />
       <Tooltip title="Attach photo">
         <span>
-          <IconButton
-            edge="end"
-            onClick={handleAttach}
-            disabled={disabled}
-          >
+          <IconButton edge="end" onClick={handleAttach} disabled={disabled}>
             <AddPhotoIcon />
           </IconButton>
         </span>
       </Tooltip>
       <Tooltip title="Attach file">
         <span>
-          <IconButton
-            edge="end"
-            onClick={handleAttach}
-            disabled={disabled}
-          >
+          <IconButton edge="end" onClick={handleAttach} disabled={disabled}>
             <AttachFileIcon />
           </IconButton>
         </span>
       </Tooltip>
-      <input
-        className={classes.fileInput}
-        ref={fileInputRef}
-        type="file"
-      />
+      <input className={classes.fileInput} ref={fileInputRef} type="file" />
     </div>
   );
 };

@@ -1,7 +1,6 @@
-import React from 'react';
-import type { FC } from 'react';
 import { makeStyles } from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import React, { FC } from 'react';
+import { Theme } from 'src/theme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -17,15 +16,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const Blockquote: FC = (props) => {
+const Blockquote: FC = props => {
   const classes = useStyles();
 
-  return (
-    <blockquote
-      className={classes.root}
-      {...props}
-    />
-  );
+  return <blockquote className={classes.root} {...props} />;
 };
 
 export default Blockquote;

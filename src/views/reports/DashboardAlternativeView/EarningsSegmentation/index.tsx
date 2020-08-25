@@ -1,23 +1,18 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback
-} from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Box,
   Card,
   CardHeader,
   Divider,
-  Typography,
-  makeStyles
+  makeStyles,
+  Typography
 } from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import GenericMoreButton from 'src/components/GenericMoreButton';
-import axios from 'src/utils/axios';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import { Theme } from 'src/theme';
+import axios from 'src/utils/axios';
 import Chart from './Chart';
 
 interface EarningsSegmentationProps {
@@ -39,13 +34,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const EarningsSegmentation: FC<EarningsSegmentationProps> = ({ className, ...rest }) => {
+const EarningsSegmentation: FC<EarningsSegmentationProps> = ({
+  className,
+  ...rest
+}) => {
   const classes = useStyles();
   const isMountedRef = useIsMountedRef();
   const [earnings, setEarnings] = useState<any>(null);
 
   const getEarnings = useCallback(async () => {
-    try  {
+    try {
       const response = await axios.get('/api/reports/earnings');
 
       if (isMountedRef.current) {
@@ -65,40 +63,23 @@ const EarningsSegmentation: FC<EarningsSegmentationProps> = ({ className, ...res
   }
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardHeader
         action={<GenericMoreButton />}
         title="Earnings Segmentation"
       />
       <Divider />
-      <Box
-        p={3}
-        position="relative"
-        minHeight={320}
-      >
+      <Box p={3} position="relative" minHeight={320}>
         <Chart data={earnings} />
       </Box>
       <Divider />
       <Box display="flex">
         {earnings.labels.map((label: string, i: number) => (
-          <div
-            key={label}
-            className={classes.item}
-          >
-            <Typography
-              variant="h4"
-              color="textPrimary"
-            >
-              {earnings.datasets[0].data[i]}
-              %
+          <div key={label} className={classes.item}>
+            <Typography variant="h4" color="textPrimary">
+              {earnings.datasets[0].data[i]}%
             </Typography>
-            <Typography
-              variant="overline"
-              color="textSecondary"
-            >
+            <Typography variant="overline" color="textSecondary">
               {label}
             </Typography>
           </div>

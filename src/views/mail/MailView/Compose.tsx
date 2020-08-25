@@ -1,6 +1,3 @@
-import React, { useState } from 'react';
-import type { FC } from 'react';
-import clsx from 'clsx';
 import {
   Backdrop,
   Box,
@@ -8,24 +5,26 @@ import {
   Divider,
   IconButton,
   Input,
+  makeStyles,
   Paper,
   Portal,
   SvgIcon,
   Tooltip,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
-import AttachFileIcon from '@material-ui/icons/AttachFile';
 import AddPhotoIcon from '@material-ui/icons/AddPhotoAlternate';
+import AttachFileIcon from '@material-ui/icons/AttachFile';
+import clsx from 'clsx';
+import React, { FC, useState } from 'react';
 import {
-  X as XIcon,
   Maximize as MaximizeIcon,
-  Minimize as MinimizeIcon
+  Minimize as MinimizeIcon,
+  X as XIcon
 } from 'react-feather';
-import type { Theme } from 'src/theme';
 import QuillEditor from 'src/components/QuillEditor';
-import { useDispatch, useSelector } from 'src/store';
 import { closeCompose } from 'src/slices/mail';
+import { useDispatch, useSelector } from 'src/store';
+import { Theme } from 'src/theme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -63,7 +62,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Compose: FC = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { isComposeOpen } = useSelector((state) => state.mail);
+  const { isComposeOpen } = useSelector(state => state.mail);
   const [fullScreen, setFullScreen] = useState<boolean>(false);
   const [messageBody, setMessageBody] = useState<string>('');
 
@@ -91,10 +90,7 @@ const Compose: FC = () => {
     <Portal>
       <Backdrop open={fullScreen} />
       <Paper
-        className={clsx(
-          classes.root,
-          { [classes.fullScreen]: fullScreen }
-        )}
+        className={clsx(classes.root, { [classes.fullScreen]: fullScreen })}
         elevation={12}
       >
         <Box
@@ -104,10 +100,7 @@ const Compose: FC = () => {
           py={1}
           px={2}
         >
-          <Typography
-            variant="h5"
-            color="textPrimary"
-          >
+          <Typography variant="h5" color="textPrimary">
             New Message
           </Typography>
           <Box flexGrow={1} />
@@ -131,11 +124,7 @@ const Compose: FC = () => {
           </IconButton>
         </Box>
         <Box p={2}>
-          <Input
-            className={classes.input}
-            disableUnderline
-            placeholder="To"
-          />
+          <Input className={classes.input} disableUnderline placeholder="To" />
           <Input
             className={classes.input}
             disableUnderline
@@ -150,12 +139,7 @@ const Compose: FC = () => {
           value={messageBody}
         />
         <Divider />
-        <Box
-          display="flex"
-          alignItems="center"
-          py={1}
-          px={2}
-        >
+        <Box display="flex" alignItems="center" py={1} px={2}>
           <Button
             color="secondary"
             variant="contained"
@@ -164,18 +148,12 @@ const Compose: FC = () => {
             Send
           </Button>
           <Tooltip title="Attach image">
-            <IconButton
-              size="small"
-              className={classes.action}
-            >
+            <IconButton size="small" className={classes.action}>
               <AddPhotoIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="Attach file">
-            <IconButton
-              size="small"
-              className={classes.action}
-            >
+            <IconButton size="small" className={classes.action}>
               <AttachFileIcon />
             </IconButton>
           </Tooltip>

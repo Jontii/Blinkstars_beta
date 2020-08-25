@@ -1,12 +1,11 @@
-import React from 'react';
-import type { FC } from 'react';
-import { Typography, makeStyles } from '@material-ui/core';
+import { makeStyles, Typography } from '@material-ui/core';
+import React, { FC } from 'react';
 
 const useStyles = makeStyles(() => ({
   root: {}
 }));
 
-const Paragraph: FC = (props) => {
+const Paragraph: FC = props => {
   const classes = useStyles();
 
   return (

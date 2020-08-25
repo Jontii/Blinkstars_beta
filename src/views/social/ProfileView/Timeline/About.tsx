@@ -1,13 +1,10 @@
-import React from 'react';
-import type { FC } from 'react';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
 import {
   Avatar,
   Box,
   Card,
   CardContent,
   CardHeader,
+  colors,
   Divider,
   LinearProgress,
   Link,
@@ -15,18 +12,20 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-  Typography,
-  colors,
-  makeStyles
+  makeStyles,
+  Typography
 } from '@material-ui/core';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import {
-  Plus as PlusIcon,
+  Briefcase as BriefcaseIcon,
   Home as HomeIcon,
   Mail as MailIcon,
-  Briefcase as BriefcaseIcon
+  Plus as PlusIcon
 } from 'react-feather';
-import type { Theme } from 'src/theme';
-import type { Profile } from 'src/types/social';
+import { Theme } from 'src/theme';
+import { Profile } from 'src/types/social';
 
 interface AboutProps {
   className?: string;
@@ -47,10 +46,7 @@ const About: FC<AboutProps> = ({ className, profile, ...rest }) => {
   const classes = useStyles();
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <div className={clsx(classes.root, className)} {...rest}>
       <Card>
         <CardHeader title="Profile Progress" />
         <Divider />
@@ -60,10 +56,7 @@ const About: FC<AboutProps> = ({ className, profile, ...rest }) => {
             value={profile.profileProgress}
           />
           <Box mt={2}>
-            <Typography
-              variant="subtitle2"
-              color="textSecondary"
-            >
+            <Typography variant="subtitle2" color="textSecondary">
               50% Set Up Complete
             </Typography>
           </Box>
@@ -74,19 +67,13 @@ const About: FC<AboutProps> = ({ className, profile, ...rest }) => {
           <CardHeader title="About" />
           <Divider />
           <CardContent>
-            <Typography
-              variant="subtitle2"
-              color="textSecondary"
-            >
+            <Typography variant="subtitle2" color="textSecondary">
               &quot;
               {profile.quote}
               &quot;
             </Typography>
             <List>
-              <ListItem
-                disableGutters
-                divider
-              >
+              <ListItem disableGutters divider>
                 <ListItemAvatar>
                   <Avatar className={classes.jobAvatar}>
                     <BriefcaseIcon size="22" />
@@ -94,47 +81,26 @@ const About: FC<AboutProps> = ({ className, profile, ...rest }) => {
                 </ListItemAvatar>
                 <ListItemText
                   disableTypography
-                  primary={(
-                    <Typography
-                      variant="body2"
-                      color="textPrimary"
-                    >
-                      {profile.currentJob.title}
-                      {' '}
-                      at
-                      {' '}
-                      <Link
-                        variant="subtitle2"
-                        color="textPrimary"
-                        href="#"
-                      >
+                  primary={
+                    <Typography variant="body2" color="textPrimary">
+                      {profile.currentJob.title} at{' '}
+                      <Link variant="subtitle2" color="textPrimary" href="#">
                         {profile.currentJob.company}
                       </Link>
                     </Typography>
-                  )}
-                  secondary={(
-                    <Typography
-                      variant="caption"
-                      color="textSecondary"
-                    >
+                  }
+                  secondary={
+                    <Typography variant="caption" color="textSecondary">
                       Past:
-                      {profile.previousJob.title}
-                      {' '}
-                      <Link
-                        variant="caption"
-                        color="textSecondary"
-                        href="#"
-                      >
+                      {profile.previousJob.title}{' '}
+                      <Link variant="caption" color="textSecondary" href="#">
                         {profile.previousJob.company}
                       </Link>
                     </Typography>
-                  )}
+                  }
                 />
               </ListItem>
-              <ListItem
-                disableGutters
-                divider
-              >
+              <ListItem disableGutters divider>
                 <ListItemAvatar>
                   <Avatar className={classes.cityAvatar}>
                     <PlusIcon size="22" />
@@ -148,10 +114,7 @@ const About: FC<AboutProps> = ({ className, profile, ...rest }) => {
                   }}
                 />
               </ListItem>
-              <ListItem
-                disableGutters
-                divider
-              >
+              <ListItem disableGutters divider>
                 <ListItemAvatar>
                   <Avatar className={classes.cityAvatar}>
                     <HomeIcon size="22" />
@@ -159,44 +122,25 @@ const About: FC<AboutProps> = ({ className, profile, ...rest }) => {
                 </ListItemAvatar>
                 <ListItemText
                   disableTypography
-                  primary={(
-                    <Typography
-                      variant="body2"
-                      color="textPrimary"
-                    >
-                      Lives in
-                      {' '}
-                      <Link
-                        variant="subtitle2"
-                        color="textPrimary"
-                        href="#"
-                      >
+                  primary={
+                    <Typography variant="body2" color="textPrimary">
+                      Lives in{' '}
+                      <Link variant="subtitle2" color="textPrimary" href="#">
                         {profile.currentCity}
                       </Link>
                     </Typography>
-                  )}
-                  secondary={(
-                    <Typography
-                      variant="caption"
-                      color="textSecondary"
-                    >
-                      Originally from
-                      {' '}
-                      <Link
-                        variant="caption"
-                        color="textSecondary"
-                        href="#"
-                      >
+                  }
+                  secondary={
+                    <Typography variant="caption" color="textSecondary">
+                      Originally from{' '}
+                      <Link variant="caption" color="textSecondary" href="#">
                         {profile.originCity}
                       </Link>
                     </Typography>
-                  )}
+                  }
                 />
               </ListItem>
-              <ListItem
-                disableGutters
-                divider
-              >
+              <ListItem disableGutters divider>
                 <ListItemAvatar>
                   <Avatar className={classes.cityAvatar}>
                     <MailIcon size="22" />

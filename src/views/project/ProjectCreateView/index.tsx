@@ -1,8 +1,3 @@
-import React, { useState } from 'react';
-import type { FC } from 'react';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import { Link as RouterLink } from 'react-router-dom';
 import {
   Avatar,
   Box,
@@ -10,33 +5,34 @@ import {
   Button,
   Card,
   CardContent,
+  colors,
   Container,
   Grid,
   Link,
+  makeStyles,
   Paper,
   Step,
   StepConnector,
   StepLabel,
   Stepper,
   Typography,
-  colors,
-  makeStyles,
   withStyles
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC, useState } from 'react';
 import {
-  User as UserIcon,
-  Star as StarIcon,
   Briefcase as BriefcaseIcon,
-  File as FileIcon
+  File as FileIcon,
+  Star as StarIcon,
+  User as UserIcon
 } from 'react-feather';
-import type { Theme } from 'src/theme';
+import { Link as RouterLink } from 'react-router-dom';
 import Page from 'src/components/Page';
-import UserDetails from './UserDetails';
-import ProjectDetails from './ProjectDetails';
-import ProjectDescription from './ProjectDescription';
-import ProjectCompany from './ProjectCompany';
+import { Theme } from 'src/theme';
 import ProjectCampagin from './ProjectCampaign';
+import ProjectCompany from './ProjectCompany';
 import ProjectInfluencers from './ProjectInfluencers';
 
 interface CustomStepIconProps {
@@ -63,7 +59,7 @@ const steps = [
 const CustomStepConnector = withStyles((theme: Theme) => ({
   vertical: {
     marginLeft: 19,
-    padding: 0,
+    padding: 0
   },
   line: {
     borderColor: theme.palette.divider
@@ -83,7 +79,11 @@ const useCustomStepIconStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const CustomStepIcon: FC<CustomStepIconProps> = ({ active, completed, icon }) => {
+const CustomStepIcon: FC<CustomStepIconProps> = ({
+  active,
+  completed,
+  icon
+}) => {
   const classes = useCustomStepIconStyles();
 
   const Icon = steps[icon - 1].icon;
@@ -121,17 +121,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const ProjectCreateView : FC = () => {
+const ProjectCreateView: FC = () => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState<number>(0);
   const [completed, setCompleted] = useState<boolean>(false);
 
   const handleNext = (): void => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setActiveStep(prevActiveStep => prevActiveStep + 1);
   };
 
   const handleBack = (): void => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setActiveStep(prevActiveStep => prevActiveStep - 1);
   };
 
   const handleComplete = (): void => {
@@ -139,10 +139,7 @@ const ProjectCreateView : FC = () => {
   };
 
   return (
-    <Page
-      className={classes.root}
-      title="Project Create"
-    >
+    <Page className={classes.root} title="Project Create">
       <Container maxWidth="lg">
         <Box mb={3}>
           <Breadcrumbs
@@ -157,35 +154,25 @@ const ProjectCreateView : FC = () => {
             >
               Dashboard
             </Link>
-            <Typography
-              variant="body1"
-              color="textPrimary"
-            >
+            <Typography variant="body1" color="textPrimary">
               Projects
             </Typography>
           </Breadcrumbs>
-          <Typography
-            variant="h3"
-            color="textPrimary"
-          >
+          <Typography variant="h3" color="textPrimary">
             Create Wizard &amp; Process
           </Typography>
         </Box>
         {!completed ? (
           <Paper>
             <Grid container>
-              <Grid
-                item
-                xs={12}
-                md={3}
-              >
+              <Grid item xs={12} md={3}>
                 <Stepper
                   activeStep={activeStep}
                   className={classes.stepper}
                   connector={<CustomStepConnector />}
                   orientation="vertical"
                 >
-                  {steps.map((step) => (
+                  {steps.map(step => (
                     <Step key={step.label}>
                       <StepLabel StepIconComponent={CustomStepIcon}>
                         {step.label}
@@ -194,20 +181,11 @@ const ProjectCreateView : FC = () => {
                   ))}
                 </Stepper>
               </Grid>
-              <Grid
-                item
-                xs={12}
-                md={9}
-              >
+              <Grid item xs={12} md={9}>
                 <Box p={3}>
-                  {activeStep === 0 && (
-                    <ProjectCompany onNext={handleNext} />
-                  )}
+                  {activeStep === 0 && <ProjectCompany onNext={handleNext} />}
                   {activeStep === 1 && (
-                    <ProjectCampagin
-                      onBack={handleBack}
-                      onNext={handleNext}
-                    />
+                    <ProjectCampagin onBack={handleBack} onNext={handleNext} />
                   )}
                   {activeStep === 2 && (
                     <ProjectInfluencers
@@ -222,24 +200,14 @@ const ProjectCreateView : FC = () => {
         ) : (
           <Card>
             <CardContent>
-              <Box
-                maxWidth={450}
-                mx="auto"
-              >
-                <Box
-                  display="flex"
-                  justifyContent="center"
-                >
+              <Box maxWidth={450} mx="auto">
+                <Box display="flex" justifyContent="center">
                   <Avatar className={classes.avatar}>
                     <StarIcon />
                   </Avatar>
                 </Box>
                 <Box mt={2}>
-                  <Typography
-                    variant="h3"
-                    color="textPrimary"
-                    align="center"
-                  >
+                  <Typography variant="h3" color="textPrimary" align="center">
                     You are all done!
                   </Typography>
                 </Box>
@@ -249,15 +217,11 @@ const ProjectCreateView : FC = () => {
                     color="textSecondary"
                     align="center"
                   >
-                    Donec ut augue sed nisi ullamcorper posuere sit amet eu mauris.
-                    Ut eget mauris scelerisque.
+                    Donec ut augue sed nisi ullamcorper posuere sit amet eu
+                    mauris. Ut eget mauris scelerisque.
                   </Typography>
                 </Box>
-                <Box
-                  mt={2}
-                  display="flex"
-                  justifyContent="center"
-                >
+                <Box mt={2} display="flex" justifyContent="center">
                   <Button
                     variant="contained"
                     color="secondary"

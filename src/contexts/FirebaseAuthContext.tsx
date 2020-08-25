@@ -1,12 +1,13 @@
 import React, {
   createContext,
+  FC,
+  ReactNode,
   useEffect,
   useReducer
 } from 'react';
-import type { FC, ReactNode } from 'react';
-import type { User } from 'src/types/user';
 import SplashScreen from 'src/components/SplashScreen';
 import firebase from 'src/lib/firebase';
+import { User } from 'src/types/user';
 
 interface AuthState {
   isInitialised: boolean;
@@ -15,8 +16,11 @@ interface AuthState {
 }
 
 interface AuthContextValue extends AuthState {
-  method: 'FirebaseAuth',
-  createUserWithEmailAndPassword: (email: string, password: string) => Promise<any>;
+  method: 'FirebaseAuth';
+  createUserWithEmailAndPassword: (
+    email: string,
+    password: string
+  ) => Promise<any>;
   signInWithEmailAndPassword: (email: string, password: string) => Promise<any>;
   signInWithGoogle: () => Promise<any>;
   logout: () => Promise<void>;
@@ -72,7 +76,10 @@ const AuthContext = createContext<AuthContextValue>({
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialAuthState);
 
-  const signInWithEmailAndPassword = (email: string, password: string): Promise<any> => {
+  const signInWithEmailAndPassword = (
+    email: string,
+    password: string
+  ): Promise<any> => {
     return firebase.auth().signInWithEmailAndPassword(email, password);
   };
 
@@ -82,7 +89,10 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     return firebase.auth().signInWithPopup(provider);
   };
 
-  const createUserWithEmailAndPassword = async (email: string, password: string): Promise<any> => {
+  const createUserWithEmailAndPassword = async (
+    email: string,
+    password: string
+  ): Promise<any> => {
     return firebase.auth().createUserWithEmailAndPassword(email, password);
   };
 
@@ -91,8 +101,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
+    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+      if (user && user?.photoURL && user?.email && user?.email) {
         // Here you should extract the complete user profile to make it available in your entire app.
         // The auth state only provides basic information.
 

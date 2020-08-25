@@ -1,22 +1,21 @@
-import React from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Button,
   Drawer,
   Grid,
   Hidden,
+  makeStyles,
   SvgIcon,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import {
   Check as CheckIcon,
-  X as XIcon,
-  Trash as TrashIcon
+  Trash as TrashIcon,
+  X as XIcon
 } from 'react-feather';
-import type { Theme } from 'src/theme';
+import { Theme } from 'src/theme';
 
 interface BulkOperationsProps {
   className?: string;
@@ -59,40 +58,21 @@ const BulkOperations: FC<BulkOperationsProps> = ({
       PaperProps={{ elevation: 1 }}
       variant="persistent"
     >
-      <div
-        className={clsx(classes.root, className)}
-        {...rest}
-      >
-        <Grid
-          alignItems="center"
-          container
-          spacing={2}
-        >
+      <div className={clsx(classes.root, className)} {...rest}>
+        <Grid alignItems="center" container spacing={2}>
           <Hidden smDown>
-            <Grid
-              item
-              md={3}
-            >
-              <Typography
-                color="textSecondary"
-                variant="subtitle1"
-              >
-                {selected.length}
-                {' '}
-                selected
+            <Grid item md={3}>
+              <Typography color="textSecondary" variant="subtitle1">
+                {selected.length} selected
               </Typography>
             </Grid>
           </Hidden>
-          <Grid
-            item
-            md={6}
-            xs={12}
-          >
+          <Grid item md={6} xs={12}>
             <div className={classes.actions}>
               <Button
                 onClick={onMarkPaid}
                 startIcon={
-                  <SvgIcon fontSize="small" >
+                  <SvgIcon fontSize="small">
                     <CheckIcon />
                   </SvgIcon>
                 }
@@ -102,7 +82,7 @@ const BulkOperations: FC<BulkOperationsProps> = ({
               <Button
                 onClick={onMarkUnpaid}
                 startIcon={
-                  <SvgIcon fontSize="small" >
+                  <SvgIcon fontSize="small">
                     <XIcon />
                   </SvgIcon>
                 }
@@ -112,7 +92,7 @@ const BulkOperations: FC<BulkOperationsProps> = ({
               <Button
                 onClick={onDelete}
                 startIcon={
-                  <SvgIcon fontSize="small" >
+                  <SvgIcon fontSize="small">
                     <TrashIcon />
                   </SvgIcon>
                 }
@@ -125,7 +105,7 @@ const BulkOperations: FC<BulkOperationsProps> = ({
       </div>
     </Drawer>
   );
-}
+};
 
 BulkOperations.propTypes = {
   className: PropTypes.string,

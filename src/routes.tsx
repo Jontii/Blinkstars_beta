@@ -1,12 +1,14 @@
-import React, { Suspense, Fragment, lazy } from 'react';
-import { Switch, Redirect, Route } from 'react-router-dom';
+import React, { Fragment, lazy, Suspense } from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import AuthGuard from 'src/components/AuthGuard';
+import GuestGuard from 'src/components/GuestGuard';
+import LoadingScreen from 'src/components/LoadingScreen';
 import DashboardLayout from 'src/layouts/DashboardLayout';
 import DocsLayout from 'src/layouts/DocsLayout';
 import MainLayout from 'src/layouts/MainLayout';
 import HomeView from 'src/views/home/HomeView';
-import LoadingScreen from 'src/components/LoadingScreen';
-import AuthGuard from 'src/components/AuthGuard';
-import GuestGuard from 'src/components/GuestGuard';
+import BusinessView from './views/business';
+import InfluencerView from './views/influencer';
 
 type Routes = {
   exact?: boolean;
@@ -69,6 +71,7 @@ const routes: Routes = [
     exact: true,
     guard: GuestGuard,
     path: '/register',
+    layout:MainLayout,
     component: lazy(() => import('src/views/auth/RegisterView'))
   },
   {
@@ -207,8 +210,8 @@ const routes: Routes = [
       {
         exact: true,
         path: '/app/projects/create',
-        component: lazy(() =>
-          import('src/views/project/ProjectCreateView/test')
+        component: lazy(
+          () => import('src/views/project/ProjectCreateView/test')
         )
       },
       {
@@ -229,8 +232,8 @@ const routes: Routes = [
       {
         exact: true,
         path: '/app/reports/dashboard-alternative',
-        component: lazy(() =>
-          import('src/views/reports/DashboardAlternativeView')
+        component: lazy(
+          () => import('src/views/reports/DashboardAlternativeView')
         )
       },
       {
@@ -341,6 +344,18 @@ const routes: Routes = [
         component: () => <Redirect to="/404" />
       }
     ]
+  },
+  {
+    exact: true,
+    layout: MainLayout,
+    path: '/business',
+    component: lazy(() => import('src/views/business/index'))
+  },
+  {
+    exact: true,
+    layout: MainLayout,
+    path: '/influencer',
+    component: lazy(() => import('src/views/influencer/index'))
   },
   {
     path: '*',

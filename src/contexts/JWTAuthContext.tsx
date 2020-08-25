@@ -1,12 +1,13 @@
+import jwtDecode from 'jwt-decode';
 import React, {
   createContext,
+  FC,
+  ReactNode,
   useEffect,
   useReducer
 } from 'react';
-import type { FC, ReactNode } from 'react';
-import jwtDecode from 'jwt-decode';
-import type { User } from 'src/types/user';
 import SplashScreen from 'src/components/SplashScreen';
+import { User } from 'src/types/user';
 import axios from 'src/utils/axios';
 
 interface AuthState {
@@ -16,7 +17,7 @@ interface AuthState {
 }
 
 interface AuthContextValue extends AuthState {
-  method: 'JWT',
+  method: 'JWT';
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   register: (email: string, name: string, password: string) => Promise<void>;
@@ -52,11 +53,7 @@ type RegisterAction = {
   };
 };
 
-type Action =
-  | InitialiseAction
-  | LoginAction
-  | LogoutAction
-  | RegisterAction;
+type Action = InitialiseAction | LoginAction | LogoutAction | RegisterAction;
 
 const initialAuthState: AuthState = {
   isAuthenticated: false,
@@ -132,7 +129,7 @@ const AuthContext = createContext<AuthContextValue>({
   ...initialAuthState,
   method: 'JWT',
   login: () => Promise.resolve(),
-  logout: () => { },
+  logout: () => {},
   register: () => Promise.resolve()
 });
 
@@ -140,7 +137,10 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialAuthState);
 
   const login = async (email: string, password: string) => {
-    const response = await axios.post<{ accessToken: string; user: User }>('/api/account/login', { email, password });
+    const response = await axios.post<{ accessToken: string; user: User }>(
+      '/api/account/login',
+      { email, password }
+    );
     const { accessToken, user } = response.data;
 
     setSession(accessToken);
@@ -158,15 +158,17 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   };
 
   const register = async (email: string, name: string, password: string) => {
-    const response = await axios.post<{ accessToken: string; user: User }>('/api/account/register', {
-      email,
-      name,
-      password
-    });
+    const response = await axios.post<{ accessToken: string; user: User }>(
+      '/api/account/register',
+      {
+        email,
+        name,
+        password
+      }
+    );
     const { accessToken, user } = response.data;
 
     window.localStorage.setItem('accessToken', accessToken);
-    
 
     dispatch({
       type: 'REGISTER',
@@ -184,7 +186,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         if (accessToken && isValidToken(accessToken)) {
           setSession(accessToken);
 
-          const response = await axios.get<{ user: User; }>('/api/account/me');
+          const response = await axios.get<{ user: User }>('/api/account/me');
           const { user } = response.data;
 
           dispatch({

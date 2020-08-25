@@ -1,22 +1,23 @@
-import React, {
-  useCallback,
-  useState,
-  useEffect
-} from 'react';
-import type { FC, ChangeEvent } from 'react';
 import {
   Box,
   Container,
   Divider,
-  Tabs,
+  makeStyles,
   Tab,
-  makeStyles
+  Tabs
 } from '@material-ui/core';
-import type { Theme } from 'src/theme';
-import axios from 'src/utils/axios';
-import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import React, {
+  ChangeEvent,
+  FC,
+  useCallback,
+  useEffect,
+  useState
+} from 'react';
 import Page from 'src/components/Page';
-import type { Project } from 'src/types/project';
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import { Theme } from 'src/theme';
+import { Project } from 'src/types/project';
+import axios from 'src/utils/axios';
 import Activities from './Activities';
 import Applicants from './Applicants';
 import Header from './Header';
@@ -51,7 +52,9 @@ const ProjectDetailsView: FC = () => {
 
   const getProject = useCallback(async () => {
     try {
-      const response = await axios.get<{ project: Project; }>('/api/projects/projects/1');
+      const response = await axios.get<{ project: Project }>(
+        '/api/projects/projects/1'
+      );
 
       if (isMountedRef.current) {
         setProject(response.data.project);
@@ -70,10 +73,7 @@ const ProjectDetailsView: FC = () => {
   }
 
   return (
-    <Page
-      className={classes.root}
-      title="Project Details"
-    >
+    <Page className={classes.root} title="Project Details">
       <Container maxWidth="lg">
         <Header project={project} />
         <Box mt={3}>
@@ -84,12 +84,8 @@ const ProjectDetailsView: FC = () => {
             value={currentTab}
             variant="scrollable"
           >
-            {tabs.map((tab) => (
-              <Tab
-                key={tab.value}
-                label={tab.label}
-                value={tab.value}
-              />
+            {tabs.map(tab => (
+              <Tab key={tab.value} label={tab.label} value={tab.value} />
             ))}
           </Tabs>
         </Box>
@@ -97,12 +93,16 @@ const ProjectDetailsView: FC = () => {
         <Box mt={3}>
           {currentTab === 'overview' && <Overview project={project} />}
           {currentTab === 'reviews' && <Reviews reviews={project.reviews} />}
-          {currentTab === 'activity' && <Activities activities={project.activities} />}
-          {currentTab === 'applicants' && <Applicants applicants={project.applicants} />}
+          {currentTab === 'activity' && (
+            <Activities activities={project.activities} />
+          )}
+          {currentTab === 'applicants' && (
+            <Applicants applicants={project.applicants} />
+          )}
         </Box>
       </Container>
     </Page>
   );
-}
+};
 
 export default ProjectDetailsView;

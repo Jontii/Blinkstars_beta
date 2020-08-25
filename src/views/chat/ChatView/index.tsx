@@ -1,15 +1,11 @@
-import React, {
-  useEffect,
-  useRef
-} from 'react';
-import type { FC } from 'react';
 import { makeStyles } from '@material-ui/core';
-import type { Theme } from 'src/theme';
-import { useDispatch } from 'src/store';
+import React, { FC, useEffect, useRef } from 'react';
 import Page from 'src/components/Page';
 import { getThreads } from 'src/slices/chat';
-import Settings from './Settings';
+import { useDispatch } from 'src/store';
+import { Theme } from 'src/theme';
 import RecentThreads from './RecentThreads';
+import Settings from './Settings';
 import Thread from './Thread';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -37,11 +33,7 @@ const ChatView: FC = () => {
   }, [dispatch]);
 
   return (
-    <Page
-      className={classes.root}
-      title="Chat"
-      ref={pageRef}
-    >
+    <Page className={classes.root} title="Chat" ref={pageRef}>
       <div className={classes.sidebar}>
         <Settings />
         <RecentThreads />

@@ -1,18 +1,17 @@
-import React from 'react';
-import type { FC } from 'react';
-import clsx from 'clsx';
 import {
   Box,
   Button,
   Container,
   Divider,
   Grid,
+  makeStyles,
   Paper,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import clsx from 'clsx';
+import React, { FC } from 'react';
 import Page from 'src/components/Page';
+import { Theme } from 'src/theme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -56,49 +55,28 @@ const PricingView: FC = () => {
   const classes = useStyles();
 
   return (
-    <Page
-      className={classes.root}
-      title="Pricing"
-    >
+    <Page className={classes.root} title="Pricing">
       <Container maxWidth="sm">
-        <Typography
-          align="center"
-          variant="h1"
-          color="textPrimary"
-        >
+        <Typography align="center" variant="h1" color="textPrimary">
           Start today. Boost up your services!
         </Typography>
         <Box mt={3}>
-          <Typography
-            align="center"
-            variant="subtitle1"
-            color="textSecondary"
-          >
+          <Typography align="center" variant="subtitle1" color="textSecondary">
             Welcome to the first platform created for freelancers and agencies
-            for showcasing and finding the best clinets in the market.
-            30% of our income goes into Whale Charity
+            for showcasing and finding the best clinets in the market. 30% of
+            our income goes into Whale Charity
           </Typography>
         </Box>
       </Container>
       <Box mt="160px">
         <Container maxWidth="lg">
-          <Grid
-            container
-            spacing={4}
-          >
-            <Grid
-              item
-              md={4}
-              xs={12}
-            >
-              <Paper
-                className={classes.product}
-                elevation={1}
-              >
+          <Grid container spacing={4}>
+            <Grid item md={4} xs={12}>
+              <Paper className={classes.product} elevation={1}>
                 <img
                   alt="Product"
                   className={classes.productImage}
-                  src={`${process.env.PUBLIC_URL}/static/images/products/product_standard.svg`}
+                  src="/static/images/products/product_standard.svg"
                 />
                 <Typography
                   component="h3"
@@ -126,19 +104,13 @@ const PricingView: FC = () => {
                     /month
                   </Typography>
                 </div>
-                <Typography
-                  variant="overline"
-                  color="textSecondary"
-                >
+                <Typography variant="overline" color="textSecondary">
                   Max 1 user
                 </Typography>
                 <Box my={2}>
                   <Divider />
                 </Box>
-                <Typography
-                  variant="body2"
-                  color="textPrimary"
-                >
+                <Typography variant="body2" color="textPrimary">
                   20 proposals/month
                   <br />
                   10 templates
@@ -159,11 +131,7 @@ const PricingView: FC = () => {
                 </Button>
               </Paper>
             </Grid>
-            <Grid
-              item
-              md={4}
-              xs={12}
-            >
+            <Grid item md={4} xs={12}>
               <Paper
                 className={clsx(classes.product, classes.recommendedProduct)}
                 elevation={1}
@@ -171,7 +139,7 @@ const PricingView: FC = () => {
                 <img
                   alt="Product"
                   className={classes.productImage}
-                  src={`${process.env.PUBLIC_URL}/static/images/products/product_premium--outlined.svg`}
+                  src="/static/images/products/product_premium--outlined.svg"
                 />
                 <Typography
                   component="h3"
@@ -199,19 +167,13 @@ const PricingView: FC = () => {
                     /month
                   </Typography>
                 </div>
-                <Typography
-                  variant="overline"
-                  color="inherit"
-                >
+                <Typography variant="overline" color="inherit">
                   Max 3 user
                 </Typography>
                 <Box my={2}>
                   <Divider />
                 </Box>
-                <Typography
-                  variant="body2"
-                  color="inherit"
-                >
+                <Typography variant="body2" color="inherit">
                   20 proposals/month
                   <br />
                   10 templates
@@ -232,19 +194,12 @@ const PricingView: FC = () => {
                 </Button>
               </Paper>
             </Grid>
-            <Grid
-              item
-              md={4}
-              xs={12}
-            >
-              <Paper
-                className={classes.product}
-                elevation={1}
-              >
+            <Grid item md={4} xs={12}>
+              <Paper className={classes.product} elevation={1}>
                 <img
                   alt="Product"
                   className={classes.productImage}
-                  src={`${process.env.PUBLIC_URL}/static/images/products/product_extended.svg`}
+                  src="/static/images/products/product_extended.svg"
                 />
                 <Typography
                   component="h3"
@@ -272,19 +227,13 @@ const PricingView: FC = () => {
                     /month
                   </Typography>
                 </div>
-                <Typography
-                  variant="overline"
-                  color="textSecondary"
-                >
+                <Typography variant="overline" color="textSecondary">
                   Unlimited
                 </Typography>
                 <Box my={2}>
                   <Divider />
                 </Box>
-                <Typography
-                  variant="body2"
-                  color="textPrimary"
-                >
+                <Typography variant="body2" color="textPrimary">
                   All from above
                   <br />
                   Unlimited 24/7 support

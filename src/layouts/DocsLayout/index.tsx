@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
-import type { FC, ReactNode } from 'react';
-import PropTypes from 'prop-types';
-import { MDXProvider } from '@mdx-js/react';
 import { Container, makeStyles } from '@material-ui/core';
+import { MDXProvider } from '@mdx-js/react';
+import PropTypes from 'prop-types';
+import React, { FC, ReactNode, useState } from 'react';
+import components from './mdx';
 import NavBar from './NavBar';
 import TopBar from './TopBar';
-import components from './mdx';
 
 interface DocsLayoutProps {
   children?: ReactNode;
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   wrapper: {
     backgroundColor: theme.palette.background.default,
     display: 'flex',
@@ -44,13 +43,8 @@ const DocsLayout: FC<DocsLayoutProps> = ({ children }) => {
       />
       <div className={classes.wrapper}>
         <div className={classes.contentContainer}>
-          <Container
-            maxWidth="md"
-            className={classes.content}
-          >
-            <MDXProvider components={components}>
-              {children}
-            </MDXProvider>
+          <Container maxWidth="md" className={classes.content}>
+            <MDXProvider components={components}>{children}</MDXProvider>
           </Container>
         </div>
       </div>

@@ -1,17 +1,11 @@
-import React, { useState } from 'react';
-import type { FC, ChangeEvent } from 'react';
-import PropTypes from 'prop-types';
+import { Box, Button, makeStyles, TextField } from '@material-ui/core';
 import clsx from 'clsx';
 import { useSnackbar } from 'notistack';
-import {
-  Box,
-  Button,
-  makeStyles,
-  TextField
-} from '@material-ui/core';
-import { useDispatch } from 'src/store';
+import PropTypes from 'prop-types';
+import React, { ChangeEvent, FC, useState } from 'react';
 import { addCheckItem } from 'src/slices/kanban';
-import type { Card, Checklist } from 'src/types/kanban';
+import { useDispatch } from 'src/store';
+import { Card, Checklist } from 'src/types/kanban';
 
 interface CheckItemAddProps {
   className?: string;
@@ -70,10 +64,7 @@ const CheckItemAdd: FC<CheckItemAddProps> = ({
   };
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <div className={clsx(classes.root, className)} {...rest}>
       {isExpanded ? (
         <div>
           <TextField
@@ -92,20 +83,13 @@ const CheckItemAdd: FC<CheckItemAddProps> = ({
             >
               Save
             </Button>
-            <Button
-              size="small"
-              onClick={handleCancel}
-            >
+            <Button size="small" onClick={handleCancel}>
               Cancel
             </Button>
           </Box>
         </div>
       ) : (
-        <Button
-          variant="outlined"
-          size="small"
-          onClick={handleAdd}
-        >
+        <Button variant="outlined" size="small" onClick={handleAdd}>
           Add an item
         </Button>
       )}

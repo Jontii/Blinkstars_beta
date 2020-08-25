@@ -1,7 +1,6 @@
-import React from 'react';
-import type { FC } from 'react';
-import { Typography, makeStyles } from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import { makeStyles, Typography } from '@material-ui/core';
+import React, { FC } from 'react';
+import { Theme } from 'src/theme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -12,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const Paragraph: FC = (props) => {
+const Paragraph: FC = props => {
   const classes = useStyles();
 
   return (
@@ -23,6 +22,6 @@ const Paragraph: FC = (props) => {
       {...props}
     />
   );
-}
+};
 
 export default Paragraph;

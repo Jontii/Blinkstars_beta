@@ -1,10 +1,11 @@
+import _ from 'lodash';
 import React, {
   createContext,
+  FC,
+  ReactNode,
   useEffect,
   useState
 } from 'react';
-import type { FC, ReactNode } from 'react';
-import _ from 'lodash';
 import { THEMES } from 'src/constants';
 
 interface Settings {
@@ -26,7 +27,7 @@ interface SettingsProviderProps {
 const defaultSettings: Settings = {
   direction: 'ltr',
   responsiveFontSizes: true,
-  theme: THEMES.LIGHT
+  theme: THEMES.ONE_DARK
 };
 
 export const restoreSettings = (): Settings | null => {
@@ -53,11 +54,16 @@ export const storeSettings = (settings: Settings): void => {
 
 const SettingsContext = createContext<SettingsContextValue>({
   settings: defaultSettings,
-  saveSettings: () => { }
+  saveSettings: () => {}
 });
 
-export const SettingsProvider: FC<SettingsProviderProps> = ({ settings, children }) => {
-  const [currentSettings, setCurrentSettings] = useState<Settings>(settings || defaultSettings);
+export const SettingsProvider: FC<SettingsProviderProps> = ({
+  settings,
+  children
+}) => {
+  const [currentSettings, setCurrentSettings] = useState<Settings>(
+    settings || defaultSettings
+  );
 
   const handleSaveSettings = (update: Settings = {}): void => {
     const mergedSettings = _.merge({}, currentSettings, update);
@@ -75,7 +81,7 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ settings, children
   }, []);
 
   useEffect(() => {
-    document.dir = currentSettings.direction;
+    document.dir = "ltr";
   }, [currentSettings]);
 
   return (

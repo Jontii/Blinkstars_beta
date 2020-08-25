@@ -1,21 +1,15 @@
-import { v4 as uuidv4 } from 'uuid';
-import moment from 'moment';
 import _ from 'lodash';
+import moment from 'moment';
+import { Contact, Thread, ThreadMessage } from 'src/types/chat';
 import mock from 'src/utils/mock';
-import type {
-  Contact,
-  Thread,
-  ThreadMessage
-} from 'src/types/chat';
+import { v4 as uuidv4 } from 'uuid';
 
 let contacts: Contact[] = [
   {
     id: '5e8891ab188cd2855e6029b7',
     avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_1.png`,
     isActive: true,
-    lastActivity: moment()
-      .toDate()
-      .getTime(),
+    lastActivity: moment().toDate().getTime(),
     name: 'Cooper Murray',
     username: 'cooper.murray'
   },
@@ -23,10 +17,7 @@ let contacts: Contact[] = [
     id: '5e887a62195cc5aef7e8ca5d',
     avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_2.png`,
     isActive: false,
-    lastActivity: moment()
-      .subtract(2, 'hours')
-      .toDate()
-      .getTime(),
+    lastActivity: moment().subtract(2, 'hours').toDate().getTime(),
     name: 'Ekaterina Tankova',
     username: 'ekaterina.tankova'
   },
@@ -34,10 +25,7 @@ let contacts: Contact[] = [
     id: '5e887ac47eed253091be10cb',
     avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_3.png`,
     isActive: false,
-    lastActivity: moment()
-      .subtract(15, 'minutes')
-      .toDate()
-      .getTime(),
+    lastActivity: moment().subtract(15, 'minutes').toDate().getTime(),
     name: 'Cao Yu',
     username: 'cao.yu'
   },
@@ -45,9 +33,7 @@ let contacts: Contact[] = [
     id: '5e887b209c28ac3dd97f6db5',
     avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_4.png`,
     isActive: true,
-    lastActivity: moment()
-      .toDate()
-      .getTime(),
+    lastActivity: moment().toDate().getTime(),
     name: 'Alex Richardson',
     username: 'alex.richardson'
   },
@@ -55,9 +41,7 @@ let contacts: Contact[] = [
     id: '5e887b7602bdbc4dbb234b27',
     avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_5.png`,
     isActive: true,
-    lastActivity: moment()
-      .toDate()
-      .getTime(),
+    lastActivity: moment().toDate().getTime(),
     name: 'Anje Keizer',
     username: 'anje.keizer'
   },
@@ -65,10 +49,7 @@ let contacts: Contact[] = [
     id: '5e86805e2bafd54f66cc95c3',
     avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_7.png`,
     isActive: false,
-    lastActivity: moment()
-      .subtract(2, 'days')
-      .toDate()
-      .getTime(),
+    lastActivity: moment().subtract(2, 'days').toDate().getTime(),
     name: 'Adam Denisov',
     username: 'adam.denisov'
   },
@@ -76,10 +57,7 @@ let contacts: Contact[] = [
     id: '5e887a1fbefd7938eea9c981',
     avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_8.png`,
     isActive: false,
-    lastActivity: moment()
-      .subtract(6, 'hours')
-      .toDate()
-      .getTime(),
+    lastActivity: moment().subtract(6, 'hours').toDate().getTime(),
     name: 'Miller Edwards',
     username: 'miller.edwards'
   },
@@ -87,19 +65,15 @@ let contacts: Contact[] = [
     id: '5e887d0b3d090c1b8f162003',
     avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.png`,
     isActive: true,
-    lastActivity: moment()
-      .toDate()
-      .getTime(),
+    lastActivity: moment().toDate().getTime(),
     name: 'Emilee Simchenko',
-    username: 'emilee.simchenko',
+    username: 'emilee.simchenko'
   },
   {
     id: '5e88792be2d4cfb4bf0971d9',
     avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_10.png`,
     isActive: true,
-    lastActivity: moment()
-      .toDate()
-      .getTime(),
+    lastActivity: moment().toDate().getTime(),
     name: 'Elliott Stone',
     username: 'elliott.stone'
   },
@@ -107,9 +81,7 @@ let contacts: Contact[] = [
     id: '5e8877da9a65442b11551975',
     avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_11.png`,
     isActive: true,
-    lastActivity: moment()
-      .toDate()
-      .getTime(),
+    lastActivity: moment().toDate().getTime(),
     name: 'Shen Zhi',
     username: 'shen.zhi'
   },
@@ -117,9 +89,7 @@ let contacts: Contact[] = [
     id: '5e8680e60cba5019c5ca6fda',
     avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_12.png`,
     isActive: true,
-    lastActivity: moment()
-      .toDate()
-      .getTime(),
+    lastActivity: moment().toDate().getTime(),
     name: 'Merrile Burgett',
     username: 'merrile.burgett'
   }
@@ -132,45 +102,37 @@ let threads: Thread[] = [
       {
         id: '5e867f0a5bc0ff2bfa07bfa6',
         attachments: [],
-        body: 'Hey, nice projects! I really liked the one in react. What\'s your quote on kinda similar project?',
+        body:
+          "Hey, nice projects! I really liked the one in react. What's your quote on kinda similar project?",
         contentType: 'text',
-        createdAt: moment()
-          .subtract(10, 'hours')
-          .toDate()
-          .getTime(),
+        createdAt: moment().subtract(10, 'hours').toDate().getTime(),
         senderId: '5e86805e2bafd54f66cc95c3'
       },
       {
         id: '5e867f167d5f78109ae9f2a4',
         attachments: [],
-        body: 'I would need to know more details, but my hourly rate stats at $35/hour. Thanks!',
+        body:
+          'I would need to know more details, but my hourly rate stats at $35/hour. Thanks!',
         contentType: 'text',
-        createdAt: moment()
-          .subtract(2, 'hours')
-          .toDate()
-          .getTime(),
+        createdAt: moment().subtract(2, 'hours').toDate().getTime(),
         senderId: '5e86809283e28b96d2d38537'
       },
       {
         id: '5e867f1c9ca72084693528f4',
         attachments: [],
-        body: 'Well it\'s a really easy one, I\'m sure we can make it half of the price.',
+        body:
+          "Well it's a really easy one, I'm sure we can make it half of the price.",
         contentType: 'text',
-        createdAt: moment()
-          .subtract(5, 'minutes')
-          .toDate()
-          .getTime(),
+        createdAt: moment().subtract(5, 'minutes').toDate().getTime(),
         senderId: '5e86805e2bafd54f66cc95c3'
       },
       {
         id: '5e867f22fd2e27a09849b4db',
         attachments: [],
-        body: 'Then why don\'t you make it if it\'s that easy? Sorry I\'m not interetes, have fantastic day Adam!',
+        body:
+          "Then why don't you make it if it's that easy? Sorry I'm not interetes, have fantastic day Adam!",
         contentType: 'text',
-        createdAt: moment()
-          .subtract(3, 'minutes')
-          .toDate()
-          .getTime(),
+        createdAt: moment().subtract(3, 'minutes').toDate().getTime(),
         senderId: '5e86809283e28b96d2d38537'
       },
       {
@@ -178,10 +140,7 @@ let threads: Thread[] = [
         attachments: [],
         body: 'Last offer, $25 per hour',
         contentType: 'text',
-        createdAt: moment()
-          .subtract(1, 'minute')
-          .toDate()
-          .getTime(),
+        createdAt: moment().subtract(1, 'minute').toDate().getTime(),
         senderId: '5e86805e2bafd54f66cc95c3'
       },
       {
@@ -189,10 +148,7 @@ let threads: Thread[] = [
         attachments: [],
         body: `${process.env.PUBLIC_URL}/static/images/projects/project_4.png`,
         contentType: 'image',
-        createdAt: moment()
-          .subtract(1, 'minute')
-          .toDate()
-          .getTime(),
+        createdAt: moment().subtract(1, 'minute').toDate().getTime(),
         senderId: '5e86805e2bafd54f66cc95c3'
       }
     ],
@@ -221,10 +177,7 @@ let threads: Thread[] = [
         attachments: [],
         body: 'Hey, would you like to collaborate?',
         contentType: 'text',
-        createdAt: moment()
-          .subtract(6, 'minutes')
-          .toDate()
-          .getTime(),
+        createdAt: moment().subtract(6, 'minutes').toDate().getTime(),
         senderId: '5e8680e60cba5019c5ca6fda'
       },
       {
@@ -232,10 +185,7 @@ let threads: Thread[] = [
         attachments: [],
         body: 'Hi, Merrile!',
         contentType: 'text',
-        createdAt: moment()
-          .subtract(5, 'minutes')
-          .toDate()
-          .getTime(),
+        createdAt: moment().subtract(5, 'minutes').toDate().getTime(),
         senderId: '5e86809283e28b96d2d38537'
       },
       {
@@ -243,10 +193,7 @@ let threads: Thread[] = [
         attachments: [],
         body: 'Hello everyone 😀',
         contentType: 'text',
-        createdAt: moment()
-          .subtract(2, 'minutes')
-          .toDate()
-          .getTime(),
+        createdAt: moment().subtract(2, 'minutes').toDate().getTime(),
         senderId: '5e8891ab188cd2855e6029b7'
       }
     ],
@@ -276,25 +223,29 @@ let threads: Thread[] = [
 ];
 
 const findContactByUsername = (username: string): Contact | null => {
-  const contact = contacts.find((_contact) => _contact.username === username);
+  const contact = contacts.find(_contact => _contact.username === username);
 
   return contact || null;
 };
 
 const findThreadById = (threadId: string): Thread | null => {
-  const thread = threads.find((_threadId) => _threadId.id === threadId);
+  const thread = threads.find(_threadId => _threadId.id === threadId);
 
   return thread || null;
 };
 
 // This means that we are looking for ONE_TO_ONE thread
-const findThreadByOtherParticipantId = (participantId: string): Thread | null => {
-  const thread = threads.find((_thread) => {
+const findThreadByOtherParticipantId = (
+  participantId: string
+): Thread | null => {
+  const thread = threads.find(_thread => {
     if (_thread.type !== 'ONE_TO_ONE') {
       return false;
     }
 
-    const participant = _thread.participants.find((_participant) => _participant.id === participantId);
+    const participant = _thread.participants.find(
+      _participant => _participant.id === participantId
+    );
 
     return !!participant;
   });
@@ -302,15 +253,17 @@ const findThreadByOtherParticipantId = (participantId: string): Thread | null =>
   return thread || null;
 };
 
-const findThreadByParticipantIds = (participantIds: string[]): Thread | null => {
-  const thread = threads.find((_thread) => {
+const findThreadByParticipantIds = (
+  participantIds: string[]
+): Thread | null => {
+  const thread = threads.find(_thread => {
     if (_thread.participants.length < participantIds.length) {
       return false;
     }
 
-    let _participantIds = [];
+    let _participantIds: any[] = [];
 
-    _thread.participants.forEach((_participant) => {
+    _thread.participants.forEach(_participant => {
       _participantIds.push(_participant.id);
     });
 
@@ -322,20 +275,20 @@ const findThreadByParticipantIds = (participantIds: string[]): Thread | null => 
 
 mock.onGet('/api/chat/contacts').reply(200, { contacts });
 
-mock.onGet('/api/chat/search').reply((config) => {
+mock.onGet('/api/chat/search').reply(config => {
   try {
     const { query } = config.params;
     const cleanQuery = query.toLowerCase().trim();
-    const results = [];
+    const results: any[] = [];
 
-    contacts.forEach((contact) => {
+    contacts.forEach(contact => {
       if (!query) {
         return results.push(contact);
       }
 
       if (contact.name.toLowerCase().includes(cleanQuery)) {
         return results.push(contact);
-      }
+      }else return [500, {message: 'Min error'}]
     });
 
     return [200, { results }];
@@ -345,7 +298,7 @@ mock.onGet('/api/chat/search').reply((config) => {
   }
 });
 
-mock.onGet('/api/chat/participants').reply((config) => {
+mock.onGet('/api/chat/participants').reply(config => {
   try {
     const { threadKey } = config.params;
     const participants = [];
@@ -378,10 +331,10 @@ mock.onGet('/api/chat/participants').reply((config) => {
 
 mock.onGet('/api/chat/threads').reply(200, { threads });
 
-mock.onGet('/api/chat/thread').reply((config) => {
+mock.onGet('/api/chat/thread').reply(config => {
   try {
     const { threadKey } = config.params;
-    
+
     // Thread key might be an ID if thread type is GROUP
     // otherwise it represents an username
     const thread = findThreadById(threadKey);
@@ -409,10 +362,10 @@ mock.onGet('/api/chat/thread').reply((config) => {
   }
 });
 
-mock.onGet('/api/chat/thread/mark-as-seen').reply((config) => {
+mock.onGet('/api/chat/thread/mark-as-seen').reply(config => {
   try {
     const { threadId } = config.params;
-    const thread = threads.find((_thread) => _thread.id === threadId);
+    const thread = threads.find(_thread => _thread.id === threadId);
 
     if (thread) {
       thread.unreadCount = 0;
@@ -429,7 +382,7 @@ mock.onGet('/api/chat/thread/mark-as-seen').reply((config) => {
 // 1) By specifying a thread id, this means that the thread already exists
 // 2) By specifying the other user id (if ONE_TO_ONE thread), thread might exist
 // 3) By specifying a list of receipients, thread might exist
-mock.onPost('/api/chat/messages/new').reply((request) => {
+mock.onPost('/api/chat/messages/new').reply(request => {
   try {
     const { threadId, recipientIds, body } = JSON.parse(request.data);
 
@@ -462,9 +415,7 @@ mock.onPost('/api/chat/messages/new').reply((request) => {
       attachments: [],
       body,
       contentType: 'text',
-      createdAt: moment()
-        .toDate()
-        .getTime(),
+      createdAt: moment().toDate().getTime(),
       senderId: user.id
     };
 
@@ -473,8 +424,8 @@ mock.onPost('/api/chat/messages/new').reply((request) => {
     } else {
       const participants = [user];
 
-      recipientIds.forEach((recipientId) => {
-        const contact = contacts.find((_contact) => _contact.id === recipientId);
+      recipientIds.forEach((recipientId: any) => {
+        const contact = contacts.find(_contact => _contact.id === recipientId);
 
         if (!contact) {
           throw new Error('Contact not found');

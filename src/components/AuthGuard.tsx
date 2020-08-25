@@ -1,7 +1,6 @@
-import React from 'react';
-import type { FC, ReactNode } from 'react';
-import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import React, { FC, ReactNode } from 'react';
+import { Redirect } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
 interface AuthGuardProps {
@@ -15,11 +14,7 @@ const AuthGuard: FC<AuthGuardProps> = ({ children }) => {
     return <Redirect to="/login" />;
   }
 
-  return (
-    <>
-      {children}
-    </>
-  );
+  return <>{children}</>;
 };
 
 AuthGuard.propTypes = {

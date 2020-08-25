@@ -1,14 +1,3 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback
-} from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import _ from 'lodash';
-import { useSnackbar } from 'notistack';
 import {
   Avatar,
   Box,
@@ -20,19 +9,22 @@ import {
   IconButton,
   Input,
   Link,
-  Paper,
-  Typography,
   makeStyles,
-  SvgIcon
+  Paper,
+  SvgIcon,
+  Typography
 } from '@material-ui/core';
-import {
-  Search as SearchIcon,
-  MoreVertical as MoreIcon
-} from 'react-feather';
-import type { Theme } from 'src/theme';
-import axios from 'src/utils/axios';
+import clsx from 'clsx';
+import _ from 'lodash';
+import { useSnackbar } from 'notistack';
+import PropTypes from 'prop-types';
+import React, { FC, useCallback, useEffect, useState } from 'react';
+import { MoreVertical as MoreIcon, Search as SearchIcon } from 'react-feather';
+import { Link as RouterLink } from 'react-router-dom';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import type { Connection } from 'src/types/social';
+import { Theme } from 'src/theme';
+import { Connection } from 'src/types/social';
+import axios from 'src/utils/axios';
 
 interface ConnectionsProps {
   className?: string;
@@ -63,16 +55,17 @@ const Connections: FC<ConnectionsProps> = ({ className, ...rest }) => {
   const [search, setSearch] = useState<string>('');
 
   const handleConnectToggle = (connectionId: string): void => {
-    setConnections((prevConnections) => {
+    setConnections(prevConnections => {
       const newConnections = _.map(prevConnections, _.clone);
 
-      return newConnections.map((connection) => {
+      return newConnections.map(connection => {
         if (connection.id === connectionId) {
           const newConnection = { ...connection };
 
-          newConnection.status = connection.status === 'connected' || connection.status === 'pending'
-            ? 'not_connected'
-            : 'pending';
+          newConnection.status =
+            connection.status === 'connected' || connection.status === 'pending'
+              ? 'not_connected'
+              : 'pending';
 
           if (newConnection.status === 'pending') {
             enqueueSnackbar('Connection request sent', {
@@ -89,7 +82,9 @@ const Connections: FC<ConnectionsProps> = ({ className, ...rest }) => {
   };
 
   const getConnections = useCallback(async () => {
-    const response = await axios.get<{ connections: Connection[]; }>('/api/social/connections');
+    const response = await axios.get<{ connections: Connection[] }>(
+      '/api/social/connections'
+    );
 
     if (isMountedRef.current) {
       setConnections(response.data.connections);
@@ -101,53 +96,32 @@ const Connections: FC<ConnectionsProps> = ({ className, ...rest }) => {
   }, [getConnections]);
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardHeader title="Connections" />
       <Divider />
-      <Box
-        py={2}
-        px={3}
-        display="flex"
-        alignItems="center"
-      >
-        <SvgIcon
-          fontSize="small"
-          color="action"
-        >
+      <Box py={2} px={3} display="flex" alignItems="center">
+        <SvgIcon fontSize="small" color="action">
           <SearchIcon />
         </SvgIcon>
         <Input
           className={classes.searchInput}
           disableUnderline
           value={search}
-          onChange={(event) => setSearch(event.target.value)}
+          onChange={event => setSearch(event.target.value)}
           placeholder="Search connections"
         />
       </Box>
       <Divider />
       <Box p={3}>
-        <Grid
-          container
-          spacing={3}
-        >
+        <Grid container spacing={3}>
           {connections
-            .filter((connection) => connection.name.toLowerCase().includes(search))
-            .map((connection) => (
-              <Grid
-                item
-                key={connection.id}
-                xs={12}
-                md={6}
-              >
+            .filter(connection =>
+              connection.name.toLowerCase().includes(search)
+            )
+            .map(connection => (
+              <Grid item key={connection.id} xs={12} md={6}>
                 <Paper variant="outlined">
-                  <Box
-                    p={2}
-                    display="flex"
-                    alignItems="center"
-                  >
+                  <Box p={2} display="flex" alignItems="center">
                     <Avatar
                       alt="Profile image"
                       className={classes.avatar}
@@ -155,10 +129,7 @@ const Connections: FC<ConnectionsProps> = ({ className, ...rest }) => {
                       src={connection.avatar}
                       to="#"
                     />
-                    <Box
-                      flexGrow={1}
-                      mx={2}
-                    >
+                    <Box flexGrow={1} mx={2}>
                       <Link
                         variant="h5"
                         color="textPrimary"
@@ -172,9 +143,7 @@ const Connections: FC<ConnectionsProps> = ({ className, ...rest }) => {
                         color="textSecondary"
                         gutterBottom
                       >
-                        {connection.commonConnections}
-                        {' '}
-                        connections in common
+                        {connection.commonConnections} connections in common
                       </Typography>
                       {connection.status !== 'rejected' && (
                         <Button

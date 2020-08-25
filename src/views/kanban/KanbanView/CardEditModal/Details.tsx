@@ -1,18 +1,12 @@
-import React from 'react';
-import type { FC } from 'react';
+import { Box, makeStyles, TextField, Typography } from '@material-ui/core';
 import clsx from 'clsx';
-import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { useSnackbar } from 'notistack';
-import {
-  Box,
-  TextField,
-  Typography,
-  makeStyles
-} from '@material-ui/core';
-import { useDispatch } from 'src/store';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import { updateCard } from 'src/slices/kanban';
-import type { Card, List } from 'src/types/kanban';
+import { useDispatch } from 'src/store';
+import { Card, List } from 'src/types/kanban';
 
 interface DetailsProps {
   className?: string;
@@ -24,17 +18,12 @@ const useStyles = makeStyles(() => ({
   root: {}
 }));
 
-const Details: FC<DetailsProps> = ({
-  card,
-  className,
-  list,
-  ...rest
-}) => {
+const Details: FC<DetailsProps> = ({ card, className, list, ...rest }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
-  const handleUpdate = _.debounce(async (update) => {
+  const handleUpdate = _.debounce(async update => {
     try {
       await dispatch(updateCard(card.id, update));
       enqueueSnackbar('Card updated', {
@@ -49,24 +38,18 @@ const Details: FC<DetailsProps> = ({
   }, 1000);
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <div className={clsx(classes.root, className)} {...rest}>
       <Box mt={3}>
         <TextField
           variant="outlined"
           fullWidth
           defaultValue={card.name}
-          onChange={(event) => handleUpdate({ name: event.target.value })}
+          onChange={event => handleUpdate({ name: event.target.value })}
           label="Card Title"
         />
       </Box>
       <Box mt={3}>
-        <Typography
-          variant="h4"
-          color="textPrimary"
-        >
+        <Typography variant="h4" color="textPrimary">
           Description
         </Typography>
         <Box mt={2}>
@@ -75,7 +58,9 @@ const Details: FC<DetailsProps> = ({
             rows={6}
             fullWidth
             variant="outlined"
-            onChange={(event) => handleUpdate({ description: event.target.value })}
+            onChange={event =>
+              handleUpdate({ description: event.target.value })
+            }
             placeholder="Leave a message"
             defaultValue={card.description}
           />
@@ -83,7 +68,7 @@ const Details: FC<DetailsProps> = ({
       </Box>
     </div>
   );
-}
+};
 
 Details.propTypes = {
   // @ts-ignore

@@ -1,19 +1,11 @@
-
-import React, { useState } from 'react';
-import type { FC, ChangeEvent } from 'react';
-import PropTypes from 'prop-types';
+import { Box, Button, Card, makeStyles, TextField } from '@material-ui/core';
 import clsx from 'clsx';
 import { useSnackbar } from 'notistack';
-import {
-  Box,
-  Button,
-  Card,
-  TextField,
-  makeStyles
-} from '@material-ui/core';
-import type { Theme } from 'src/theme';
-import { useDispatch } from 'src/store';
+import PropTypes from 'prop-types';
+import React, { ChangeEvent, FC, useState } from 'react';
 import { createList } from 'src/slices/kanban';
+import { useDispatch } from 'src/store';
+import { Theme } from 'src/theme';
 
 interface ListAddProps {
   className?: string;
@@ -69,10 +61,7 @@ const ListAdd: FC<ListAddProps> = ({ className, ...rest }) => {
   };
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <div className={clsx(classes.root, className)} {...rest}>
       <Card className={classes.inner}>
         <Box p={2}>
           {isExpanded ? (
@@ -85,15 +74,8 @@ const ListAdd: FC<ListAddProps> = ({ className, ...rest }) => {
                 value={name}
                 variant="outlined"
               />
-              <Box
-                mt={2}
-                display="flex"
-                justifyContent="space-between"
-              >
-                <Button
-                  onClick={handleAddCancel}
-                  variant="text"
-                >
+              <Box mt={2} display="flex" justifyContent="space-between">
+                <Button onClick={handleAddCancel} variant="text">
                   Cancel
                 </Button>
                 <Button
@@ -106,13 +88,8 @@ const ListAdd: FC<ListAddProps> = ({ className, ...rest }) => {
               </Box>
             </>
           ) : (
-            <Box
-              display="flex"
-              justifyContent="center"
-            >
-              <Button onClick={handleAddInit}>
-                Add another list
-              </Button>
+            <Box display="flex" justifyContent="center">
+              <Button onClick={handleAddInit}>Add another list</Button>
             </Box>
           )}
         </Box>

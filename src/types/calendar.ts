@@ -8,8 +8,4 @@ export interface Event {
   title: string;
 }
 
-export type View =
-  | 'dayGridMonth'
-  | 'timeGridWeek'
-  | 'timeGridDay'
-  | 'listWeek';
+export type View = 'dayGridMonth' | 'timeGridWeek' | 'timeGridDay' | 'listWeek';

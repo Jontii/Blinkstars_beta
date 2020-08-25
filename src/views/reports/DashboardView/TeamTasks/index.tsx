@@ -1,12 +1,3 @@
-import React, {
-  useCallback,
-  useState,
-  useEffect
-} from 'react';
-import type { FC } from 'react';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   Box,
   Card,
@@ -15,10 +6,14 @@ import {
   List,
   makeStyles
 } from '@material-ui/core';
-import axios from 'src/utils/axios';
-import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC, useCallback, useEffect, useState } from 'react';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import GenericMoreButton from 'src/components/GenericMoreButton';
-import type { Task } from 'src/types/reports';
+import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import { Task } from 'src/types/reports';
+import axios from 'src/utils/axios';
 import TaskItem from './TaskItem';
 
 interface TeamTasksProps {
@@ -36,8 +31,10 @@ const TeamTasks: FC<TeamTasksProps> = ({ className, ...rest }) => {
 
   const getTasks = useCallback(async () => {
     try {
-      const response = await axios.get<{ tasks: Task[]; }>('/api/reports/latest-tasks');
-  
+      const response = await axios.get<{ tasks: Task[] }>(
+        '/api/reports/latest-tasks'
+      );
+
       if (isMountedRef.current) {
         setTasks(response.data.tasks);
       }
@@ -51,14 +48,8 @@ const TeamTasks: FC<TeamTasksProps> = ({ className, ...rest }) => {
   }, [getTasks]);
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <CardHeader
-        action={<GenericMoreButton />}
-        title="Team Tasks"
-      />
+    <Card className={clsx(classes.root, className)} {...rest}>
+      <CardHeader action={<GenericMoreButton />} title="Team Tasks" />
       <Divider />
       <PerfectScrollbar>
         <Box minWidth={400}>

@@ -1,9 +1,8 @@
-import React from 'react';
-import type { FC, ReactNode } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import { fade, makeStyles } from '@material-ui/core';
-import type { Theme } from 'src/theme'; 
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC, ReactNode } from 'react';
+import { Theme } from 'src/theme';
 
 interface LabelProps {
   className?: string;
@@ -64,11 +63,13 @@ const Label: FC<LabelProps> = ({
 
   return (
     <span
-      className={
-        clsx(classes.root, {
+      className={clsx(
+        classes.root,
+        {
           [classes[color]]: color
-        }, className)
-      }
+        },
+        className
+      )}
       {...rest}
     >
       {children}
@@ -80,7 +81,13 @@ Label.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   style: PropTypes.object,
-  color: PropTypes.oneOf(['primary', 'secondary', 'error', 'warning', 'success'])
+  color: PropTypes.oneOf([
+    'primary',
+    'secondary',
+    'error',
+    'warning',
+    'success'
+  ])
 };
 
 export default Label;

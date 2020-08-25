@@ -1,45 +1,26 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
-import type { FC, ReactNode } from 'react';
-import { useLocation, matchPath } from 'react-router-dom';
-import { Link as RouterLink } from 'react-router-dom';
-import PerfectScrollbar from 'react-perfect-scrollbar';
-import PropTypes from 'prop-types';
 import {
   Avatar,
   Box,
-  Chip,
   Divider,
   Drawer,
   Hidden,
   Link,
   List,
   ListSubheader,
-  Typography,
-  makeStyles
+  makeStyles,
+  Typography
 } from '@material-ui/core';
-import ReceiptIcon from '@material-ui/icons/ReceiptOutlined';
+import PropTypes from 'prop-types';
+import React, { FC, ReactNode, useEffect } from 'react';
 import {
   Briefcase as BriefcaseIcon,
-  Calendar as CalendarIcon,
-  ShoppingCart as ShoppingCartIcon,
-  Folder as FolderIcon,
-  BarChart as BarChartIcon,
-  Lock as LockIcon,
-  UserPlus as UserPlusIcon,
-  AlertCircle as AlertCircleIcon,
-  Trello as TrelloIcon,
-  User as UserIcon,
-  Layout as LayoutIcon,
-  Edit as EditIcon,
-  DollarSign as DollarSignIcon,
-  Mail as MailIcon,
-  MessageCircle as MessageCircleIcon,
   PieChart as PieChartIcon,
-  Share2 as ShareIcon,
-  Users as UsersIcon
+  User as UserIcon
 } from 'react-feather';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import { Link as RouterLink, matchPath, useLocation } from 'react-router-dom';
 import Logo from 'src/components/Logo';
 import useAuth from 'src/hooks/useAuth';
 import NavItem from './NavItem';
@@ -71,11 +52,11 @@ const sections: Section[] = [
         icon: PieChartIcon,
         href: '/app/reports/dashboard'
       },
-      // {
-      //   title: 'Dashboard Alternative',
-      //   icon: BarChartIcon,
-      //   href: '/app/reports/dashboard-alternative'
-      // }
+      {
+        title: 'Dashboard Company',
+        icon: PieChartIcon,
+        href: '/app/reports/dashboard-alternative'
+      }
     ]
   },
   // {
@@ -147,7 +128,7 @@ const sections: Section[] = [
   //     }
   //   ]
   // },
- {
+  {
     subheader: 'Applications',
     items: [
       {
@@ -172,7 +153,7 @@ const sections: Section[] = [
             href: '/app/projects/1'
           }
         ]
-      },
+      }
       // {
       //   title: 'Social Platform',
       //   href: '/app/social',
@@ -209,7 +190,7 @@ const sections: Section[] = [
       //       label="Updated"
       //     />
       //   )
-      // },    
+      // },
       // {
       //   title: 'Calendar',
       //   href: '/app/calendar',
@@ -246,7 +227,7 @@ const sections: Section[] = [
         title: 'Account',
         href: '/app/account',
         icon: UserIcon
-      },
+      }
       // {
       //   title: 'Error',
       //   href: '/404',
@@ -258,7 +239,7 @@ const sections: Section[] = [
       //   icon: DollarSignIcon
       // }
     ]
-  },
+  }
   // {
   //   subheader: 'Extra',
   //   items: [
@@ -307,7 +288,7 @@ const sections: Section[] = [
   // }
 ];
 
-const sections2:  Section[] = [
+const sections2: Section[] = [
   {
     subheader: 'Reports',
     items: [
@@ -315,7 +296,7 @@ const sections2:  Section[] = [
         title: 'Dashboard',
         icon: PieChartIcon,
         href: '/app/reports/dashboard'
-      },
+      }
     ]
   },
   {
@@ -325,11 +306,10 @@ const sections2:  Section[] = [
         title: 'Account',
         href: '/app/account',
         icon: UserIcon
-      },
+      }
     ]
-  },
+  }
 ];
-
 
 function renderNavItems({
   items,
@@ -429,43 +409,25 @@ const NavBar: FC<NavBarProps> = ({ onMobileClose, openMobile }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
-  const userSections = user.name === 'AMD' ? sections : sections2;
+  const userSections = user?.name === 'AMD' ? sections : sections2;
 
   const content = (
-    <Box
-      height="100%"
-      display="flex"
-      flexDirection="column"
-    >
+    <Box height="100%" display="flex" flexDirection="column">
       <PerfectScrollbar options={{ suppressScrollX: true }}>
         <Hidden lgUp>
-          <Box
-            p={2}
-            display="flex"
-            justifyContent="center"
-          >
+          <Box p={2} display="flex" justifyContent="center">
             <RouterLink to="/">
               <Logo />
             </RouterLink>
           </Box>
         </Hidden>
         <Box p={2}>
-          <Box
-            display="flex"
-            justifyContent="center"
-          >
+          <Box display="flex" justifyContent="center">
             <RouterLink to="/app/account">
-              <Avatar
-                alt="User"
-                className={classes.avatar}
-                src={user.avatar}
-              />
+              <Avatar alt="User" className={classes.avatar} src={user?.avatar} />
             </RouterLink>
           </Box>
-          <Box
-            mt={2}
-            textAlign="center"
-          >
+          <Box mt={2} textAlign="center">
             <Link
               component={RouterLink}
               to="/app/account"
@@ -473,36 +435,26 @@ const NavBar: FC<NavBarProps> = ({ onMobileClose, openMobile }) => {
               color="textPrimary"
               underline="none"
             >
-              {user.name}
+              {user?.name}
             </Link>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-            >
-              Your tier:
-              {' '}
-              <Link
-                component={RouterLink}
-                to="/pricing"
-              >
-                {user.tier}
+            <Typography variant="body2" color="textSecondary">
+              Your tier:{' '}
+              <Link component={RouterLink} to="/pricing">
+                {user?.tier}
               </Link>
             </Typography>
           </Box>
         </Box>
         <Divider />
         <Box p={2}>
-          {userSections.map((section) => (
+          {userSections.map(section => (
             <List
               key={section.subheader}
-              subheader={(
-                <ListSubheader
-                  disableGutters
-                  disableSticky
-                >
+              subheader={
+                <ListSubheader disableGutters disableSticky>
                   {section.subheader}
                 </ListSubheader>
-              )}
+              }
             >
               {renderNavItems({
                 items: section.items,
@@ -563,11 +515,6 @@ const NavBar: FC<NavBarProps> = ({ onMobileClose, openMobile }) => {
       </Hidden>
     </>
   );
-};
-
-NavBar.propTypes = {
-  onMobileClose: PropTypes.func,
-  openMobile: PropTypes.bool
 };
 
 export default NavBar;

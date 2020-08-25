@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
-import type { FC, FormEvent } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Box,
   Button,
   FormHelperText,
+  makeStyles,
   Paper,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC, FormEvent, useState } from 'react';
 import QuillEditor from 'src/components/QuillEditor';
-import type { Theme } from 'src/theme';
+import { Theme } from 'src/theme';
 
 interface ProjectDescriprionProps {
   className?: string;
@@ -46,7 +45,9 @@ const ProjectDescription: FC<ProjectDescriprionProps> = ({
     setContent(value);
   };
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (
+    event: FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     event.preventDefault();
 
     try {
@@ -71,25 +72,16 @@ const ProjectDescription: FC<ProjectDescriprionProps> = ({
       className={clsx(classes.root, className)}
       {...rest}
     >
-      <Typography
-        variant="h3"
-        color="textPrimary"
-      >
+      <Typography variant="h3" color="textPrimary">
         Please select one option
       </Typography>
       <Box mt={2}>
-        <Typography
-          variant="subtitle1"
-          color="textSecondary"
-        >
-          Proin tincidunt lacus sed ante efficitur efficitur.
-          Quisque aliquam fringilla velit sit amet euismod.
+        <Typography variant="subtitle1" color="textSecondary">
+          Proin tincidunt lacus sed ante efficitur efficitur. Quisque aliquam
+          fringilla velit sit amet euismod.
         </Typography>
       </Box>
-      <Paper
-        className={classes.editorContainer}
-        variant="outlined"
-      >
+      <Paper className={classes.editorContainer} variant="outlined">
         <QuillEditor
           handleChange={handleChange}
           value={content}
@@ -98,20 +90,12 @@ const ProjectDescription: FC<ProjectDescriprionProps> = ({
       </Paper>
       {error && (
         <Box mt={2}>
-          <FormHelperText error>
-            {FormHelperText}
-          </FormHelperText>
+          <FormHelperText error>{FormHelperText}</FormHelperText>
         </Box>
       )}
-      <Box
-        mt={6}
-        display="flex"
-      >
+      <Box mt={6} display="flex">
         {onBack && (
-          <Button
-            onClick={onBack}
-            size="large"
-          >
+          <Button onClick={onBack} size="large">
             Previous
           </Button>
         )}

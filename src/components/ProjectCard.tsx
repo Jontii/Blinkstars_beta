@@ -1,32 +1,31 @@
-import React, { useState } from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import moment from 'moment';
-import numeral from 'numeral';
 import {
   Avatar,
   Box,
   Card,
   CardMedia,
+  colors,
   Divider,
   Grid,
   IconButton,
   Link,
+  makeStyles,
   SvgIcon,
   Tooltip,
-  Typography,
-  colors,
-  makeStyles
+  Typography
 } from '@material-ui/core';
-import { Rating } from '@material-ui/lab';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import { Rating } from '@material-ui/lab';
+import clsx from 'clsx';
+import moment from 'moment';
+import numeral from 'numeral';
+import PropTypes from 'prop-types';
+import React, { FC, useState } from 'react';
 import { Users as UsersIcon } from 'react-feather';
-import type { Theme } from 'src/theme';
+import { Link as RouterLink } from 'react-router-dom';
+import { Theme } from 'src/theme';
+import { Project } from 'src/types/project';
 import getInitials from 'src/utils/getInitials';
-import type { Project } from 'src/types/project';
 
 interface ProjectCardProps {
   className?: string;
@@ -51,37 +50,24 @@ const useStyles = makeStyles((theme: Theme) => ({
 const ProjectCard: FC<ProjectCardProps> = ({ className, project, ...rest }) => {
   const classes = useStyles();
   const [isLiked, setLiked] = useState<boolean>(project.isLiked);
-  const [likesCount, setLikesCount] = useState<number>(project.likesCount);
+  const [likesCount, setLikesCount] = useState<number>(project.likesCount === undefined ? 0 : project.likesCount);
 
   const handleLike = (): void => {
     setLiked(true);
-    setLikesCount((prevLikes) => prevLikes + 1);
+    setLikesCount(prevLikes => prevLikes + 1);
   };
 
   const handleUnlike = (): void => {
     setLiked(false);
-    setLikesCount((prevLikes) => prevLikes - 1);
+    setLikesCount(prevLikes => prevLikes - 1);
   };
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <Box p={3}>
-        <CardMedia
-          className={classes.image}
-          image={project.image}
-        />
-        <Box
-          display="flex"
-          alignItems="center"
-          mt={2}
-        >
-          <Avatar
-            alt="Author"
-            src={project.author.avatar}
-          >
+        <CardMedia className={classes.image} image={project.image} />
+        <Box display="flex" alignItems="center" mt={2}>
+          <Avatar alt="Author" src={project.author.avatar}>
             {getInitials(project.author.name)}
           </Avatar>
           <Box ml={2}>
@@ -93,12 +79,8 @@ const ProjectCard: FC<ProjectCardProps> = ({ className, project, ...rest }) => {
             >
               {project.title}
             </Link>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-            >
-              by
-              {' '}
+            <Typography variant="body2" color="textSecondary">
+              by{' '}
               <Link
                 color="textPrimary"
                 component={RouterLink}
@@ -106,94 +88,50 @@ const ProjectCard: FC<ProjectCardProps> = ({ className, project, ...rest }) => {
                 variant="h6"
               >
                 {project.author.name}
-              </Link>
-              {' '}
-              | Updated
-              {' '}
-              {moment(project.updatedAt).fromNow()}
+              </Link>{' '}
+              | Updated {moment(project.updatedAt).fromNow()}
             </Typography>
           </Box>
         </Box>
       </Box>
-      <Box
-        pb={2}
-        px={3}
-      >
-        <Typography
-          color="textSecondary"
-          variant="body2"
-        >
+      <Box pb={2} px={3}>
+        <Typography color="textSecondary" variant="body2">
           {project.caption}
         </Typography>
       </Box>
-      <Box
-        py={2}
-        px={3}
-      >
-        <Grid
-          alignItems="center"
-          container
-          justify="space-between"
-          spacing={3}
-        >
+      <Box py={2} px={3}>
+        <Grid alignItems="center" container justify="space-between" spacing={3}>
           <Grid item>
-            <Typography
-              variant="h5"
-              color="textPrimary"
-            >
+            <Typography variant="h5" color="textPrimary">
               {numeral(project.budget).format(`${project.currency}0,0.00`)}
             </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-            >
+            <Typography variant="body2" color="textSecondary">
               Budget
             </Typography>
           </Grid>
           <Grid item>
-            <Typography
-              variant="h5"
-              color="textPrimary"
-            >
+            <Typography variant="h5" color="textPrimary">
               {project.location}
             </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-            >
+            <Typography variant="body2" color="textSecondary">
               Location
             </Typography>
           </Grid>
           <Grid item>
-            <Typography
-              variant="h5"
-              color="textPrimary"
-            >
+            <Typography variant="h5" color="textPrimary">
               {project.type}
             </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-            >
+            <Typography variant="body2" color="textSecondary">
               Type
             </Typography>
           </Grid>
         </Grid>
       </Box>
       <Divider />
-      <Box
-        py={2}
-        pl={2}
-        pr={3}
-        display="flex"
-        alignItems="center"
-      >
+      <Box py={2} pl={2} pr={3} display="flex" alignItems="center">
         {isLiked ? (
           <Tooltip title="Unlike">
-            <IconButton
-              className={classes.likedButton}
-              onClick={handleUnlike}
-            >
+            <IconButton className={classes.likedButton} onClick={handleUnlike}>
               <FavoriteIcon fontSize="small" />
             </IconButton>
           </Tooltip>
@@ -204,10 +142,7 @@ const ProjectCard: FC<ProjectCardProps> = ({ className, project, ...rest }) => {
             </IconButton>
           </Tooltip>
         )}
-        <Typography
-          variant="subtitle2"
-          color="textSecondary"
-        >
+        <Typography variant="subtitle2" color="textSecondary">
           {likesCount}
         </Typography>
         <SvgIcon
@@ -217,18 +152,11 @@ const ProjectCard: FC<ProjectCardProps> = ({ className, project, ...rest }) => {
         >
           <UsersIcon />
         </SvgIcon>
-        <Typography
-          variant="subtitle2"
-          color="textSecondary"
-        >
+        <Typography variant="subtitle2" color="textSecondary">
           {project.membersCount}
         </Typography>
         <Box flexGrow={1} />
-        <Rating
-          value={project.rating}
-          size="small"
-          readOnly
-        />
+        <Rating value={project.rating} size="small" readOnly />
       </Box>
     </Card>
   );

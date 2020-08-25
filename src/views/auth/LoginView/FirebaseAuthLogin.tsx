@@ -1,21 +1,20 @@
-import React from 'react';
-import type { FC } from 'react';
-import clsx from 'clsx';
-import * as Yup from 'yup';
-import PropTypes from 'prop-types';
-import { Formik } from 'formik';
 import {
   Box,
   Button,
   Divider,
   FormHelperText,
+  makeStyles,
   TextField,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import clsx from 'clsx';
+import { Formik } from 'formik';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import useAuth from 'src/hooks/useAuth';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import { Theme } from 'src/theme';
+import * as Yup from 'yup';
 
 interface FirebaseAuthLoginProps {
   className?: string;
@@ -37,15 +36,20 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const FirebaseAuthLogin: FC<FirebaseAuthLoginProps> = ({ className, ...rest }) => {
+const FirebaseAuthLogin: FC<FirebaseAuthLoginProps> = ({
+  className,
+  ...rest
+}) => {
   const classes = useStyles();
+
+  // @ts-ignore
   const { signInWithEmailAndPassword, signInWithGoogle } = useAuth() as any;
   const isMountedRef = useIsMountedRef();
 
   const handleGoogleClick = async () => {
     try {
       await signInWithGoogle();
-    } catch(err) {
+    } catch (err) {
       console.error(err);
     }
   };
@@ -66,26 +70,16 @@ const FirebaseAuthLogin: FC<FirebaseAuthLoginProps> = ({ className, ...rest }) =
         />
         Sign in with Google
       </Button>
-      <Box
-        alignItems="center"
-        display="flex"
-        mt={2}
-      >
-        <Divider
-          className={classes.divider}
-          orientation="horizontal"
-        />
-        <Typography 
+      <Box alignItems="center" display="flex" mt={2}>
+        <Divider className={classes.divider} orientation="horizontal" />
+        <Typography
           color="textSecondary"
           variant="body1"
           className={classes.dividerText}
         >
           OR
         </Typography>
-        <Divider
-          className={classes.divider}
-          orientation="horizontal"
-        />
+        <Divider className={classes.divider} orientation="horizontal" />
       </Box>
       <Formik
         initialValues={{
@@ -94,14 +88,13 @@ const FirebaseAuthLogin: FC<FirebaseAuthLoginProps> = ({ className, ...rest }) =
           submit: null
         }}
         validationSchema={Yup.object().shape({
-          email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
+          email: Yup.string()
+            .email('Must be a valid email')
+            .max(255)
+            .required('Email is required'),
           password: Yup.string().max(255).required('Password is required')
         })}
-        onSubmit={async (values, {
-          setErrors,
-          setStatus,
-          setSubmitting
-        }) => {
+        onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
             await signInWithEmailAndPassword(values.email, values.password);
 
@@ -162,9 +155,7 @@ const FirebaseAuthLogin: FC<FirebaseAuthLoginProps> = ({ className, ...rest }) =
             />
             {errors.submit && (
               <Box mt={3}>
-                <FormHelperText error>
-                  {errors.submit}
-                </FormHelperText>
+                <FormHelperText error>{errors.submit}</FormHelperText>
               </Box>
             )}
             <Box mt={2}>
@@ -187,7 +178,7 @@ const FirebaseAuthLogin: FC<FirebaseAuthLoginProps> = ({ className, ...rest }) =
 };
 
 FirebaseAuthLogin.propTypes = {
-  className: PropTypes.string,
+  className: PropTypes.string
 };
 
 export default FirebaseAuthLogin;

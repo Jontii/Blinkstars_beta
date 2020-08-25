@@ -1,11 +1,3 @@
-import React, { useState } from 'react';
-import type {
-  FC,
-  ChangeEvent,
-  KeyboardEvent
-} from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Box,
   Card,
@@ -17,7 +9,10 @@ import {
   makeStyles
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import type { Theme } from 'src/theme';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { ChangeEvent, FC, KeyboardEvent, useState } from 'react';
+import { Theme } from 'src/theme';
 import MultiSelect from './MultiSelect';
 
 interface FilterProps {
@@ -27,11 +22,7 @@ interface FilterProps {
 const selectOptions = [
   {
     label: 'Type',
-    options: [
-      'Freelance',
-      'Full Time',
-      'Part Time',
-      'Internship']
+    options: ['Freelance', 'Full Time', 'Part Time', 'Internship']
   },
   {
     label: 'Level',
@@ -86,14 +77,14 @@ const Filter: FC<FilterProps> = ({ className, ...rest }) => {
 
     if (event.keyCode === 13 && inputValue) {
       if (!chips.includes(inputValue)) {
-        setChips((prevChips) => [...prevChips, inputValue]);
+        setChips(prevChips => [...prevChips, inputValue]);
         setInputValue('');
       }
     }
   };
 
   const handleChipDelete = (chip: string): void => {
-    setChips((prevChips) => prevChips.filter((prevChip) => chip !== prevChip));
+    setChips(prevChips => prevChips.filter(prevChip => chip !== prevChip));
   };
 
   const handleMultiSelectChange = (value: string[]): void => {
@@ -101,15 +92,8 @@ const Filter: FC<FilterProps> = ({ className, ...rest }) => {
   };
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <Box
-        p={2}
-        display="flex"
-        alignItems="center"
-      >
+    <Card className={clsx(classes.root, className)} {...rest}>
+      <Box p={2} display="flex" alignItems="center">
         <SearchIcon />
         <Input
           disableUnderline
@@ -122,13 +106,8 @@ const Filter: FC<FilterProps> = ({ className, ...rest }) => {
         />
       </Box>
       <Divider />
-      <Box
-        p={2}
-        display="flex"
-        alignItems="center"
-        flexWrap="wrap"
-      >
-        {chips.map((chip) => (
+      <Box p={2} display="flex" alignItems="center" flexWrap="wrap">
+        {chips.map(chip => (
           <Chip
             className={classes.chip}
             key={chip}
@@ -138,13 +117,8 @@ const Filter: FC<FilterProps> = ({ className, ...rest }) => {
         ))}
       </Box>
       <Divider />
-      <Box
-        display="flex"
-        alignItems="center"
-        flexWrap="wrap"
-        p={1}
-      >
-        {selectOptions.map((option) => (
+      <Box display="flex" alignItems="center" flexWrap="wrap" p={1}>
+        {selectOptions.map(option => (
           <MultiSelect
             key={option.label}
             label={option.label}
@@ -155,9 +129,7 @@ const Filter: FC<FilterProps> = ({ className, ...rest }) => {
         ))}
         <Box flexGrow={1} />
         <FormControlLabel
-          control={(
-            <Checkbox defaultChecked />
-          )}
+          control={<Checkbox defaultChecked />}
           label="In network"
         />
       </Box>

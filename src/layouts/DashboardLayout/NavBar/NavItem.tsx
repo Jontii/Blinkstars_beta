@@ -1,17 +1,11 @@
-import React, { useState } from 'react';
-import type { FC, ReactNode } from 'react';
-import { NavLink as RouterLink } from 'react-router-dom';
+import { Button, Collapse, ListItem, makeStyles } from '@material-ui/core';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import {
-  Button,
-  Collapse,
-  ListItem,
-  makeStyles
-} from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import type { Theme } from 'src/theme';
+import React, { FC, ReactNode, useState } from 'react';
+import { NavLink as RouterLink } from 'react-router-dom';
+import { Theme } from 'src/theme';
 
 interface NavItemProps {
   children?: ReactNode;
@@ -91,7 +85,7 @@ const NavItem: FC<NavItemProps> = ({
   const [open, setOpen] = useState<boolean>(openProp);
 
   const handleToggle = (): void => {
-    setOpen((prevOpen) => !prevOpen);
+    setOpen(prevOpen => !prevOpen);
   };
 
   let paddingLeft = 8;
@@ -110,25 +104,12 @@ const NavItem: FC<NavItemProps> = ({
         key={title}
         {...rest}
       >
-        <Button
-          className={classes.button}
-          onClick={handleToggle}
-          style={style}
-        >
-          {Icon && (
-            <Icon
-              className={classes.icon}
-              size="20"
-            />
-          )}
-          <span className={classes.title}>
-            {title}
-          </span>
+        <Button className={classes.button} onClick={handleToggle} style={style}>
+          {Icon && <Icon className={classes.icon} size="20" />}
+          <span className={classes.title}>{title}</span>
           {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
         </Button>
-        <Collapse in={open}>
-          {children}
-        </Collapse>
+        <Collapse in={open}>{children}</Collapse>
       </ListItem>
     );
   }
@@ -148,15 +129,8 @@ const NavItem: FC<NavItemProps> = ({
         style={style}
         to={href}
       >
-        {Icon && (
-          <Icon
-            className={classes.icon}
-            size="20"
-          />
-        )}
-        <span className={classes.title}>
-          {title}
-        </span>
+        {Icon && <Icon className={classes.icon} size="20" />}
+        <span className={classes.title}>{title}</span>
         {Info && <Info />}
       </Button>
     </ListItem>

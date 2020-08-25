@@ -1,18 +1,14 @@
-import React, {
-  useState,
-  useEffect
-} from 'react';
-import type { FC } from 'react';
-import Cookies from 'js-cookie';
 import {
   Box,
   Button,
   Link,
+  makeStyles,
   Portal,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import Cookies from 'js-cookie';
+import React, { FC, useEffect, useState } from 'react';
+import { Theme } from 'src/theme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -57,13 +53,9 @@ const CookiesNotification: FC = () => {
   return (
     <Portal>
       <div className={classes.root}>
-        <Typography
-          variant="body1"
-          color="inherit"
-        >
+        <Typography variant="body1" color="inherit">
           We use Cookies to ensure that we give you the best experience on our
-          website. Read our
-          {' '}
+          website. Read our{' '}
           <Link
             component="a"
             color="inherit"
@@ -75,11 +67,7 @@ const CookiesNotification: FC = () => {
           </Link>
           .
         </Typography>
-        <Box
-          mt={2}
-          display="flex"
-          justifyContent="flex-end"
-        >
+        <Box mt={2} display="flex" justifyContent="flex-end">
           <Button
             onClick={handleClose}
             variant="contained"

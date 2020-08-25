@@ -10,13 +10,12 @@ import {
   TextField,
   Typography
 } from '@material-ui/core';
+import Axios from 'axios';
 import clsx from 'clsx';
 import { Formik } from 'formik';
-import PropTypes from 'prop-types';
-import React, { useState, FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Plus as PlusIcon } from 'react-feather';
 import * as Yup from 'yup';
-import Axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
   root: {},

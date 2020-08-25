@@ -1,13 +1,3 @@
-import React, { useState } from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import * as Yup from 'yup';
-import {
-  Field,
-  SubmissionError,
-  reduxForm
-} from 'redux-form';
-import type { InjectedFormProps } from 'redux-form';
 import {
   Box,
   Button,
@@ -24,23 +14,35 @@ import {
   Typography
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
+import PropTypes from 'prop-types';
+import React, { FC, useState } from 'react';
+import {
+  Field,
+  InjectedFormProps,
+  reduxForm,
+  SubmissionError
+} from 'redux-form';
 import wait from 'src/utils/wait';
+import * as Yup from 'yup';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email().required('Required'),
   firstName: Yup.string().required('Required'),
   lastName: Yup.string().required('Required'),
-  password: Yup.string().min(7, 'Must be at least 7 characters').max(255).required('Required'),
+  password: Yup.string()
+    .min(7, 'Must be at least 7 characters')
+    .max(255)
+    .required('Required'),
   policy: Yup.boolean().oneOf([true], 'This field must be checked')
 });
 
-const validate = (values) => {
+const validate = values => {
   const formErrors = {};
 
   try {
     validationSchema.validateSync(values, { abortEarly: false });
   } catch (errors) {
-    errors.inner.forEach((error) => {
+    errors.inner.forEach(error => {
       formErrors[error.path] = error.message;
     });
   }
@@ -87,11 +89,7 @@ const renderCheckbox = ({
 }) => {
   return (
     <div>
-      <Box
-        alignItems="center"
-        display="flex"
-        ml={-1}
-      >
+      <Box alignItems="center" display="flex" ml={-1}>
         <Checkbox
           checked={!!input.value}
           onChange={input.onChange}
@@ -101,9 +99,7 @@ const renderCheckbox = ({
         {label}
       </Box>
       {Boolean(touched && invalid) && (
-        <FormHelperText error>
-          {error}
-        </FormHelperText>
+        <FormHelperText error>{error}</FormHelperText>
       )}
     </div>
   );
@@ -120,44 +116,26 @@ const BasicForm: FC<InjectedFormProps> = ({ handleSubmit, submitting }) => {
         <CardContent>
           {isAlertVisible && (
             <Box mb={3}>
-              <Alert
-                onClose={() => setAlertVisible(false)}
-                severity="info"
-              >
+              <Alert onClose={() => setAlertVisible(false)} severity="info">
                 This is an info alert - check it out!
               </Alert>
             </Box>
           )}
-          {(submitting) ? (
-            <Box
-              display="flex"
-              justifyContent="center"
-              my={5}
-            >
+          {submitting ? (
+            <Box display="flex" justifyContent="center" my={5}>
               <CircularProgress />
             </Box>
           ) : (
             <>
-              <Grid
-                container
-                spacing={2}
-              >
-                <Grid
-                  item
-                  md={6}
-                  xs={12}
-                >
+              <Grid container spacing={2}>
+                <Grid item md={6} xs={12}>
                   <Field
                     name="firstName"
                     label="First Name"
                     component={renderTextField}
                   />
                 </Grid>
-                <Grid
-                  item
-                  md={6}
-                  xs={12}
-                >
+                <Grid item md={6} xs={12}>
                   <Field
                     name="lastName"
                     label="Last Name"
@@ -184,22 +162,14 @@ const BasicForm: FC<InjectedFormProps> = ({ handleSubmit, submitting }) => {
               <Box mt={2}>
                 <Field
                   name="policy"
-                  label={(
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                    >
-                      I have read the
-                      {' '}
-                      <Link
-                        component="a"
-                        href="#"
-                        color="secondary"
-                      >
+                  label={
+                    <Typography variant="body2" color="textSecondary">
+                      I have read the{' '}
+                      <Link component="a" href="#" color="secondary">
                         Terms and Conditions
                       </Link>
                     </Typography>
-                )}
+                  }
                   component={renderCheckbox}
                 />
               </Box>

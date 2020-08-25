@@ -1,12 +1,6 @@
-import React from 'react';
-import type { FC } from 'react';
+import { Card, CardContent, Typography, useTheme } from '@material-ui/core';
+import React, { FC } from 'react';
 import Chart from 'react-apexcharts';
-import {
-  Card,
-  CardContent,
-  Typography,
-  useTheme
-} from '@material-ui/core';
 
 const LineChart: FC = () => {
   const theme = useTheme();
@@ -72,7 +66,20 @@ const LineChart: FC = () => {
           show: true,
           color: theme.palette.divider
         },
-        categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan', '10 Jan', '11 Jan', '12 Jan'],
+        categories: [
+          '01 Jan',
+          '02 Jan',
+          '03 Jan',
+          '04 Jan',
+          '05 Jan',
+          '06 Jan',
+          '07 Jan',
+          '08 Jan',
+          '09 Jan',
+          '10 Jan',
+          '11 Jan',
+          '12 Jan'
+        ],
         labels: {
           style: {
             colors: theme.palette.text.secondary
@@ -116,7 +123,20 @@ const LineChart: FC = () => {
     series: [
       {
         name: 'Page Views',
-        data: [3350, 1840, 2254, 5780, 9349, 5241, 2770, 2051, 3764, 2385, 5912, 8323]
+        data: [
+          3350,
+          1840,
+          2254,
+          5780,
+          9349,
+          5241,
+          2770,
+          2051,
+          3764,
+          2385,
+          5912,
+          8323
+        ]
       },
       {
         name: 'Session Duration',
@@ -128,17 +148,10 @@ const LineChart: FC = () => {
   return (
     <Card>
       <CardContent>
-        <Typography
-          variant="h4"
-          color="textPrimary"
-        >
+        <Typography variant="h4" color="textPrimary">
           Web Traffic
         </Typography>
-        <Chart
-          type="line"
-          height="300"
-          {...chart}
-        />
+        <Chart type="line" height="300" {...chart} />
       </CardContent>
     </Card>
   );

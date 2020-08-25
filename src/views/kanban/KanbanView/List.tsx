@@ -1,38 +1,26 @@
-import React, {
-  useState,
-  useRef
-} from 'react';
-import type { FC, ChangeEvent } from 'react';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import { useSnackbar } from 'notistack';
-import {
-  Droppable,
-  Draggable
-} from 'react-beautiful-dnd';
 import {
   Box,
   ClickAwayListener,
   Divider,
   IconButton,
+  makeStyles,
   Menu,
   MenuItem,
   Paper,
   SvgIcon,
   TextField,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
+import clsx from 'clsx';
+import { useSnackbar } from 'notistack';
+import PropTypes from 'prop-types';
+import React, { ChangeEvent, FC, useRef, useState } from 'react';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { MoreVertical as MoreIcon } from 'react-feather';
-import type { Theme } from 'src/theme';
-import { useDispatch, useSelector } from 'src/store';
-import type { RootState } from 'src/store';
-import {
-  clearList,
-  deleteList,
-  updateList
-} from 'src/slices/kanban';
-import type { List as ListType } from 'src/types/kanban';
+import { clearList, deleteList, updateList } from 'src/slices/kanban';
+import { RootState, useDispatch, useSelector } from 'src/store';
+import { Theme } from 'src/theme';
+import { List as ListType } from 'src/types/kanban';
 import Card from './Card';
 import CardAdd from './CardAdd';
 
@@ -82,7 +70,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const List: FC<ListProps> = ({ className, listId, ...rest }) => {
   const classes = useStyles();
   const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
-  const list = useSelector((state) => listSelector(state, listId));
+  const list = useSelector(state => listSelector(state, listId));
   const dispatch = useDispatch();
   const moreRef = useRef<HTMLButtonElement | null>(null);
   const { enqueueSnackbar } = useSnackbar();
@@ -161,17 +149,9 @@ const List: FC<ListProps> = ({ className, listId, ...rest }) => {
   };
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <div className={clsx(classes.root, className)} {...rest}>
       <Paper className={classes.inner}>
-        <Box
-          py={1}
-          px={2}
-          display="flex"
-          alignItems="center"
-        >
+        <Box py={1} px={2} display="flex" alignItems="center">
           {isRenaming ? (
             <ClickAwayListener onClickAway={handleRename}>
               <TextField
@@ -183,11 +163,7 @@ const List: FC<ListProps> = ({ className, listId, ...rest }) => {
               />
             </ClickAwayListener>
           ) : (
-            <Typography
-              color="inherit"
-              variant="h5"
-              onClick={handleRenameInit}
-            >
+            <Typography color="inherit" variant="h5" onClick={handleRenameInit}>
               {list.name}
             </Typography>
           )}
@@ -204,21 +180,11 @@ const List: FC<ListProps> = ({ className, listId, ...rest }) => {
           </IconButton>
         </Box>
         <Divider />
-        <Droppable
-          droppableId={list.id}
-          type="card"
-        >
-          {(provided) => (
-            <div
-              ref={provided.innerRef}
-              className={classes.droppableArea}
-            >
+        <Droppable droppableId={list.id} type="card">
+          {provided => (
+            <div ref={provided.innerRef} className={classes.droppableArea}>
               {list.cardIds.map((cardId, index) => (
-                <Draggable
-                  draggableId={cardId}
-                  index={index}
-                  key={cardId}
-                >
+                <Draggable draggableId={cardId} index={index} key={cardId}>
                   {(provided, snapshot) => (
                     <Card
                       cardId={cardId}
@@ -255,15 +221,9 @@ const List: FC<ListProps> = ({ className, listId, ...rest }) => {
           PaperProps={{ className: classes.menu }}
           getContentAnchorEl={null}
         >
-          <MenuItem onClick={handleRenameInit}>
-            Rename
-          </MenuItem>
-          <MenuItem onClick={handleClear}>
-            Clear
-          </MenuItem>
-          <MenuItem onClick={handleDelete}>
-            Delete
-          </MenuItem>
+          <MenuItem onClick={handleRenameInit}>Rename</MenuItem>
+          <MenuItem onClick={handleClear}>Clear</MenuItem>
+          <MenuItem onClick={handleDelete}>Delete</MenuItem>
         </Menu>
       </Paper>
     </div>

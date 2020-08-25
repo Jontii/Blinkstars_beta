@@ -1,10 +1,6 @@
 import moment from 'moment';
+import { Connection, Post, Profile } from 'src/types/social';
 import mock from 'src/utils/mock';
-import type {
-  Connection,
-  Post,
-  Profile
-} from 'src/types/social';
 
 mock.onGet('/api/social/profile').reply(() => {
   const profile: Profile = {
@@ -26,7 +22,8 @@ mock.onGet('/api/social/profile').reply(() => {
       title: 'UX Designer at'
     },
     profileProgress: 50,
-    quote: 'Everyone thinks of changing the world, but no one thinks of changing himself.'
+    quote:
+      'Everyone thinks of changing the world, but no one thinks of changing himself.'
   };
 
   return [200, { profile }];
@@ -84,10 +81,7 @@ mock.onGet('/api/social/posts').reply(() => {
             avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_5.png`,
             name: 'Anje Keizer'
           },
-          createdAt: moment()
-            .subtract(3, 'hours')
-            .toDate()
-            .getTime(),
+          createdAt: moment().subtract(3, 'hours').toDate().getTime(),
           message: 'Could use some more statistics, but that’s me haha'
         },
         {
@@ -97,17 +91,12 @@ mock.onGet('/api/social/posts').reply(() => {
             avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_8.png`,
             name: 'Miller Edwards'
           },
-          createdAt: moment()
-            .subtract(2, 'hours')
-            .toDate()
-            .getTime(),
-          message: 'Hmm, honestly this looks nice but I would change the shadow though',
+          createdAt: moment().subtract(2, 'hours').toDate().getTime(),
+          message:
+            'Hmm, honestly this looks nice but I would change the shadow though'
         }
       ],
-      createdAt: moment()
-        .subtract(4, 'hours')
-        .toDate()
-        .getTime(),
+      createdAt: moment().subtract(4, 'hours').toDate().getTime(),
       isLiked: true,
       likes: 24,
       media: `${process.env.PUBLIC_URL}/static/images/posts/post_1.png`,
@@ -128,11 +117,9 @@ mock.onGet('/api/social/posts').reply(() => {
             avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_11.png`,
             name: 'Shen Zhi'
           },
-          createdAt: moment()
-            .subtract(3, 'hours')
-            .toDate()
-            .getTime(),
-          message: 'That’s actually deep. Thanks for the design, would you consider making an interaction?'
+          createdAt: moment().subtract(3, 'hours').toDate().getTime(),
+          message:
+            'That’s actually deep. Thanks for the design, would you consider making an interaction?'
         },
         {
           id: '5e887feb11b7add1ebfcca78',
@@ -141,20 +128,15 @@ mock.onGet('/api/social/posts').reply(() => {
             avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_4.png`,
             name: 'Alex Richardson'
           },
-          createdAt: moment()
-            .subtract(2, 'hours')
-            .toDate()
-            .getTime(),
+          createdAt: moment().subtract(2, 'hours').toDate().getTime(),
           message: 'Oh... so sentimental'
         }
       ],
-      createdAt: moment()
-        .subtract(7, 'hours')
-        .toDate()
-        .getTime(),
+      createdAt: moment().subtract(7, 'hours').toDate().getTime(),
       isLiked: false,
       likes: 65,
-      message: 'As a human being, you are designed in a way that makes you incapable of experiencing any positive emotion unless you set an aim and progress towards it. What makes you happy is not, in fact, attaining it, but making progress towards it.'
+      message:
+        'As a human being, you are designed in a way that makes you incapable of experiencing any positive emotion unless you set an aim and progress towards it. What makes you happy is not, in fact, attaining it, but making progress towards it.'
     }
   ];
 
@@ -178,20 +160,14 @@ mock.onGet('/api/social/feed').reply(() => {
             avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_12.png`,
             name: 'Merrile Burgett'
           },
-          createdAt: moment()
-            .subtract(3, 'hours')
-            .toDate()
-            .getTime(),
-          message: 'I\'ve been using Angular for the past 3 years'
+          createdAt: moment().subtract(3, 'hours').toDate().getTime(),
+          message: "I've been using Angular for the past 3 years"
         }
       ],
-      createdAt: moment()
-        .subtract(16, 'minutes')
-        .toDate()
-        .getTime(),
+      createdAt: moment().subtract(16, 'minutes').toDate().getTime(),
       isLiked: true,
       likes: 1,
-      message: 'Hey guys! What\'s your favorite framework?'
+      message: "Hey guys! What's your favorite framework?"
     },
     {
       id: '5e887faca2b7a1ddce01221a',
@@ -208,10 +184,7 @@ mock.onGet('/api/social/feed').reply(() => {
             avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_5.png`,
             name: 'Anje Keizer'
           },
-          createdAt: moment()
-            .subtract(3, 'hours')
-            .toDate()
-            .getTime(),
+          createdAt: moment().subtract(3, 'hours').toDate().getTime(),
           message: 'Could use some more statistics, but that’s me haha'
         },
         {
@@ -221,17 +194,12 @@ mock.onGet('/api/social/feed').reply(() => {
             avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_8.png`,
             name: 'Miller Edwards'
           },
-          createdAt: moment()
-            .subtract(2, 'hours')
-            .toDate()
-            .getTime(),
-          message: 'Hmm, honestly this looks nice but I would change the shadow though'
+          createdAt: moment().subtract(2, 'hours').toDate().getTime(),
+          message:
+            'Hmm, honestly this looks nice but I would change the shadow though'
         }
       ],
-      createdAt: moment()
-        .subtract(4, 'hours')
-        .toDate()
-        .getTime(),
+      createdAt: moment().subtract(4, 'hours').toDate().getTime(),
       isLiked: true,
       likes: 24,
       media: `${process.env.PUBLIC_URL}/static/images/posts/post_1.png`,
@@ -252,11 +220,9 @@ mock.onGet('/api/social/feed').reply(() => {
             name: 'Shen Zhi',
             avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_11.png`
           },
-          createdAt: moment()
-            .subtract(3, 'hours')
-            .toDate()
-            .getTime(),
-          message: 'That’s actually deep. Thanks for the design, would you consider making an interaction?'
+          createdAt: moment().subtract(3, 'hours').toDate().getTime(),
+          message:
+            'That’s actually deep. Thanks for the design, would you consider making an interaction?'
         },
         {
           id: '5e887feb11b7add1ebfcca78',
@@ -265,20 +231,15 @@ mock.onGet('/api/social/feed').reply(() => {
             name: 'Alex Richardson',
             avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_4.png`
           },
-          createdAt: moment()
-            .subtract(2, 'hours')
-            .toDate()
-            .getTime(),
+          createdAt: moment().subtract(2, 'hours').toDate().getTime(),
           message: 'Oh... so sentimental'
         }
       ],
-      createdAt: moment()
-        .subtract(7, 'hours')
-        .toDate()
-        .getTime(),
+      createdAt: moment().subtract(7, 'hours').toDate().getTime(),
       isLiked: false,
       likes: 65,
-      message: 'As a human being, you are designed in a way that makes you incapable of experiencing any positive emotion unless you set an aim and progress towards it. What makes you happy is not, in fact, attaining it, but making progress towards it.'
+      message:
+        'As a human being, you are designed in a way that makes you incapable of experiencing any positive emotion unless you set an aim and progress towards it. What makes you happy is not, in fact, attaining it, but making progress towards it.'
     }
   ];
 

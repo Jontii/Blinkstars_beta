@@ -9,8 +9,7 @@ import {
 } from '@material-ui/core';
 import clsx from 'clsx';
 import { Formik } from 'formik';
-import PropTypes from 'prop-types';
-import React, { useState, FC } from 'react';
+import React, { FC, useState } from 'react';
 import QuillEditor from 'src/components/QuillEditor';
 import * as Yup from 'yup';
 

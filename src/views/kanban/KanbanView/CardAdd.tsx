@@ -1,18 +1,10 @@
-import React, {
-  useState
-} from 'react';
-import type { FC, ChangeEvent } from 'react';
-import PropTypes from 'prop-types';
+import { Box, Button, makeStyles, TextField } from '@material-ui/core';
 import clsx from 'clsx';
 import { useSnackbar } from 'notistack';
-import {
-  Box,
-  Button,
-  TextField,
-  makeStyles
-} from '@material-ui/core';
-import { useDispatch } from 'src/store';
+import PropTypes from 'prop-types';
+import React, { ChangeEvent, FC, useState } from 'react';
 import { createCard } from 'src/slices/kanban';
+import { useDispatch } from 'src/store';
 
 interface CardAddProps {
   className?: string;
@@ -23,11 +15,7 @@ const useStyles = makeStyles(() => ({
   root: {}
 }));
 
-const CardAdd: FC<CardAddProps> = ({
-  className,
-  listId,
-  ...rest
-}) => {
+const CardAdd: FC<CardAddProps> = ({ className, listId, ...rest }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
@@ -65,10 +53,7 @@ const CardAdd: FC<CardAddProps> = ({
   };
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <div className={clsx(classes.root, className)} {...rest}>
       {isExpanded ? (
         <>
           <TextField
@@ -79,15 +64,8 @@ const CardAdd: FC<CardAddProps> = ({
             value={name}
             variant="outlined"
           />
-          <Box
-            mt={2}
-            display="flex"
-            justifyContent="space-between"
-          >
-            <Button
-              onClick={handleAddCancel}
-              variant="text"
-            >
+          <Box mt={2} display="flex" justifyContent="space-between">
+            <Button onClick={handleAddCancel} variant="text">
               Cancel
             </Button>
             <Button
@@ -100,13 +78,8 @@ const CardAdd: FC<CardAddProps> = ({
           </Box>
         </>
       ) : (
-        <Box
-          display="flex"
-          justifyContent="center"
-        >
-          <Button onClick={handleAddInit}>
-            Add another card
-          </Button>
+        <Box display="flex" justifyContent="center">
+          <Button onClick={handleAddInit}>Add another card</Button>
         </Box>
       )}
     </div>

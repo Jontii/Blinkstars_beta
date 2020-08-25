@@ -1,24 +1,25 @@
-import React, {
-  useCallback,
-  useState,
-  useEffect
-} from 'react';
-import type { FC, ChangeEvent } from 'react';
 import {
   Box,
   Container,
   Divider,
+  makeStyles,
   Tab,
-  Tabs,
-  makeStyles
+  Tabs
 } from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import React, {
+  ChangeEvent,
+  FC,
+  useCallback,
+  useEffect,
+  useState
+} from 'react';
 import Page from 'src/components/Page';
-import axios from 'src/utils/axios';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
-import type { Customer } from 'src/types/customer';
-import Header from './Header';
+import { Theme } from 'src/theme';
+import { Customer } from 'src/types/customer';
+import axios from 'src/utils/axios';
 import Details from './Details';
+import Header from './Header';
 import Invoices from './Invoices';
 import Logs from './Logs';
 
@@ -49,7 +50,9 @@ const CustomerDetailsView: FC = () => {
 
   const getCustomer = useCallback(async () => {
     try {
-      const response = await axios.get<{ customer: Customer; }>('/api/customers/1');
+      const response = await axios.get<{ customer: Customer }>(
+        '/api/customers/1'
+      );
 
       if (isMountedRef.current) {
         setCustomer(response.data.customer);
@@ -68,10 +71,7 @@ const CustomerDetailsView: FC = () => {
   }
 
   return (
-    <Page
-      className={classes.root}
-      title="Customer Details"
-    >
+    <Page className={classes.root} title="Customer Details">
       <Container maxWidth={false}>
         <Header customer={customer} />
         <Box mt={3}>
@@ -82,12 +82,8 @@ const CustomerDetailsView: FC = () => {
             variant="scrollable"
             textColor="secondary"
           >
-            {tabs.map((tab) => (
-              <Tab
-                key={tab.value}
-                label={tab.label}
-                value={tab.value}
-              />
+            {tabs.map(tab => (
+              <Tab key={tab.value} label={tab.label} value={tab.value} />
             ))}
           </Tabs>
         </Box>

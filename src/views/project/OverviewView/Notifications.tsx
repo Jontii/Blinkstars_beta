@@ -1,7 +1,3 @@
-import React from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Card,
   IconButton,
@@ -10,16 +6,19 @@ import {
   ListItemIcon,
   ListItemSecondaryAction,
   ListItemText,
+  makeStyles,
   Tooltip,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
-import SendIcon from '@material-ui/icons/Send';
+import MailIcon from '@material-ui/icons/MailOutlineOutlined';
 import NavigateNextIcon from '@material-ui/icons/NavigateNextOutlined';
 import PaymentIcon from '@material-ui/icons/PaymentOutlined';
-import MailIcon from '@material-ui/icons/MailOutlineOutlined';
-import type { Theme } from 'src/theme';
-import type { Notification, NotificationType } from 'src/types/project';
+import SendIcon from '@material-ui/icons/Send';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { Theme } from 'src/theme';
+import { Notification, NotificationType } from 'src/types/project';
 
 interface NotificationsProps {
   className?: string;
@@ -46,7 +45,9 @@ const notifications: Notification[] = [
   }
 ];
 
-const getNotificationIcon = (notificationType: NotificationType): JSX.Element => {
+const getNotificationIcon = (
+  notificationType: NotificationType
+): JSX.Element => {
   const iconsMap = {
     invite: <SendIcon />,
     message: <MailIcon />,
@@ -67,10 +68,7 @@ const Notifications: FC<NotificationsProps> = ({ className, ...rest }) => {
   const classes = useStyles();
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <List>
         {notifications.map((notification, i) => (
           <ListItem
@@ -81,28 +79,19 @@ const Notifications: FC<NotificationsProps> = ({ className, ...rest }) => {
               {getNotificationIcon(notification.type)}
             </ListItemIcon>
             <ListItemText>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-              >
+              <Typography variant="body2" color="textSecondary">
                 <span className={classes.fontWeightMedium}>
                   {notification.value}
-                </span>
-                {' '}
+                </span>{' '}
                 <span className={classes.fontWeightMedium}>
-                  {notification.type}
-                  s
-                </span>
-                {' '}
+                  {notification.type}s
+                </span>{' '}
                 {notification.message}
               </Typography>
             </ListItemText>
             <ListItemSecondaryAction>
               <Tooltip title="View">
-                <IconButton
-                  edge="end"
-                  size="small"
-                >
+                <IconButton edge="end" size="small">
                   <NavigateNextIcon />
                 </IconButton>
               </Tooltip>

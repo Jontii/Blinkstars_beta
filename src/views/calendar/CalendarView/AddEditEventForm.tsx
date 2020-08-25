@@ -1,34 +1,29 @@
-import React from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import moment from 'moment';
-import _ from 'lodash';
-import * as Yup from 'yup';
-import { Formik } from 'formik';
-import { useSnackbar } from 'notistack';
 import {
   Box,
-  Typography,
-  TextField,
   Button,
-  IconButton,
   Divider,
   FormControlLabel,
   FormHelperText,
-  Switch,
+  IconButton,
+  makeStyles,
   SvgIcon,
-  makeStyles
+  Switch,
+  TextField,
+  Typography
 } from '@material-ui/core';
 import { DateTimePicker } from '@material-ui/pickers';
+import { Formik } from 'formik';
+import _ from 'lodash';
+import moment from 'moment';
+import { useSnackbar } from 'notistack';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import { Trash as TrashIcon } from 'react-feather';
-import type { Theme } from 'src/theme';
-import type { Event } from 'src/types/calendar';
+import { createEvent, deleteEvent, updateEvent } from 'src/slices/calendar';
 import { useDispatch } from 'src/store';
-import {
-  createEvent,
-  updateEvent,
-  deleteEvent
-} from 'src/slices/calendar';
+import { Theme } from 'src/theme';
+import { Event } from 'src/types/calendar';
+import * as Yup from 'yup';
 
 interface AddEditEventModalProps {
   event?: Event;
@@ -36,32 +31,43 @@ interface AddEditEventModalProps {
   onCancel?: () => void;
   onDeleteComplete?: () => void;
   onEditComplete?: () => void;
-  range?: { start: number, end: number };
+  range?: { start: number; end: number };
 }
 
-const getInitialValues = (event?: Event, range?: { start: number, end: number; }) => {
+const getInitialValues = (
+  event?: Event,
+  range?: { start: number; end: number }
+) => {
   if (event) {
-    return _.merge({}, {
-      allDay: false,
-      color: '',
-      description: '',
-      end: moment().add(30, 'minutes').toDate(),
-      start: moment().toDate(),
-      title: '',
-      submit: null
-    }, event);
+    return _.merge(
+      {},
+      {
+        allDay: false,
+        color: '',
+        description: '',
+        end: moment().add(30, 'minutes').toDate(),
+        start: moment().toDate(),
+        title: '',
+        submit: null
+      },
+      event
+    );
   }
 
   if (range) {
-    return _.merge({}, {
-      allDay: false,
-      color: '',
-      description: '',
-      end: new Date(range.end),
-      start: new Date(range.start),
-      title: '',
-      submit: null
-    }, event);
+    return _.merge(
+      {},
+      {
+        allDay: false,
+        color: '',
+        description: '',
+        end: new Date(range.end),
+        start: new Date(range.start),
+        title: '',
+        submit: null
+      },
+      event
+    );
   }
 
   return {
@@ -111,20 +117,18 @@ const AddEditEventForm: FC<AddEditEventModalProps> = ({
       validationSchema={Yup.object().shape({
         allDay: Yup.bool(),
         description: Yup.string().max(5000),
-        end: Yup.date()
-          .when(
-            'start',
-            (start: Date, schema: any) => (start && schema.min(start, 'End date must be later than start date'))
-          ),
+        end: Yup.date().when(
+          'start',
+          (start: Date, schema: any) =>
+            start && schema.min(start, 'End date must be later than start date')
+        ),
         start: Yup.date(),
         title: Yup.string().max(255).required('Title is required')
       })}
-      onSubmit={async (values, {
-        resetForm,
-        setErrors,
-        setStatus,
-        setSubmitting
-      }) => {
+      onSubmit={async (
+        values,
+        { resetForm, setErrors, setStatus, setSubmitting }
+      ) => {
         try {
           const data = {
             allDay: values.allDay,
@@ -209,13 +213,13 @@ const AddEditEventForm: FC<AddEditEventModalProps> = ({
             </Box>
             <Box mt={2}>
               <FormControlLabel
-                control={(
+                control={
                   <Switch
                     checked={values.allDay}
                     name="allDay"
                     onChange={handleChange}
                   />
-                )}
+                }
                 label="All day"
               />
             </Box>
@@ -226,7 +230,7 @@ const AddEditEventForm: FC<AddEditEventModalProps> = ({
                 label="Start date"
                 name="start"
                 onClick={() => setFieldTouched('end')}
-                onChange={(date) => setFieldValue('start', date)}
+                onChange={date => setFieldValue('start', date)}
                 value={values.start}
               />
             </Box>
@@ -237,24 +241,18 @@ const AddEditEventForm: FC<AddEditEventModalProps> = ({
                 label="End date"
                 name="end"
                 onClick={() => setFieldTouched('end')}
-                onChange={(date) => setFieldValue('end', date)}
+                onChange={date => setFieldValue('end', date)}
                 value={values.end}
               />
             </Box>
             {Boolean(touched.end && errors.end) && (
               <Box mt={2}>
-                <FormHelperText error>
-                  {errors.end}
-                </FormHelperText>
+                <FormHelperText error>{errors.end}</FormHelperText>
               </Box>
             )}
           </Box>
           <Divider />
-          <Box
-            p={2}
-            display="flex"
-            alignItems="center"
-          >
+          <Box p={2} display="flex" alignItems="center">
             {!isCreating && (
               <IconButton onClick={() => handleDelete()}>
                 <SvgIcon>
@@ -263,9 +261,7 @@ const AddEditEventForm: FC<AddEditEventModalProps> = ({
               </IconButton>
             )}
             <Box flexGrow={1} />
-            <Button onClick={onCancel}>
-              Cancel
-            </Button>
+            <Button onClick={onCancel}>Cancel</Button>
             <Button
               variant="contained"
               type="submit"
@@ -294,10 +290,10 @@ AddEditEventForm.propTypes = {
 };
 
 AddEditEventForm.defaultProps = {
-  onAddComplete: () => { },
-  onCancel: () => { },
-  onDeleteComplete: () => { },
-  onEditComplete: () => { }
+  onAddComplete: () => {},
+  onCancel: () => {},
+  onDeleteComplete: () => {},
+  onEditComplete: () => {}
 };
 
 export default AddEditEventForm;

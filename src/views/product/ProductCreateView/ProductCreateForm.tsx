@@ -1,11 +1,3 @@
-import React from 'react';
-import type { FC } from 'react';
-import { useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import * as Yup from 'yup';
-import { Formik } from 'formik';
-import { useSnackbar } from 'notistack';
 import {
   Box,
   Button,
@@ -17,13 +9,20 @@ import {
   FormControlLabel,
   FormHelperText,
   Grid,
+  makeStyles,
   Paper,
   TextField,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
-import QuillEditor from 'src/components/QuillEditor';
+import clsx from 'clsx';
+import { Formik } from 'formik';
+import { useSnackbar } from 'notistack';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { useHistory } from 'react-router-dom';
 import FilesDropzone from 'src/components/FilesDropzone';
+import QuillEditor from 'src/components/QuillEditor';
+import * as Yup from 'yup';
 
 interface ProductCreateFormProps {
   className?: string;
@@ -53,7 +52,10 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const ProductCreateForm: FC<ProductCreateFormProps> = ({ className, ...rest }) => {
+const ProductCreateForm: FC<ProductCreateFormProps> = ({
+  className,
+  ...rest
+}) => {
   const classes = useStyles();
   const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
@@ -85,11 +87,7 @@ const ProductCreateForm: FC<ProductCreateFormProps> = ({ className, ...rest }) =
         productSku: Yup.string().max(255),
         salePrice: Yup.number().min(0)
       })}
-      onSubmit={async (values, {
-        setErrors,
-        setStatus,
-        setSubmitting
-      }) => {
+      onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
           // NOTE: Make API request
           setStatus({ success: true });
@@ -121,15 +119,8 @@ const ProductCreateForm: FC<ProductCreateFormProps> = ({ className, ...rest }) =
           className={clsx(classes.root, className)}
           {...rest}
         >
-          <Grid
-            container
-            spacing={3}
-          >
-            <Grid
-              item
-              xs={12}
-              lg={8}
-            >
+          <Grid container spacing={3}>
+            <Grid item xs={12} lg={8}>
               <Card>
                 <CardContent>
                   <TextField
@@ -143,14 +134,8 @@ const ProductCreateForm: FC<ProductCreateFormProps> = ({ className, ...rest }) =
                     value={values.name}
                     variant="outlined"
                   />
-                  <Box
-                    mt={3}
-                    mb={1}
-                  >
-                    <Typography
-                      variant="subtitle2"
-                      color="textSecondary"
-                    >
+                  <Box mt={3} mb={1}>
+                    <Typography variant="subtitle2" color="textSecondary">
                       Description
                     </Typography>
                   </Box>
@@ -158,10 +143,12 @@ const ProductCreateForm: FC<ProductCreateFormProps> = ({ className, ...rest }) =
                     <QuillEditor
                       className={classes.editor}
                       value={values.description}
-                      onChange={(value: string) => setFieldValue('description', value)}
+                      onChange={(value: string) =>
+                        setFieldValue('description', value)
+                      }
                     />
                   </Paper>
-                  {(touched.description && errors.description) && (
+                  {touched.description && errors.description && (
                     <Box mt={2}>
                       <FormHelperText error>
                         {errors.description}
@@ -184,17 +171,16 @@ const ProductCreateForm: FC<ProductCreateFormProps> = ({ className, ...rest }) =
                   <CardHeader title="Prices" />
                   <Divider />
                   <CardContent>
-                    <Grid
-                      container
-                      spacing={3}
-                    >
+                    <Grid container spacing={3}>
                       <Grid item xs={12} md={6}>
                         <TextField
                           error={Boolean(touched.price && errors.price)}
                           fullWidth
-                          helperText={touched.price && errors.price
-                            ? errors.price
-                            : 'If you have a sale price this will be shown as old price'}
+                          helperText={
+                            touched.price && errors.price
+                              ? errors.price
+                              : 'If you have a sale price this will be shown as old price'
+                          }
                           label="Price"
                           name="price"
                           type="number"
@@ -221,27 +207,27 @@ const ProductCreateForm: FC<ProductCreateFormProps> = ({ className, ...rest }) =
                     </Grid>
                     <Box mt={2}>
                       <FormControlLabel
-                        control={(
+                        control={
                           <Checkbox
                             checked={values.isTaxable}
                             onChange={handleChange}
                             value={values.isTaxable}
                             name="isTaxable"
                           />
-                        )}
+                        }
                         label="Product is taxable"
                       />
                     </Box>
                     <Box mt={2}>
                       <FormControlLabel
-                        control={(
+                        control={
                           <Checkbox
                             checked={values.includesTaxes}
                             onChange={handleChange}
                             value={values.includesTaxes}
                             name="includesTaxes"
                           />
-                        )}
+                        }
                         label="Price includes taxes"
                       />
                     </Box>
@@ -249,11 +235,7 @@ const ProductCreateForm: FC<ProductCreateFormProps> = ({ className, ...rest }) =
                 </Card>
               </Box>
             </Grid>
-            <Grid
-              item
-              xs={12}
-              lg={4}
-            >
+            <Grid item xs={12} lg={4}>
               <Card>
                 <CardHeader title="Organize" />
                 <Divider />
@@ -268,11 +250,8 @@ const ProductCreateForm: FC<ProductCreateFormProps> = ({ className, ...rest }) =
                     value={values.category}
                     variant="outlined"
                   >
-                    {categories.map((category) => (
-                      <option
-                        key={category.id}
-                        value={category.id}
-                      >
+                    {categories.map(category => (
+                      <option key={category.id} value={category.id}>
                         {category.name}
                       </option>
                     ))}
@@ -309,9 +288,7 @@ const ProductCreateForm: FC<ProductCreateFormProps> = ({ className, ...rest }) =
           </Grid>
           {errors.submit && (
             <Box mt={3}>
-              <FormHelperText error>
-                {errors.submit}
-              </FormHelperText>
+              <FormHelperText error>{errors.submit}</FormHelperText>
             </Box>
           )}
           <Box mt={2}>

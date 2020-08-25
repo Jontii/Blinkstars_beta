@@ -1,7 +1,3 @@
-import React from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Avatar,
   Box,
@@ -12,8 +8,11 @@ import {
   makeStyles
 } from '@material-ui/core';
 import { AvatarGroup } from '@material-ui/lab';
-import type { Theme } from 'src/theme';
-import type { Thread } from 'src/types/chat';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { Theme } from 'src/theme';
+import { Thread } from 'src/types/chat';
 
 interface ThreadItemProps {
   active?: boolean;
@@ -23,16 +22,21 @@ interface ThreadItemProps {
 }
 
 const getDetails = (thread, currentUserId: string) => {
-  const otherParticipants = thread.participants.filter((participant) => participant.id !== currentUserId);
-  const displayNames = otherParticipants.reduce((names, participant) => [...names, participant.name], []).join(', ');
-  let displayText = ''
+  const otherParticipants = thread.participants.filter(
+    participant => participant.id !== currentUserId
+  );
+  const displayNames = otherParticipants
+    .reduce((names, participant) => [...names, participant.name], [])
+    .join(', ');
+  let displayText = '';
   const lastMessage = thread.messages[thread.messages.length - 1];
 
   if (lastMessage) {
     const sender = lastMessage.senderId === currentUserId ? 'Me: ' : '';
-    const message = lastMessage.contentType === 'image' ? 'Sent a photo' : lastMessage.body;
-    
-    displayText = `${sender}${message}`
+    const message =
+      lastMessage.contentType === 'image' ? 'Sent a photo' : lastMessage.body;
+
+    displayText = `${sender}${message}`;
   }
 
   return {
@@ -78,19 +82,19 @@ const ThreadItem: FC<ThreadItemProps> = ({
   return (
     <ListItem
       button
-      className={clsx(
-        { [classes.active]: active },
-        className
-      )}
+      className={clsx({ [classes.active]: active }, className)}
       onClick={onSelect}
       {...rest}
     >
       <ListItemAvatar>
         <AvatarGroup
-          classes={{ avatar: details.otherParticipants.length > 1 ? classes.smallAvatar : null }}
+          classes={{
+            avatar:
+              details.otherParticipants.length > 1 ? classes.smallAvatar : null
+          }}
           max={2}
         >
-          {details.otherParticipants.map((participant) => (
+          {details.otherParticipants.map(participant => (
             <Avatar
               alt="Person"
               key={participant.id}
@@ -113,12 +117,7 @@ const ThreadItem: FC<ThreadItemProps> = ({
           color: 'textSecondary'
         }}
       />
-      <Box
-        ml={2}
-        display="flex"
-        flexDirection="column"
-        alignItems="flex-end"
-      >
+      <Box ml={2} display="flex" flexDirection="column" alignItems="flex-end">
         {thread.unreadCount > 0 && (
           <Chip
             className={classes.unreadIndicator}
@@ -142,7 +141,7 @@ ThreadItem.propTypes = {
 
 ThreadItem.defaultProps = {
   active: false,
-  onSelect: () => { }
+  onSelect: () => {}
 };
 
 export default ThreadItem;

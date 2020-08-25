@@ -1,27 +1,24 @@
-import React from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
 import {
   AppBar,
   Box,
   Button,
-  Divider,
-  Toolbar,
   Hidden,
+  makeStyles,
+  Toolbar,
   Typography,
-  Link,
-  makeStyles
+  Divider
 } from '@material-ui/core';
-import { APP_VERSION } from 'src/constants';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { Link as RouterLink, Link } from 'react-router-dom';
 import Logo from 'src/components/Logo';
 
 interface TopBarProps {
   className?: string;
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.default
   },
@@ -49,31 +46,22 @@ const TopBar: FC<TopBarProps> = ({ className, ...rest }) => {
   const classes = useStyles();
 
   return (
-    <AppBar
-      className={clsx(classes.root, className)}
-      color="default"
-      {...rest}
-    >
+    <AppBar className={clsx(classes.root, className)} color="default" {...rest}>
       <Toolbar className={classes.toolbar}>
         <RouterLink to="/">
           <Logo className={classes.logo} />
         </RouterLink>
         <Hidden mdDown>
-          <Typography
-            variant="caption"
-            color="textSecondary"
-          >
+          <Typography variant="caption" color="textSecondary">
             Blinkstar
           </Typography>
         </Hidden>
         <Box flexGrow={1} />
-        {/* <Link
+        <Link
           className={classes.link}
           color="textSecondary"
           component={RouterLink}
           to="/app"
-          underline="none"
-          variant="body2"
         >
           Dashboard
         </Link>
@@ -82,12 +70,10 @@ const TopBar: FC<TopBarProps> = ({ className, ...rest }) => {
           color="textSecondary"
           component={RouterLink}
           to="/docs"
-          underline="none"
-          variant="body2"
         >
           Documentation
         </Link>
-        <Divider className={classes.divider} /> */}
+        <Divider className={classes.divider} />
         <Button
           color="primary"
           component={RouterLink}

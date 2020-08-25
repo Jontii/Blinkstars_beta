@@ -1,22 +1,21 @@
-import React from 'react';
-import type { FC } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Box,
   Hidden,
   IconButton,
   Input,
+  makeStyles,
   Paper,
-  Tooltip,
-  makeStyles
+  Tooltip
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import SearchIcon from '@material-ui/icons/Search';
-import type { Theme } from 'src/theme';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { Theme } from 'src/theme';
 
 interface ToolbarProps {
   className?: string;
@@ -64,10 +63,7 @@ const Toolbar: FC<ToolbarProps> = ({ className, ...rest }) => {
   };
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <div className={clsx(classes.root, className)} {...rest}>
       <Tooltip title="Back">
         <IconButton onClick={handleBack}>
           <ArrowBackIcon fontSize="small" />
@@ -75,10 +71,7 @@ const Toolbar: FC<ToolbarProps> = ({ className, ...rest }) => {
       </Tooltip>
       <Box flexGrow={1} />
       <Hidden mdDown>
-        <Paper
-          className={classes.searchContainer}
-          variant="outlined"
-        >
+        <Paper className={classes.searchContainer} variant="outlined">
           <SearchIcon color="action" />
           <Input
             className={classes.searchInput}
@@ -99,7 +92,7 @@ const Toolbar: FC<ToolbarProps> = ({ className, ...rest }) => {
       </Tooltip>
     </div>
   );
-}
+};
 
 Toolbar.propTypes = {
   className: PropTypes.string

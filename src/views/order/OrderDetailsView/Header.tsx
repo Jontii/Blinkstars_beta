@@ -1,19 +1,18 @@
-import React from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Breadcrumbs,
   Button,
   Grid,
   Link,
+  makeStyles,
   SvgIcon,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
-import { Edit as EditIcon } from 'react-feather';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { Edit as EditIcon } from 'react-feather';
+import { Link as RouterLink } from 'react-router-dom';
 
 interface HeaderProps {
   className?: string;
@@ -55,17 +54,11 @@ const Header: FC<HeaderProps> = ({ className, ...rest }) => {
           >
             Management
           </Link>
-          <Typography
-            variant="body1"
-            color="textPrimary"
-          >
+          <Typography variant="body1" color="textPrimary">
             Orders
           </Typography>
         </Breadcrumbs>
-        <Typography
-          variant="h3"
-          color="textPrimary"
-        >
+        <Typography variant="h3" color="textPrimary">
           Order Details
         </Typography>
       </Grid>
@@ -84,7 +77,7 @@ const Header: FC<HeaderProps> = ({ className, ...rest }) => {
       </Grid>
     </Grid>
   );
-}
+};
 
 Header.propTypes = {
   className: PropTypes.string

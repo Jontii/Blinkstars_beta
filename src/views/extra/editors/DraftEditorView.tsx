@@ -1,19 +1,18 @@
-import React from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import {
   Box,
   Breadcrumbs,
   Container,
   Link,
+  makeStyles,
   Paper,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import type { Theme } from 'src/theme';
-import Page from 'src/components/Page';
+import React, { FC } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import DraftEditor from 'src/components/DraftEditor';
+import Page from 'src/components/Page';
+import { Theme } from 'src/theme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -28,10 +27,7 @@ const DraftEditorView: FC = () => {
   const classes = useStyles();
 
   return (
-    <Page
-      className={classes.root}
-      title="Formik Form"
-    >
+    <Page className={classes.root} title="Formik Form">
       <Container maxWidth="lg">
         <Breadcrumbs
           separator={<NavigateNextIcon fontSize="small" />}
@@ -53,17 +49,11 @@ const DraftEditorView: FC = () => {
           >
             Extra
           </Link>
-          <Typography
-            variant="body1"
-            color="textPrimary"
-          >
+          <Typography variant="body1" color="textPrimary">
             Editors
           </Typography>
         </Breadcrumbs>
-        <Typography
-          variant="h3"
-          color="textPrimary"
-        >
+        <Typography variant="h3" color="textPrimary">
           DraftJS
         </Typography>
         <Box mt={3}>

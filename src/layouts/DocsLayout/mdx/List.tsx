@@ -1,8 +1,7 @@
-import React from 'react';
-import type { FC, ReactNode } from 'react';
-import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import PropTypes from 'prop-types';
+import React, { FC, ReactNode } from 'react';
+import { Theme } from 'src/theme';
 
 interface ListProps {
   children?: ReactNode;
@@ -16,22 +15,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const List: FC<ListProps> = ({
-  variant: Component,
-  children,
-  ...rest
-}) => {
+const List: FC<ListProps> = ({ variant: Component, children, ...rest }) => {
   const classes = useStyles();
 
   return (
-    <Component
-      className={classes.root}
-      {...rest}
-    >
+    <Component className={classes.root} {...rest}>
       {children}
     </Component>
   );
-}
+};
 
 List.propTypes = {
   children: PropTypes.node,

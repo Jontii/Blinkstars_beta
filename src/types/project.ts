@@ -1,7 +1,4 @@
-export type NotificationType = 
-  | 'invite'
-  | 'message'
-  | 'payout';
+export type NotificationType = 'invite' | 'message' | 'payout';
 
 export interface Notification {
   id: string;

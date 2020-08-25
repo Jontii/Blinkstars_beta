@@ -1,29 +1,27 @@
-import React from 'react';
-import type { FC, ChangeEvent } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import moment from 'moment';
 import {
   Avatar,
   Box,
   Checkbox,
-  IconButton,
-  Hidden,
-  Tooltip,
-  Typography,
   colors,
-  makeStyles
+  Hidden,
+  IconButton,
+  makeStyles,
+  Tooltip,
+  Typography
 } from '@material-ui/core';
-import StarIcon from '@material-ui/icons/Star';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
 import LabelImportantIcon from '@material-ui/icons/LabelImportant';
 import LabelImportantOutlinedIcon from '@material-ui/icons/LabelImportantOutlined';
-import type { Theme } from 'src/theme';
-import getInitials from 'src/utils/getInitials';
+import StarIcon from '@material-ui/icons/Star';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import clsx from 'clsx';
+import moment from 'moment';
+import PropTypes from 'prop-types';
+import React, { ChangeEvent, FC } from 'react';
+import { Link as RouterLink, useParams } from 'react-router-dom';
 import { useSelector } from 'src/store';
-import type { Mail } from 'src/types/mail';
+import { Theme } from 'src/theme';
+import { Mail } from 'src/types/mail';
+import getInitials from 'src/utils/getInitials';
 
 interface MailItemProps {
   className?: string;
@@ -139,9 +137,10 @@ const MailItem: FC<MailItemProps> = ({
 }) => {
   const classes = useStyles();
   const params = useParams();
-  const { labels } = useSelector((state) => state.mail);
+  const { labels } = useSelector(state => state.mail);
 
-  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>): void => (event.target.checked ? onSelect() : onDeselect());
+  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>): void =>
+    event.target.checked ? onSelect() : onDeselect();
 
   const handleStarToggle = (): void => {
     // dispatch action
@@ -166,15 +165,8 @@ const MailItem: FC<MailItemProps> = ({
       {...rest}
     >
       <Hidden smDown>
-        <Box
-          mr={1}
-          display="flex"
-          alignItems="center"
-        >
-          <Checkbox
-            checked={selected}
-            onChange={handleCheckboxChange}
-          />
+        <Box mr={1} display="flex" alignItems="center">
+          <Checkbox checked={selected} onChange={handleCheckboxChange} />
           <Tooltip title="Starred">
             <IconButton onClick={handleStarToggle}>
               {mail.isStarred ? (
@@ -204,14 +196,8 @@ const MailItem: FC<MailItemProps> = ({
         to={to}
         className={classes.content}
       >
-        <Avatar src={mail.from.avatar}>
-          {getInitials(mail.from.name)}
-        </Avatar>
-        <Box
-          minWidth="1px"
-          ml={1}
-          className={classes.details}
-        >
+        <Avatar src={mail.from.avatar}>{getInitials(mail.from.name)}</Avatar>
+        <Box minWidth="1px" ml={1} className={classes.details}>
           <Typography
             variant="body2"
             color="textPrimary"
@@ -232,21 +218,15 @@ const MailItem: FC<MailItemProps> = ({
               color="textSecondary"
               className={classes.message}
             >
-              <Box
-                component="span"
-                ml={2}
-              >
+              <Box component="span" ml={2}>
                 -
               </Box>
               {mail.message}
             </Typography>
             {mail.labelIds.length > 0 && (
-              <Box
-                display="flex"
-                mx={2}
-              >
+              <Box display="flex" mx={2}>
                 {mail.labelIds.map((labelId: string) => {
-                  const label = labels.find((_label) => _label.id === labelId);
+                  const label = labels.find(_label => _label.id === labelId);
 
                   if (!label) return null;
 

@@ -1,17 +1,10 @@
-import React from 'react';
-import type { FC } from 'react';
+import { Avatar, Box, Card, makeStyles, Typography } from '@material-ui/core';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import {
-  Avatar,
-  Box,
-  Card,
-  Typography,
-  makeStyles
-} from '@material-ui/core';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-import type { Theme } from 'src/theme';
+import React, { FC } from 'react';
 import Label from 'src/components/Label';
+import { Theme } from 'src/theme';
 
 interface TodaysMoneyProps {
   className?: string;
@@ -44,10 +37,7 @@ const TodaysMoney: FC<TodaysMoneyProps> = ({ className, ...rest }) => {
   };
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <Box flexGrow={1}>
         <Typography
           component="h3"
@@ -57,15 +47,8 @@ const TodaysMoney: FC<TodaysMoneyProps> = ({ className, ...rest }) => {
         >
           Todays money
         </Typography>
-        <Box
-          display="flex"
-          alignItems="center"
-          flexWrap="wrap"
-        >
-          <Typography
-            variant="h3"
-            color="textPrimary"
-          >
+        <Box display="flex" alignItems="center" flexWrap="wrap">
+          <Typography variant="h3" color="textPrimary">
             {data.currency}
             {data.value}
           </Typography>
@@ -74,8 +57,7 @@ const TodaysMoney: FC<TodaysMoneyProps> = ({ className, ...rest }) => {
             color={data.difference > 0 ? 'success' : 'error'}
           >
             {data.difference > 0 ? '+' : ''}
-            {data.difference}
-            %
+            {data.difference}%
           </Label>
         </Box>
       </Box>

@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-import type { FC, ReactNode } from 'react';
-import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import PropTypes from 'prop-types';
+import React, { FC, ReactNode, useState } from 'react';
+import { Theme } from 'src/theme';
 import NavBar from './NavBar';
 import TopBar from './TopBar';
 
 interface DashboardLayoutProps {
-  children?: ReactNode
+  children?: ReactNode;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -52,9 +51,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ children }) => {
       />
       <div className={classes.wrapper}>
         <div className={classes.contentContainer}>
-          <div className={classes.content}>
-            {children}
-          </div>
+          <div className={classes.content}>{children}</div>
         </div>
       </div>
     </div>

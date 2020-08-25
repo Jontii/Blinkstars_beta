@@ -16,11 +16,7 @@ export interface OrderItem {
   unitAmount: number;
 }
 
-export type OrderStatus =
-  | 'canceled'
-  | 'completed'
-  | 'pending'
-  | 'rejected';
+export type OrderStatus = 'canceled' | 'completed' | 'pending' | 'rejected';
 
 export interface Order {
   id: string;
@@ -28,9 +24,9 @@ export interface Order {
   createdAt: number;
   currency?: string;
   customer: OrderCustomer;
-  items?: OrderItem[],
+  items?: OrderItem[];
   number?: string;
   paymentMethod: string;
-  status: OrderStatus
+  status: OrderStatus;
   totalAmount?: number;
 }

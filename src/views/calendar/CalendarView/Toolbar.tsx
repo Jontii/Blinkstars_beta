@@ -1,27 +1,22 @@
-import React from 'react';
-import type {
-  ElementType,
-  FC,
-  ReactNode
-} from 'react';
-import clsx from 'clsx';
-import moment from 'moment';
-import PropTypes from 'prop-types';
 import {
   Button,
   ButtonGroup,
   Grid,
   Hidden,
   IconButton,
+  makeStyles,
   Tooltip,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
-import ViewConfigIcon from '@material-ui/icons/ViewComfyOutlined';
-import ViewWeekIcon from '@material-ui/icons/ViewWeekOutlined';
-import ViewDayIcon from '@material-ui/icons/ViewDayOutlined';
 import ViewAgendaIcon from '@material-ui/icons/ViewAgendaOutlined';
-import type { View } from 'src/types/calendar';
+import ViewConfigIcon from '@material-ui/icons/ViewComfyOutlined';
+import ViewDayIcon from '@material-ui/icons/ViewDayOutlined';
+import ViewWeekIcon from '@material-ui/icons/ViewWeekOutlined';
+import clsx from 'clsx';
+import moment from 'moment';
+import PropTypes from 'prop-types';
+import React, { ElementType, FC, ReactNode } from 'react';
+import { View } from 'src/types/calendar';
 
 interface ToolbarProps {
   children?: ReactNode;
@@ -99,22 +94,16 @@ const Toolbar: FC<ToolbarProps> = ({
       </Grid>
       <Hidden smDown>
         <Grid item>
-          <Typography
-            variant="h3"
-            color="textPrimary"
-          >
+          <Typography variant="h3" color="textPrimary">
             {moment(date).format('MMMM YYYY')}
           </Typography>
         </Grid>
         <Grid item>
-          {viewOptions.map((viewOption) => {
+          {viewOptions.map(viewOption => {
             const Icon = viewOption.icon;
 
             return (
-              <Tooltip
-                key={viewOption.value}
-                title={viewOption.label}
-              >
+              <Tooltip key={viewOption.value} title={viewOption.label}>
                 <IconButton
                   color={viewOption.value === view ? 'secondary' : 'default'}
                   onClick={() => onViewChange(viewOption.value)}
@@ -139,7 +128,12 @@ Toolbar.propTypes = {
   onDateToday: PropTypes.func,
   onAddClick: PropTypes.func,
   onViewChange: PropTypes.func,
-  view: PropTypes.oneOf(['dayGridMonth', 'timeGridWeek', 'timeGridDay', 'listWeek'])
+  view: PropTypes.oneOf([
+    'dayGridMonth',
+    'timeGridWeek',
+    'timeGridDay',
+    'listWeek'
+  ])
 };
 
 Toolbar.defaultProps = {

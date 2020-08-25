@@ -1,7 +1,3 @@
-import React, { useState } from 'react';
-import type { FC } from 'react';
-import * as Yup from 'yup';
-import { Formik } from 'formik';
 import {
   Box,
   Button,
@@ -18,7 +14,10 @@ import {
   Typography
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
+import { Formik } from 'formik';
+import React, { FC, useState } from 'react';
 import wait from 'src/utils/wait';
+import * as Yup from 'yup';
 
 const BasicForm: FC = () => {
   const [isAlertVisible, setAlertVisible] = useState<boolean>(true);
@@ -37,15 +36,16 @@ const BasicForm: FC = () => {
         email: Yup.string().email().required('Required'),
         firstName: Yup.string().required('Required'),
         lastName: Yup.string().required('Required'),
-        password: Yup.string().min(7, 'Must be at least 7 characters').max(255).required('Required'),
+        password: Yup.string()
+          .min(7, 'Must be at least 7 characters')
+          .max(255)
+          .required('Required'),
         policy: Yup.boolean().oneOf([true], 'This field must be checked')
       })}
-      onSubmit={async (values, {
-        resetForm,
-        setErrors,
-        setStatus,
-        setSubmitting
-      }) => {
+      onSubmit={async (
+        values,
+        { resetForm, setErrors, setStatus, setSubmitting }
+      ) => {
         try {
           // NOTE: Make API request
           await wait(1000);
@@ -75,33 +75,19 @@ const BasicForm: FC = () => {
           <CardContent>
             {isAlertVisible && (
               <Box mb={3}>
-                <Alert
-                  onClose={() => setAlertVisible(false)}
-                  severity="info"
-                >
+                <Alert onClose={() => setAlertVisible(false)} severity="info">
                   This is an info alert - check it out!
                 </Alert>
               </Box>
             )}
             {isSubmitting ? (
-              <Box
-                display="flex"
-                justifyContent="center"
-                my={5}
-              >
+              <Box display="flex" justifyContent="center" my={5}>
                 <CircularProgress />
               </Box>
             ) : (
               <form onSubmit={handleSubmit}>
-                <Grid
-                  container
-                  spacing={2}
-                >
-                  <Grid
-                    item
-                    md={6}
-                    xs={12}
-                  >
+                <Grid container spacing={2}>
+                  <Grid item md={6} xs={12}>
                     <TextField
                       error={Boolean(touched.firstName && errors.firstName)}
                       fullWidth
@@ -114,11 +100,7 @@ const BasicForm: FC = () => {
                       variant="outlined"
                     />
                   </Grid>
-                  <Grid
-                    item
-                    md={6}
-                    xs={12}
-                  >
+                  <Grid item md={6} xs={12}>
                     <TextField
                       error={Boolean(touched.lastName && errors.lastName)}
                       fullWidth
@@ -160,36 +142,21 @@ const BasicForm: FC = () => {
                     variant="outlined"
                   />
                 </Box>
-                <Box
-                  alignItems="center"
-                  display="flex"
-                  mt={2}
-                  ml={-1}
-                >
+                <Box alignItems="center" display="flex" mt={2} ml={-1}>
                   <Checkbox
                     checked={values.policy}
                     name="policy"
                     onChange={handleChange}
                   />
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                  >
-                    I have read the
-                    {' '}
-                    <Link
-                      component="a"
-                      href="#"
-                      color="secondary"
-                    >
+                  <Typography variant="body2" color="textSecondary">
+                    I have read the{' '}
+                    <Link component="a" href="#" color="secondary">
                       Terms and Conditions
                     </Link>
                   </Typography>
                 </Box>
                 {Boolean(touched.policy && errors.policy) && (
-                  <FormHelperText error>
-                    {errors.policy}
-                  </FormHelperText>
+                  <FormHelperText error>{errors.policy}</FormHelperText>
                 )}
                 <Box mt={2}>
                   <Button

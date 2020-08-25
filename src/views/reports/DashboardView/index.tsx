@@ -1,20 +1,12 @@
-import React from 'react';
-import type { FC } from 'react';
-import {
-  Container,
-  Grid,
-  makeStyles
-} from '@material-ui/core';
+import { Container, Grid, makeStyles } from '@material-ui/core';
+import React, { FC } from 'react';
 import Page from 'src/components/Page';
-import type { Theme } from 'src/theme';
+import { Theme } from 'src/theme';
 import Header from './Header';
 import LatestProjects from './LatestProjects';
 import NewProjects from './NewProjects';
 import PerformanceOverTime from './PerformanceOverTime';
-import RealTime from './RealTime';
 import RoiPerCustomer from './RoiPerCustomer';
-import SystemHealth from './SystemHealth';
-import TeamTasks from './TeamTasks';
 import TodaysMoney from './TodaysMoney';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -30,30 +22,14 @@ const DashboardView: FC = () => {
   const classes = useStyles();
 
   return (
-    <Page
-      className={classes.root}
-      title="Dashboard"
-    >
+    <Page className={classes.root} title="Dashboard">
       <Container maxWidth={false}>
         <Header />
-        <Grid
-          container
-          spacing={3}
-        >
-          <Grid
-            item
-            lg={3}
-            sm={6}
-            xs={12}
-          >
+        <Grid container spacing={3}>
+          <Grid item lg={3} sm={6} xs={12}>
             <TodaysMoney />
           </Grid>
-          <Grid
-            item
-            lg={3}
-            sm={6}
-            xs={12}
-          >
+          <Grid item lg={3} sm={6} xs={12}>
             <NewProjects />
           </Grid>
           {/* <Grid
@@ -64,12 +40,7 @@ const DashboardView: FC = () => {
           >
             <SystemHealth />
           </Grid> */}
-          <Grid
-            item
-            lg={3}
-            sm={6}
-            xs={12}
-          >
+          <Grid item lg={3} sm={6} xs={12}>
             <RoiPerCustomer />
           </Grid>
           {/* <Grid
@@ -79,11 +50,7 @@ const DashboardView: FC = () => {
           >
             <RealTime />
           </Grid> */}
-          <Grid
-            item
-            lg={9}
-            xs={12}
-          >
+          <Grid item lg={9} xs={12}>
             <PerformanceOverTime />
           </Grid>
           {/* <Grid
@@ -94,12 +61,7 @@ const DashboardView: FC = () => {
           >
             <TeamTasks />
           </Grid> */}
-          <Grid
-            item
-            lg={7}
-            xl={8}
-            xs={12}
-          >
+          <Grid item lg={7} xl={8} xs={12}>
             <LatestProjects />
           </Grid>
         </Grid>

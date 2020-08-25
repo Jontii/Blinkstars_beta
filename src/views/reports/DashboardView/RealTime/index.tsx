@@ -1,12 +1,3 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback
-} from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
 import {
   Box,
   Button,
@@ -15,12 +6,16 @@ import {
   List,
   ListItem,
   ListItemText,
-  Typography,
-  makeStyles
+  makeStyles,
+  Typography
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import type { Theme } from 'src/theme';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC, useCallback, useEffect, useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import { Theme } from 'src/theme';
 import Chart from './Chart';
 
 interface RealTimeProps {
@@ -64,7 +59,7 @@ const RealTime: FC<RealTimeProps> = ({ className, ...rest }) => {
 
   const getData = useCallback(() => {
     if (isMountedRef.current) {
-      setData((prevData) => {
+      setData(prevData => {
         const newData = [...prevData];
 
         newData.shift();
@@ -76,7 +71,7 @@ const RealTime: FC<RealTimeProps> = ({ className, ...rest }) => {
 
     setTimeout(() => {
       if (isMountedRef.current) {
-        setData((prevData) => {
+        setData(prevData => {
           const newData = [...prevData];
           const random = getRandomInt(100, 200);
 
@@ -115,54 +110,37 @@ const RealTime: FC<RealTimeProps> = ({ className, ...rest }) => {
   ];
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardHeader
-        action={(
-          <Typography
-            color="inherit"
-            variant="h3"
-          >
-            {
-              data[data.length - 1] === 0
-                ? data[data.length - 2]
-                : data[data.length - 1]
-            }
+        action={
+          <Typography color="inherit" variant="h3">
+            {data[data.length - 1] === 0
+              ? data[data.length - 2]
+              : data[data.length - 1]}
           </Typography>
-        )}
+        }
         classes={{ action: classes.current }}
         subheader="Page views per second"
         subheaderTypographyProps={{ color: 'textSecondary', variant: 'body2' }}
         title="Active users"
         titleTypographyProps={{ color: 'textPrimary' }}
       />
-      <Chart
-        data={data}
-        labels={labels}
-      />
+      <Chart data={data} labels={labels} />
       <List>
-        {pages.map((page) => (
-          <ListItem
-            divider
-            key={page.pathname}
-          >
+        {pages.map(page => (
+          <ListItem divider key={page.pathname}>
             <ListItemText
               primary={page.pathname}
-              primaryTypographyProps={{ color: 'textSecondary', variant: 'body2' }}
+              primaryTypographyProps={{
+                color: 'textSecondary',
+                variant: 'body2'
+              }}
             />
-            <Typography color="inherit">
-              {page.views}
-            </Typography>
+            <Typography color="inherit">{page.views}</Typography>
           </ListItem>
         ))}
       </List>
-      <Box
-        p={2}
-        display="flex"
-        justifyContent="flex-end"
-      >
+      <Box p={2} display="flex" justifyContent="flex-end">
         <Button
           component={RouterLink}
           size="small"

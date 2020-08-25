@@ -1,10 +1,9 @@
-import React from 'react';
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import ReactQuill from 'react-quill';
 import { makeStyles } from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import ReactQuill from 'react-quill';
+import { Theme } from 'src/theme';
 
 // NOTE: At this moment, this ReactQuill does not export
 // the types for props and we cannot extend them
@@ -82,10 +81,7 @@ const QuillEditor: FC<QuillEditorProps> = ({ className, ...rest }) => {
 
   return (
     // @ts-ignore
-    <ReactQuill
-      className={clsx(classes.root, className)}
-      {...rest}
-    />
+    <ReactQuill className={clsx(classes.root, className)} {...rest} />
   );
 };
 

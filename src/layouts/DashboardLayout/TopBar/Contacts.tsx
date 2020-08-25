@@ -1,11 +1,3 @@
-import React, {
-  useRef,
-  useState,
-  useEffect
-} from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import moment from 'moment';
 import {
   Avatar,
   Box,
@@ -15,17 +7,20 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
+  makeStyles,
   Popover,
   SvgIcon,
   Tooltip,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
+import moment from 'moment';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { Users as UsersIcon } from 'react-feather';
-import type { Theme } from 'src/theme';
-import { useDispatch, useSelector } from 'src/store';
-import { getContacts } from 'src/slices/chat';
+import { Link as RouterLink } from 'react-router-dom';
 import OnlineIndicator from 'src/components/OnlineIndicator';
+import { getContacts } from 'src/slices/chat';
+import { useDispatch, useSelector } from 'src/store';
+import { Theme } from 'src/theme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   popover: {
@@ -47,7 +42,7 @@ const Contacts: FC = () => {
   const classes = useStyles();
   const ref = useRef<any>(null);
   const dispatch = useDispatch();
-  const { contacts } = useSelector((state) => state.chat);
+  const { contacts } = useSelector(state => state.chat);
   const [isOpen, setOpen] = useState<boolean>(false);
 
   const handleOpen = (): void => {
@@ -65,11 +60,7 @@ const Contacts: FC = () => {
   return (
     <>
       <Tooltip title="Contacts">
-        <IconButton
-          color="inherit"
-          onClick={handleOpen}
-          ref={ref}
-        >
+        <IconButton color="inherit" onClick={handleOpen} ref={ref}>
           <SvgIcon fontSize="small">
             <UsersIcon />
           </SvgIcon>
@@ -85,33 +76,23 @@ const Contacts: FC = () => {
         onClose={handleClose}
         open={isOpen}
       >
-
-        <Typography
-          variant="h4"
-          color="textPrimary"
-        >
+        <Typography variant="h4" color="textPrimary">
           Contacts
         </Typography>
         <Box mt={2}>
           <List disablePadding>
-            {contacts.allIds.map((contactId) => {
+            {contacts.allIds.map(contactId => {
               const contact = contacts.byId[contactId];
 
               return (
-                <ListItem
-                  disableGutters
-                  key={contact.id}
-                >
+                <ListItem disableGutters key={contact.id}>
                   <ListItemAvatar>
-                    <Avatar
-                      alt="Person"
-                      src={contact.avatar}
-                    />
+                    <Avatar alt="Person" src={contact.avatar} />
                   </ListItemAvatar>
                   <ListItemText
                     className={classes.listItemText}
                     disableTypography
-                    primary={(
+                    primary={
                       <Link
                         color="textPrimary"
                         component={RouterLink}
@@ -123,19 +104,12 @@ const Contacts: FC = () => {
                       >
                         {contact.name}
                       </Link>
-                    )}
+                    }
                   />
                   {contact.isActive ? (
-                    <OnlineIndicator
-                      size="small"
-                      status="online"
-                    />
+                    <OnlineIndicator size="small" status="online" />
                   ) : (
-                    <Typography
-                      color="textSecondary"
-                      noWrap
-                      variant="caption"
-                    >
+                    <Typography color="textSecondary" noWrap variant="caption">
                       {moment(contact.lastActivity).fromNow()}
                     </Typography>
                   )}

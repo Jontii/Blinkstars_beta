@@ -1,20 +1,16 @@
-import React from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
 import {
   Box,
   IconButton,
+  makeStyles,
   SvgIcon,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
-import {
-  Settings as SettingsIcon,
-  Edit as EditIcon
-} from 'react-feather';
-import type { Theme } from 'src/theme';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { Edit as EditIcon, Settings as SettingsIcon } from 'react-feather';
+import { Link as RouterLink } from 'react-router-dom';
+import { Theme } from 'src/theme';
 
 interface SettingsProps {
   className?: string;
@@ -34,14 +30,8 @@ const Settings: FC<SettingsProps> = ({ className, ...rest }) => {
   const classes = useStyles();
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <Typography
-        variant="h3"
-        color="textPrimary"
-      >
+    <div className={clsx(classes.root, className)} {...rest}>
+      <Typography variant="h3" color="textPrimary">
         Chats
       </Typography>
       <Box flexGrow={1} />
@@ -50,10 +40,7 @@ const Settings: FC<SettingsProps> = ({ className, ...rest }) => {
           <SettingsIcon />
         </SvgIcon>
       </IconButton>
-      <IconButton
-        component={RouterLink}
-        to="/app/chat/new"
-      >
+      <IconButton component={RouterLink} to="/app/chat/new">
         <SvgIcon fontSize="small">
           <EditIcon />
         </SvgIcon>

@@ -1,9 +1,3 @@
-import React from 'react';
-import type { FC } from 'react';
-import clsx from 'clsx';
-import * as Yup from 'yup';
-import PropTypes from 'prop-types';
-import { Formik } from 'formik';
 import {
   Box,
   Button,
@@ -11,13 +5,18 @@ import {
   Divider,
   FormHelperText,
   Link,
+  makeStyles,
   TextField,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
-import type { Theme } from 'src/theme';
+import clsx from 'clsx';
+import { Formik } from 'formik';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import useAuth from 'src/hooks/useAuth';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import { Theme } from 'src/theme';
+import * as Yup from 'yup';
 
 interface FirebaseAuthRegisterProps {
   className?: string;
@@ -39,15 +38,19 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const FirebaseAuthRegister: FC<FirebaseAuthRegisterProps> = ({ className, ...rest }) => {
+const FirebaseAuthRegister: FC<FirebaseAuthRegisterProps> = ({
+  className,
+  ...rest
+}) => {
   const classes = useStyles();
+  // @ts-ignore
   const { createUserWithEmailAndPassword, signInWithGoogle } = useAuth() as any;
   const isMountedRef = useIsMountedRef();
 
   const handleGoogleClick = async () => {
     try {
       await signInWithGoogle();
-    } catch(err) {
+    } catch (err) {
       console.error(err);
     }
   };
@@ -68,26 +71,16 @@ const FirebaseAuthRegister: FC<FirebaseAuthRegisterProps> = ({ className, ...res
         />
         Register with Google
       </Button>
-      <Box
-        alignItems="center"
-        display="flex"
-        mt={2}
-      >
-        <Divider
-          className={classes.divider}
-          orientation="horizontal"
-        />
-        <Typography 
+      <Box alignItems="center" display="flex" mt={2}>
+        <Divider className={classes.divider} orientation="horizontal" />
+        <Typography
           color="textSecondary"
           variant="body1"
           className={classes.dividerText}
         >
           OR
         </Typography>
-        <Divider
-          className={classes.divider}
-          orientation="horizontal"
-        />
+        <Divider className={classes.divider} orientation="horizontal" />
       </Box>
       <Formik
         initialValues={{
@@ -97,15 +90,17 @@ const FirebaseAuthRegister: FC<FirebaseAuthRegisterProps> = ({ className, ...res
           submit: null
         }}
         validationSchema={Yup.object().shape({
-          email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-          password: Yup.string().min(7).max(255).required('Password is required'),
+          email: Yup.string()
+            .email('Must be a valid email')
+            .max(255)
+            .required('Email is required'),
+          password: Yup.string()
+            .min(7)
+            .max(255)
+            .required('Password is required'),
           policy: Yup.boolean().oneOf([true], 'This field must be checked')
         })}
-        onSubmit={async (values, {
-          setErrors,
-          setStatus,
-          setSubmitting
-        }) => {
+        onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
             await createUserWithEmailAndPassword(values.email, values.password);
 
@@ -164,42 +159,25 @@ const FirebaseAuthRegister: FC<FirebaseAuthRegisterProps> = ({ className, ...res
               value={values.password}
               variant="outlined"
             />
-            <Box
-              alignItems="center"
-              display="flex"
-              mt={2}
-              ml={-1}
-            >
+            <Box alignItems="center" display="flex" mt={2} ml={-1}>
               <Checkbox
                 checked={values.policy}
                 name="policy"
                 onChange={handleChange}
               />
-              <Typography
-                variant="body2"
-                color="textSecondary"
-              >
-                I have read the
-                {' '}
-                <Link
-                  component="a"
-                  href="#"
-                  color="secondary"
-                >
+              <Typography variant="body2" color="textSecondary">
+                I have read the{' '}
+                <Link component="a" href="#" color="secondary">
                   Terms and Conditions
                 </Link>
               </Typography>
             </Box>
             {Boolean(touched.policy && errors.policy) && (
-              <FormHelperText error>
-                {errors.policy}
-              </FormHelperText>
+              <FormHelperText error>{errors.policy}</FormHelperText>
             )}
             {errors.submit && (
               <Box mt={3}>
-                <FormHelperText error>
-                  {errors.submit}
-                </FormHelperText>
+                <FormHelperText error>{errors.submit}</FormHelperText>
               </Box>
             )}
             <Box mt={2}>

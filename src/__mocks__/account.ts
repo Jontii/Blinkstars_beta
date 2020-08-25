@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
-import { v4 as uuidv4 } from 'uuid';
 import mock from 'src/utils/mock';
 import wait from 'src/utils/wait';
+import { v4 as uuidv4 } from 'uuid';
 
 const JWT_SECRET = 'devias-top-secret-key';
 const JWT_EXPIRES_IN = '2 days';
@@ -79,7 +79,7 @@ mock.onPost('/api/account/register').reply(async config => {
   try {
     await wait(1000);
 
-    const { email, name, password } = JSON.parse(config.data);
+    const { email, avatar, country, phone, name, password } = JSON.parse(config.data);
     let user = users.find(_user => _user.email === email);
 
     if (user) {
@@ -88,16 +88,16 @@ mock.onPost('/api/account/register').reply(async config => {
 
     user = {
       id: uuidv4(),
-      avatar: null,
+      avatar,
       canHire: false,
-      country: null,
+      country,
       email,
       isPublic: true,
       name,
       password,
-      phone: null,
+      phone,
       role: 'admin',
-      state: null,
+      state: '',
       tier: 'Standard'
     };
 

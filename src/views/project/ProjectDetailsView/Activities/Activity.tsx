@@ -1,23 +1,22 @@
-import React from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import moment from 'moment';
 import {
   Avatar,
   Card,
-  Typography,
+  colors,
   Link,
   makeStyles,
-  colors
+  Typography
 } from '@material-ui/core';
-import GetAppIcon from '@material-ui/icons/GetApp';
-import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import DashboardIcon from '@material-ui/icons/DashboardOutlined';
-import type { Theme } from 'src/theme';
-import type { ProjectActivity } from 'src/types/project';
+import GetAppIcon from '@material-ui/icons/GetApp';
+import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
+import clsx from 'clsx';
+import moment from 'moment';
+import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import { Theme } from 'src/theme';
+import { ProjectActivity } from 'src/types/project';
 
 interface ActivityProps {
   activity: ProjectActivity;
@@ -81,33 +80,18 @@ const Activity: FC<ActivityProps> = ({ activity, className, ...rest }) => {
   const avatar = avatarsMap[activity.type];
 
   return (
-    <div
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <div className={clsx(classes.root, className)} {...rest}>
       <Avatar className={clsx(classes.avatar, classes[avatar.className])}>
         <avatar.icon />
       </Avatar>
       <Card className={classes.card}>
-        <Typography
-          variant="body1"
-          color="textPrimary"
-        >
-          <Link
-            color="textPrimary"
-            component={RouterLink}
-            to="#"
-            variant="h6"
-          >
+        <Typography variant="body1" color="textPrimary">
+          <Link color="textPrimary" component={RouterLink} to="#" variant="h6">
             {activity.subject}
-          </Link>
-          {' '}
+          </Link>{' '}
           {activity.description}
         </Typography>
-        <Typography
-          className={classes.date}
-          variant="caption"
-        >
+        <Typography className={classes.date} variant="caption">
           {moment(activity.createdAt).fromNow()}
         </Typography>
       </Card>
