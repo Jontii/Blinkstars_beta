@@ -69,7 +69,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 const LoginView: FC = () => {
   const classes = useStyles();
 
-  // @ts-ignore
   const { method } = useAuth() as any;
 
   return (

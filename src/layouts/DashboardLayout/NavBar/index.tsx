@@ -12,7 +12,6 @@ import {
   makeStyles,
   Typography
 } from '@material-ui/core';
-import PropTypes from 'prop-types';
 import React, { FC, ReactNode, useEffect } from 'react';
 import {
   Briefcase as BriefcaseIcon,
@@ -50,13 +49,13 @@ const sections: Section[] = [
       {
         title: 'Dashboard',
         icon: PieChartIcon,
-        href: '/app/reports/dashboard'
-      },
-      {
-        title: 'Dashboard Company',
-        icon: PieChartIcon,
         href: '/app/reports/dashboard-alternative'
       }
+      // {
+      //   title: 'Dashboard Company',
+      //   icon: PieChartIcon,
+      //   href: '/app/reports/dashboard-alternative'
+      // }
     ]
   },
   // {
@@ -409,6 +408,7 @@ const NavBar: FC<NavBarProps> = ({ onMobileClose, openMobile }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
+  console.log(user);
   const userSections = user?.name === 'AMD' ? sections : sections2;
 
   const content = (
@@ -424,7 +424,11 @@ const NavBar: FC<NavBarProps> = ({ onMobileClose, openMobile }) => {
         <Box p={2}>
           <Box display="flex" justifyContent="center">
             <RouterLink to="/app/account">
-              <Avatar alt="User" className={classes.avatar} src={user?.avatar} />
+              <Avatar
+                alt="User"
+                className={classes.avatar}
+                src={user?.avatar}
+              />
             </RouterLink>
           </Box>
           <Box mt={2} textAlign="center">

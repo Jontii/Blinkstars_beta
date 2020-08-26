@@ -7,8 +7,6 @@ import DashboardLayout from 'src/layouts/DashboardLayout';
 import DocsLayout from 'src/layouts/DocsLayout';
 import MainLayout from 'src/layouts/MainLayout';
 import HomeView from 'src/views/home/HomeView';
-import BusinessView from './views/business';
-import InfluencerView from './views/influencer';
 
 type Routes = {
   exact?: boolean;
@@ -71,7 +69,7 @@ const routes: Routes = [
     exact: true,
     guard: GuestGuard,
     path: '/register',
-    layout:MainLayout,
+    layout: MainLayout,
     component: lazy(() => import('src/views/auth/RegisterView'))
   },
   {

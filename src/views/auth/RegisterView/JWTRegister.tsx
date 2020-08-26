@@ -26,7 +26,6 @@ const useStyles = makeStyles(() => ({
 
 const JWTRegister: FC<JWTRegisterProps> = ({ className, ...rest }) => {
   const classes = useStyles();
-  // @ts-ignore
   const { register } = useAuth() as any;
   const isMountedRef = useIsMountedRef();
 
