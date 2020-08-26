@@ -101,7 +101,10 @@ const Hero: FC<HeroProps> = ({ className, ...rest }) => {
           <Grid item xs={12} md={7}>
             <Box position="relative">
               <div className={classes.shape}>
-              <img alt="Presentation" src="/static/images/undraw_work_chat_erdt.svg" />
+                <img
+                  alt="Presentation"
+                  src={`${process.env.PUBLIC_URL}/static/images/undraw_work_chat_erdt.svg`}
+                />
               </div>
             </Box>
           </Grid>

@@ -98,7 +98,7 @@ const Subscription: FC<SubscriptionProps> = ({ className, ...rest }) => {
               <img
                 alt="Product"
                 className={classes.productImage}
-                src="/static/images/products/product_premium.svg"
+                src={`${process.env.PUBLIC_URL}/static/images/products/product_premium.svg`}
               />
               <Typography variant="overline" color="textSecondary">
                 {subscription.name}

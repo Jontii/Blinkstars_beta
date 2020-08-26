@@ -34,12 +34,12 @@ interface LatestProjectsProps {
 }
 
 const technologyMap: Record<string, string> = {
-  'html-css': '/static/images/technologies/html.svg',
-  'react-js': '/static/images/technologies/react-js.svg',
-  'vue-js': '/static/images/technologies/vue-js.svg',
-  angular: '/static/images/technologies/angular.svg',
-  figma: '/static/images/technologies/figma.svg',
-  sketch: '/static/images/technologies/sketch.svg'
+  'html-css': `${process.env.PUBLIC_URL}/static/images/technologies/html.svg`,
+  'react-js': `${process.env.PUBLIC_URL}/static/images/technologies/react-js.svg`,
+  'vue-js': `${process.env.PUBLIC_URL}/static/images/technologies/vue-js.svg`,
+  angular: `${process.env.PUBLIC_URL}/static/images/technologies/angular.svg`,
+  figma: `${process.env.PUBLIC_URL}/static/images/technologies/figma.svg`,
+  sketch: `${process.env.PUBLIC_URL}/static/images/technologies/sketch.svg`
 };
 
 const useStyles = makeStyles((theme: Theme) => ({

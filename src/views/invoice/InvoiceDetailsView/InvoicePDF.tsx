@@ -105,7 +105,10 @@ const InvoicePDF: FC<InvoicePDFProps> = ({ invoice }) => {
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
           <View>
-            <Image source="/static/logo.jpg" style={styles.brand} />
+            <Image
+              source={`${process.env.PUBLIC_URL}/static/logo.jpg`}
+              style={styles.brand}
+            />
             <Text style={styles.h5}>www.devias.io</Text>
           </View>
           <View>
