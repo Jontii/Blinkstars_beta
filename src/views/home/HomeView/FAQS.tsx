@@ -3,6 +3,7 @@ import {
   Container,
   Divider,
   Grid,
+  Link,
   makeStyles,
   Typography
 } from '@material-ui/core';
@@ -17,7 +18,7 @@ interface FAQSProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    backgroundColor: theme.palette.background.dark,
+    backgroundColor: theme.palette.background.default,
     paddingTop: theme.spacing(6),
     paddingBottom: theme.spacing(6),
     '& dt': {
@@ -41,63 +42,63 @@ const FAQS: FC<FAQSProps> = ({ className, ...rest }) => {
         <Grid container spacing={3} component="dl">
           <Grid item xs={12} md={6}>
             <Typography variant="overline" color="secondary">
-              Technical &amp; Licensing
+              About Blinkstar
             </Typography>
             <Box mt={6}>
               <dt>
                 <Typography variant="h4" color="textPrimary">
-                  What do we use for styling our components?
+                  Who is this for and how does it work?
                 </Typography>
               </dt>
               <dd>
                 <Typography variant="body1" color="textSecondary">
-                  We use Material-ui&apos;s hooks api as we think it’s the best
-                  way of avoiding clutter.
+                  Blinkstar is a plattform where businesses and influencers can
+                  find each other.
                 </Typography>
               </dd>
             </Box>
             <Box mt={6}>
               <dt>
                 <Typography variant="h4" color="textPrimary">
-                  Is Typescript available?
+                  Does it cost anything?
                 </Typography>
               </dt>
               <dd>
                 <Typography variant="body1" color="textSecondary">
-                  Yes, we have the Typescript version available for Standard
-                  Plus and Extended license.
+                  Influencers can use it for free. Companies need to pay for a
+                  budget after creating a campaign.
                 </Typography>
               </dd>
             </Box>
             <Box mt={6}>
               <dt>
                 <Typography variant="h4" color="textPrimary">
-                  Are you providing support for setting up my project?
+                  Are you providing support for setting up a campaign?
                 </Typography>
               </dt>
               <dd>
                 <Typography variant="body1" color="textSecondary">
-                  Yes, we offer email support for all our customers &amp; even
-                  skype meetings for our extended license customers.
+                  Yes, we offer email support for all our customers.
                 </Typography>
               </dd>
             </Box>
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography variant="overline" color="secondary">
-              Design
+              Contact
             </Typography>
             <Box mt={6}>
               <dt>
                 <Typography variant="h4" color="textPrimary">
-                  Are the design files (Sketch, Figma) included in the Standard
-                  License?
+                  Want to know more or have other questions?
                 </Typography>
               </dt>
               <dd>
                 <Typography variant="body1" color="textSecondary">
-                  No, we offer the design source file only to Standard Plus and
-                  Extended License.
+                  Contact us at{' '}
+                  <Link href="mail:to blinkstars.com@gmail.com">
+                    blinkstars.com@gmail.com
+                  </Link>
                 </Typography>
               </dd>
             </Box>

@@ -2,17 +2,14 @@ import {
   Box,
   Card,
   CardContent,
-  Chip,
   Container,
   Divider,
   Link,
   makeStyles,
-  Tooltip,
   Typography
 } from '@material-ui/core';
 import React, { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import Logo from 'src/components/Logo';
 import Page from 'src/components/Page';
 import useAuth from 'src/hooks/useAuth';
 import { Theme } from 'src/theme';
@@ -72,7 +69,6 @@ const RegisterView: FC = () => {
 
   return (
     <Page className={classes.root} title="Register">
-      
       {/* <div className={classes.banner}>
         <Container maxWidth="md">
           <Box alignItems="center" display="flex" justifyContent="center">
@@ -116,8 +112,7 @@ const RegisterView: FC = () => {
         </Container>
       </div> */}
       <Container className={classes.cardContainer} maxWidth="sm">
-        <Box mb={8} display="flex" justifyContent="center">
-        </Box>
+        <Box mb={8} display="flex" justifyContent="center"></Box>
         <Card>
           <CardContent className={classes.cardContent}>
             <Box
@@ -131,12 +126,12 @@ const RegisterView: FC = () => {
                   Register
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                  Register on the internal platform
+                  Register as a business/influencer
                 </Typography>
               </div>
-              <div className={classes.currentMethodIcon}>
+              {/* <div className={classes.currentMethodIcon}>
                 <img alt="Auth method" src={methodIcons[method]} />
-              </div>
+              </div> */}
             </Box>
             <Box flexGrow={1} mt={3}>
               {method === 'Auth0' && <Auth0Register />}

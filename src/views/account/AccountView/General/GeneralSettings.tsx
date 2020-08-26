@@ -4,20 +4,25 @@ import {
   Card,
   CardContent,
   CardHeader,
+  Chip,
   Divider,
   FormHelperText,
   Grid,
+  IconButton,
   makeStyles,
+  SvgIcon,
   Switch,
   TextField,
   Typography
 } from '@material-ui/core';
+import GetAppIcon from '@material-ui/icons/GetApp';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import clsx from 'clsx';
 import { Formik } from 'formik';
 import { useSnackbar } from 'notistack';
 import PropTypes from 'prop-types';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
+import { Plus as PlusIcon } from 'react-feather';
 import { User } from 'src/types/user';
 import wait from 'src/utils/wait';
 import * as Yup from 'yup';
@@ -28,8 +33,16 @@ interface GeneralSettingsProps {
   user: User;
 }
 
-const useStyles = makeStyles(() => ({
-  root: {}
+const useStyles = makeStyles(theme => ({
+  root: {},
+  tag: {
+    '& + &': {
+      marginLeft: theme.spacing(1)
+    }
+  },
+  addTab: {
+    marginLeft: theme.spacing(2)
+  }
 }));
 
 const GeneralSettings: FC<GeneralSettingsProps> = ({
@@ -39,6 +52,7 @@ const GeneralSettings: FC<GeneralSettingsProps> = ({
 }) => {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
+  const [tag, setTag] = useState<string>('');
 
   return (
     <Formik
@@ -52,6 +66,7 @@ const GeneralSettings: FC<GeneralSettingsProps> = ({
         name: user.name || '',
         phone: user.phone || '',
         state: user.state || '',
+        tags: ['Technology', 'Environment'],
         submit: null
       }}
       validationSchema={Yup.object().shape({
@@ -93,6 +108,7 @@ const GeneralSettings: FC<GeneralSettingsProps> = ({
         handleBlur,
         handleChange,
         handleSubmit,
+        setFieldValue,
         isSubmitting,
         touched,
         values
@@ -190,6 +206,67 @@ const GeneralSettings: FC<GeneralSettingsProps> = ({
                     variant="outlined"
                   />
                 </Grid>
+                <Grid item md={6} xs={12}>
+                  <Box mt={3} display="flex" alignItems="center">
+                    <TextField
+                      fullWidth
+                      label="Interests"
+                      name="tags"
+                      value={tag}
+                      onChange={event => setTag(event.target.value)}
+                      variant="outlined"
+                    />
+                    <IconButton
+                      className={classes.addTab}
+                      onClick={() => {
+                        if (!tag) {
+                          return;
+                        }
+
+                        setFieldValue('tags', [...values.tags, tag]);
+                        setTag('');
+                      }}
+                    >
+                      <SvgIcon>
+                        <PlusIcon />
+                      </SvgIcon>
+                    </IconButton>
+                  </Box>
+                  <Box mt={2}>
+                    {values.tags.map((tag, i) => (
+                      <Chip
+                        variant="outlined"
+                        key={i}
+                        label={tag}
+                        className={classes.tag}
+                        onDelete={() => {
+                          const newTags = values.tags.filter(t => t !== tag);
+
+                          setFieldValue('tags', newTags);
+                        }}
+                      />
+                    ))}
+                  </Box>
+                </Grid>
+                <Grid item md={6} xs={12}>
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    flexDirection="column"
+                    alignItems="flex-start"
+                    mt="24px"
+                  >
+                    <Button
+                      style={{ height: '54px' }}
+                      size="large"
+                      fullWidth
+                      startIcon={<GetAppIcon />}
+                    >
+                      Import Linkedin Connections
+                    </Button>
+                  </Box>
+                </Grid>
+
                 {user.name !== 'AMD' && (
                   <>
                     <Grid item md={6} xs={12}>

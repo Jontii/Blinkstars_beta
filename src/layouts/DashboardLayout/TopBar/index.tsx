@@ -12,14 +12,9 @@ import PropTypes from 'prop-types';
 import React, { FC } from 'react';
 import { Menu as MenuIcon } from 'react-feather';
 import { Link as RouterLink } from 'react-router-dom';
-import Logo from 'src/components/Logo';
 import { THEMES } from 'src/constants';
 import { Theme } from 'src/theme';
 import Account from './Account';
-import Contacts from './Contacts';
-import Notifications from './Notifications';
-import Search from './Search';
-import Settings from './Settings';
 
 interface TopBarProps {
   className?: string;
@@ -61,14 +56,18 @@ const TopBar: FC<TopBarProps> = ({ className, onMobileNavOpen, ...rest }) => {
         </Hidden>
         <Hidden mdDown>
           <RouterLink to="/app/reports/dashboard">
-            <Logo />
+            <img
+              alt="Logo"
+              style={{ height: '42px' }}
+              src={`${process.env.PUBLIC_URL}/static/home/Btxt.svg`}
+            />
           </RouterLink>
         </Hidden>
         <Box ml={2} flexGrow={1} />
-        <Search />
+        {/* <Search />
         <Contacts />
         <Notifications />
-        <Settings />
+        <Settings /> */}
         <Box ml={2}>
           <Account />
         </Box>

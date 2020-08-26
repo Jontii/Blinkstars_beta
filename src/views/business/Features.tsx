@@ -40,10 +40,10 @@ const Features: FC<FeaturesProps> = ({ className, ...rest }) => {
           color="secondary"
           align="center"
         >
-          Explore Devias Kit Pro
+          Explore Blinkstar
         </Typography>
         <Typography variant="h1" align="center" color="textPrimary">
-          Not just a pretty face
+          Match with influencers
         </Typography>
         <Box mt={8}>
           <Grid container spacing={3}>
@@ -52,7 +52,7 @@ const Features: FC<FeaturesProps> = ({ className, ...rest }) => {
                 <Avatar className={classes.avatar}>01</Avatar>
                 <Box ml={2}>
                   <Typography variant="h4" gutterBottom color="textPrimary">
-                    Complete User Flows
+                    Create a campaign
                   </Typography>
                   <Typography variant="body1" color="textPrimary">
                     Not just a set of tools, the package includes the most
@@ -67,7 +67,7 @@ const Features: FC<FeaturesProps> = ({ className, ...rest }) => {
                 <Avatar className={classes.avatar}>02</Avatar>
                 <Box ml={2}>
                   <Typography variant="h4" gutterBottom color="textPrimary">
-                    Support for Plugins
+                    Match with influencers
                   </Typography>
                   <Typography variant="body1" color="textPrimary">
                     The kit provides support for multiple third-party plugins
@@ -82,7 +82,7 @@ const Features: FC<FeaturesProps> = ({ className, ...rest }) => {
                 <Avatar className={classes.avatar}>03</Avatar>
                 <Box ml={2}>
                   <Typography variant="h4" gutterBottom color="textPrimary">
-                    Designers, we got you
+                    Expand your sales and reach!
                   </Typography>
                   <Typography variant="body1" color="textPrimary" gutterBottom>
                     We&apos;ve included the source Sketch &amp; Figma files to

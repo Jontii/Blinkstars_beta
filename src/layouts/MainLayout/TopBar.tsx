@@ -2,16 +2,16 @@ import {
   AppBar,
   Box,
   Button,
-  Hidden,
+  Divider,
+  Link,
   makeStyles,
   Toolbar,
-  Typography,
-  Divider
+  Typography
 } from '@material-ui/core';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { FC } from 'react';
-import { Link as RouterLink, Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import Logo from 'src/components/Logo';
 
 interface TopBarProps {
@@ -32,7 +32,8 @@ const useStyles = makeStyles(theme => ({
     fontWeight: theme.typography.fontWeightMedium,
     '& + &': {
       marginLeft: theme.spacing(2)
-    }
+    },
+    textDecoration: 'none'
   },
   divider: {
     width: 1,
@@ -51,37 +52,26 @@ const TopBar: FC<TopBarProps> = ({ className, ...rest }) => {
         <RouterLink to="/">
           <Logo className={classes.logo} />
         </RouterLink>
-        <Hidden mdDown>
+        {/* <Hidden mdDown>
           <Typography variant="caption" color="textSecondary">
             Blinkstar
           </Typography>
-        </Hidden>
+        </Hidden> */}
         <Box flexGrow={1} />
-        <Link
-          className={classes.link}
-          color="textSecondary"
-          component={RouterLink}
-          to="/app"
-        >
-          Dashboard
-        </Link>
-        <Link
-          className={classes.link}
-          color="textSecondary"
-          component={RouterLink}
-          to="/docs"
-        >
-          Documentation
+        <Link className={classes.link} component={RouterLink} to="/login">
+          <Typography color="primary" variant="body2">
+            Login
+          </Typography>
         </Link>
         <Divider className={classes.divider} />
         <Button
           color="primary"
           component={RouterLink}
-          to="/login"
+          to="/register"
           variant="contained"
           size="small"
         >
-          Login
+          Register
         </Button>
       </Toolbar>
     </AppBar>

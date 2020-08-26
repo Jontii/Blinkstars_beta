@@ -3,7 +3,6 @@ import FolderOpenIcon from '@material-ui/icons/FolderOpenOutlined';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { FC } from 'react';
-import Label from 'src/components/Label';
 import { Theme } from 'src/theme';
 
 interface NewProjectsProps {
@@ -50,13 +49,13 @@ const NewProjects: FC<NewProjectsProps> = ({ className, ...rest }) => {
           <Typography variant="h3" color="textPrimary">
             {data.value}
           </Typography>
-          <Label
+          {/* <Label
             className={classes.label}
             color={data.difference > 0 ? 'success' : 'error'}
           >
             {data.difference > 0 ? '+' : ''}
             {data.difference}%
-          </Label>
+          </Label> */}
         </Box>
       </Box>
       <Avatar className={classes.avatar}>

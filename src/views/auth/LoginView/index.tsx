@@ -2,12 +2,10 @@ import {
   Box,
   Card,
   CardContent,
-  Chip,
   Container,
   Divider,
   Link,
   makeStyles,
-  Tooltip,
   Typography
 } from '@material-ui/core';
 import React, { FC } from 'react';
@@ -73,7 +71,7 @@ const LoginView: FC = () => {
 
   return (
     <Page className={classes.root} title="Login">
-      <div className={classes.banner}>
+      {/* <div className={classes.banner}>
         <Container maxWidth="md">
           <Box alignItems="center" display="flex" justifyContent="center">
             <Chip
@@ -114,7 +112,7 @@ const LoginView: FC = () => {
             </Box>
           </Box>
         </Container>
-      </div>
+      </div> */}
       <Container className={classes.cardContainer} maxWidth="sm">
         <Box mb={8} display="flex" justifyContent="center">
           <RouterLink to="/">
@@ -137,9 +135,9 @@ const LoginView: FC = () => {
                   Sign in on the internal platform
                 </Typography>
               </div>
-              <div className={classes.currentMethodIcon}>
+              {/* <div className={classes.currentMethodIcon}>
                 <img alt="Auth method" src={methodIcons[method]} />
-              </div>
+              </div> */}
             </Box>
             <Box flexGrow={1} mt={3}>
               {method === 'Auth0' && <Auth0Login />}

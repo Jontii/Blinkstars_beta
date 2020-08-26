@@ -40,7 +40,7 @@ const Members: FC<MembersProps> = ({ className, members, ...rest }) => {
     <Card className={clsx(classes.root, className)} {...rest}>
       <CardHeader
         className={classes.header}
-        title="Campaign Applicants"
+        title="Applying influencers"
         titleTypographyProps={{
           variant: 'overline'
         }}
@@ -65,7 +65,7 @@ const Members: FC<MembersProps> = ({ className, members, ...rest }) => {
       </CardContent>
       <Divider />
       <CardActions>
-        <Button fullWidth>Manage applicants</Button>
+        <Button fullWidth>Manage Influencers</Button>
       </CardActions>
     </Card>
   );

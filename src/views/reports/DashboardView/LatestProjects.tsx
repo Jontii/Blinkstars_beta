@@ -1,7 +1,6 @@
 import {
   Avatar,
   Box,
-  Button,
   Card,
   CardHeader,
   Divider,
@@ -14,14 +13,13 @@ import {
   TableSortLabel,
   Tooltip
 } from '@material-ui/core';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import clsx from 'clsx';
 import moment from 'moment';
 import numeral from 'numeral';
 import PropTypes from 'prop-types';
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import { Link as RouterLink } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import GenericMoreButton from 'src/components/GenericMoreButton';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import { Theme } from 'src/theme';
@@ -56,6 +54,7 @@ const LatestProjects: FC<LatestProjectsProps> = ({ className, ...rest }) => {
   const classes = useStyles();
   const isMountedRef = useIsMountedRef();
   const [projects, setProjects] = useState<Project[]>([]);
+  const history = useHistory();
 
   const getProjects = useCallback(async () => {
     try {
@@ -64,7 +63,10 @@ const LatestProjects: FC<LatestProjectsProps> = ({ className, ...rest }) => {
       );
 
       if (isMountedRef.current) {
-        setProjects(response.data.projects);
+        let tempProjects = [];
+        tempProjects.push(response.data.projects[0]);
+
+        setProjects(tempProjects);
       }
     } catch (err) {
       console.error(err);
@@ -77,7 +79,7 @@ const LatestProjects: FC<LatestProjectsProps> = ({ className, ...rest }) => {
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
-      <CardHeader action={<GenericMoreButton />} title="Latest Projects" />
+      <CardHeader action={<GenericMoreButton />} title="Active Campaigns" />
       <Divider />
       <PerfectScrollbar>
         <Box minWidth={900}>
@@ -87,7 +89,7 @@ const LatestProjects: FC<LatestProjectsProps> = ({ className, ...rest }) => {
                 <TableCell>Title</TableCell>
                 <TableCell>Author</TableCell>
                 <TableCell>Budget</TableCell>
-                <TableCell>Technology</TableCell>
+                {/* <TableCell>Area</TableCell> */}
                 <TableCell align="right" sortDirection="desc">
                   <Tooltip enterDelay={300} title="Sort">
                     <TableSortLabel active direction="desc">
@@ -99,7 +101,11 @@ const LatestProjects: FC<LatestProjectsProps> = ({ className, ...rest }) => {
             </TableHead>
             <TableBody>
               {projects.map(project => (
-                <TableRow hover key={project.id}>
+                <TableRow
+                  hover
+                  key={project.id}
+                  onClick={() => history.push('/app/projects/1')}
+                >
                   <TableCell>{project.title}</TableCell>
                   <TableCell>
                     <Box display="flex" alignItems="center">
@@ -114,16 +120,7 @@ const LatestProjects: FC<LatestProjectsProps> = ({ className, ...rest }) => {
                       `${project.currency}0,0.00`
                     )}
                   </TableCell>
-                  <TableCell>
-                    {project.technologies.map(technology => (
-                      <img
-                        alt="Tech"
-                        key={technology}
-                        className={classes.technology}
-                        src={technologyMap[technology]}
-                      />
-                    ))}
-                  </TableCell>
+                  {/* <TableCell>Telekom</TableCell> */}
                   <TableCell align="right">
                     {moment(project.createdAt).format('DD MMM, YYYY')}
                   </TableCell>
@@ -133,7 +130,7 @@ const LatestProjects: FC<LatestProjectsProps> = ({ className, ...rest }) => {
           </Table>
         </Box>
       </PerfectScrollbar>
-      <Box p={2} display="flex" justifyContent="flex-end">
+      {/* <Box p={2} display="flex" justifyContent="flex-end">
         <Button
           component={RouterLink}
           size="small"
@@ -142,7 +139,7 @@ const LatestProjects: FC<LatestProjectsProps> = ({ className, ...rest }) => {
         >
           See all
         </Button>
-      </Box>
+      </Box> */}
     </Card>
   );
 };

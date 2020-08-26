@@ -1,7 +1,6 @@
 import {
   Avatar,
   Box,
-  Button,
   Container,
   Grid,
   makeStyles,
@@ -43,7 +42,7 @@ const Features: FC<FeaturesProps> = ({ className, ...rest }) => {
           Explore Blinkstars platform
         </Typography>
         <Typography variant="h1" align="center" color="textPrimary">
-          Not just a pretty face
+          Match with businesses
         </Typography>
         <Box mt={8}>
           <Grid container spacing={3}>
@@ -52,10 +51,11 @@ const Features: FC<FeaturesProps> = ({ className, ...rest }) => {
                 <Avatar className={classes.avatar}>01</Avatar>
                 <Box ml={2}>
                   <Typography variant="h4" gutterBottom color="textPrimary">
-                  Earn $
+                    Register your profile
                   </Typography>
                   <Typography variant="body1" color="textPrimary">
-                  Get paid to create content by collaborating with brands and companies.
+                    Get paid to create content by collaborating with brands and
+                    companies.
                   </Typography>
                 </Box>
               </Box>
@@ -65,10 +65,10 @@ const Features: FC<FeaturesProps> = ({ className, ...rest }) => {
                 <Avatar className={classes.avatar}>02</Avatar>
                 <Box ml={2}>
                   <Typography variant="h4" gutterBottom color="textPrimary">
-                  Contact marketers 
-                                    </Typography>
+                    Search and match with campaigns
+                  </Typography>
                   <Typography variant="body1" color="textPrimary">
-                  Be exposed to marketers looking for online B2B influencers.
+                    Be exposed to marketers looking for online B2B influencers.
                   </Typography>
                 </Box>
               </Box>
@@ -78,10 +78,11 @@ const Features: FC<FeaturesProps> = ({ className, ...rest }) => {
                 <Avatar className={classes.avatar}>03</Avatar>
                 <Box ml={2}>
                   <Typography variant="h4" gutterBottom color="textPrimary">
-                  Get the buzz going
-                                    </Typography>
+                    Post on social media and earn money!
+                  </Typography>
                   <Typography variant="body1" color="textPrimary" gutterBottom>
-                  Blinkstars gets people talking about your company and influence your business.
+                    Blinkstars gets people talking about your company and
+                    influence your business.
                   </Typography>
                 </Box>
               </Box>

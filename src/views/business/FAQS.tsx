@@ -3,6 +3,7 @@ import {
   Container,
   Divider,
   Grid,
+  Link,
   makeStyles,
   Typography
 } from '@material-ui/core';
@@ -17,7 +18,7 @@ interface FAQSProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    backgroundColor: theme.palette.background.dark,
+    backgroundColor: theme.palette.background.default,
     paddingTop: theme.spacing(6),
     paddingBottom: theme.spacing(6),
     '& dt': {
@@ -41,12 +42,12 @@ const FAQS: FC<FAQSProps> = ({ className, ...rest }) => {
         <Grid container spacing={3} component="dl">
           <Grid item xs={12} md={6}>
             <Typography variant="overline" color="secondary">
-              Technical &amp; Licensing
+              About business
             </Typography>
             <Box mt={6}>
               <dt>
                 <Typography variant="h4" color="textPrimary">
-                  What do we use for styling our components?
+                  How does it work?
                 </Typography>
               </dt>
               <dd>
@@ -59,7 +60,7 @@ const FAQS: FC<FAQSProps> = ({ className, ...rest }) => {
             <Box mt={6}>
               <dt>
                 <Typography variant="h4" color="textPrimary">
-                  Is Typescript available?
+                  What kind of business are valid?
                 </Typography>
               </dt>
               <dd>
@@ -72,7 +73,7 @@ const FAQS: FC<FAQSProps> = ({ className, ...rest }) => {
             <Box mt={6}>
               <dt>
                 <Typography variant="h4" color="textPrimary">
-                  Are you providing support for setting up my project?
+                  What do we mean by business?
                 </Typography>
               </dt>
               <dd>
@@ -85,19 +86,20 @@ const FAQS: FC<FAQSProps> = ({ className, ...rest }) => {
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography variant="overline" color="secondary">
-              Design
+              Contact
             </Typography>
             <Box mt={6}>
               <dt>
                 <Typography variant="h4" color="textPrimary">
-                  Are the design files (Sketch, Figma) included in the Standard
-                  License?
+                  Want to know more or have other questions?
                 </Typography>
               </dt>
               <dd>
                 <Typography variant="body1" color="textSecondary">
-                  No, we offer the design source file only to Standard Plus and
-                  Extended License.
+                  Contact us at{' '}
+                  <Link href="mail:to blinkstars.com@gmail.com">
+                    blinkstars.com@gmail.com
+                  </Link>
                 </Typography>
               </dd>
             </Box>

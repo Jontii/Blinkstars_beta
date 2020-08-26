@@ -29,7 +29,7 @@ const JWTRegister: FC<JWTRegisterProps> = ({ className, ...rest }) => {
   const { register } = useAuth() as any;
   const isMountedRef = useIsMountedRef();
 
-  const userOptions = ['Company', 'Influencer'];
+  const userOptions = ['Business', 'Influencer'];
 
   const [user, setUser] = useState<string>(userOptions[0]);
 

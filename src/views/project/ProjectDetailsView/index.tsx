@@ -42,8 +42,8 @@ const ProjectDetailsView: FC = () => {
   const tabs = [
     { value: 'overview', label: 'Overview' },
     // { value: 'reviews', label: 'Reviews' },
-    { value: 'activity', label: 'Activity' },
-    { value: 'applicants', label: 'Applicants' }
+    { value: 'activity', label: 'History' },
+    { value: 'applicants', label: 'Influencers' }
   ];
 
   const handleTabsChange = (event: ChangeEvent<{}>, value: string): void => {
@@ -73,7 +73,7 @@ const ProjectDetailsView: FC = () => {
   }
 
   return (
-    <Page className={classes.root} title="Project Details">
+    <Page className={classes.root} title="Campaign Details">
       <Container maxWidth="lg">
         <Header project={project} />
         <Box mt={3}>
