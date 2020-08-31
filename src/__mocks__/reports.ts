@@ -203,8 +203,8 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
     {
       id: '5eff24e675e7b3cba23e4be7',
       author: {
-        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_5.png`,
-        name: 'Anje Keizer'
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.png`,
+        name: 'Emilee Simchenko'
       },
       budget: 12500,
       createdAt: moment()

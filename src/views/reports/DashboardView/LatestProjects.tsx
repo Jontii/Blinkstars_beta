@@ -47,6 +47,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& + &': {
       marginLeft: theme.spacing(1)
     }
+  },
+  row: {
+    cursor: 'pointer'
   }
 }));
 
@@ -104,6 +107,7 @@ const LatestProjects: FC<LatestProjectsProps> = ({ className, ...rest }) => {
                 <TableRow
                   hover
                   key={project.id}
+                  className={classes.row}
                   onClick={() => history.push('/app/projects/1')}
                 >
                   <TableCell>{project.title}</TableCell>
