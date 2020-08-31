@@ -1,16 +1,15 @@
 import {
   Box,
   Button,
-  FormHelperText,
+  Card,
+  CardContent,
   makeStyles,
-  Paper,
-  TextField,
   Typography
 } from '@material-ui/core';
 import clsx from 'clsx';
 import { Formik } from 'formik';
 import React, { FC, useState } from 'react';
-import QuillEditor from 'src/components/QuillEditor';
+import FilesDropzone from 'src/components/FilesDropzone';
 import * as Yup from 'yup';
 
 const useStyles = makeStyles(theme => ({
@@ -41,7 +40,7 @@ interface ProjectCompanyProps {
   onNext?: () => void;
 }
 
-const ProjectCompany: FC<ProjectCompanyProps> = ({
+const ProjectMediaFiles: FC<ProjectCompanyProps> = ({
   className,
   onNext,
   onBack,
@@ -56,15 +55,7 @@ const ProjectCompany: FC<ProjectCompanyProps> = ({
         projectName: '',
         tags: ['Full-Time']
       }}
-      validationSchema={Yup.object().shape({
-        projectName: Yup.string()
-          .min(3, 'Must be at least 3 characters')
-          .max(255)
-          .required('Required'),
-        tags: Yup.array(),
-        startDate: Yup.date(),
-        endDate: Yup.date()
-      })}
+      validationSchema={Yup.object().shape({})}
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
           // Do API call to store step data in server session
@@ -98,45 +89,20 @@ const ProjectCompany: FC<ProjectCompanyProps> = ({
           {...rest}
         >
           <Typography variant="h3" color="textPrimary">
-            About the company
+            Campaign Media
           </Typography>
           <Box mt={2}>
             <Typography variant="subtitle1" color="textSecondary">
-              Proin tincidunt lacus sed ante efficitur efficitur. Quisque
-              aliquam fringilla velit sit amet euismod.
+              Here you can upload any files you wish the influencer to share or
+              learn from.
             </Typography>
           </Box>
-          <Box mt={2}>
-            <TextField
-              error={Boolean(touched.projectName && errors.projectName)}
-              fullWidth
-              helperText={touched.projectName && errors.projectName}
-              label="Name of the company"
-              name="projectName"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.projectName}
-              variant="outlined"
-            />
-            <Box mt={2}>
-              <Typography variant="subtitle1" color="textSecondary">
-                Description
-              </Typography>
-            </Box>
-            <Paper variant="outlined" component={Box}>
-              <QuillEditor
-                handleChange={e => {
-                  setContent(e.value);
-                }}
-                value={content}
-                className={classes.editor}
-              />
-            </Paper>
-            {Boolean(touched.tags && errors.tags) && (
-              <Box mt={2}>
-                <FormHelperText error>{errors.tags}</FormHelperText>
-              </Box>
-            )}
+          <Box mt={4}>
+            <Card>
+              <CardContent>
+                <FilesDropzone />
+              </CardContent>
+            </Card>
           </Box>
           <Box mt={6} display="flex">
             {onBack && (
@@ -161,4 +127,4 @@ const ProjectCompany: FC<ProjectCompanyProps> = ({
   );
 };
 
-export default ProjectCompany;
+export default ProjectMediaFiles;

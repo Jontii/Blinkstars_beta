@@ -14,6 +14,7 @@ import {
   AlertTriangle as AlertIcon,
   Calendar as CalendarIcon,
   Check as CheckIcon,
+  Share,
   Share2 as ShareIcon
 } from 'react-feather';
 import { Theme } from 'src/theme';
@@ -103,19 +104,20 @@ const Header: FC<HeaderProps> = ({ className, project, ...rest }) => {
         >
           Share
         </Button>
-        {/* <Button
+        <Button
           className={classes.action}
           onClick={handleApplyModalOpen}
           variant="contained"
           color="secondary"
+          disabled
           startIcon={
             <SvgIcon fontSize="small">
-              <SendIcon />
+              <Share />
             </SvgIcon>
           }
         >
-          Apply for a role
-        </Button> */}
+          Unpublish Campaign
+        </Button>
         <ApplyModal
           author={project.author}
           onApply={handleApplyModalClose}

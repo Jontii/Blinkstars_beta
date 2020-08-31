@@ -3,14 +3,13 @@ import {
   Button,
   FormHelperText,
   makeStyles,
-  Paper,
-  TextField,
   Typography
 } from '@material-ui/core';
+import { KeyboardDatePicker } from '@material-ui/pickers';
+import Axios from 'axios';
 import clsx from 'clsx';
 import { Formik } from 'formik';
 import React, { FC, useState } from 'react';
-import QuillEditor from 'src/components/QuillEditor';
 import * as Yup from 'yup';
 
 const useStyles = makeStyles(theme => ({
@@ -20,48 +19,44 @@ const useStyles = makeStyles(theme => ({
   },
   tag: {
     '& + &': {
-      marginLeft: theme.spacing(1)
-    }
-  },
-  editor: {
-    '& .ql-editor': {
-      height: 350
+      marginRight: theme.spacing(1)
     }
   },
   datePicker: {
     '& + &': {
       marginLeft: theme.spacing(2)
     }
+  },
+  editor: {
+    '& .ql-editor': {
+      height: 350
+    }
   }
 }));
 
-interface ProjectCompanyProps {
+interface ProjectCampaignProps {
   className?: string;
   onBack?: () => void;
-  onNext?: () => void;
+  onComplete?: () => void;
 }
 
-const ProjectCompany: FC<ProjectCompanyProps> = ({
+const ProjectCampignComplete: FC<ProjectCampaignProps> = ({
   className,
-  onNext,
   onBack,
+  onComplete,
   ...rest
 }) => {
   const classes = useStyles();
+  const [tag, setTag] = useState('');
   const [content, setContent] = useState('');
 
   return (
     <Formik
       initialValues={{
-        projectName: '',
-        tags: ['Full-Time']
+        startDate: new Date(),
+        endDate: new Date()
       }}
       validationSchema={Yup.object().shape({
-        projectName: Yup.string()
-          .min(3, 'Must be at least 3 characters')
-          .max(255)
-          .required('Required'),
-        tags: Yup.array(),
         startDate: Yup.date(),
         endDate: Yup.date()
       })}
@@ -73,8 +68,15 @@ const ProjectCompany: FC<ProjectCompanyProps> = ({
           setStatus({ success: true });
           setSubmitting(false);
 
-          if (onNext) {
-            onNext();
+          if (onComplete) {
+            Axios.post('/api/campaign/', {
+              name: 'Jontetest'
+            })
+              .then(resp => {
+                console.log('Posted', resp);
+              })
+              .catch(error => console.log(error));
+            onComplete();
           }
         } catch (err) {
           // setErrors({ submit: err.message });
@@ -89,6 +91,8 @@ const ProjectCompany: FC<ProjectCompanyProps> = ({
         handleChange,
         handleSubmit,
         isSubmitting,
+        setFieldValue,
+        setFieldTouched,
         touched,
         values
       }) => (
@@ -98,7 +102,7 @@ const ProjectCompany: FC<ProjectCompanyProps> = ({
           {...rest}
         >
           <Typography variant="h3" color="textPrimary">
-            About the company
+            Campaign Description
           </Typography>
           <Box mt={2}>
             <Typography variant="subtitle1" color="textSecondary">
@@ -106,45 +110,54 @@ const ProjectCompany: FC<ProjectCompanyProps> = ({
               aliquam fringilla velit sit amet euismod.
             </Typography>
           </Box>
-          <Box mt={2}>
-            <TextField
-              error={Boolean(touched.projectName && errors.projectName)}
+          <Box mt={4} display="flex" justifyContent="space-between">
+            <KeyboardDatePicker
+              className={classes.datePicker}
+              label="Campaign Start Date"
+              format="MM/DD/YYYY"
+              name="startDate"
               fullWidth
-              helperText={touched.projectName && errors.projectName}
-              label="Name of the company"
-              name="projectName"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.projectName}
-              variant="outlined"
+              inputVariant="outlined"
+              value={values.startDate}
+              onBlur={() => setFieldTouched('startDate')}
+              onClose={() => setFieldTouched('startDate')}
+              onAccept={() => setFieldTouched('startDate')}
+              onChange={date => setFieldValue('startDate', date)}
             />
-            <Box mt={2}>
-              <Typography variant="subtitle1" color="textSecondary">
-                Description
-              </Typography>
-            </Box>
-            <Paper variant="outlined" component={Box}>
-              <QuillEditor
-                handleChange={e => {
-                  setContent(e.value);
-                }}
-                value={content}
-                className={classes.editor}
-              />
-            </Paper>
-            {Boolean(touched.tags && errors.tags) && (
-              <Box mt={2}>
-                <FormHelperText error>{errors.tags}</FormHelperText>
-              </Box>
-            )}
+            <KeyboardDatePicker
+              className={classes.datePicker}
+              label="Campaign End Date"
+              format="MM/DD/YYYY"
+              name="endDate"
+              fullWidth
+              inputVariant="outlined"
+              value={values.endDate}
+              onBlur={() => setFieldTouched('endDate')}
+              onClose={() => setFieldTouched('endDate')}
+              onAccept={() => setFieldTouched('endDate')}
+              onChange={date => setFieldValue('endDate', date)}
+            />
           </Box>
-          <Box mt={6} display="flex">
+
+          {Boolean(touched.startDate && errors.startDate) && (
+            <Box mt={2}>
+              <FormHelperText error>{errors.startDate}</FormHelperText>
+            </Box>
+          )}
+          {Boolean(touched.endDate && errors.endDate) && (
+            <Box mt={2}>
+              <FormHelperText error>{errors.endDate}</FormHelperText>
+            </Box>
+          )}
+
+          <Box mt={4} display="flex">
             {onBack && (
               <Button onClick={onBack} size="large">
                 Previous
               </Button>
             )}
             <Box flexGrow={1} />
+
             <Button
               color="secondary"
               disabled={isSubmitting}
@@ -152,7 +165,7 @@ const ProjectCompany: FC<ProjectCompanyProps> = ({
               variant="contained"
               size="large"
             >
-              Next
+              Publish
             </Button>
           </Box>
         </form>
@@ -161,4 +174,4 @@ const ProjectCompany: FC<ProjectCompanyProps> = ({
   );
 };
 
-export default ProjectCompany;
+export default ProjectCampignComplete;

@@ -409,7 +409,7 @@ const NavBar: FC<NavBarProps> = ({ onMobileClose, openMobile }) => {
   }, [location.pathname]);
 
   console.log(user);
-  const userSections = user?.name === 'AMD' ? sections : sections2;
+  const userSections = user?.name === 'Emilee Simchenko' ? sections : sections2;
 
   const content = (
     <Box height="100%" display="flex" flexDirection="column">

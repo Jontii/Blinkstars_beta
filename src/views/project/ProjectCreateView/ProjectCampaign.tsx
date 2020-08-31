@@ -1,8 +1,6 @@
 import {
   Box,
   Button,
-  Card,
-  CardContent,
   Chip,
   FormHelperText,
   IconButton,
@@ -12,12 +10,10 @@ import {
   TextField,
   Typography
 } from '@material-ui/core';
-import { KeyboardDatePicker } from '@material-ui/pickers';
 import clsx from 'clsx';
 import { Formik } from 'formik';
 import React, { FC, useState } from 'react';
 import { Plus as PlusIcon } from 'react-feather';
-import FilesDropzone from 'src/components/FilesDropzone';
 import QuillEditor from 'src/components/QuillEditor';
 import * as Yup from 'yup';
 
@@ -113,7 +109,7 @@ const ProjectCampagin: FC<ProjectCampaignProps> = ({
           {...rest}
         >
           <Typography variant="h3" color="textPrimary">
-            About the campaign
+            Campaign Description
           </Typography>
           <Box mt={2}>
             <Typography variant="subtitle1" color="textSecondary">
@@ -121,18 +117,20 @@ const ProjectCampagin: FC<ProjectCampaignProps> = ({
               aliquam fringilla velit sit amet euismod.
             </Typography>
           </Box>
-          <Box mt={4}>
+          <Box mt={2}>
             <TextField
               error={Boolean(touched.campaignTitle && errors.campaignTitle)}
               fullWidth
               helperText={touched.campaignTitle && errors.campaignTitle}
-              label="Campaign title"
+              label="Campaign name"
               name="campaignTitle"
               onBlur={handleBlur}
               onChange={handleChange}
               value={values.campaignTitle}
               variant="outlined"
             />
+          </Box>
+          <Box mt={2}>
             <Paper variant="outlined" component={Box}>
               <QuillEditor
                 handleChange={e => {
@@ -143,43 +141,6 @@ const ProjectCampagin: FC<ProjectCampaignProps> = ({
                 className={classes.editor}
               />
             </Paper>
-
-            <Box mt={4}>
-              <Card>
-                <CardContent>
-                  <FilesDropzone />
-                </CardContent>
-              </Card>
-            </Box>
-
-            <Box mt={8} display="flex" justifyContent="space-between">
-              <KeyboardDatePicker
-                className={classes.datePicker}
-                label="Start Date"
-                format="MM/DD/YYYY"
-                name="startDate"
-                fullWidth
-                inputVariant="outlined"
-                value={values.startDate}
-                onBlur={() => setFieldTouched('startDate')}
-                onClose={() => setFieldTouched('startDate')}
-                onAccept={() => setFieldTouched('startDate')}
-                onChange={date => setFieldValue('startDate', date)}
-              />
-              <KeyboardDatePicker
-                className={classes.datePicker}
-                label="End Date"
-                format="MM/DD/YYYY"
-                name="endDate"
-                fullWidth
-                inputVariant="outlined"
-                value={values.endDate}
-                onBlur={() => setFieldTouched('endDate')}
-                onClose={() => setFieldTouched('endDate')}
-                onAccept={() => setFieldTouched('endDate')}
-                onChange={date => setFieldValue('endDate', date)}
-              />
-            </Box>
 
             {Boolean(touched.startDate && errors.startDate) && (
               <Box mt={2}>
@@ -192,7 +153,7 @@ const ProjectCampagin: FC<ProjectCampaignProps> = ({
               </Box>
             )}
 
-            <Box mt={8}>
+            <Box mt={2}>
               <TextField
                 error={Boolean(touched.campaignUrl && errors.campaignUrl)}
                 fullWidth
@@ -207,7 +168,7 @@ const ProjectCampagin: FC<ProjectCampaignProps> = ({
               />
             </Box>
 
-            <Box mt={8} display="flex" alignItems="center">
+            <Box mt={2} display="flex" alignItems="center">
               <Box display="flex" width="50%">
                 <TextField
                   label="Campaign hashtags"
@@ -273,7 +234,7 @@ const ProjectCampagin: FC<ProjectCampaignProps> = ({
             )}
           </Box>
 
-          <Box mt={6} display="flex">
+          <Box mt={4} display="flex">
             {onBack && (
               <Button onClick={onBack} size="large">
                 Previous

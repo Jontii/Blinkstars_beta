@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& p': {
       marginBottom: theme.spacing(2)
     }
+  },
+  tag: {
+    marginRight: theme.spacing(1)
   }
 }));
 
@@ -45,13 +48,56 @@ const Brief: FC<BriefProps> = ({ className, project, ...rest }) => {
             </Typography>
             <Box mt={3}>
               <Typography variant="subtitle2" color="textSecondary">
-                Tags
+                Campaign Hashtags
               </Typography>
               <Box mt={1}>
-                {project.tags.map(tag => (
-                  <Chip key={tag} variant="outlined" label={tag} />
+                {project.hashtags.map(tag => (
+                  <Chip
+                    key={tag}
+                    className={classes.tag}
+                    variant="outlined"
+                    label={tag}
+                  />
                 ))}
               </Box>
+            </Box>
+            <Box display="flex" justifyContent="space-between">
+              <Box mt={3}>
+                <Typography variant="subtitle2" color="textSecondary">
+                  Countries
+                </Typography>
+                <Box mt={1}>
+                  {project.country.map(tag => (
+                    <Chip
+                      key={tag}
+                      className={classes.tag}
+                      variant="outlined"
+                      label={tag}
+                    />
+                  ))}
+                </Box>
+              </Box>
+              <Box mt={3}>
+                <Typography variant="subtitle2" color="textSecondary">
+                  Roles
+                </Typography>
+                <Box mt={1}>
+                  {project.tags.map(tag => (
+                    <Chip
+                      key={tag}
+                      className={classes.tag}
+                      variant="outlined"
+                      label={tag}
+                    />
+                  ))}
+                </Box>
+              </Box>
+            </Box>
+            <Box mt={3}>
+              <Typography variant="subtitle2" color="textSecondary">
+                Influencer network
+              </Typography>
+              <Box mt={1}>{project.connections}</Box>
             </Box>
           </Grid>
         </Grid>

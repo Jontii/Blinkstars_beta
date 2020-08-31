@@ -10,7 +10,6 @@ import {
   TextField,
   Typography
 } from '@material-ui/core';
-import Axios from 'axios';
 import clsx from 'clsx';
 import { Formik } from 'formik';
 import React, { FC, useState } from 'react';
@@ -36,14 +35,14 @@ const useStyles = makeStyles(theme => ({
 
 interface ProjectInfluencersProps {
   className?: string;
-  onComplete?: () => void;
+  onNext?: () => void;
   onBack?: () => void;
 }
 
 const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
   className,
   onBack,
-  onComplete,
+  onNext,
   ...rest
 }) => {
   const classes = useStyles();
@@ -90,7 +89,7 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
     },
     {
       value: 10000,
-      label: '10000'
+      label: '10 000 +'
     }
   ];
 
@@ -125,15 +124,8 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
           // decides to continue later.
           setSubmitting(false);
 
-          if (onComplete) {
-            Axios.post('/api/campaign/', {
-              name: 'Jontetest'
-            })
-              .then(resp => {
-                console.log('Posted', resp);
-              })
-              .catch(error => console.log(error));
-            onComplete();
+          if (onNext) {
+            onNext();
           }
         } catch (err) {
           // setErrors({ submit: err.message });
@@ -159,7 +151,7 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
           {...rest}
         >
           <Typography variant="h3" color="textPrimary">
-            Please select one option
+            Pick your influencer criteria for best match
           </Typography>
           <Box mt={2}>
             <Typography variant="subtitle1" color="textSecondary">
@@ -296,7 +288,7 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
               variant="contained"
               size="large"
             >
-              Complete
+              Next
             </Button>
           </Box>
         </form>

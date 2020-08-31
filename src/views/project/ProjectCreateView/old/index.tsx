@@ -31,9 +31,8 @@ import {
 import { Link as RouterLink } from 'react-router-dom';
 import Page from 'src/components/Page';
 import { Theme } from 'src/theme';
-import ProjectCampagin from './ProjectCampaign';
-import ProjectCompany from './ProjectCompany';
-import ProjectInfluencers from './ProjectInfluencers';
+import ProjectCampagin from '../ProjectCampaign';
+import ProjectCompany from '../ProjectCompany';
 
 interface CustomStepIconProps {
   active?: boolean;
@@ -186,12 +185,6 @@ const ProjectCreateView: FC = () => {
                   {activeStep === 0 && <ProjectCompany onNext={handleNext} />}
                   {activeStep === 1 && (
                     <ProjectCampagin onBack={handleBack} onNext={handleNext} />
-                  )}
-                  {activeStep === 2 && (
-                    <ProjectInfluencers
-                      onBack={handleBack}
-                      onComplete={handleComplete}
-                    />
                   )}
                 </Box>
               </Grid>

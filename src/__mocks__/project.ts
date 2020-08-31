@@ -181,20 +181,20 @@ mock.onGet('/api/projects/projects/1').reply(() => {
         id: '5e8dd0828d628e6f40abdfe8',
         createdAt: moment().subtract(23, 'minutes').toDate().getTime(),
         description: 'has uploaded a new file',
-        subject: 'Project author',
+        subject: 'Campaign author',
         type: 'upload_file'
       },
       {
         id: '5e8dd0893a6725f2bb603617',
         createdAt: moment().subtract(2, 'hours').toDate().getTime(),
-        description: 'joined team as a Front-End Developer',
+        description: 'joined team as a influencer',
         subject: 'Adrian Stefan',
         type: 'join_team'
       },
       {
         id: '5e8dd08f44603e3300b75cf1',
         createdAt: moment().subtract(9, 'hours').toDate().getTime(),
-        description: 'joined team as a Full Stack Developer',
+        description: 'joined team as a influencer',
         subject: 'Alexndru Robert',
         type: 'join_team'
       },
@@ -202,14 +202,14 @@ mock.onGet('/api/projects/projects/1').reply(() => {
         id: '5e8dd0960f3f0fe04e64d8f4',
         createdAt: moment().subtract(2, 'days').toDate().getTime(),
         description: 'raised the project budget',
-        subject: 'Project author',
+        subject: 'Campaign author',
         type: 'price_change'
       },
       {
         id: '5e8dd09db94421c502c53d13',
         createdAt: moment().subtract(4, 'days').toDate().getTime(),
         description: 'created',
-        subject: 'Contest',
+        subject: 'Campaign',
         type: 'contest_created'
       }
     ],
@@ -219,13 +219,7 @@ mock.onGet('/api/projects/projects/1').reply(() => {
         avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_2.png`,
         commonConnections: 12,
         cover: `${process.env.PUBLIC_URL}/static/images/covers/cover_2.jpg`,
-        labels: [
-          'User Experience',
-          'FrontEnd development',
-          'HTML5',
-          'VueJS',
-          'ReactJS'
-        ],
+        labels: ['Project Manager', '10 000+ connections', 'Sweden'],
         name: 'Ekaterina Tankova'
       },
       {
@@ -233,12 +227,7 @@ mock.onGet('/api/projects/projects/1').reply(() => {
         avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_3.png`,
         commonConnections: 5,
         cover: `${process.env.PUBLIC_URL}/static/images/covers/cover_3.jpg`,
-        labels: [
-          'User Interface',
-          'FullStack development',
-          'Angular',
-          'ExpressJS'
-        ],
+        labels: ['Denmark', 'Agile Coach', '5000 connections', 'Full-time'],
         name: 'Cao Yu'
       },
       {
@@ -246,14 +235,20 @@ mock.onGet('/api/projects/projects/1').reply(() => {
         avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_6.png`,
         commonConnections: 17,
         cover: `${process.env.PUBLIC_URL}/static/images/covers/cover_1.jpg`,
-        labels: ['BackEnd development', 'Firebase', 'MongoDB', 'ExpressJS'],
+        labels: [
+          '17+ previous campaigns',
+          'Agile Coach',
+          '7000 connections',
+          'Sweden'
+        ],
         name: 'Katarina Smith'
       }
     ],
     author: {
       id: '5e887d0b3d090c1b8f162003',
       avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.png`,
-      name: 'Emilee Simchenko'
+      name: 'Emilee Simchenko',
+      bio: 'Manager at Telia'
     },
     budget: 12500.0,
     caption:
@@ -351,8 +346,11 @@ The project has been created in Sketch so let me know if there are any problems 
       }
     ],
     startDate: moment().add(7, 'days').toDate().getTime(),
-    tags: ['React JS'],
+    tags: ['Project Manager', 'Agile Coach'],
+    hashtags: ['Tag1', 'Tag2'],
+    country: ['Sweden', 'Denmark'],
     title: 'Campaign for the new Iphone model',
+    connections: '4000+',
     type: 'Full-Time',
     updatedAt: moment().subtract(23, 'minutes').toDate().getTime()
   };

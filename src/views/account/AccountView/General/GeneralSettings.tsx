@@ -267,7 +267,7 @@ const GeneralSettings: FC<GeneralSettingsProps> = ({
                   </Box>
                 </Grid>
 
-                {user.name !== 'AMD' && (
+                {user.name !== 'Emilee Simchenko' && (
                   <>
                     <Grid item md={6} xs={12}>
                       <Typography variant="h6" color="textPrimary">

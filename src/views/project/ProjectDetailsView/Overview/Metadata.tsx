@@ -69,7 +69,7 @@ const Metadata: FC<MetadataProps> = ({ className, project, ...rest }) => {
         }
         title={
           <Typography display="block" variant="overline" color="textSecondary">
-            Contest holder
+            Campaign Owner
           </Typography>
         }
       />

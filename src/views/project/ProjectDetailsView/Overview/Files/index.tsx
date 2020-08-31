@@ -1,8 +1,7 @@
-import { Box, Card, CardContent, Grid, makeStyles } from '@material-ui/core';
+import { Box, Grid, makeStyles } from '@material-ui/core';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { FC } from 'react';
-import FilesDropzone from 'src/components/FilesDropzone';
 import FileCard from './FileCard';
 
 interface FilesProps {
@@ -19,11 +18,11 @@ const Files: FC<FilesProps> = ({ className, files, ...rest }) => {
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
-      <Card>
+      {/* <Card>
         <CardContent>
           <FilesDropzone />
         </CardContent>
-      </Card>
+      </Card> */}
       <Box mt={3}>
         <Grid container spacing={3}>
           {files.map(file => (

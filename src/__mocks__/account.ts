@@ -23,12 +23,12 @@ const users = [
   },
   {
     id: '5e86809283e28b96d2d38537',
-    avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_2.png`,
+    avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.png`,
     canHire: false,
     country: 'USA',
-    email: 'company@amd.io',
+    email: 'company@telia.io',
     isPublic: true,
-    name: 'AMD',
+    name: 'Emilee Simchenko',
     password: 'Password123',
     phone: '+40 777666555',
     role: 'admin',
@@ -79,7 +79,9 @@ mock.onPost('/api/account/register').reply(async config => {
   try {
     await wait(1000);
 
-    const { email, avatar, country, phone, name, password } = JSON.parse(config.data);
+    const { email, avatar, country, phone, name, password } = JSON.parse(
+      config.data
+    );
     let user = users.find(_user => _user.email === email);
 
     if (user) {

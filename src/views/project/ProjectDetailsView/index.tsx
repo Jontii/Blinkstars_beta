@@ -42,8 +42,8 @@ const ProjectDetailsView: FC = () => {
   const tabs = [
     { value: 'overview', label: 'Overview' },
     // { value: 'reviews', label: 'Reviews' },
-    { value: 'activity', label: 'History' },
-    { value: 'applicants', label: 'Influencers' }
+    { value: 'applicants', label: 'Influencers' },
+    { value: 'activity', label: 'History' }
   ];
 
   const handleTabsChange = (event: ChangeEvent<{}>, value: string): void => {
@@ -93,11 +93,14 @@ const ProjectDetailsView: FC = () => {
         <Box mt={3}>
           {currentTab === 'overview' && <Overview project={project} />}
           {currentTab === 'reviews' && <Reviews reviews={project.reviews} />}
+          {currentTab === 'applicants' && (
+            <Applicants
+              applicants={project.applicants}
+              author={project.author}
+            />
+          )}
           {currentTab === 'activity' && (
             <Activities activities={project.activities} />
-          )}
-          {currentTab === 'applicants' && (
-            <Applicants applicants={project.applicants} />
           )}
         </Box>
       </Container>

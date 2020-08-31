@@ -66,11 +66,11 @@ const ApplyModal: FC<ApplyModalProps> = ({
           variant="h3"
           color="textPrimary"
         >
-          The project requires an introduction
+          You have been selected for our campaign
         </Typography>
         <Typography align="center" variant="subtitle2" color="textSecondary">
           Write down a short note with your application regarding why you think
-          you&apos;d be a good fit for this position.
+          you&apos;d be a good fit for our campaign.
         </Typography>
         <Box mt={3}>
           <TextField
@@ -80,8 +80,9 @@ const ApplyModal: FC<ApplyModalProps> = ({
             helperText={`${200 - value.length} characters left`}
             label="Short Note"
             multiline
+            disabled
             onChange={handleChange}
-            placeholder="What excites you about this project?"
+            placeholder="What excites you about this campaign?"
             rows={5}
             value={value}
             variant="outlined"
@@ -95,7 +96,7 @@ const ApplyModal: FC<ApplyModalProps> = ({
                 {author.name}
               </Typography>
               <Typography variant="subtitle2" color="textPrimary">
-                {/* {author.bio} */}
+                {author.bio}
               </Typography>
             </Box>
           </Box>
@@ -107,7 +108,7 @@ const ApplyModal: FC<ApplyModalProps> = ({
             fullWidth
             color="primary"
           >
-            Apply for a role
+            Send request to influencer
           </Button>
         </Box>
       </div>

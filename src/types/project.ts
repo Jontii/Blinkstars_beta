@@ -35,6 +35,7 @@ export interface ProjectAuthor {
   id: string;
   avatar: string;
   name: string;
+  bio?: string;
 }
 
 export interface ProjectFile {
@@ -85,6 +86,9 @@ export interface Project {
   reviews?: ProjectReview[];
   startDate?: number;
   tags?: string[]; //
+  hashtags?: string[];
+  country?: string[];
+  connections?: number | string;
   technology?: string; //
   title: string;
   type: 'Full-Time' | 'Part-Time';

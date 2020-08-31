@@ -23,29 +23,35 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import {
-  Briefcase as BriefcaseIcon,
-  Star as StarIcon,
-  User as UserIcon
-} from 'react-feather';
+import { Star as StarIcon } from 'react-feather';
 import { Link as RouterLink } from 'react-router-dom';
 import Page from 'src/components/Page';
 import ProjectCampagin from './ProjectCampaign';
+import ProjectCampignComplete from './ProjectCampignComplete';
 import ProjectCompany from './ProjectCompany';
 import ProjectInfluencers from './ProjectInfluencers';
+import ProjectMediaFiles from './ProjectMediaFiles';
 
 const steps = [
   {
-    label: 'About the company',
-    icon: BriefcaseIcon
+    label: 'Campaign Details',
+    icon: 1
   },
   {
-    label: 'About the campaign',
-    icon: BriefcaseIcon
+    label: 'Campaign Media',
+    icon: 2
   },
   {
-    label: 'Influencer criteria',
-    icon: UserIcon
+    label: 'About The Company',
+    icon: 3
+  },
+  {
+    label: 'Influencer Criteria',
+    icon: 4
+  },
+  {
+    label: 'Complete Campaign',
+    icon: 5
   }
 ];
 
@@ -82,7 +88,7 @@ function CustomStepIcon({ active, completed, icon }) {
         [classes.completed]: completed
       })}
     >
-      <Icon size="20" />
+      {Icon}
     </Avatar>
   );
 }
@@ -143,7 +149,7 @@ function ProjectCreateView() {
             </Typography>
           </Breadcrumbs>
           <Typography variant="h3" color="textPrimary">
-            Create campaign wizard
+            Create Campaign Wizard
           </Typography>
         </Box>
         {!completed ? (
@@ -168,12 +174,24 @@ function ProjectCreateView() {
               </Grid>
               <Grid item xs={12} md={9}>
                 <Box p={3}>
-                  {activeStep === 0 && <ProjectCompany onNext={handleNext} />}
+                  {activeStep === 0 && <ProjectCampagin onNext={handleNext} />}
                   {activeStep === 1 && (
-                    <ProjectCampagin onBack={handleBack} onNext={handleNext} />
+                    <ProjectMediaFiles
+                      onBack={handleBack}
+                      onNext={handleNext}
+                    />
                   )}
                   {activeStep === 2 && (
+                    <ProjectCompany onBack={handleBack} onNext={handleNext} />
+                  )}
+                  {activeStep === 3 && (
                     <ProjectInfluencers
+                      onBack={handleBack}
+                      onNext={handleNext}
+                    />
+                  )}
+                  {activeStep === 4 && (
+                    <ProjectCampignComplete
                       onBack={handleBack}
                       onComplete={handleComplete}
                     />

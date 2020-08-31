@@ -14,14 +14,16 @@ import {
 } from '@material-ui/core';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { UserCheck } from 'react-feather';
 import { Link as RouterLink } from 'react-router-dom';
 import { Theme } from 'src/theme';
-import { ProjectApplicant } from 'src/types/project';
+import { ProjectApplicant, ProjectAuthor } from 'src/types/project';
+import ApplyModal from '../Header/ApplyModal';
 interface ApplicantCardProps {
   className?: string;
   applicant: ProjectApplicant;
+  author: ProjectAuthor;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -50,9 +52,20 @@ const useStyles = makeStyles((theme: Theme) => ({
 const ApplicantCard: FC<ApplicantCardProps> = ({
   className,
   applicant,
+  author,
   ...rest
 }) => {
   const classes = useStyles();
+
+  const [isApplyModalOpen, setApplyModalOpen] = useState<boolean>(false);
+
+  const handleApplyModalOpen = (): void => {
+    setApplyModalOpen(true);
+  };
+
+  const handleApplyModalClose = (): void => {
+    setApplyModalOpen(false);
+  };
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
@@ -98,7 +111,7 @@ const ApplicantCard: FC<ApplicantCardProps> = ({
         <Box display="flex" justifyContent="center">
           <Button
             className={classes.action}
-            // onClick={handleApplyModalOpen}
+            onClick={handleApplyModalOpen}
             variant="contained"
             color="secondary"
             startIcon={
@@ -107,9 +120,15 @@ const ApplicantCard: FC<ApplicantCardProps> = ({
               </SvgIcon>
             }
           >
-            Select for campaign
+            Ask to be influencer
           </Button>
         </Box>
+        <ApplyModal
+          author={author}
+          onApply={handleApplyModalClose}
+          onClose={handleApplyModalClose}
+          open={isApplyModalOpen}
+        />
       </CardContent>
     </Card>
   );

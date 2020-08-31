@@ -11,7 +11,7 @@ const GuestGuard: FC<GuestGuardProps> = ({ children }) => {
   const { isAuthenticated, user } = useAuth();
 
   if (isAuthenticated) {
-    if (user.name === 'AMD')
+    if (user.name === 'Emilee Simchenko')
       return <Redirect to="/app/reports/dashboard-alternative" />;
     else return <Redirect to="/app/reports/dashboard" />;
   }
