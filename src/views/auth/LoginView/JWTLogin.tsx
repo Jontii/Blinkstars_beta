@@ -65,7 +65,7 @@ const JWTLogin: FC<JWTLoginProps> = ({ className, ...rest }) => {
           className={classes.providerIcon}
           src={`${process.env.PUBLIC_URL}/static/images/linkedin.svg`}
         />
-        Sign in with LinkedIn
+        Sign in as a influencer with LinkedIn
       </Button>
       <Box alignItems="center" display="flex" mt={2}>
         <Divider className={classes.divider} orientation="horizontal" />
