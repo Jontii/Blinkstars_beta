@@ -38,10 +38,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Overview: FC<OverviewProps> = ({ className, ...rest }) => {
   const classes = useStyles();
   const overview = {
-    income: '854,355.00',
-    expanses: '373,250.50',
-    profit: '123,532.00',
-    subscriptions: '26,000'
+    income: '32 213',
+    expanses: '2334',
+    profit: '9',
+    subscriptions: '7'
   };
 
   return (
@@ -54,14 +54,14 @@ const Overview: FC<OverviewProps> = ({ className, ...rest }) => {
             variant="overline"
             color="textSecondary"
           >
-            Total Income
+            Total Reactions
           </Typography>
           <div className={classes.valueContainer}>
             <Typography variant="h3" color="textPrimary">
-              ${overview.income}
+              {overview.income}
             </Typography>
             <Label className={classes.label} color="success">
-              +25%
+              +22%
             </Label>
           </div>
         </Grid>
@@ -72,11 +72,11 @@ const Overview: FC<OverviewProps> = ({ className, ...rest }) => {
             variant="overline"
             color="textSecondary"
           >
-            Total Expanses
+            Total Shares
           </Typography>
           <div className={classes.valueContainer}>
             <Typography variant="h3" color="textPrimary">
-              ${overview.expanses}
+              {overview.expanses}
             </Typography>
             <Label className={classes.label} color="success">
               +12%
@@ -90,14 +90,14 @@ const Overview: FC<OverviewProps> = ({ className, ...rest }) => {
             variant="overline"
             color="textSecondary"
           >
-            Net Profit
+            Click Through Rate
           </Typography>
           <div className={classes.valueContainer}>
             <Typography variant="h3" color="textPrimary">
-              {overview.profit}
+              {overview.profit}%
             </Typography>
-            <Label className={classes.label} color="error">
-              -20%
+            <Label className={classes.label} color="success">
+              +6%
             </Label>
           </div>
         </Grid>
@@ -108,12 +108,15 @@ const Overview: FC<OverviewProps> = ({ className, ...rest }) => {
             variant="overline"
             color="textSecondary"
           >
-            Active Subscriptions
+            Engagement Rate
           </Typography>
           <div className={classes.valueContainer}>
             <Typography variant="h3" color="textPrimary">
-              {overview.subscriptions}
+              {overview.subscriptions}%
             </Typography>
+            <Label className={classes.label} color="error">
+              -1%
+            </Label>
           </div>
         </Grid>
       </Grid>

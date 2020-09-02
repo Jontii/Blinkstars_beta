@@ -7,9 +7,10 @@ import { Theme } from 'src/theme';
 interface ChartProps {
   className?: string;
   data: any;
+  version: number;
 }
 
-const Chart: FC<ChartProps> = ({ data: dataProp, ...rest }) => {
+const Chart: FC<ChartProps> = ({ data: dataProp, version, ...rest }) => {
   const theme: Theme = useTheme();
 
   const data = {
@@ -51,7 +52,8 @@ const Chart: FC<ChartProps> = ({ data: dataProp, ...rest }) => {
           const label = _data.labels[tooltipItem.index];
           const value = _data.datasets[0].data[tooltipItem.index];
 
-          return `${label}: ${value}%`;
+          if (version === 3) return `${label}: ${value}%`;
+          else return `${label}: ${value}`;
         }
       }
     }

@@ -9,14 +9,10 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  TableRow,
-  TableSortLabel,
-  Tooltip
+  TableRow
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import clsx from 'clsx';
-import moment from 'moment';
-import numeral from 'numeral';
 import PropTypes from 'prop-types';
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -37,8 +33,11 @@ const labelColors: Record<OrderStatus, 'success' | 'warning' | 'error'> = {
   rejected: 'error'
 };
 
-const useStyles = makeStyles(() => ({
-  root: {}
+const useStyles = makeStyles(theme => ({
+  root: {},
+  marginRight: {
+    marginRight: theme.spacing(1)
+  }
 }));
 
 const LatestOrders: FC<LatestOrdersProps> = ({ className, ...rest }) => {
@@ -66,46 +65,55 @@ const LatestOrders: FC<LatestOrdersProps> = ({ className, ...rest }) => {
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
-      <CardHeader action={<GenericMoreButton />} title="Latest Orders" />
+      <CardHeader
+        action={<GenericMoreButton />}
+        title="Companies & Roles Data"
+      />
       <Divider />
       <PerfectScrollbar>
         <Box minWidth={700}>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell sortDirection="desc">
+                {/* <TableCell sortDirection="desc">
                   <Tooltip enterDelay={300} title="Sort">
                     <TableSortLabel active direction="desc">
                       Number
                     </TableSortLabel>
                   </Tooltip>
-                </TableCell>
-                <TableCell>Customer</TableCell>
-                <TableCell>Items</TableCell>
-                <TableCell>Total</TableCell>
-                <TableCell>Status</TableCell>
-                <TableCell align="right">Date</TableCell>
+                </TableCell> */}
+                <TableCell>Companies</TableCell>
+                <TableCell>Total Views</TableCell>
+                <TableCell>Roles</TableCell>
+                {/* <TableCell align="right">Date</TableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>
               {orders.map(order => (
                 <TableRow hover key={order.id}>
-                  <TableCell>{order.number}</TableCell>
                   <TableCell>{order.customer.name}</TableCell>
-                  <TableCell>{order.items}</TableCell>
+                  <TableCell>{order.items * 13}</TableCell>
                   <TableCell>
+                    {order.roles &&
+                      order.roles.map(i => (
+                        <Label className={classes.marginRight} color="success">
+                          {i}
+                        </Label>
+                      ))}
+                  </TableCell>
+                  {/* <TableCell>
                     {numeral(order.totalAmount).format(
                       `${order.currency}0,0.00`
                     )}
-                  </TableCell>
-                  <TableCell>
+                  </TableCell> */}
+                  {/* <TableCell>
                     <Label color={labelColors[order.status]}>
                       {order.status}
                     </Label>
                   </TableCell>
                   <TableCell align="right">
                     {moment(order.createdAt).format('DD MMM, YYYY hh:mm:ss')}
-                  </TableCell>
+                  </TableCell> */}
                 </TableRow>
               ))}
             </TableBody>
@@ -116,7 +124,7 @@ const LatestOrders: FC<LatestOrdersProps> = ({ className, ...rest }) => {
         <Button
           component={RouterLink}
           size="small"
-          to="/app/management/orders"
+          to="#"
           endIcon={<NavigateNextIcon />}
         >
           See all

@@ -20,7 +20,7 @@ mock.onGet('/api/reports/customer-activity').reply(() => {
         avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_2.png`,
         name: 'Ekaterina Tankova'
       },
-      description: 'Created account',
+      description: 'Project Manager',
       type: 'register'
     },
     {
@@ -31,40 +31,40 @@ mock.onGet('/api/reports/customer-activity').reply(() => {
         name: 'Cao Yu',
         avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_3.png`
       },
-      description: 'Subscription Purchase',
+      description: 'Agile Coach',
       type: 'payment'
     },
     {
       id: '5e89141633dc5e52c923ef27',
-      createdAt: moment().subtract(2, 'hours').toDate().getTime(),
+      createdAt: moment().subtract(5, 'hours').toDate().getTime(),
       customer: {
         id: '5e887b209c28ac3dd97f6db5',
         name: 'Alex Richardson',
         avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_4.png`
       },
-      description: 'Submitted a ticket',
+      description: 'Entrepreneur',
       type: 'ticket_create'
     },
     {
       id: '5e89141bd975c7f33aee9f4b',
-      createdAt: moment().subtract(5, 'minutes').toDate().getTime(),
+      createdAt: moment().subtract(7, 'hours').toDate().getTime(),
       customer: {
         id: '5e887b7602bdbc4dbb234b27',
         name: 'Anje Keizer',
         avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_5.png`
       },
-      description: 'Subscription Purchase',
+      description: 'Entrepreneur',
       type: 'payment'
     },
     {
       id: '5e891421d7945778863cf9ca',
-      createdAt: moment().subtract(5, 'minutes').toDate().getTime(),
+      createdAt: moment().subtract(9, 'hours').toDate().getTime(),
       customer: {
         id: '5e86809283e28b96d2d38537',
         name: 'Katarina Smith',
         avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_6.png`
       },
-      description: 'Subscription Purchase',
+      description: 'Influencer',
       type: 'payment'
     }
   ];
@@ -76,11 +76,35 @@ mock.onGet('/api/reports/earnings').reply(200, {
   earnings: {
     datasets: [
       {
-        data: [56, 24, 20],
+        data: [15500, 3350, 2880],
         backgroundColor: ['#3d72eb', '#4b9e86', '#b658f5']
       }
     ],
-    labels: ['Subscriptions', 'Affiliate', 'Sales']
+    labels: ['Views', 'Reactions', 'Shares']
+  }
+});
+
+mock.onGet('/api/reports/earnings2').reply(200, {
+  earnings: {
+    datasets: [
+      {
+        data: [3999, 1123, 2355],
+        backgroundColor: ['#3d72eb', '#4b9e86', '#b658f5']
+      }
+    ],
+    labels: ['Comments', 'Click through rate', 'Engagement rate']
+  }
+});
+
+mock.onGet('/api/reports/earnings3').reply(200, {
+  earnings: {
+    datasets: [
+      {
+        data: [65, 15, 20],
+        backgroundColor: ['#3d72eb', '#4b9e86', '#b658f5']
+      }
+    ],
+    labels: ['Sweden', 'Denmark', 'Norway']
   }
 });
 
@@ -95,13 +119,14 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
         .getTime(),
       customer: {
         email: 'ekaterina@devias.io',
-        name: 'Ekaterina Tankova'
+        name: 'Volvo'
       },
       currency: '$',
-      items: 7,
-      number: 'DEV-1042',
+      items: 8,
+      number: 'CEO, Project Manager, Agile Coach, Engineer...',
       status: 'pending',
-      totalAmount: 524.0
+      totalAmount: 524.0,
+      roles: ['Project Manager', 'Agile Coach', 'Engineer']
     },
     {
       id: '5eff254e46b753a166e7d7af',
@@ -112,14 +137,15 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
         .toDate()
         .getTime(),
       customer: {
-        email: 'cao.yu@devias.io',
+        email: 'HIQ',
         name: 'Cao Yu'
       },
       currency: '$',
-      items: 8,
+      items: 7,
       number: 'DEV-1041',
       status: 'complete',
-      totalAmount: 693.0
+      totalAmount: 693.0,
+      roles: ['Project Manager', 'Engineer', 'Consultant']
     },
     {
       id: '5eff2553e1c551e2e28a9205',
@@ -131,13 +157,14 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
         .getTime(),
       customer: {
         email: 'alex.richardson@devias.io',
-        name: 'Alex Richardson'
+        name: 'TV4'
       },
       currency: '$',
-      items: 4,
+      items: 5,
       number: 'DEV-1040',
       status: 'rejected',
-      totalAmount: 215.0
+      totalAmount: 215.0,
+      roles: ['TV Host', 'Director']
     },
     {
       id: '5eff25590f3e28f013c39a0e',
@@ -149,13 +176,14 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
         .getTime(),
       customer: {
         email: 'anje.keiser@devias.io',
-        name: 'Anje Keizer'
+        name: 'Tele2'
       },
       currency: '$',
-      items: 1,
+      items: 4,
       number: 'DEV-1039',
       status: 'pending',
-      totalAmount: 25.0
+      totalAmount: 25.0,
+      roles: ['Agile Coach', 'Engineer', 'Devops', 'IT-Support']
     },
     {
       id: '5eff255f57499089243805d8',
@@ -166,14 +194,15 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
         .toDate()
         .getTime(),
       customer: {
-        name: 'Clarke Gillebert',
+        name: 'SAAB',
         email: 'clarke.gillebert@devias.io'
       },
       currency: '$',
-      items: 5,
+      items: 2,
       number: 'DEV-1038',
       status: 'complete',
-      totalAmount: 535.0
+      totalAmount: 535.0,
+      roles: ['Engineer']
     },
     {
       id: '5eff25658d416fc5adb96a3a',
@@ -185,13 +214,14 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
         .getTime(),
       customer: {
         email: 'merrile.burgett@devias.io',
-        name: 'Merrile Burgett'
+        name: 'SAS'
       },
       currency: '$',
-      items: 2,
+      items: 1,
       number: 'DEV-1037',
       status: 'complete',
-      totalAmount: 56.0
+      totalAmount: 56.0,
+      roles: ['Project Manager']
     }
   ];
 

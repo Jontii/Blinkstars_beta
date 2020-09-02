@@ -1,4 +1,5 @@
 import { Card, CardContent, Typography, useTheme } from '@material-ui/core';
+import moment from 'moment';
 import React, { FC } from 'react';
 import Chart from 'react-apexcharts';
 
@@ -67,18 +68,42 @@ const LineChart: FC = () => {
           color: theme.palette.divider
         },
         categories: [
-          '01 Jan',
-          '02 Jan',
-          '03 Jan',
-          '04 Jan',
-          '05 Jan',
-          '06 Jan',
-          '07 Jan',
-          '08 Jan',
-          '09 Jan',
-          '10 Jan',
-          '11 Jan',
-          '12 Jan'
+          `${moment(moment().subtract(11, 'days').toDate().getTime()).format(
+            'DD MMM'
+          )}`,
+          `${moment(moment().subtract(10, 'days').toDate().getTime()).format(
+            'DD MMM'
+          )}`,
+          `${moment(moment().subtract(9, 'days').toDate().getTime()).format(
+            'DD MMM'
+          )}`,
+          `${moment(moment().subtract(8, 'days').toDate().getTime()).format(
+            'DD MMM'
+          )}`,
+          `${moment(moment().subtract(7, 'days').toDate().getTime()).format(
+            'DD MMM'
+          )}`,
+          `${moment(moment().subtract(6, 'days').toDate().getTime()).format(
+            'DD MMM'
+          )}`,
+          `${moment(moment().subtract(5, 'days').toDate().getTime()).format(
+            'DD MMM'
+          )}`,
+          `${moment(moment().subtract(4, 'days').toDate().getTime()).format(
+            'DD MMM'
+          )}`,
+          `${moment(moment().subtract(3, 'days').toDate().getTime()).format(
+            'DD MMM'
+          )}`,
+          `${moment(moment().subtract(2, 'days').toDate().getTime()).format(
+            'DD MMM'
+          )}`,
+          `${moment(moment().subtract(1, 'days').toDate().getTime()).format(
+            'DD MMM'
+          )}`,
+          `${moment(moment().subtract(0, 'days').toDate().getTime()).format(
+            'DD MMM'
+          )}`
         ],
         labels: {
           style: {
@@ -122,7 +147,7 @@ const LineChart: FC = () => {
     },
     series: [
       {
-        name: 'Page Views',
+        name: 'Views',
         data: [
           3350,
           1840,
@@ -139,8 +164,8 @@ const LineChart: FC = () => {
         ]
       },
       {
-        name: 'Session Duration',
-        data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
+        name: 'Comments',
+        data: [560, 198, 254, 388, 1122, 634, 288, 230, 399, 279, 433, 989]
       }
     ]
   };
@@ -151,7 +176,7 @@ const LineChart: FC = () => {
         <Typography variant="h4" color="textPrimary">
           Web Traffic
         </Typography>
-        <Chart type="line" height="300" {...chart} />
+        <Chart type="line" height="415" {...chart} />
       </CardContent>
     </Card>
   );

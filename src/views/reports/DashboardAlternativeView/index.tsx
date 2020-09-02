@@ -2,14 +2,12 @@ import { Container, Grid, makeStyles } from '@material-ui/core';
 import React, { FC } from 'react';
 import Page from 'src/components/Page';
 import { Theme } from 'src/theme';
+import LineChart from 'src/views/extra/charts/ApexChartsView/LineChart';
 import CustomerActivity from './CustomerActivity';
 import EarningsSegmentation from './EarningsSegmentation';
-import FinancialStats from './FinancialStats';
 import Header from './Header';
 import LatestOrders from './LatestOrders';
-import MostProfitableProducts from './MostProfitableProducts';
 import Overview from './Overview';
-import TopReferrals from './TopReferrals';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -32,23 +30,33 @@ const DashboardAlternativeView: FC = () => {
             <Overview />
           </Grid>
           <Grid item lg={8} xl={9} xs={12}>
-            <FinancialStats />
+            <LineChart />
+          </Grid>
+
+          {/* <Grid item lg={4} xl={3} xs={12}>
+            <EarningsSegmentation version={1} />
           </Grid>
           <Grid item lg={4} xl={3} xs={12}>
-            <EarningsSegmentation />
+            <EarningsSegmentation version={2} />
+          </Grid> */}
+          <Grid item lg={4} xl={3} xs={12}>
+            <EarningsSegmentation version={3} />
           </Grid>
-          <Grid item lg={8} xs={12}>
+          <Grid item lg={8} xl={9} xs={12}>
             <LatestOrders />
           </Grid>
-          <Grid item lg={4} xs={12}>
+          {/* <Grid item lg={8} xs={12}>
+            <LatestOrders />
+          </Grid> */}
+          <Grid item lg={4} xl={3} xs={12}>
             <CustomerActivity />
           </Grid>
-          <Grid item lg={8} xs={12}>
+          {/* <Grid item lg={8} xs={12}>
             <MostProfitableProducts />
-          </Grid>
-          <Grid item lg={4} xs={12}>
+          </Grid> */}
+          {/* <Grid item lg={3} xs={12}>
             <TopReferrals />
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
     </Page>

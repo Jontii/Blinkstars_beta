@@ -1,6 +1,5 @@
 import {
   Avatar,
-  Box,
   Card,
   CardHeader,
   Divider,
@@ -67,9 +66,9 @@ const CustomerActivity: FC<CustomerActivityProps> = ({
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
-      <CardHeader title="Customer Activity" action={<GenericMoreButton />} />
+      <CardHeader title="Matched Influencers" action={<GenericMoreButton />} />
       <Divider />
-      <Box display="flex">
+      {/* <Box display="flex">
         <div className={classes.item}>
           <Typography align="center" variant="h3" color="textPrimary">
             15,245
@@ -100,7 +99,7 @@ const CustomerActivity: FC<CustomerActivityProps> = ({
           </Typography>
         </div>
       </Box>
-      <Divider />
+      <Divider /> */}
       <List disablePadding>
         {activities.map((activity, i) => (
           <ListItem divider={i < activities.length - 1} key={activity.id}>

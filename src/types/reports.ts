@@ -24,6 +24,7 @@ export interface Order {
   number: string;
   status: OrderStatus;
   totalAmount: number;
+  roles?: Array<string>;
 }
 
 export interface Product {

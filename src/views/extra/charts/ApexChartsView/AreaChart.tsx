@@ -101,7 +101,7 @@ const AreaChart: FC = () => {
           options={data.options}
           series={data.series}
           type="bar"
-          height="300"
+          height="415"
         />
       </CardContent>
     </Card>

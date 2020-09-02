@@ -17,6 +17,7 @@ import Chart from './Chart';
 
 interface EarningsSegmentationProps {
   className?: string;
+  version: number;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -36,6 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const EarningsSegmentation: FC<EarningsSegmentationProps> = ({
   className,
+  version,
   ...rest
 }) => {
   const classes = useStyles();
@@ -44,10 +46,26 @@ const EarningsSegmentation: FC<EarningsSegmentationProps> = ({
 
   const getEarnings = useCallback(async () => {
     try {
-      const response = await axios.get('/api/reports/earnings');
-
-      if (isMountedRef.current) {
-        setEarnings(response.data.earnings);
+      if (version === 1) {
+        const response = await axios.get('/api/reports/earnings');
+        if (isMountedRef.current) {
+          setEarnings(response.data.earnings);
+        }
+      } else if (version === 2) {
+        const response = await axios.get('/api/reports/earnings2');
+        if (isMountedRef.current) {
+          setEarnings(response.data.earnings);
+        }
+      } else if (version === 3) {
+        const response = await axios.get('/api/reports/earnings3');
+        if (isMountedRef.current) {
+          setEarnings(response.data.earnings);
+        }
+      } else {
+        const response = await axios.get('/api/reports/earnings');
+        if (isMountedRef.current) {
+          setEarnings(response.data.earnings);
+        }
       }
     } catch (err) {
       console.error(err);
@@ -64,20 +82,21 @@ const EarningsSegmentation: FC<EarningsSegmentationProps> = ({
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
-      <CardHeader
-        action={<GenericMoreButton />}
-        title="Earnings Segmentation"
-      />
+      <CardHeader action={<GenericMoreButton />} title="Geographics" />
       <Divider />
       <Box p={3} position="relative" minHeight={320}>
-        <Chart data={earnings} />
+        <Chart data={earnings} version={version} />
       </Box>
       <Divider />
       <Box display="flex">
         {earnings.labels.map((label: string, i: number) => (
           <div key={label} className={classes.item}>
             <Typography variant="h4" color="textPrimary">
-              {earnings.datasets[0].data[i]}%
+              {version === 3 ? (
+                <>{earnings.datasets[0].data[i]}%</>
+              ) : (
+                <>{earnings.datasets[0].data[i]}</>
+              )}
             </Typography>
             <Typography variant="overline" color="textSecondary">
               {label}

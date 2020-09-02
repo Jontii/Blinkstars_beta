@@ -31,7 +31,7 @@ const timeRanges = [
   },
   {
     value: 'last_30_days',
-    text: 'Last 30 days'
+    text: 'Last 10 days'
   },
   {
     value: 'last_year',
@@ -82,6 +82,7 @@ const Header: FC<HeaderProps> = ({ className, ...rest }) => {
         <Button
           ref={actionRef}
           onClick={() => setMenuOpen(true)}
+          disabled
           startIcon={
             <SvgIcon fontSize="small">
               <CalendarIcon />
