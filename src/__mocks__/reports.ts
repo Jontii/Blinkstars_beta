@@ -14,48 +14,48 @@ mock.onGet('/api/reports/customer-activity').reply(() => {
   const activities: CustomerActivity[] = [
     {
       id: '5e89140bcc768199d1e0dc49',
-      createdAt: moment().subtract(23, 'minutes').toDate().getTime(),
+      createdAt: moment().subtract(3, 'hours').toDate().getTime(),
       customer: {
         id: '5e887a62195cc5aef7e8ca5d',
         avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_2.png`,
         name: 'Ekaterina Tankova'
       },
-      description: 'Project Manager',
+      description: 'Influencer',
       type: 'register'
     },
     {
       id: '5e891411b0290b175166cd32',
-      createdAt: moment().subtract(56, 'minutes').toDate().getTime(),
+      createdAt: moment().subtract(6, 'hours').toDate().getTime(),
       customer: {
         id: '5e887ac47eed253091be10cb',
-        name: 'Cao Yu',
+        name: 'Adrian Stefan',
         avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_3.png`
       },
-      description: 'Agile Coach',
+      description: 'Influencer',
       type: 'payment'
     },
-    {
-      id: '5e89141633dc5e52c923ef27',
-      createdAt: moment().subtract(5, 'hours').toDate().getTime(),
-      customer: {
-        id: '5e887b209c28ac3dd97f6db5',
-        name: 'Alex Richardson',
-        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_4.png`
-      },
-      description: 'Entrepreneur',
-      type: 'ticket_create'
-    },
-    {
-      id: '5e89141bd975c7f33aee9f4b',
-      createdAt: moment().subtract(7, 'hours').toDate().getTime(),
-      customer: {
-        id: '5e887b7602bdbc4dbb234b27',
-        name: 'Anje Keizer',
-        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_5.png`
-      },
-      description: 'Entrepreneur',
-      type: 'payment'
-    },
+    // {
+    //   id: '5e89141633dc5e52c923ef27',
+    //   createdAt: moment().subtract(5, 'hours').toDate().getTime(),
+    //   customer: {
+    //     id: '5e887b209c28ac3dd97f6db5',
+    //     name: 'Alex Richardson',
+    //     avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_4.png`
+    //   },
+    //   description: 'Influencer',
+    //   type: 'ticket_create'
+    // },
+    // {
+    //   id: '5e89141bd975c7f33aee9f4b',
+    //   createdAt: moment().subtract(7, 'hours').toDate().getTime(),
+    //   customer: {
+    //     id: '5e887b7602bdbc4dbb234b27',
+    //     name: 'Anje Keizer',
+    //     avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_5.png`
+    //   },
+    //   description: 'Influencer',
+    //   type: 'payment'
+    // },
     {
       id: '5e891421d7945778863cf9ca',
       createdAt: moment().subtract(9, 'hours').toDate().getTime(),
@@ -111,7 +111,7 @@ mock.onGet('/api/reports/earnings3').reply(200, {
 mock.onGet('/api/reports/latest-orders').reply(() => {
   const orders: Order[] = [
     {
-      id: '5eff2548979e396cb4b000ba',
+      id: '5eff2548979e396c1b4b000ba',
       createdAt: moment()
         .subtract(7, 'minutes')
         .subtract(10, 'seconds')
@@ -121,7 +121,7 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
         email: 'ekaterina@devias.io',
         name: 'Volvo'
       },
-      currency: '$',
+      currency: 'SEK',
       items: 8,
       number: 'CEO, Project Manager, Agile Coach, Engineer...',
       status: 'pending',
@@ -129,7 +129,7 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
       roles: ['Project Manager', 'Agile Coach', 'Engineer']
     },
     {
-      id: '5eff254e46b753a166e7d7af',
+      id: '5eff254e46b7523a166e7d7af',
       createdAt: moment()
         .subtract(2, 'hours')
         .subtract(12, 'minutes')
@@ -138,9 +138,9 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
         .getTime(),
       customer: {
         email: 'HIQ',
-        name: 'Cao Yu'
+        name: 'HIQ'
       },
-      currency: '$',
+      currency: 'SEK',
       items: 7,
       number: 'DEV-1041',
       status: 'complete',
@@ -148,7 +148,7 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
       roles: ['Project Manager', 'Engineer', 'Consultant']
     },
     {
-      id: '5eff2553e1c551e2e28a9205',
+      id: '5eff2553e1c5531e2e28a9205',
       createdAt: moment()
         .subtract(5, 'hours')
         .subtract(39, 'minutes')
@@ -159,7 +159,7 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
         email: 'alex.richardson@devias.io',
         name: 'TV4'
       },
-      currency: '$',
+      currency: 'SEK',
       items: 5,
       number: 'DEV-1040',
       status: 'rejected',
@@ -167,7 +167,7 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
       roles: ['TV Host', 'Director']
     },
     {
-      id: '5eff25590f3e28f013c39a0e',
+      id: '5eff25590f3e428f013c39a0e',
       createdAt: moment()
         .subtract(5, 'hours')
         .subtract(46, 'minutes')
@@ -178,7 +178,7 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
         email: 'anje.keiser@devias.io',
         name: 'Tele2'
       },
-      currency: '$',
+      currency: 'SEK',
       items: 4,
       number: 'DEV-1039',
       status: 'pending',
@@ -186,7 +186,7 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
       roles: ['Agile Coach', 'Engineer', 'Devops', 'IT-Support']
     },
     {
-      id: '5eff255f57499089243805d8',
+      id: '5eff255f575499089243805d8',
       createdAt: moment()
         .subtract(8, 'hours')
         .subtract(19, 'minutes')
@@ -197,7 +197,7 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
         name: 'SAAB',
         email: 'clarke.gillebert@devias.io'
       },
-      currency: '$',
+      currency: 'SEK',
       items: 2,
       number: 'DEV-1038',
       status: 'complete',
@@ -205,7 +205,7 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
       roles: ['Engineer']
     },
     {
-      id: '5eff25658d416fc5adb96a3a',
+      id: '5eff256586d416fc5adb96a3a',
       createdAt: moment()
         .subtract(1, 'days')
         .subtract(45, 'minutes')
@@ -216,7 +216,7 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
         email: 'merrile.burgett@devias.io',
         name: 'SAS'
       },
-      currency: '$',
+      currency: 'SEK',
       items: 1,
       number: 'DEV-1037',
       status: 'complete',
@@ -233,24 +233,24 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
     {
       id: '5eff24e675e7b3cba23e4be7',
       author: {
-        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.png`,
-        name: 'Emilee Simchenko'
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.svg`,
+        name: 'Klarna'
       },
-      budget: 12500,
+      budget: 10000,
       createdAt: moment()
         .subtract(2, 'hours')
         .subtract(34, 'minutes')
         .subtract(10, 'seconds')
         .toDate()
         .getTime(),
-      currency: '$',
+      currency: 'SEK',
       technologies: ['angular'],
       title: 'Apple new Iphone'
     },
     {
       id: '5eff24e98e2c9107e95cb827',
       author: {
-        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.png`,
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.svg`,
         name: 'Emilee Simchenko'
       },
       budget: 15750,
@@ -260,7 +260,7 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
         .subtract(25, 'seconds')
         .toDate()
         .getTime(),
-      currency: '$',
+      currency: 'SEK',
       technologies: ['sketch', 'html-css'],
       title: 'Volvo new car'
     },
@@ -277,7 +277,7 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
         .subtract(50, 'seconds')
         .toDate()
         .getTime(),
-      currency: '$',
+      currency: 'SEK',
       technologies: ['react-js'],
       title: 'Zalando new app'
     },
@@ -294,7 +294,7 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
         .subtract(30, 'seconds')
         .toDate()
         .getTime(),
-      currency: '$',
+      currency: 'SEK',
       technologies: ['vue-js'],
       title: 'H&M new clothing line'
     },
@@ -302,7 +302,7 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
       id: '5eff24fb29fc5e37bdab3b2d',
       author: {
         avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_3.png`,
-        name: 'Cao Yu'
+        name: 'Adrian Stefan'
       },
       budget: 15750,
       createdAt: moment()
@@ -311,7 +311,7 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
         .subtract(6, 'seconds')
         .toDate()
         .getTime(),
-      currency: '$',
+      currency: 'SEK',
       technologies: ['angular', 'figma'],
       title: 'SAAB new platform'
     }
@@ -332,7 +332,7 @@ mock.onGet('/api/reports/latest-tasks').reply(() => {
         },
         {
           avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_3.png`,
-          name: 'Cao Yu'
+          name: 'Adrian Stefan'
         }
       ],
       title: 'Update the API for the project'
@@ -422,7 +422,7 @@ mock.onGet('/api/reports/profitable-products').reply(() => {
     {
       id: '5eff2512c6f8737d08325676',
       conversionRate: 93,
-      currency: '$',
+      currency: 'SEK',
       image: `${process.env.PUBLIC_URL}/static/images/products/product_standard.svg`,
       name: 'Freelancer Basic Subscription',
       price: 5.0,
@@ -431,7 +431,7 @@ mock.onGet('/api/reports/profitable-products').reply(() => {
     {
       id: '5eff2516247f9a6fcca9f151',
       conversionRate: 76,
-      currency: '$',
+      currency: 'SEK',
       image: `${process.env.PUBLIC_URL}/static/images/products/product_standard.svg`,
       name: 'Freelancer Extra Subscription',
       price: 15.0,
@@ -440,7 +440,7 @@ mock.onGet('/api/reports/profitable-products').reply(() => {
     {
       id: '5eff251a3bb9ab7290640f18',
       conversionRate: 60,
-      currency: '$',
+      currency: 'SEK',
       image: `${process.env.PUBLIC_URL}/static/images/products/product_premium.svg`,
       name: 'Agency Basic Subscription',
       price: 25.0,
@@ -449,7 +449,7 @@ mock.onGet('/api/reports/profitable-products').reply(() => {
     {
       id: '5eff251e297fd17f0dc18a8b',
       conversionRate: 46,
-      currency: '$',
+      currency: 'SEK',
       image: `${process.env.PUBLIC_URL}/static/images/products/product_extended.svg`,
       name: 'Enterprise Basic Subscription',
       price: 205.0,
@@ -458,7 +458,7 @@ mock.onGet('/api/reports/profitable-products').reply(() => {
     {
       id: '5eff2524ef813f061b3ea39f',
       conversionRate: 41,
-      currency: '$',
+      currency: 'SEK',
       image: `${process.env.PUBLIC_URL}/static/images/products/product_extended.svg`,
       name: 'Enterprise Extra Subscription',
       price: 500.0,

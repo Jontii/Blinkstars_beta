@@ -154,6 +154,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
   const logout = () => {
     setSession(null);
+
     dispatch({ type: 'LOGOUT' });
   };
 

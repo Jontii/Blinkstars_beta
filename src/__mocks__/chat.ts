@@ -26,7 +26,7 @@ let contacts: Contact[] = [
     avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_3.png`,
     isActive: false,
     lastActivity: moment().subtract(15, 'minutes').toDate().getTime(),
-    name: 'Cao Yu',
+    name: 'Adrian Stefan',
     username: 'cao.yu'
   },
   {
@@ -63,7 +63,7 @@ let contacts: Contact[] = [
   },
   {
     id: '5e887d0b3d090c1b8f162003',
-    avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.png`,
+    avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.svg`,
     isActive: true,
     lastActivity: moment().toDate().getTime(),
     name: 'Emilee Simchenko',
@@ -288,7 +288,7 @@ mock.onGet('/api/chat/search').reply(config => {
 
       if (contact.name.toLowerCase().includes(cleanQuery)) {
         return results.push(contact);
-      }else return [500, {message: 'Min error'}]
+      } else return [500, { message: 'Min error' }];
     });
 
     return [200, { results }];

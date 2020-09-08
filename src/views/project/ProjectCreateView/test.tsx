@@ -220,8 +220,8 @@ function ProjectCreateView() {
                     color="textSecondary"
                     align="center"
                   >
-                    Donec ut augue sed nisi ullamcorper posuere sit amet eu
-                    mauris. Ut eget mauris scelerisque.
+                    Your campaign has been saved as a draft and you need to
+                    publish it for it to be public.
                   </Typography>
                 </Box>
                 <Box mt={2} display="flex" justifyContent="center">
@@ -231,7 +231,7 @@ function ProjectCreateView() {
                     component={RouterLink}
                     to="/app/projects/1"
                   >
-                    View your project
+                    View your campaign
                   </Button>
                 </Box>
               </Box>

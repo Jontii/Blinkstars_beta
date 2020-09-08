@@ -35,7 +35,7 @@ mock.onGet('/api/social/connections').reply(() => {
       id: '5e887ac47eed253091be10cb',
       avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_3.png`,
       commonConnections: 10,
-      name: 'Cao Yu',
+      name: 'Adrian Stefan',
       status: 'rejected'
     },
     {

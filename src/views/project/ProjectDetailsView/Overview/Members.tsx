@@ -14,13 +14,14 @@ import {
 } from '@material-ui/core';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { FC } from 'react';
+import React, { ChangeEvent, FC } from 'react';
 import { ProjectMember } from 'src/types/project';
 import getInitials from 'src/utils/getInitials';
 
 interface MembersProps {
   className?: string;
   members: ProjectMember[];
+  handleTabsChange: (event: ChangeEvent<{}>, value: string) => void;
 }
 
 const useStyles = makeStyles(() => ({
@@ -33,14 +34,19 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Members: FC<MembersProps> = ({ className, members, ...rest }) => {
+const Members: FC<MembersProps> = ({
+  className,
+  members,
+  handleTabsChange,
+  ...rest
+}) => {
   const classes = useStyles();
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
       <CardHeader
         className={classes.header}
-        title="Applying influencers"
+        title="Matched Influencers"
         titleTypographyProps={{
           variant: 'overline'
         }}
@@ -65,7 +71,9 @@ const Members: FC<MembersProps> = ({ className, members, ...rest }) => {
       </CardContent>
       <Divider />
       <CardActions>
-        <Button fullWidth>Manage Influencers</Button>
+        <Button onClick={e => handleTabsChange(e, 'applicants')} fullWidth>
+          Show Matched Influencers
+        </Button>
       </CardActions>
     </Card>
   );

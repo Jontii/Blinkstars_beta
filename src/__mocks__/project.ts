@@ -14,7 +14,7 @@ mock.onGet('/api/projects/overview/projects').reply(() => {
       budget: 2394.0,
       caption:
         "We're looking for experienced Developers and Product Designers to come aboard and help us build succesful businesses through software.",
-      currency: '$',
+      currency: 'SEK',
       isLiked: true,
       likesCount: 57,
       location: 'Europe',
@@ -52,7 +52,7 @@ mock.onGet('/api/projects/projects').reply(() => {
       budget: 6125.0,
       caption:
         "We're looking for experienced Developers and Product Designers to come aboard and help us build succesful businesses through software.",
-      currency: '$',
+      currency: 'SEK',
       isLiked: true,
       likesCount: 7,
       location: 'Europe',
@@ -67,13 +67,13 @@ mock.onGet('/api/projects/projects').reply(() => {
       id: '5e8dcf076c50b9d8e756a5a2',
       author: {
         id: '5e887d0b3d090c1b8f162003',
-        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.png`,
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.svg`,
         name: 'Emilee Simchenko'
       },
       budget: 4205.0,
       caption:
         "We're looking for experienced Developers and Product Designers to come aboard and help us build succesful businesses through software.",
-      currency: '$',
+      currency: 'SEK',
       isLiked: true,
       likesCount: 12,
       location: 'Europe',
@@ -94,7 +94,7 @@ mock.onGet('/api/projects/projects').reply(() => {
       budget: 2394.0,
       caption:
         "We're looking for experienced Developers and Product Designers to come aboard and help us build succesful businesses through software.",
-      currency: '$',
+      currency: 'SEK',
       isLiked: true,
       likesCount: 18,
       location: 'Europe',
@@ -115,7 +115,7 @@ mock.onGet('/api/projects/projects').reply(() => {
       budget: 2784.0,
       caption:
         "We're looking for experienced Developers and Product Designers to come aboard and help us build succesful businesses through software.",
-      currency: '$',
+      currency: 'SEK',
       image: `${process.env.PUBLIC_URL}/static/images/projects/project_4.png`,
       isLiked: false,
       likesCount: 1,
@@ -131,12 +131,12 @@ mock.onGet('/api/projects/projects').reply(() => {
       author: {
         id: '5e887ac47eed253091be10cb',
         avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_3.png`,
-        name: 'Cao Yu'
+        name: 'Adrian Stefan'
       },
       budget: 5835.0,
       caption:
         "We're looking for experienced Developers and Product Designers to come aboard and help us build succesful businesses through software.",
-      currency: '$',
+      currency: 'SEK',
       isLiked: false,
       likesCount: 7,
       location: 'Europe',
@@ -157,7 +157,7 @@ mock.onGet('/api/projects/projects').reply(() => {
       budget: 4255.0,
       caption:
         "We're looking for experienced Developers and Product Designers to come aboard and help us build succesful businesses through software.",
-      currency: '$',
+      currency: 'SEK',
       isLiked: true,
       likesCount: 4,
       location: 'Europe',
@@ -195,7 +195,7 @@ mock.onGet('/api/projects/projects/1').reply(() => {
         id: '5e8dd08f44603e3300b75cf1',
         createdAt: moment().subtract(9, 'hours').toDate().getTime(),
         description: 'joined team as a influencer',
-        subject: 'Alexndru Robert',
+        subject: 'Katarina Smith',
         type: 'join_team'
       },
       {
@@ -228,7 +228,7 @@ mock.onGet('/api/projects/projects/1').reply(() => {
         commonConnections: 5,
         cover: `${process.env.PUBLIC_URL}/static/images/covers/cover_3.jpg`,
         labels: ['Denmark', 'Agile Coach', '5000 connections', 'Full-time'],
-        name: 'Cao Yu'
+        name: 'Adrian Stefan'
       },
       {
         id: '5e86809283e28b96d2d38537',
@@ -246,14 +246,14 @@ mock.onGet('/api/projects/projects/1').reply(() => {
     ],
     author: {
       id: '5e887d0b3d090c1b8f162003',
-      avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.png`,
+      avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.svg`,
       name: 'Emilee Simchenko',
       bio: 'Manager at Telia'
     },
     budget: 12500.0,
     caption:
       "We're looking for experienced Developers and Product Designers to come aboard and help us build succesful businesses through software.",
-    currency: '$',
+    currency: 'SEK',
     description: `
 Material files are attached in the files tab.
 
@@ -301,7 +301,7 @@ The project has been created in Sketch so let me know if there are any problems 
         id: '5e887ac47eed253091be10cb',
         avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_3.png`,
         bio: 'Influencer',
-        name: 'Cao Yu'
+        name: 'Adrian Stefan'
       },
       {
         id: '5e887b7602bdbc4dbb234b27',
@@ -337,7 +337,7 @@ The project has been created in Sketch so let me know if there are any problems 
         id: '6z9dwxjzkqbmxuluxx2681jd',
         author: {
           avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_3.png`,
-          name: 'Cao Yu'
+          name: 'Adrian Stefan'
         },
         comment:
           'I have been working with this company full-time. Great for the work life balance. Cons, decentralized decision making process across the organization.',

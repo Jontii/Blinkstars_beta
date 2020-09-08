@@ -15,6 +15,8 @@ import { Link as RouterLink } from 'react-router-dom';
 import { THEMES } from 'src/constants';
 import { Theme } from 'src/theme';
 import Account from './Account';
+import Notifications from './Notifications';
+import Settings from './Settings';
 
 interface TopBarProps {
   className?: string;
@@ -65,9 +67,9 @@ const TopBar: FC<TopBarProps> = ({ className, onMobileNavOpen, ...rest }) => {
         </Hidden>
         <Box ml={2} flexGrow={1} />
         {/* <Search />
-        <Contacts />
+        <Contacts /> */}
         <Notifications />
-        <Settings /> */}
+        <Settings />
         <Box ml={2}>
           <Account />
         </Box>

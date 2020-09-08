@@ -56,6 +56,8 @@ const Header: FC<HeaderProps> = ({ className, project, ...rest }) => {
     setApplyModalOpen(false);
   };
 
+  const [isPublished, setIsPublished] = useState<boolean>(false);
+
   return (
     <Grid
       container
@@ -106,17 +108,16 @@ const Header: FC<HeaderProps> = ({ className, project, ...rest }) => {
         </Button>
         <Button
           className={classes.action}
-          onClick={handleApplyModalOpen}
+          onClick={() => setIsPublished(!isPublished)}
           variant="contained"
           color="secondary"
-          disabled
           startIcon={
             <SvgIcon fontSize="small">
               <Share />
             </SvgIcon>
           }
         >
-          Unpublish Campaign
+          {!isPublished ? <>Publish Campaign</> : <>Unpublish Campaign</>}
         </Button>
         <ApplyModal
           author={project.author}

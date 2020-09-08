@@ -30,7 +30,7 @@ const RoiPerCustomer: FC<RoiPerCustomerProps> = ({ className, ...rest }) => {
   const classes = useStyles();
   const data = {
     value: '25.50',
-    currency: '$'
+    currency: 'SEK'
   };
 
   return (

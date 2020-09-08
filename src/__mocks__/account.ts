@@ -23,12 +23,12 @@ const users = [
   },
   {
     id: '5e86809283e28b96d2d38537',
-    avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.png`,
+    avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.svg`,
     canHire: false,
     country: 'USA',
     email: 'company@telia.io',
     isPublic: true,
-    name: 'Emilee Simchenko',
+    name: 'Klarna',
     password: 'Password123',
     phone: '+40 777666555',
     role: 'admin',
@@ -168,7 +168,7 @@ mock.onGet('/api/account/subscription').reply(200, {
   subscription: {
     name: 'Premium',
     price: 29,
-    currency: '$',
+    currency: 'SEK',
     proposalsLeft: 12,
     templatesLeft: 5,
     invitesLeft: 24,

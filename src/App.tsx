@@ -16,12 +16,15 @@ import { AuthProvider } from 'src/contexts/JWTAuthContext';
 import useSettings from 'src/hooks/useSettings';
 import routes, { renderRoutes } from 'src/routes';
 import { createTheme } from 'src/theme';
+import useAuth from './hooks/useAuth';
 
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 const history = createBrowserHistory();
 
 const App: FC = () => {
   const { settings } = useSettings();
+
+  const { user } = useAuth();
 
   const theme = createTheme({
     direction: settings.direction,

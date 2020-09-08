@@ -181,7 +181,7 @@ Dear Shen, Your flight is coming up soon. Please don’t forget to check in for 
 My market leading client has another fantastic opportunity for an experienced Software Developer to join them on a heavily remote basis
     `,
     from: {
-      name: 'Cao Yu',
+      name: 'Adrian Stefan',
       email: 'cao.yu@devias.io',
       avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_3.png`
     },
@@ -227,7 +227,8 @@ const filterMails = (
     }
   }
 
-  if (systemLabel && 
+  if (
+    systemLabel &&
     ['inbox', 'sent', 'drafts', 'trash', 'spam', 'starred'].includes(
       systemLabel
     )

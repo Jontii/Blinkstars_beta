@@ -102,7 +102,7 @@ const ProjectCampignComplete: FC<ProjectCampaignProps> = ({
           {...rest}
         >
           <Typography variant="h3" color="textPrimary">
-            Campaign Description
+            Complete Campaign
           </Typography>
           <Box mt={2}>
             <Typography variant="subtitle1" color="textSecondary">
@@ -150,7 +150,9 @@ const ProjectCampignComplete: FC<ProjectCampaignProps> = ({
             </Box>
           )}
 
-          <Box mt={4} display="flex">
+          <Box flexGrow={1} />
+
+          <Box mt={8} display="flex">
             {onBack && (
               <Button onClick={onBack} size="large">
                 Previous
@@ -165,7 +167,7 @@ const ProjectCampignComplete: FC<ProjectCampaignProps> = ({
               variant="contained"
               size="large"
             >
-              Publish
+              Save as draft
             </Button>
           </Box>
         </form>

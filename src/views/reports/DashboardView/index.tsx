@@ -1,11 +1,13 @@
 import { Container, Grid, makeStyles } from '@material-ui/core';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import Page from 'src/components/Page';
+import { THEMES } from 'src/constants';
+import useAuth from 'src/hooks/useAuth';
+import useSettings from 'src/hooks/useSettings';
 import { Theme } from 'src/theme';
 import Header from './Header';
 import LatestProjects from './LatestProjects';
 import NewProjects from './NewProjects';
-import PerformanceOverTime from './PerformanceOverTime';
 import RoiPerCustomer from './RoiPerCustomer';
 import TodaysMoney from './TodaysMoney';
 
@@ -20,6 +22,17 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const DashboardView: FC = () => {
   const classes = useStyles();
+
+  const { saveSettings } = useSettings();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (user.name === 'Klarna') {
+      saveSettings({ theme: THEMES.UNICORN });
+    } else {
+      saveSettings({ theme: THEMES.LIGHT });
+    }
+  }, []);
 
   return (
     <Page className={classes.root} title="Dashboard">
@@ -50,9 +63,9 @@ const DashboardView: FC = () => {
           >
             <RealTime />
           </Grid> */}
-          <Grid item lg={9} xs={12}>
+          {/* <Grid item lg={9} xs={12}>
             <PerformanceOverTime />
-          </Grid>
+          </Grid> */}
           {/* <Grid
             item
             lg={5}
@@ -61,7 +74,7 @@ const DashboardView: FC = () => {
           >
             <TeamTasks />
           </Grid> */}
-          <Grid item lg={7} xl={8} xs={12}>
+          <Grid item lg={9} xs={12}>
             <LatestProjects />
           </Grid>
         </Grid>

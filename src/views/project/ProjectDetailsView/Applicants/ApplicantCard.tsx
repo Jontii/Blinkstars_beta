@@ -73,7 +73,7 @@ const ApplicantCard: FC<ApplicantCardProps> = ({
       <CardContent className={classes.content}>
         <Box mt={-4} mb={2} display="flex" justifyContent="center">
           <Avatar
-            alt="Applicant"
+            alt="Influencer"
             className={classes.avatar}
             component={RouterLink}
             src={applicant.avatar}

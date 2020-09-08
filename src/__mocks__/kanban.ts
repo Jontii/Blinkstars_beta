@@ -137,7 +137,7 @@ const board: Board = {
     {
       id: '5e887ac47eed253091be10cb',
       avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_3.png`,
-      name: 'Cao Yu'
+      name: 'Adrian Stefan'
     },
     {
       id: '5e887b209c28ac3dd97f6db5',

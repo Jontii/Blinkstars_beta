@@ -42,7 +42,7 @@ const ProjectDetailsView: FC = () => {
   const tabs = [
     { value: 'overview', label: 'Overview' },
     // { value: 'reviews', label: 'Reviews' },
-    { value: 'applicants', label: 'Influencers' },
+    { value: 'applicants', label: 'Matched Influencers' },
     { value: 'activity', label: 'History' }
   ];
 
@@ -91,7 +91,9 @@ const ProjectDetailsView: FC = () => {
         </Box>
         <Divider />
         <Box mt={3}>
-          {currentTab === 'overview' && <Overview project={project} />}
+          {currentTab === 'overview' && (
+            <Overview project={project} handleTabsChange={handleTabsChange} />
+          )}
           {currentTab === 'reviews' && <Reviews reviews={project.reviews} />}
           {currentTab === 'applicants' && (
             <Applicants

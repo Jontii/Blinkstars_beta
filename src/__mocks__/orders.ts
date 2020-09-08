@@ -11,9 +11,9 @@ mock.onGet('/api/orders').reply(() => {
         .subtract(23, 'seconds')
         .toDate()
         .getTime(),
-      currency: '$',
+      currency: 'SEK',
       customer: {
-        name: 'Cao Yu'
+        name: 'Adrian Stefan'
       },
       number: 'DEV-102',
       paymentMethod: 'CreditCard',
@@ -27,7 +27,7 @@ mock.onGet('/api/orders').reply(() => {
         .subtract(51, 'seconds')
         .toDate()
         .getTime(),
-      currency: '$',
+      currency: 'SEK',
       customer: {
         name: 'Alex Richardson'
       },
@@ -43,7 +43,7 @@ mock.onGet('/api/orders').reply(() => {
         .subtract(55, 'seconds')
         .toDate()
         .getTime(),
-      currency: '$',
+      currency: 'SEK',
       customer: {
         name: 'Anje Keizer'
       },
@@ -59,7 +59,7 @@ mock.onGet('/api/orders').reply(() => {
         .subtract(3, 'seconds')
         .toDate()
         .getTime(),
-      currency: '$',
+      currency: 'SEK',
       customer: {
         name: 'Clarke Gillebert'
       },
@@ -75,7 +75,7 @@ mock.onGet('/api/orders').reply(() => {
         .subtract(32, 'seconds')
         .toDate()
         .getTime(),
-      currency: '$',
+      currency: 'SEK',
       customer: {
         name: 'Adam Denisov'
       },
@@ -91,7 +91,7 @@ mock.onGet('/api/orders').reply(() => {
         .subtract(57, 'seconds')
         .toDate()
         .getTime(),
-      currency: '$',
+      currency: 'SEK',
       customer: {
         name: 'Miller Edwards'
       },
@@ -107,7 +107,7 @@ mock.onGet('/api/orders').reply(() => {
         .subtract(4, 'seconds')
         .toDate()
         .getTime(),
-      currency: '$',
+      currency: 'SEK',
       customer: {
         name: 'Emilee Simchenko'
       },
@@ -123,7 +123,7 @@ mock.onGet('/api/orders').reply(() => {
         .subtract(43, 'seconds')
         .toDate()
         .getTime(),
-      currency: '$',
+      currency: 'SEK',
       customer: {
         name: 'Elliott Stone'
       },
@@ -139,7 +139,7 @@ mock.onGet('/api/orders').reply(() => {
         .subtract(6, 'seconds')
         .toDate()
         .getTime(),
-      currency: '$',
+      currency: 'SEK',
       customer: {
         name: 'Shen Zhi'
       },
@@ -156,7 +156,7 @@ mock.onGet('/api/orders').reply(() => {
         .subtract(43, 'seconds')
         .toDate()
         .getTime(),
-      currency: '$',
+      currency: 'SEK',
       customer: {
         name: 'Merrile Burgett'
       },
@@ -175,7 +175,7 @@ mock.onGet('/api/orders/1').reply(() => {
     id: '5ecb8a6879877087d4aa2690',
     coupon: null,
     createdAt: moment().toDate().getTime(),
-    currency: '$',
+    currency: 'SEK',
     customer: {
       address1: 'Street John Wick, no. 7',
       address2: 'House #25',
@@ -187,7 +187,7 @@ mock.onGet('/api/orders/1').reply(() => {
       {
         id: '5ecb8abbdd6dfb1f9d6bf98b',
         billingCycle: 'monthly',
-        currency: '$',
+        currency: 'SEK',
         name: 'Project Points',
         quantity: 25,
         unitAmount: 50.25
@@ -195,7 +195,7 @@ mock.onGet('/api/orders/1').reply(() => {
       {
         id: '5ecb8ac10f116d04bed990eb',
         billingCycle: 'monthly',
-        currency: '$',
+        currency: 'SEK',
         name: 'Freelancer Subscription',
         quantity: 1,
         unitAmount: 5.0

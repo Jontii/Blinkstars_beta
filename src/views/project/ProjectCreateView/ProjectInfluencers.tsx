@@ -151,7 +151,7 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
           {...rest}
         >
           <Typography variant="h3" color="textPrimary">
-            Pick your influencer criteria for best match
+            Pick your influencer network criteria
           </Typography>
           <Box mt={2}>
             <Typography variant="subtitle1" color="textSecondary">

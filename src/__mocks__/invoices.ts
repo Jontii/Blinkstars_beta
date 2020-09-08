@@ -6,7 +6,7 @@ mock.onGet('/api/invoices').reply(() => {
   const invoices: Invoice[] = [
     {
       id: '5ecb868d0f437390ef3ac62c',
-      currency: '$',
+      currency: 'SEK',
       customer: {
         email: 'contact@anahenisky.io',
         name: 'Ana Henisky'
@@ -17,7 +17,7 @@ mock.onGet('/api/invoices').reply(() => {
     },
     {
       id: '5ecb868ada8deedee0638502',
-      currency: '$',
+      currency: 'SEK',
       customer: {
         email: 'sales@matt-jason.com',
         name: 'Matt Jason'
@@ -32,7 +32,7 @@ mock.onGet('/api/invoices').reply(() => {
     },
     {
       id: '5ecb868700aba84d0f1c0e48',
-      currency: '$',
+      currency: 'SEK',
       customer: {
         email: 'support@terrythomas.io',
         name: 'Terry Thomas'
@@ -47,7 +47,7 @@ mock.onGet('/api/invoices').reply(() => {
     },
     {
       id: '5ecb8682038e1ddf4e868764',
-      currency: '$',
+      currency: 'SEK',
       customer: {
         email: 'contact@triv-shopper.co.uk',
         name: 'Triv Shopper'
@@ -68,7 +68,7 @@ mock.onGet('/api/invoices').reply(() => {
 mock.onGet('/api/invoices/1').reply(() => {
   const invoice: Invoice = {
     id: '5ecb86785312dcc69b5799ad',
-    currency: '$',
+    currency: 'SEK',
     customer: {
       address: '271 Richmond Rd, Grey Lynn, Auckland 1022, New Zealand',
       company: 'Countdown Grey Lynn',
@@ -81,7 +81,7 @@ mock.onGet('/api/invoices/1').reply(() => {
     items: [
       {
         id: '5ecb8694db1760a701dfbf74',
-        currency: '$',
+        currency: 'SEK',
         description: 'Freelancer Subscription (12/05/2019 - 11/06/2019)',
         unitAmount: 55.5
       }

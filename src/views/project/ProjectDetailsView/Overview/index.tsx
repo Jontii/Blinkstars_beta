@@ -1,7 +1,7 @@
 import { Box, Grid, makeStyles } from '@material-ui/core';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { FC } from 'react';
+import React, { ChangeEvent, FC } from 'react';
 import { Project } from 'src/types/project';
 import Brief from './Brief';
 import Files from './Files';
@@ -11,13 +11,19 @@ import Metadata from './Metadata';
 interface OverviewProps {
   className?: string;
   project: Project;
+  handleTabsChange: (event: ChangeEvent<{}>, value: string) => void;
 }
 
 const useStyles = makeStyles(() => ({
   root: {}
 }));
 
-const Overview: FC<OverviewProps> = ({ className, project, ...rest }) => {
+const Overview: FC<OverviewProps> = ({
+  className,
+  project,
+  handleTabsChange,
+  ...rest
+}) => {
   const classes = useStyles();
 
   return (
@@ -37,7 +43,10 @@ const Overview: FC<OverviewProps> = ({ className, project, ...rest }) => {
         <Box mb={3}>
           <Metadata project={project} />
         </Box>
-        <Members members={project.members} />
+        <Members
+          members={project.members}
+          handleTabsChange={handleTabsChange}
+        />
       </Grid>
     </Grid>
   );
