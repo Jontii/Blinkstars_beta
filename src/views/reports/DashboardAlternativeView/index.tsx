@@ -81,7 +81,7 @@ const DashboardAlternativeView: FC = () => {
               onClick={() => setShowProp(!showProp)}
             >
               <Typography color="primary" variant="h4">
-                Klarna Campaign
+                Active Campaign
               </Typography>
 
               <IconButton

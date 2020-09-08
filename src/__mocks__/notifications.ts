@@ -6,8 +6,8 @@ const notifications: Notification[] = [
   {
     id: '5e8883f1b51cc1956a5a1ec0',
     createdAt: moment().subtract(2, 'hours').toDate().getTime(),
-    description: 'Click here to refill!',
-    title: '50% of campaign is remaining',
+    description: 'Click here to add more.',
+    title: '50% of budget is remaining',
     type: 'order_placed'
   },
   // {
@@ -20,14 +20,14 @@ const notifications: Notification[] = [
   {
     id: '5e8883fca0e8612044248ecf',
     createdAt: moment().subtract(3, 'days').toDate().getTime(),
-    description: 'Your campaign was published!',
+    description: 'Your campaign was published.',
     title: 'Campaign Published',
     type: 'new_message'
   },
   {
     id: '5e88840187f6b09b431bae68',
     createdAt: moment().subtract(7, 'days').toDate().getTime(),
-    description: 'Your campaign was created!',
+    description: 'Your campaign was created.',
     title: 'Campaign created',
     type: 'new_message'
   }

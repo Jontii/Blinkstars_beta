@@ -3,5 +3,6 @@ export interface User {
   avatar: string;
   email: string;
   name: string;
+  tier: 'Company' | 'Influencer';
   [key: string]: any;
 }

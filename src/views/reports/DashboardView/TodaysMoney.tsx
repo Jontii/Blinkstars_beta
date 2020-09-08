@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const TodaysMoney: FC<TodaysMoneyProps> = ({ className, ...rest }) => {
   const classes = useStyles();
   const data = {
-    value: '65',
+    value: '650',
     currency: 'SEK',
     difference: 6
   };

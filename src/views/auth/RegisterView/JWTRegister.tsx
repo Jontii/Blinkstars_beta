@@ -43,7 +43,7 @@ const JWTRegister: FC<JWTRegisterProps> = ({ className, ...rest }) => {
       initialValues={{
         email: '',
         name: '',
-        // usertype: user,
+        usertype: user,
         password: '',
         policy: false,
         submit: null
@@ -54,7 +54,7 @@ const JWTRegister: FC<JWTRegisterProps> = ({ className, ...rest }) => {
           .max(255)
           .required('Email is required'),
         name: Yup.string().max(255).required('Name is required'),
-        // usertype: Yup.string().required('Must choose a type of account'),
+        usertype: Yup.string().required('Must choose a type of account'),
         password: Yup.string().min(7).max(255).required('Password is required'),
         policy: Yup.boolean().oneOf([true], 'This field must be checked')
       })}
@@ -102,6 +102,7 @@ const JWTRegister: FC<JWTRegisterProps> = ({ className, ...rest }) => {
             value={values.name}
             variant="outlined"
           />
+          <p>{values}</p>
           <TextField
             error={Boolean(touched.email && errors.email)}
             fullWidth

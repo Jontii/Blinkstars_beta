@@ -13,10 +13,10 @@ import React, { FC } from 'react';
 import { Menu as MenuIcon } from 'react-feather';
 import { Link as RouterLink } from 'react-router-dom';
 import { THEMES } from 'src/constants';
+import useAuth from 'src/hooks/useAuth';
 import { Theme } from 'src/theme';
 import Account from './Account';
 import Notifications from './Notifications';
-import Settings from './Settings';
 
 interface TopBarProps {
   className?: string;
@@ -46,6 +46,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 const TopBar: FC<TopBarProps> = ({ className, onMobileNavOpen, ...rest }) => {
   const classes = useStyles();
 
+  const { user } = useAuth();
+
   return (
     <AppBar className={clsx(classes.root, className)} {...rest}>
       <Toolbar className={classes.toolbar}>
@@ -68,8 +70,7 @@ const TopBar: FC<TopBarProps> = ({ className, onMobileNavOpen, ...rest }) => {
         <Box ml={2} flexGrow={1} />
         {/* <Search />
         <Contacts /> */}
-        <Notifications />
-        <Settings />
+        {user.name === 'Klarna' && <Notifications />}
         <Box ml={2}>
           <Account />
         </Box>

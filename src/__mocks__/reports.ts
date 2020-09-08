@@ -245,7 +245,7 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
         .getTime(),
       currency: 'SEK',
       technologies: ['angular'],
-      title: 'Apple new Iphone'
+      title: 'New payment solution'
     },
     {
       id: '5eff24e98e2c9107e95cb827',

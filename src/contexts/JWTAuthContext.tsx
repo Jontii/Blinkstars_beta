@@ -20,7 +20,12 @@ interface AuthContextValue extends AuthState {
   method: 'JWT';
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
-  register: (email: string, name: string, password: string) => Promise<void>;
+  register: (
+    email: string,
+    name: string,
+    password: string,
+    tier: any
+  ) => Promise<void>;
 }
 
 interface AuthProviderProps {
@@ -158,13 +163,19 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     dispatch({ type: 'LOGOUT' });
   };
 
-  const register = async (email: string, name: string, password: string) => {
+  const register = async (
+    email: string,
+    name: string,
+    password: string,
+    tier: any
+  ) => {
     const response = await axios.post<{ accessToken: string; user: User }>(
       '/api/account/register',
       {
         email,
         name,
-        password
+        password,
+        tier
       }
     );
     const { accessToken, user } = response.data;

@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  Button,
   Card,
   CardHeader,
   Divider,
@@ -92,7 +93,7 @@ const LatestProjects: FC<LatestProjectsProps> = ({ className, ...rest }) => {
                 <TableCell>Title</TableCell>
                 <TableCell>Author</TableCell>
                 <TableCell>Budget</TableCell>
-                {/* <TableCell>Area</TableCell> */}
+                <TableCell>Matched Campaigns</TableCell>
                 <TableCell align="right" sortDirection="desc">
                   <Tooltip enterDelay={300} title="Sort">
                     <TableSortLabel active direction="desc">
@@ -124,7 +125,9 @@ const LatestProjects: FC<LatestProjectsProps> = ({ className, ...rest }) => {
                       `${project.currency}0,0.00`
                     )}
                   </TableCell>
-                  {/* <TableCell>Telekom</TableCell> */}
+                  <TableCell>
+                    <Button color="secondary">Accept</Button>
+                  </TableCell>
                   <TableCell align="right">
                     {moment(project.createdAt).format('DD MMM, YYYY')}
                   </TableCell>
