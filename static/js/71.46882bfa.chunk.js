@@ -1,2 +1,0 @@
-(this["webpackJsonp@devias-io/material-kit-pro-react"]=this["webpackJsonp@devias-io/material-kit-pro-react"]||[]).push([[71],{2104:function(e,t,a){"use strict";a.r(t);var n=a(0),i=a.n(n),l=a(304),r=Object(n.lazy)((function(){return a.e(56).then(a.bind(null,2047))}));t.default=function(){return i.a.createElement(l.a,{title:"Settings"},i.a.createElement(n.Suspense,{fallback:null},i.a.createElement(r,null)))}}}]);
-//# sourceMappingURL=71.46882bfa.chunk.js.map
