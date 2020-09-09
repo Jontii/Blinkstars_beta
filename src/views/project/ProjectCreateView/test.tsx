@@ -46,7 +46,7 @@ const steps = [
     icon: 3
   },
   {
-    label: 'Influencer Criteria',
+    label: 'Influencer Network Criteria',
     icon: 4
   },
   {
@@ -113,7 +113,7 @@ const useStyles = makeStyles(theme => ({
 
 function ProjectCreateView() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(4);
   const [completed, setCompleted] = useState(false);
 
   const handleNext = () => {
@@ -129,7 +129,7 @@ function ProjectCreateView() {
   };
 
   return (
-    <Page className={classes.root} title="Project Create">
+    <Page className={classes.root} title="Create Campaign">
       <Container maxWidth="lg">
         <Box mb={3}>
           <Breadcrumbs

@@ -126,7 +126,7 @@ const RegisterView: FC = () => {
                   Register
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                  Register as a business/influencer
+                  Register as a Company Or Influencer
                 </Typography>
               </div>
               {/* <div className={classes.currentMethodIcon}>

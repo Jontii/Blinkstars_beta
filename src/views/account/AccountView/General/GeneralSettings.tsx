@@ -10,6 +10,7 @@ import {
   Grid,
   IconButton,
   makeStyles,
+  Paper,
   SvgIcon,
   Switch,
   TextField,
@@ -23,6 +24,7 @@ import { useSnackbar } from 'notistack';
 import PropTypes from 'prop-types';
 import React, { FC, useState } from 'react';
 import { Plus as PlusIcon } from 'react-feather';
+import QuillEditor from 'src/components/QuillEditor';
 import { User } from 'src/types/user';
 import wait from 'src/utils/wait';
 import * as Yup from 'yup';
@@ -42,6 +44,11 @@ const useStyles = makeStyles(theme => ({
   },
   addTab: {
     marginLeft: theme.spacing(2)
+  },
+  editor: {
+    '& .ql-editor': {
+      height: 300
+    }
   }
 }));
 
@@ -67,6 +74,7 @@ const GeneralSettings: FC<GeneralSettingsProps> = ({
         phone: user.phone || '',
         state: user.state || '',
         tags: ['Technology', 'Environment'],
+        aboutCompany: user.about || '',
         submit: null
       }}
       validationSchema={Yup.object().shape({
@@ -80,7 +88,8 @@ const GeneralSettings: FC<GeneralSettingsProps> = ({
         isPublic: Yup.bool(),
         name: Yup.string().max(255).required('Name is required'),
         phone: Yup.string(),
-        state: Yup.string()
+        state: Yup.string(),
+        aboutCompany: Yup.string().max(5000)
       })}
       onSubmit={async (
         values,
@@ -206,99 +215,127 @@ const GeneralSettings: FC<GeneralSettingsProps> = ({
                     variant="outlined"
                   />
                 </Grid>
-                <Grid item md={6} xs={12}>
-                  <Box mt={3} display="flex" alignItems="center">
-                    <TextField
-                      fullWidth
-                      label="Interests"
-                      name="tags"
-                      value={tag}
-                      onChange={event => setTag(event.target.value)}
-                      variant="outlined"
+
+                <Grid item md={12} xs={12}>
+                  <Box mb={1}>
+                    <Typography variant="subtitle2" color="textSecondary">
+                      About the Company
+                    </Typography>
+                  </Box>
+                  <Paper variant="outlined">
+                    <QuillEditor
+                      className={classes.editor}
+                      value={values.aboutCompany}
+                      onChange={(value: string) =>
+                        setFieldValue('aboutCompany', value)
+                      }
                     />
-                    <IconButton
-                      className={classes.addTab}
-                      onClick={() => {
-                        if (!tag) {
-                          return;
-                        }
-
-                        setFieldValue('tags', [...values.tags, tag]);
-                        setTag('');
-                      }}
-                    >
-                      <SvgIcon>
-                        <PlusIcon />
-                      </SvgIcon>
-                    </IconButton>
-                  </Box>
-                  <Box mt={2}>
-                    {values.tags.map((tag, i) => (
-                      <Chip
-                        variant="outlined"
-                        key={i}
-                        label={tag}
-                        className={classes.tag}
-                        onDelete={() => {
-                          const newTags = values.tags.filter(t => t !== tag);
-
-                          setFieldValue('tags', newTags);
-                        }}
-                      />
-                    ))}
-                  </Box>
+                  </Paper>
+                  {touched.aboutCompany && errors.aboutCompany && (
+                    <Box mt={2}>
+                      <FormHelperText error>
+                        {errors.aboutCompany}
+                      </FormHelperText>
+                    </Box>
+                  )}
                 </Grid>
-                <Grid item md={6} xs={12}>
-                  <Box
-                    display="flex"
-                    justifyContent="center"
-                    flexDirection="column"
-                    alignItems="flex-start"
-                    mt="24px"
-                  >
-                    <Button
-                      style={{ height: '54px' }}
-                      size="large"
-                      fullWidth
-                      startIcon={<GetAppIcon />}
-                    >
-                      Import Linkedin Connections
-                    </Button>
-                  </Box>
-                </Grid>
-
-                {user.name !== 'Klarna' && (
+                {user.tier !== 'Company' && (
                   <>
                     <Grid item md={6} xs={12}>
-                      <Typography variant="h6" color="textPrimary">
-                        Make Contact Info Public
-                      </Typography>
-                      <Typography variant="body2" color="textSecondary">
-                        Means that anyone viewing your profile will be able to
-                        see your contacts details
-                      </Typography>
-                      <Switch
-                        checked={values.isPublic}
-                        edge="start"
-                        name="isPublic"
-                        onChange={handleChange}
-                      />
+                      <Box mt={3} display="flex" alignItems="center">
+                        <TextField
+                          fullWidth
+                          label="Interests"
+                          name="tags"
+                          value={tag}
+                          onChange={event => setTag(event.target.value)}
+                          variant="outlined"
+                        />
+                        <IconButton
+                          className={classes.addTab}
+                          onClick={() => {
+                            if (!tag) {
+                              return;
+                            }
+
+                            setFieldValue('tags', [...values.tags, tag]);
+                            setTag('');
+                          }}
+                        >
+                          <SvgIcon>
+                            <PlusIcon />
+                          </SvgIcon>
+                        </IconButton>
+                      </Box>
+                      <Box mt={2}>
+                        {values.tags.map((tag, i) => (
+                          <Chip
+                            variant="outlined"
+                            key={i}
+                            label={tag}
+                            className={classes.tag}
+                            onDelete={() => {
+                              const newTags = values.tags.filter(
+                                t => t !== tag
+                              );
+
+                              setFieldValue('tags', newTags);
+                            }}
+                          />
+                        ))}
+                      </Box>
                     </Grid>
                     <Grid item md={6} xs={12}>
-                      <Typography variant="h6" color="textPrimary">
-                        Available to hire
-                      </Typography>
-                      <Typography variant="body2" color="textSecondary">
-                        Toggling this will let companies know that you are
-                        available for new campaigns
-                      </Typography>
-                      <Switch
-                        checked={values.canHire}
-                        edge="start"
-                        name="canHire"
-                        onChange={handleChange}
-                      />
+                      <Box
+                        display="flex"
+                        justifyContent="center"
+                        flexDirection="column"
+                        alignItems="flex-start"
+                        mt="24px"
+                      >
+                        <Button
+                          style={{ height: '54px' }}
+                          size="large"
+                          fullWidth
+                          startIcon={<GetAppIcon />}
+                        >
+                          Import Linkedin Connections
+                        </Button>
+                      </Box>
                     </Grid>
+
+                    <>
+                      <Grid item md={6} xs={12}>
+                        <Typography variant="h6" color="textPrimary">
+                          Make Contact Info Public
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary">
+                          Means that anyone viewing your profile will be able to
+                          see your contacts details
+                        </Typography>
+                        <Switch
+                          checked={values.isPublic}
+                          edge="start"
+                          name="isPublic"
+                          onChange={handleChange}
+                        />
+                      </Grid>
+                      <Grid item md={6} xs={12}>
+                        <Typography variant="h6" color="textPrimary">
+                          Available to hire
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary">
+                          Toggling this will let companies know that you are
+                          available for new campaigns
+                        </Typography>
+                        <Switch
+                          checked={values.canHire}
+                          edge="start"
+                          name="canHire"
+                          onChange={handleChange}
+                        />
+                      </Grid>
+                    </>
                   </>
                 )}
               </Grid>

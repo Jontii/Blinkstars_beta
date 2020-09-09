@@ -174,7 +174,7 @@ const JWTLogin: FC<JWTLoginProps> = ({ className, ...rest }) => {
                   Use{' '}
                   <b>
                     influencer@influencer.io for influencer or company@telia.io
-                    for business
+                    for company
                   </b>{' '}
                   and password <b>Password123</b>
                 </div>

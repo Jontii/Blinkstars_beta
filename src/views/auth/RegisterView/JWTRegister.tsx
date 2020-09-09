@@ -29,7 +29,7 @@ const JWTRegister: FC<JWTRegisterProps> = ({ className, ...rest }) => {
   const { register } = useAuth() as any;
   const isMountedRef = useIsMountedRef();
 
-  const userOptions = ['Business', 'Influencer'];
+  const userOptions = ['Company', 'Influencer'];
 
   const [user, setUser] = useState<string>(userOptions[0]);
 
@@ -60,8 +60,7 @@ const JWTRegister: FC<JWTRegisterProps> = ({ className, ...rest }) => {
       })}
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
-          //TODO Need to add usertype here
-          await register(values.email, values.name, values.password);
+          await register(values.email, values.name, values.password, user);
 
           if (isMountedRef.current) {
             setStatus({ success: true });
@@ -102,7 +101,6 @@ const JWTRegister: FC<JWTRegisterProps> = ({ className, ...rest }) => {
             value={values.name}
             variant="outlined"
           />
-          <p>{values}</p>
           <TextField
             error={Boolean(touched.email && errors.email)}
             fullWidth

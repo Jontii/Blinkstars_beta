@@ -33,7 +33,9 @@ const users = [
     phone: '+40 777666555',
     role: 'admin',
     state: 'New York',
-    tier: 'Company'
+    tier: 'Company',
+    about:
+      'Klarna was founded in 2005 in Stockholm, Sweden with the aim of making it easier for people to shop online. In the last 15 years, technology has evolved, excited and transformed the world around us, yet our mission remains as relevant as ever, to make paying as simple, safe and above all, smoooth as possible. <br/> <br/> Klarna is now one of Europe’s largest banks and is providing payment solutions for 85 million consumers across more than 200,000 merchants in 17 countries. Klarna offers direct payments, pay after delivery options and instalment plans in a smooth one-click purchase experience that lets consumers pay when and how they prefer to.'
   }
 ];
 
@@ -65,7 +67,8 @@ mock.onPost('/api/account/login').reply(async config => {
           avatar: user.avatar,
           email: user.email,
           name: user.name,
-          tier: user.tier
+          tier: user.tier,
+          about: user.about
         }
       }
     ];
@@ -79,9 +82,16 @@ mock.onPost('/api/account/register').reply(async config => {
   try {
     await wait(1000);
 
-    const { email, avatar, country, phone, name, password, tier } = JSON.parse(
-      config.data
-    );
+    const {
+      email,
+      avatar,
+      country,
+      phone,
+      name,
+      password,
+      tier,
+      about
+    } = JSON.parse(config.data);
     let user = users.find(_user => _user.email === email);
 
     if (user) {
@@ -100,7 +110,8 @@ mock.onPost('/api/account/register').reply(async config => {
       phone,
       role: 'admin',
       state: '',
-      tier
+      tier,
+      about
     };
 
     const accessToken = jwt.sign({ userId: user.id }, JWT_SECRET, {
@@ -116,7 +127,8 @@ mock.onPost('/api/account/register').reply(async config => {
           avatar: user.avatar,
           email: user.email,
           name: user.name,
-          tier: user.tier
+          tier: user.tier,
+          about: user.about
         }
       }
     ];
@@ -150,7 +162,8 @@ mock.onGet('/api/account/me').reply(config => {
           avatar: user.avatar,
           email: user.email,
           name: user.name,
-          tier: user.tier
+          tier: user.tier,
+          about: user.about
         }
       }
     ];

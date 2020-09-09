@@ -37,7 +37,7 @@ const Testimonials: FC<TestimonialsProps> = ({ className, ...rest }) => {
           color="textPrimary"
           className={classes.title}
         >
-          &quot;Our platform matches you with businesses.
+          &quot;Our platform matches you with companies.
           <br />
           Time to start influence.&quot;
         </Typography>

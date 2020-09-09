@@ -42,7 +42,7 @@ const Features: FC<FeaturesProps> = ({ className, ...rest }) => {
           Explore Blinkstars platform
         </Typography>
         <Typography variant="h1" align="center" color="textPrimary">
-          Match with businesses
+          Match with companies
         </Typography>
         <Box mt={8}>
           <Grid container spacing={3}>
@@ -82,7 +82,7 @@ const Features: FC<FeaturesProps> = ({ className, ...rest }) => {
                   </Typography>
                   <Typography variant="body1" color="textPrimary" gutterBottom>
                     Blinkstars gets people talking about your company and
-                    influence your business.
+                    influence your company.
                   </Typography>
                 </Box>
               </Box>

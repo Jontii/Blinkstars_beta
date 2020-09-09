@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Chip,
+  CircularProgress,
   FormHelperText,
   IconButton,
   makeStyles,
@@ -15,7 +16,6 @@ import { Formik } from 'formik';
 import React, { FC, useState } from 'react';
 import { Plus as PlusIcon } from 'react-feather';
 import * as Yup from 'yup';
-
 const useStyles = makeStyles(theme => ({
   root: {},
   editor: {
@@ -30,6 +30,9 @@ const useStyles = makeStyles(theme => ({
     '& + &': {
       marginLeft: theme.spacing(1)
     }
+  },
+  bottom: {
+    color: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700]
   }
 }));
 
@@ -48,7 +51,8 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
   const classes = useStyles();
   const [content, setContent] = useState('');
   const [error, setError] = useState(null);
-  const [tag, setTag] = useState('');
+  const [roleTag, setRoleTag] = useState('');
+  const [countryTag, setCountryTag] = useState('');
 
   const marks = [
     {
@@ -101,12 +105,49 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
     return `${value}°C`;
   }
 
+  interface IProgress {
+    value: number;
+  }
+
+  const CircularProgressWithLabel: FC<IProgress> = ({ value }) => {
+    const classes = useStyles();
+
+    return (
+      <Box position="relative" display="inline-flex">
+        <CircularProgress
+          size="5rem"
+          variant="determinate"
+          // color="secondary"
+          className={classes.bottom}
+          value={value}
+        />
+        <Box
+          top={0}
+          left={0}
+          bottom={0}
+          right={0}
+          position="absolute"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Typography
+            variant="caption"
+            component="div"
+            color="textSecondary"
+          >{`${Math.round(value)}%`}</Typography>
+        </Box>
+      </Box>
+    );
+  };
+
   return (
     <Formik
       initialValues={{
         projectName: '',
         campaignUrl: 'https://...',
-        tags: ['tag1', 'tag2', 'tag3']
+        roleTags: ['Agile coach', 'Project manager', 'Sales engineer'],
+        countryTags: ['Sweden', 'Denmark', 'England']
       }}
       validationSchema={Yup.object().shape({
         // projectName: Yup.string()
@@ -163,21 +204,24 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
             <TextField
               label="Country"
               fullWidth
-              name="tags"
-              value={tag}
-              onChange={event => setTag(event.target.value)}
+              name="countryTags"
+              value={countryTag}
+              onChange={event => setCountryTag(event.target.value)}
               variant="outlined"
             />
             <IconButton
               // variant="contained"
               className={classes.addTab}
               onClick={() => {
-                if (!tag) {
+                if (!countryTag) {
                   return;
                 }
 
-                setFieldValue('tags', [...values.tags, tag]);
-                setTag('');
+                setFieldValue('countryTags', [
+                  ...values.countryTags,
+                  countryTag
+                ]);
+                setCountryTag('');
               }}
             >
               <SvgIcon>
@@ -186,23 +230,23 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
             </IconButton>
           </Box>
           <Box mt={2}>
-            {values.tags.map((tag, i) => (
+            {values.countryTags.map((tag, i) => (
               <Chip
                 variant="outlined"
                 key={i}
                 label={tag}
                 className={classes.tag}
                 onDelete={() => {
-                  const newTags = values.tags.filter(t => t !== tag);
+                  const newTags = values.countryTags.filter(t => t !== tag);
 
-                  setFieldValue('tags', newTags);
+                  setFieldValue('countryTags', newTags);
                 }}
               />
             ))}
           </Box>
-          {Boolean(touched.tags && errors.tags) && (
+          {Boolean(touched.countryTags && errors.countryTags) && (
             <Box mt={2}>
-              <FormHelperText error>{errors.tags}</FormHelperText>
+              <FormHelperText error>{errors.countryTags}</FormHelperText>
             </Box>
           )}
 
@@ -210,21 +254,21 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
             <TextField
               label="Role"
               fullWidth
-              name="tags"
-              value={tag}
-              onChange={event => setTag(event.target.value)}
+              name="roleTags"
+              value={roleTag}
+              onChange={event => setRoleTag(event.target.value)}
               variant="outlined"
             />
             <IconButton
               // variant="contained"
               className={classes.addTab}
               onClick={() => {
-                if (!tag) {
+                if (!roleTag) {
                   return;
                 }
 
-                setFieldValue('tags', [...values.tags, tag]);
-                setTag('');
+                setFieldValue('roleTags', [...values.roleTags, roleTag]);
+                setRoleTag('');
               }}
             >
               <SvgIcon>
@@ -233,29 +277,29 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
             </IconButton>
           </Box>
           <Box mt={2}>
-            {values.tags.map((tag, i) => (
+            {values.roleTags.map((tag, i) => (
               <Chip
                 variant="outlined"
                 key={i}
                 label={tag}
                 className={classes.tag}
                 onDelete={() => {
-                  const newTags = values.tags.filter(t => t !== tag);
+                  const newTags = values.roleTags.filter(t => t !== tag);
 
-                  setFieldValue('tags', newTags);
+                  setFieldValue('roleTags', newTags);
                 }}
               />
             ))}
           </Box>
-          {Boolean(touched.tags && errors.tags) && (
+          {Boolean(touched.roleTags && errors.roleTags) && (
             <Box mt={2}>
-              <FormHelperText error>{errors.tags}</FormHelperText>
+              <FormHelperText error>{errors.roleTags}</FormHelperText>
             </Box>
           )}
 
           <Box width={'80%'} mt={8}>
             <Typography id="discrete-slider" gutterBottom>
-              Followers
+              Network connections
             </Typography>
             <Slider
               defaultValue={5000}
@@ -274,6 +318,14 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
               <FormHelperText error>{FormHelperText}</FormHelperText>
             </Box>
           )}
+
+          <Box width={'80%'} mt={8}>
+            <Typography id="discrete-slider" gutterBottom>
+              Influencer network match
+            </Typography>
+            <CircularProgressWithLabel value={10} />
+          </Box>
+
           <Box mt={6} display="flex">
             {onBack && (
               <Button onClick={onBack} size="large">

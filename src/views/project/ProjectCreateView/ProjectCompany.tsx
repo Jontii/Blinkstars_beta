@@ -9,8 +9,9 @@ import {
 } from '@material-ui/core';
 import clsx from 'clsx';
 import { Formik } from 'formik';
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import QuillEditor from 'src/components/QuillEditor';
+import useAuth from 'src/hooks/useAuth';
 import * as Yup from 'yup';
 
 const useStyles = makeStyles(theme => ({
@@ -48,12 +49,14 @@ const ProjectCompany: FC<ProjectCompanyProps> = ({
   ...rest
 }) => {
   const classes = useStyles();
-  const [content, setContent] = useState('');
+
+  const { user } = useAuth();
 
   return (
     <Formik
       initialValues={{
-        projectName: '',
+        projectName: user.tier === 'Company' ? user.name : '',
+        aboutCompany: user.tier === 'Company' ? user.about : '',
         tags: ['Full-Time']
       }}
       validationSchema={Yup.object().shape({
@@ -61,6 +64,7 @@ const ProjectCompany: FC<ProjectCompanyProps> = ({
           .min(3, 'Must be at least 3 characters')
           .max(255)
           .required('Required'),
+        aboutCompany: Yup.string().max(3000),
         tags: Yup.array(),
         startDate: Yup.date(),
         endDate: Yup.date()
@@ -90,7 +94,8 @@ const ProjectCompany: FC<ProjectCompanyProps> = ({
         handleSubmit,
         isSubmitting,
         touched,
-        values
+        values,
+        setFieldValue
       }) => (
         <form
           onSubmit={handleSubmit}
@@ -125,16 +130,16 @@ const ProjectCompany: FC<ProjectCompanyProps> = ({
             </Box>
             <Paper variant="outlined" component={Box}>
               <QuillEditor
-                handleChange={e => {
-                  setContent(e.value);
-                }}
-                value={content}
+                onChange={(value: string) =>
+                  setFieldValue('aboutCompany', value)
+                }
+                value={values.aboutCompany}
                 className={classes.editor}
               />
             </Paper>
-            {Boolean(touched.tags && errors.tags) && (
+            {Boolean(touched.aboutCompany && errors.aboutCompany) && (
               <Box mt={2}>
-                <FormHelperText error>{errors.tags}</FormHelperText>
+                <FormHelperText error>{errors.aboutCompany}</FormHelperText>
               </Box>
             )}
           </Box>

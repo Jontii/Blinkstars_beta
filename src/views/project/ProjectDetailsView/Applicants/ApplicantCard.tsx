@@ -12,6 +12,7 @@ import {
   SvgIcon,
   Typography
 } from '@material-ui/core';
+import { Rating } from '@material-ui/lab';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { FC, useState } from 'react';
@@ -46,6 +47,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& + &': {
       marginLeft: theme.spacing(1)
     }
+  },
+  rating: {
+    marginLeft: theme.spacing(2),
+    fontWeight: theme.typography.fontWeightBold
   }
 }));
 
@@ -94,6 +99,14 @@ const ApplicantCard: FC<ApplicantCardProps> = ({
         <Typography align="center" variant="body2" color="textSecondary">
           {applicant.commonConnections} previous campaigns
         </Typography>
+        <Box display="flex" flexDirection="column" alignItems="center">
+          <Box display="flex" flexDirection="column" alignItems="center">
+            <Rating name="rating" value={Math.floor(Math.random() * 5) + 3} />
+          </Box>
+          <Typography color="textSecondary" variant="body2">
+            {Math.floor(Math.random() * 60) + 30} reviews in total
+          </Typography>
+        </Box>
         <Box my={2}>
           <Divider />
         </Box>

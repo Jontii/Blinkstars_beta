@@ -408,7 +408,7 @@ const NavBar: FC<NavBarProps> = ({ onMobileClose, openMobile }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
-  const userSections = user?.name === 'Klarna' ? sections : sections2;
+  const userSections = user?.tier === 'Company' ? sections : sections2;
 
   const content = (
     <Box height="100%" display="flex" flexDirection="column">
