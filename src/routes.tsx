@@ -209,7 +209,7 @@ const routes: Routes = [
         exact: true,
         path: '/app/projects/create',
         component: lazy(
-          () => import('src/views/project/ProjectCreateView/test')
+          () => import('src/views/project/ProjectCreateView/ProjectCreateView')
         )
       },
       {

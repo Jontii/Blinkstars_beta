@@ -16,6 +16,7 @@ import { Formik } from 'formik';
 import React, { FC, useState } from 'react';
 import { Plus as PlusIcon } from 'react-feather';
 import * as Yup from 'yup';
+
 const useStyles = makeStyles(theme => ({
   root: {},
   editor: {
@@ -33,6 +34,15 @@ const useStyles = makeStyles(theme => ({
   },
   bottom: {
     color: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700]
+  },
+  top: {
+    // color: '#1a90ff',
+    animationDuration: '550ms',
+    position: 'absolute',
+    left: 0
+  },
+  circle: {
+    strokeLinecap: 'round'
   }
 }));
 
@@ -49,10 +59,10 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
   ...rest
 }) => {
   const classes = useStyles();
-  const [content, setContent] = useState('');
   const [error, setError] = useState(null);
   const [roleTag, setRoleTag] = useState('');
   const [countryTag, setCountryTag] = useState('');
+  const [progressValue, setProgressValue] = useState(60);
 
   const marks = [
     {
@@ -113,14 +123,29 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
     const classes = useStyles();
 
     return (
-      <Box position="relative" display="inline-flex">
+      <Box position="relative" display="inline-flex" mt={1}>
         <CircularProgress
-          size="5rem"
-          variant="determinate"
-          // color="secondary"
+          variant="static"
           className={classes.bottom}
-          value={value}
+          size={'6rem'}
+          thickness={4}
+          // {...props}
+          value={100}
         />
+        <CircularProgress
+          variant="static"
+          disableShrink
+          className={classes.top}
+          classes={{
+            circle: classes.circle
+          }}
+          size={'6rem'}
+          color="primary"
+          thickness={4}
+          value={30}
+          // {...props}
+        />
+
         <Box
           top={0}
           left={0}
@@ -132,9 +157,9 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
           justifyContent="center"
         >
           <Typography
-            variant="caption"
+            variant="h4"
             component="div"
-            color="textSecondary"
+            color="textPrimary"
           >{`${Math.round(value)}%`}</Typography>
         </Box>
       </Box>
@@ -146,8 +171,8 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
       initialValues={{
         projectName: '',
         campaignUrl: 'https://...',
-        roleTags: ['Agile coach', 'Project manager', 'Sales engineer'],
-        countryTags: ['Sweden', 'Denmark', 'England']
+        roleTags: ['Agile coach', 'Project manager'],
+        countryTags: ['Sweden']
       }}
       validationSchema={Yup.object().shape({
         // projectName: Yup.string()
@@ -297,7 +322,7 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
             </Box>
           )}
 
-          <Box width={'80%'} mt={8}>
+          <Box width={'80%'} mt={6}>
             <Typography id="discrete-slider" gutterBottom>
               Network connections
             </Typography>
@@ -308,6 +333,11 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
               step={1000}
               min={1000}
               max={10000}
+              onChange={(e, value) =>
+                setProgressValue(
+                  typeof value === 'number' ? progressValue + value / 100 : 10
+                )
+              }
               valueLabelDisplay="auto"
               marks={marks}
             />
@@ -319,11 +349,11 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
             </Box>
           )}
 
-          <Box width={'80%'} mt={8}>
+          <Box width={'80%'} mt={6}>
             <Typography id="discrete-slider" gutterBottom>
               Influencer network match
             </Typography>
-            <CircularProgressWithLabel value={10} />
+            <CircularProgressWithLabel value={progressValue} />
           </Box>
 
           <Box mt={6} display="flex">

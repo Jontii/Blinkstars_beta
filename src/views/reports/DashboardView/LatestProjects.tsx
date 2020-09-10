@@ -30,6 +30,8 @@ import getInitials from 'src/utils/getInitials';
 
 interface LatestProjectsProps {
   className?: string;
+  title?: string;
+  showOnlyFirst: boolean;
 }
 
 const technologyMap: Record<string, string> = {
@@ -54,7 +56,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const LatestProjects: FC<LatestProjectsProps> = ({ className, ...rest }) => {
+const LatestProjects: FC<LatestProjectsProps> = ({
+  className,
+  title,
+  showOnlyFirst,
+  ...rest
+}) => {
   const classes = useStyles();
   const isMountedRef = useIsMountedRef();
   const [projects, setProjects] = useState<Project[]>([]);
@@ -68,9 +75,15 @@ const LatestProjects: FC<LatestProjectsProps> = ({ className, ...rest }) => {
 
       if (isMountedRef.current) {
         let tempProjects = [];
-        tempProjects.push(response.data.projects[0]);
 
-        setProjects(tempProjects);
+        if (showOnlyFirst) {
+          tempProjects.push(response.data.projects[0]);
+          setProjects(tempProjects);
+        } else {
+          let temp = [...response.data.projects];
+          temp.splice(0, 1);
+          setProjects(temp);
+        }
       }
     } catch (err) {
       console.error(err);
@@ -81,9 +94,14 @@ const LatestProjects: FC<LatestProjectsProps> = ({ className, ...rest }) => {
     getProjects();
   }, [getProjects]);
 
+  console.log(projects);
+
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
-      <CardHeader action={<GenericMoreButton />} title="Active Campaigns" />
+      <CardHeader
+        action={<GenericMoreButton />}
+        title={title || 'My Campaigns'}
+      />
       <Divider />
       <PerfectScrollbar>
         <Box minWidth={900}>
@@ -93,7 +111,7 @@ const LatestProjects: FC<LatestProjectsProps> = ({ className, ...rest }) => {
                 <TableCell>Title</TableCell>
                 <TableCell>Author</TableCell>
                 <TableCell>Budget</TableCell>
-                <TableCell>Matched Campaigns</TableCell>
+                {showOnlyFirst && <TableCell>Matched Campaigns</TableCell>}
                 <TableCell align="right" sortDirection="desc">
                   <Tooltip enterDelay={300} title="Sort">
                     <TableSortLabel active direction="desc">
@@ -125,9 +143,11 @@ const LatestProjects: FC<LatestProjectsProps> = ({ className, ...rest }) => {
                       `${project.currency}0,0.00`
                     )}
                   </TableCell>
-                  <TableCell>
-                    <Button color="secondary">Accept</Button>
-                  </TableCell>
+                  {showOnlyFirst && (
+                    <TableCell>
+                      <Button color="secondary">Accept</Button>
+                    </TableCell>
+                  )}
                   <TableCell align="right">
                     {moment(project.createdAt).format('DD MMM, YYYY')}
                   </TableCell>

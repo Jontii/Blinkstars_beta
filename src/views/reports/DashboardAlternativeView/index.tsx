@@ -59,7 +59,7 @@ const DashboardAlternativeView: FC = () => {
 
   useEffect(() => {
     if (user.tier === 'Company') {
-      saveSettings({ theme: THEMES.UNICORN });
+      saveSettings({ theme: THEMES.LIGHT_COMPANY });
     } else {
       saveSettings({ theme: THEMES.LIGHT });
     }

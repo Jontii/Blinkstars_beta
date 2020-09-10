@@ -250,7 +250,7 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
     {
       id: '5eff24e98e2c9107e95cb827',
       author: {
-        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.svg`,
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_2.svg`,
         name: 'Emilee Simchenko'
       },
       budget: 15750,
@@ -270,7 +270,7 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
         avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_10.png`,
         name: 'Elliott Stone'
       },
-      budget: 15750,
+      budget: 8000,
       createdAt: moment()
         .subtract(1, 'days')
         .subtract(30, 'minutes')
@@ -304,7 +304,7 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
         avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_3.png`,
         name: 'Adrian Stefan'
       },
-      budget: 15750,
+      budget: 20000,
       createdAt: moment()
         .subtract(1, 'days')
         .subtract(11, 'minutes')

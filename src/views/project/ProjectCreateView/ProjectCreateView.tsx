@@ -113,7 +113,7 @@ const useStyles = makeStyles(theme => ({
 
 function ProjectCreateView() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = useState(4);
+  const [activeStep, setActiveStep] = useState(3);
   const [completed, setCompleted] = useState(false);
 
   const handleNext = () => {

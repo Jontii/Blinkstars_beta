@@ -28,7 +28,7 @@ const DashboardView: FC = () => {
 
   useEffect(() => {
     if (user.tier === 'Company') {
-      saveSettings({ theme: THEMES.UNICORN });
+      saveSettings({ theme: THEMES.LIGHT_COMPANY });
     } else {
       saveSettings({ theme: THEMES.LIGHT });
     }
@@ -75,7 +75,10 @@ const DashboardView: FC = () => {
             <TeamTasks />
           </Grid> */}
           <Grid item lg={9} xs={12}>
-            <LatestProjects />
+            <LatestProjects showOnlyFirst />
+          </Grid>
+          <Grid item lg={9} xs={12}>
+            <LatestProjects showOnlyFirst={false} title="New Campaigns" />
           </Grid>
         </Grid>
       </Container>
