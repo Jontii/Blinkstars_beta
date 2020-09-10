@@ -14,6 +14,7 @@ import {
   TableSortLabel,
   Tooltip
 } from '@material-ui/core';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import clsx from 'clsx';
 import moment from 'moment';
 import numeral from 'numeral';
@@ -21,6 +22,7 @@ import PropTypes from 'prop-types';
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useHistory } from 'react-router';
+import { Link as RouterLink } from 'react-router-dom';
 import GenericMoreButton from 'src/components/GenericMoreButton';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import { Theme } from 'src/theme';
@@ -100,7 +102,7 @@ const LatestProjects: FC<LatestProjectsProps> = ({
     <Card className={clsx(classes.root, className)} {...rest}>
       <CardHeader
         action={<GenericMoreButton />}
-        title={title || 'My Campaigns'}
+        title={title || 'My Matched Campaigns'}
       />
       <Divider />
       <PerfectScrollbar>
@@ -157,16 +159,18 @@ const LatestProjects: FC<LatestProjectsProps> = ({
           </Table>
         </Box>
       </PerfectScrollbar>
-      {/* <Box p={2} display="flex" justifyContent="flex-end">
-        <Button
-          component={RouterLink}
-          size="small"
-          to="/app/projects"
-          endIcon={<NavigateNextIcon />}
-        >
-          See all
-        </Button>
-      </Box> */}
+      {!showOnlyFirst && (
+        <Box p={2} display="flex" justifyContent="flex-end">
+          <Button
+            component={RouterLink}
+            size="small"
+            to="#"
+            endIcon={<NavigateNextIcon />}
+          >
+            See all
+          </Button>
+        </Box>
+      )}
     </Card>
   );
 };

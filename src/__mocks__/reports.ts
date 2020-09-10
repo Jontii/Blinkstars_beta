@@ -255,7 +255,7 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
       },
       budget: 15750,
       createdAt: moment()
-        .subtract(10, 'hours')
+        .subtract(60, 'hours')
         .subtract(56, 'minutes')
         .subtract(25, 'seconds')
         .toDate()
@@ -272,7 +272,7 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
       },
       budget: 8000,
       createdAt: moment()
-        .subtract(1, 'days')
+        .subtract(3, 'days')
         .subtract(30, 'minutes')
         .subtract(50, 'seconds')
         .toDate()
@@ -289,7 +289,7 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
       },
       budget: 12500,
       createdAt: moment()
-        .subtract(1, 'days')
+        .subtract(4, 'days')
         .subtract(4, 'minutes')
         .subtract(30, 'seconds')
         .toDate()
@@ -306,7 +306,7 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
       },
       budget: 20000,
       createdAt: moment()
-        .subtract(1, 'days')
+        .subtract(5, 'days')
         .subtract(11, 'minutes')
         .subtract(6, 'seconds')
         .toDate()

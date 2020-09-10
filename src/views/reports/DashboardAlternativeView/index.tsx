@@ -66,7 +66,7 @@ const DashboardAlternativeView: FC = () => {
   }, []);
 
   return (
-    <Page className={classes.root} title="Dashboard Alternative">
+    <Page className={classes.root} title="Dashboard">
       <Container maxWidth={false}>
         <Header />
         <Box className={classes.root2}>
@@ -129,6 +129,48 @@ const DashboardAlternativeView: FC = () => {
             <TopReferrals />
           </Grid> */}
             </Grid>
+          </Collapse>
+        </Box>
+        <Box className={classes.root2}>
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <Box display="flex" alignItems="center">
+              <Typography color="primary" variant="h4">
+                Old Campaigns
+              </Typography>
+
+              <IconButton
+                className={classNames(classes.chevron, {
+                  [classes.chevronDown]: false
+                })}
+              >
+                <SvgIcon fontSize="small">
+                  <ChevronRight />
+                </SvgIcon>
+              </IconButton>
+            </Box>
+          </Box>
+          <Collapse in={false}>
+            {/* <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <Overview />
+              </Grid>
+              <Grid item lg={8} xl={9} xs={12}>
+                <LineChart />
+              </Grid>
+              <Grid item lg={4} xl={3} xs={12}>
+                <EarningsSegmentation version={3} />
+              </Grid>
+              <Grid item lg={8} xl={9} xs={12}>
+                <LatestOrders />
+              </Grid>
+              <Grid item lg={4} xl={3} xs={12}>
+                <CustomerActivity />
+              </Grid> 
+            </Grid> */}
           </Collapse>
         </Box>
       </Container>
