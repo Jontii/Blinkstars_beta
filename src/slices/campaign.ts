@@ -64,7 +64,7 @@ interface Campaign {
 
 const slice = createSlice({
   name: 'campaign',
-  initialState: mockState,
+  initialState,
   reducers: {
     createCampaign(
       state: Campaign,
