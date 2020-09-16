@@ -96,7 +96,11 @@ const LatestOrders: FC<LatestOrdersProps> = ({ className, ...rest }) => {
                   <TableCell>
                     {order.roles &&
                       order.roles.map(i => (
-                        <Label className={classes.marginRight} color="success">
+                        <Label
+                          key={i}
+                          className={classes.marginRight}
+                          color="success"
+                        >
                           {i}
                         </Label>
                       ))}

@@ -15,7 +15,10 @@ import clsx from 'clsx';
 import { Formik } from 'formik';
 import React, { FC, useState } from 'react';
 import { Plus as PlusIcon } from 'react-feather';
+import { influencerCampaign } from 'src/slices/campaign';
+import { useDispatch } from 'src/store';
 import * as Yup from 'yup';
+import { InfluencerCampaign } from './CampaignTypes';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -63,6 +66,8 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
   const [roleTag, setRoleTag] = useState('');
   const [countryTag, setCountryTag] = useState('');
   const [progressValue, setProgressValue] = useState(60);
+  const [value, setValue] = useState(5000);
+  const dispatch = useDispatch();
 
   const marks = [
     {
@@ -166,14 +171,15 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
     );
   };
 
+  const initialValues: InfluencerCampaign = {
+    roleTags: [],
+    countryTags: [],
+    value: 5000
+  };
+
   return (
     <Formik
-      initialValues={{
-        projectName: '',
-        campaignUrl: 'https://...',
-        roleTags: ['Agile coach', 'Project manager'],
-        countryTags: ['Sweden']
-      }}
+      initialValues={initialValues}
       validationSchema={Yup.object().shape({
         // projectName: Yup.string()
         //   .min(3, 'Must be at least 3 characters')
@@ -189,6 +195,10 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
           // It is important to have it on server to be able to reuse it if user
           // decides to continue later.
           setSubmitting(false);
+
+          const campaign: InfluencerCampaign = { ...values };
+
+          dispatch(influencerCampaign(campaign));
 
           if (onNext) {
             onNext();
@@ -333,11 +343,15 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
               step={1000}
               min={1000}
               max={10000}
-              onChange={(e, value) =>
-                setProgressValue(
-                  typeof value === 'number' ? progressValue + value / 100 : 10
-                )
-              }
+              // value={value}
+              onChange={(e, value) => {
+                setFieldValue('value', [value]);
+              }}
+              // onChange={(e, value) =>
+              //   setProgressValue(
+              //     typeof value === 'number' ? progressValue + value / 100 : 10
+              //   )
+              // }
               valueLabelDisplay="auto"
               marks={marks}
             />

@@ -1,7 +1,6 @@
 import {
   Avatar,
   Box,
-  Button,
   Card,
   CardContent,
   CardMedia,
@@ -9,18 +8,15 @@ import {
   Divider,
   Link,
   makeStyles,
-  SvgIcon,
   Typography
 } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { FC, useState } from 'react';
-import { UserCheck } from 'react-feather';
 import { Link as RouterLink } from 'react-router-dom';
 import { Theme } from 'src/theme';
 import { ProjectApplicant, ProjectAuthor } from 'src/types/project';
-import ApplyModal from '../Header/ApplyModal';
 interface ApplicantCardProps {
   className?: string;
   applicant: ProjectApplicant;
@@ -63,6 +59,7 @@ const ApplicantCard: FC<ApplicantCardProps> = ({
   const classes = useStyles();
 
   const [isApplyModalOpen, setApplyModalOpen] = useState<boolean>(false);
+  const [approve, setApprove] = useState<boolean[]>([]);
 
   const handleApplyModalOpen = (): void => {
     setApplyModalOpen(true);
@@ -118,7 +115,7 @@ const ApplicantCard: FC<ApplicantCardProps> = ({
             variant="outlined"
           />
         ))}
-        <Box my={2}>
+        {/* <Box my={2}>
           <Divider />
         </Box>
         <Box display="flex" justifyContent="center">
@@ -133,7 +130,7 @@ const ApplicantCard: FC<ApplicantCardProps> = ({
               </SvgIcon>
             }
           >
-            Ask to be influencer
+            Approve as influencer
           </Button>
         </Box>
         <ApplyModal
@@ -141,7 +138,7 @@ const ApplicantCard: FC<ApplicantCardProps> = ({
           onApply={handleApplyModalClose}
           onClose={handleApplyModalClose}
           open={isApplyModalOpen}
-        />
+        /> */}
       </CardContent>
     </Card>
   );

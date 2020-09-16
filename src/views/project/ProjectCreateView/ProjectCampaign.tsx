@@ -15,7 +15,10 @@ import { Formik } from 'formik';
 import React, { FC, useState } from 'react';
 import { Plus as PlusIcon } from 'react-feather';
 import QuillEditor from 'src/components/QuillEditor';
+import { createCampaign } from 'src/slices/campaign';
+import { useDispatch } from 'src/store';
 import * as Yup from 'yup';
+import { CreateCampaign } from './CampaignTypes';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -52,27 +55,26 @@ const ProjectCampagin: FC<ProjectCampaignProps> = ({
   ...rest
 }) => {
   const classes = useStyles();
-  const [tag, setTag] = useState('');
-  const [content, setContent] = useState('');
+  const [hashtag, setHashTags] = useState('');
+  const dispatch = useDispatch();
+
+  const initalValues: CreateCampaign = {
+    campaignTitle: '',
+    campaignDescription: '',
+    campaignUrl: '',
+    campaignBudget: '',
+    hashtags: []
+  };
 
   return (
     <Formik
-      initialValues={{
-        campaignTitle: '',
-        campaignUrl: '',
-        campaignBudget: '',
-        startDate: new Date(),
-        endDate: new Date(),
-        tags: ['tag1', 'tag2', 'tag3']
-      }}
+      initialValues={initalValues}
       validationSchema={Yup.object().shape({
         campaignTitle: Yup.string()
           .min(3, 'Must be at least 3 characters')
           .max(255)
-          .required('Required'),
+          .required('Required')
         // tags: Yup.array(),
-        startDate: Yup.date(),
-        endDate: Yup.date()
       })}
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
@@ -82,6 +84,12 @@ const ProjectCampagin: FC<ProjectCampaignProps> = ({
           setStatus({ success: true });
           setSubmitting(false);
 
+          let temp: CreateCampaign = values;
+          temp.campaignDescription.replace(/<[^>]*>?/gm, '');
+
+          const campaign: CreateCampaign = { ...temp };
+
+          dispatch(createCampaign(campaign));
           if (onNext) {
             onNext();
           }
@@ -133,25 +141,14 @@ const ProjectCampagin: FC<ProjectCampaignProps> = ({
           <Box mt={2}>
             <Paper variant="outlined" component={Box}>
               <QuillEditor
-                handleChange={e => {
-                  setContent(e.value);
-                }}
-                value={content}
+                onChange={(value: string) =>
+                  setFieldValue('campaignDescription', value)
+                }
+                value={values.campaignDescription}
                 placeholder="Describe the purpose of the campagin"
                 className={classes.editor}
               />
             </Paper>
-
-            {Boolean(touched.startDate && errors.startDate) && (
-              <Box mt={2}>
-                <FormHelperText error>{errors.startDate}</FormHelperText>
-              </Box>
-            )}
-            {Boolean(touched.endDate && errors.endDate) && (
-              <Box mt={2}>
-                <FormHelperText error>{errors.endDate}</FormHelperText>
-              </Box>
-            )}
 
             <Box mt={2}>
               <TextField
@@ -172,22 +169,22 @@ const ProjectCampagin: FC<ProjectCampaignProps> = ({
               <Box display="flex" width="50%">
                 <TextField
                   label="Campaign hashtags"
-                  name="tags"
+                  name="hashtags"
                   fullWidth
-                  value={tag}
-                  onChange={event => setTag(event.target.value)}
+                  value={hashtag}
+                  onChange={event => setHashTags(event.target.value)}
                   variant="outlined"
                 />
                 <IconButton
                   // variant="contained"
                   className={classes.addTab}
                   onClick={() => {
-                    if (!tag) {
+                    if (!hashtag) {
                       return;
                     }
 
-                    setFieldValue('tags', [...values.tags, tag]);
-                    setTag('');
+                    setFieldValue('hashtags', [...values.hashtags, hashtag]);
+                    setHashTags('');
                   }}
                 >
                   <SvgIcon>
@@ -213,23 +210,23 @@ const ProjectCampagin: FC<ProjectCampaignProps> = ({
               </Box>
             </Box>
             <Box mt={2}>
-              {values.tags.map((tag, i) => (
+              {values.hashtags.map((tag, i) => (
                 <Chip
                   variant="outlined"
                   key={i}
                   label={tag}
                   className={classes.tag}
                   onDelete={() => {
-                    const newTags = values.tags.filter(t => t !== tag);
+                    const newTags = values.hashtags.filter(t => t !== tag);
 
-                    setFieldValue('tags', newTags);
+                    setFieldValue('hashtags', newTags);
                   }}
                 />
               ))}
             </Box>
-            {Boolean(touched.tags && errors.tags) && (
+            {Boolean(touched.hashtags && errors.hashtags) && (
               <Box mt={2}>
-                <FormHelperText error>{errors.tags}</FormHelperText>
+                <FormHelperText error>{errors.hashtags}</FormHelperText>
               </Box>
             )}
           </Box>

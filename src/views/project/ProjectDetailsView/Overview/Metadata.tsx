@@ -15,6 +15,7 @@ import numeral from 'numeral';
 import PropTypes from 'prop-types';
 import React, { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import { useSelector } from 'src/store';
 import { Theme } from 'src/theme';
 import { Project } from 'src/types/project';
 import getInitials from 'src/utils/getInitials';
@@ -41,6 +42,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Metadata: FC<MetadataProps> = ({ className, project, ...rest }) => {
   const classes = useStyles();
 
+  const campaign = useSelector(state => state.campaign);
+
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
       <CardHeader
@@ -51,7 +54,7 @@ const Metadata: FC<MetadataProps> = ({ className, project, ...rest }) => {
             src={project.author.avatar}
             to="#"
           >
-            {getInitials(project.author.name)}
+            {getInitials(campaign.companyCampaign.companyName)}
           </Avatar>
         }
         className={classes.header}
@@ -64,7 +67,7 @@ const Metadata: FC<MetadataProps> = ({ className, project, ...rest }) => {
             underline="none"
             variant="h6"
           >
-            {project.author.name}
+            {campaign.companyCampaign.companyName}
           </Link>
         }
         title={
@@ -80,7 +83,7 @@ const Metadata: FC<MetadataProps> = ({ className, project, ...rest }) => {
               Deadline
             </Typography>
             <Typography variant="h6" color="textSecondary">
-              {moment(project.endDate).format('DD MMM YYYY')}
+              {moment(campaign.completeCampaign.endDate).format('DD MMM YYYY')}
             </Typography>
           </ListItem>
           <ListItem className={classes.listItem} disableGutters divider>
@@ -88,7 +91,9 @@ const Metadata: FC<MetadataProps> = ({ className, project, ...rest }) => {
               Budget
             </Typography>
             <Typography variant="h6" color="textSecondary">
-              {numeral(project.budget).format(`${project.currency}0,0.00`)}
+              {numeral(campaign.createCampaign.campaignBudget).format(
+                `${project.currency}0,0.00`
+              )}
             </Typography>
           </ListItem>
           <ListItem className={classes.listItem} disableGutters divider>

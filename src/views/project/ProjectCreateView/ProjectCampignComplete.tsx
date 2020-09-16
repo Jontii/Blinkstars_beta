@@ -9,8 +9,12 @@ import { KeyboardDatePicker } from '@material-ui/pickers';
 import Axios from 'axios';
 import clsx from 'clsx';
 import { Formik } from 'formik';
+import moment from 'moment';
 import React, { FC, useState } from 'react';
+import { completeCampaign } from 'src/slices/campaign';
+import { useDispatch } from 'src/store';
 import * as Yup from 'yup';
+import { CompleteCampaign } from './CampaignTypes';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -49,16 +53,19 @@ const ProjectCampignComplete: FC<ProjectCampaignProps> = ({
   const classes = useStyles();
   const [tag, setTag] = useState('');
   const [content, setContent] = useState('');
+  const dispatch = useDispatch();
+
+  const initialValues: CompleteCampaign = {
+    startDate: moment().toDate().getTime(),
+    endDate: moment().add(2, 'days').toDate().getTime()
+  };
 
   return (
     <Formik
-      initialValues={{
-        startDate: new Date(),
-        endDate: new Date()
-      }}
+      initialValues={initialValues}
       validationSchema={Yup.object().shape({
-        startDate: Yup.date(),
-        endDate: Yup.date()
+        // startDate: Yup.date(),
+        // endDate: Yup.date()
       })}
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
@@ -67,6 +74,15 @@ const ProjectCampignComplete: FC<ProjectCampaignProps> = ({
           // decides to continue later.
           setStatus({ success: true });
           setSubmitting(false);
+
+          const dates = {
+            startDate: values.startDate,
+            endDate: values.endDate
+          };
+
+          const campaign: CompleteCampaign = { ...values };
+
+          dispatch(completeCampaign(campaign));
 
           if (onComplete) {
             Axios.post('/api/campaign/', {
@@ -122,7 +138,9 @@ const ProjectCampignComplete: FC<ProjectCampaignProps> = ({
               onBlur={() => setFieldTouched('startDate')}
               onClose={() => setFieldTouched('startDate')}
               onAccept={() => setFieldTouched('startDate')}
-              onChange={date => setFieldValue('startDate', date)}
+              onChange={date =>
+                setFieldValue('startDate', date.toDate().getTime())
+              }
             />
             <KeyboardDatePicker
               className={classes.datePicker}
@@ -135,7 +153,9 @@ const ProjectCampignComplete: FC<ProjectCampaignProps> = ({
               onBlur={() => setFieldTouched('endDate')}
               onClose={() => setFieldTouched('endDate')}
               onAccept={() => setFieldTouched('endDate')}
-              onChange={date => setFieldValue('endDate', date)}
+              onChange={date =>
+                setFieldValue('endDate', date.toDate().getTime())
+              }
             />
           </Box>
 

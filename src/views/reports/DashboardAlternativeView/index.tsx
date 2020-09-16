@@ -15,6 +15,7 @@ import Page from 'src/components/Page';
 import { THEMES } from 'src/constants';
 import useAuth from 'src/hooks/useAuth';
 import useSettings from 'src/hooks/useSettings';
+import { useSelector } from 'src/store';
 import { Theme } from 'src/theme';
 import LineChart from 'src/views/extra/charts/ApexChartsView/LineChart';
 import CustomerActivity from './CustomerActivity';
@@ -52,7 +53,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 const DashboardAlternativeView: FC = () => {
   const classes = useStyles();
 
-  const [showProp, setShowProp] = useState<boolean>(true);
+  const { campaignTitle } = useSelector(state => state.campaign.createCampaign);
+  const [showProp, setShowProp] = useState<boolean>(
+    campaignTitle ? true : false
+  );
 
   const { saveSettings } = useSettings();
   const { user } = useAuth();
@@ -96,39 +100,43 @@ const DashboardAlternativeView: FC = () => {
             </Box>
           </Box>
           <Collapse in={showProp}>
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <Overview />
-              </Grid>
-              <Grid item lg={8} xl={9} xs={12}>
-                <LineChart />
-              </Grid>
+            {!campaignTitle ? (
+              <Typography variant="h3">No Active Campaigns</Typography>
+            ) : (
+              <Grid container spacing={3}>
+                <Grid item xs={12}>
+                  <Overview />
+                </Grid>
+                <Grid item lg={8} xl={9} xs={12}>
+                  <LineChart />
+                </Grid>
 
-              {/* <Grid item lg={4} xl={3} xs={12}>
+                {/* <Grid item lg={4} xl={3} xs={12}>
             <EarningsSegmentation version={1} />
           </Grid>
           <Grid item lg={4} xl={3} xs={12}>
             <EarningsSegmentation version={2} />
           </Grid> */}
-              <Grid item lg={4} xl={3} xs={12}>
-                <EarningsSegmentation version={3} />
-              </Grid>
-              <Grid item lg={8} xl={9} xs={12}>
-                <LatestOrders />
-              </Grid>
-              {/* <Grid item lg={8} xs={12}>
+                <Grid item lg={4} xl={3} xs={12}>
+                  <EarningsSegmentation version={3} />
+                </Grid>
+                <Grid item lg={8} xl={9} xs={12}>
+                  <LatestOrders />
+                </Grid>
+                {/* <Grid item lg={8} xs={12}>
             <LatestOrders />
           </Grid> */}
-              <Grid item lg={4} xl={3} xs={12}>
-                <CustomerActivity />
-              </Grid>
-              {/* <Grid item lg={8} xs={12}>
+                <Grid item lg={4} xl={3} xs={12}>
+                  <CustomerActivity />
+                </Grid>
+                {/* <Grid item lg={8} xs={12}>
             <MostProfitableProducts />
           </Grid> */}
-              {/* <Grid item lg={3} xs={12}>
+                {/* <Grid item lg={3} xs={12}>
             <TopReferrals />
           </Grid> */}
-            </Grid>
+              </Grid>
+            )}
           </Collapse>
         </Box>
         <Box className={classes.root2}>

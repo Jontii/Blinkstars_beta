@@ -63,7 +63,15 @@ const Activities: FC<ActivitiesProps> = ({
         Today
       </Typography>
       <div className={classes.group}>
-        {todayItems.map(activity => (
+        {/* {todayItems.map(activity => (
+          <Activity
+            activity={activity}
+            className={classes.activity}
+            key={activity.id}
+          />
+        ))} */}
+
+        {lastWeekItems.map(activity => (
           <Activity
             activity={activity}
             className={classes.activity}
@@ -71,7 +79,7 @@ const Activities: FC<ActivitiesProps> = ({
           />
         ))}
       </div>
-      <div className={classes.group}>
+      {/* <div className={classes.group}>
         <Typography className={classes.title} variant="h3" color="textPrimary">
           Last week
         </Typography>
@@ -82,7 +90,7 @@ const Activities: FC<ActivitiesProps> = ({
             key={activity.id}
           />
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

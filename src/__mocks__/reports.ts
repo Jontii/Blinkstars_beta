@@ -250,7 +250,7 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
     {
       id: '5eff24e98e2c9107e95cb827',
       author: {
-        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_2.svg`,
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_2.png`,
         name: 'Emilee Simchenko'
       },
       budget: 15750,

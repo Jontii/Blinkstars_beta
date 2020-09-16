@@ -5,6 +5,7 @@ import {
   Card,
   CardHeader,
   Divider,
+  Link,
   makeStyles,
   Table,
   TableBody,
@@ -25,6 +26,7 @@ import { useHistory } from 'react-router';
 import { Link as RouterLink } from 'react-router-dom';
 import GenericMoreButton from 'src/components/GenericMoreButton';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
+import { useSelector } from 'src/store';
 import { Theme } from 'src/theme';
 import { Project } from 'src/types/reports';
 import axios from 'src/utils/axios';
@@ -34,6 +36,8 @@ interface LatestProjectsProps {
   className?: string;
   title?: string;
   showOnlyFirst: boolean;
+  setAccepted?: (value: boolean) => void;
+  accepted?: boolean;
 }
 
 const technologyMap: Record<string, string> = {
@@ -62,6 +66,8 @@ const LatestProjects: FC<LatestProjectsProps> = ({
   className,
   title,
   showOnlyFirst,
+  accepted,
+  setAccepted,
   ...rest
 }) => {
   const classes = useStyles();
@@ -95,8 +101,7 @@ const LatestProjects: FC<LatestProjectsProps> = ({
   useEffect(() => {
     getProjects();
   }, [getProjects]);
-
-  console.log(projects);
+  const campaign = useSelector(state => state.campaign);
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
@@ -123,39 +128,81 @@ const LatestProjects: FC<LatestProjectsProps> = ({
                 </TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {projects.map(project => (
-                <TableRow
-                  hover
-                  key={project.id}
-                  className={classes.row}
-                  onClick={() => history.push('/app/projects/1')}
-                >
-                  <TableCell>{project.title}</TableCell>
+            {!showOnlyFirst && (
+              <TableBody>
+                {projects.map(project => (
+                  <TableRow
+                    hover
+                    key={project.id}
+                    className={classes.row}
+                    // onClick={() => history.push('/app/projects/1')}
+                  >
+                    <TableCell>{project.title}</TableCell>
+                    <TableCell>
+                      <Box display="flex" alignItems="center">
+                        <Avatar alt="Author" src={project.author.avatar}>
+                          {getInitials(project.author.name)}
+                        </Avatar>
+                        <Box ml={1}>{project.author.name}</Box>
+                      </Box>
+                    </TableCell>
+                    <TableCell>
+                      {numeral(project.budget).format(
+                        `${project.currency}0,0.00`
+                      )}
+                    </TableCell>
+                    <TableCell align="right">
+                      {moment(project.createdAt).format('DD MMM, YYYY')}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            )}
+            {projects[0] && showOnlyFirst && (
+              <TableBody>
+                <TableRow hover className={classes.row}>
+                  <TableCell>
+                    {/* onClick={() => history.push('/app/projects/1')} */}
+                    <Link component={RouterLink} to="/app/projects/1">
+                      {campaign.createCampaign.campaignTitle}
+                    </Link>
+                  </TableCell>
                   <TableCell>
                     <Box display="flex" alignItems="center">
-                      <Avatar alt="Author" src={project.author.avatar}>
-                        {getInitials(project.author.name)}
+                      <Avatar alt="Author" src={projects[0].author.avatar}>
+                        {getInitials(campaign.companyCampaign.companyName)}
                       </Avatar>
-                      <Box ml={1}>{project.author.name}</Box>
+                      <Box ml={1}>{campaign.companyCampaign.companyName}</Box>
                     </Box>
                   </TableCell>
                   <TableCell>
-                    {numeral(project.budget).format(
-                      `${project.currency}0,0.00`
+                    {numeral(campaign.createCampaign.campaignBudget).format(
+                      `SEK0,0.00`
                     )}
                   </TableCell>
-                  {showOnlyFirst && (
-                    <TableCell>
-                      <Button color="secondary">Accept</Button>
-                    </TableCell>
-                  )}
+                  <TableCell>
+                    {accepted ? (
+                      <Button
+                        onClick={() => setAccepted(!accepted)}
+                        color="secondary"
+                      >
+                        Accept
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={() => setAccepted(!accepted)}
+                        color="primary"
+                      >
+                        Decline
+                      </Button>
+                    )}
+                  </TableCell>
                   <TableCell align="right">
-                    {moment(project.createdAt).format('DD MMM, YYYY')}
+                    {moment(new Date()).format('DD MMM, YYYY')}
                   </TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
+              </TableBody>
+            )}
           </Table>
         </Box>
       </PerfectScrollbar>

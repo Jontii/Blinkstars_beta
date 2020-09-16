@@ -5,12 +5,15 @@ import {
   useSelector as useReduxSelector
 } from 'react-redux';
 import { ThunkAction } from 'redux-thunk';
-import { ENABLE_REDUX_DEV_TOOLS } from 'src/constants';
 import rootReducer from './rootReducer';
+
+const composeEnhancers =
+  (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
+  (window as any).__REDUX_DEVTOOLS_EXTENSION__();
 
 const store = configureStore({
   reducer: rootReducer,
-  devTools: ENABLE_REDUX_DEV_TOOLS
+  devTools: composeEnhancers
 });
 
 export type RootState = ReturnType<typeof store.getState>;

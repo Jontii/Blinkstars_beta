@@ -26,7 +26,7 @@ const users = [
     avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.svg`,
     canHire: false,
     country: 'USA',
-    email: 'company@telia.io',
+    email: 'company@klarna.io',
     isPublic: true,
     name: 'Klarna',
     password: 'Password123',

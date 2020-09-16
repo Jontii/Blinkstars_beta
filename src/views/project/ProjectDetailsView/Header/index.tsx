@@ -14,9 +14,10 @@ import {
   AlertTriangle as AlertIcon,
   Calendar as CalendarIcon,
   Check as CheckIcon,
-  Share,
-  Share2 as ShareIcon
+  Share
 } from 'react-feather';
+import useAuth from 'src/hooks/useAuth';
+import { useSelector } from 'src/store';
 import { Theme } from 'src/theme';
 import { Project } from 'src/types/project';
 import ApplyModal from './ApplyModal';
@@ -57,6 +58,9 @@ const Header: FC<HeaderProps> = ({ className, project, ...rest }) => {
   };
 
   const [isPublished, setIsPublished] = useState<boolean>(false);
+  const campaign = useSelector(state => state.campaign);
+
+  const { user } = useAuth();
 
   return (
     <Grid
@@ -68,7 +72,7 @@ const Header: FC<HeaderProps> = ({ className, project, ...rest }) => {
     >
       <Grid item>
         <Typography variant="h3" color="textPrimary">
-          {project.title}
+          {campaign.createCampaign.campaignTitle}
         </Typography>
         <Box
           mx={-2}
@@ -79,10 +83,10 @@ const Header: FC<HeaderProps> = ({ className, project, ...rest }) => {
         >
           <div className={classes.badge}>
             <SvgIcon fontSize="small" className={classes.badgeIcon}>
-              {project.isActive ? <CheckIcon /> : <AlertIcon />}
+              {isPublished ? <CheckIcon /> : <AlertIcon />}
             </SvgIcon>
             <Typography variant="body2" color="inherit" component="span">
-              {project.isActive ? 'Active' : 'Inactive'}
+              {isPublished ? 'Active' : 'Draft'}
             </Typography>
           </div>
           <div className={classes.badge}>
@@ -90,13 +94,15 @@ const Header: FC<HeaderProps> = ({ className, project, ...rest }) => {
               <CalendarIcon />
             </SvgIcon>
             <Typography variant="body2" color="inherit" component="span">
-              {`Deadline ${moment(project.endDate).fromNow()}`}
+              {`Deadline ${moment(
+                campaign.completeCampaign.endDate
+              ).fromNow()}`}
             </Typography>
           </div>
         </Box>
       </Grid>
       <Grid item>
-        <Button
+        {/* <Button
           className={classes.action}
           startIcon={
             <SvgIcon fontSize="small">
@@ -105,20 +111,22 @@ const Header: FC<HeaderProps> = ({ className, project, ...rest }) => {
           }
         >
           Share
-        </Button>
-        <Button
-          className={classes.action}
-          onClick={() => setIsPublished(!isPublished)}
-          variant="contained"
-          color="secondary"
-          startIcon={
-            <SvgIcon fontSize="small">
-              <Share />
-            </SvgIcon>
-          }
-        >
-          {!isPublished ? <>Publish Campaign</> : <>Unpublish Campaign</>}
-        </Button>
+        </Button> */}
+        {user.tier === 'Company' && (
+          <Button
+            className={classes.action}
+            onClick={() => setIsPublished(!isPublished)}
+            variant="contained"
+            color="secondary"
+            startIcon={
+              <SvgIcon fontSize="small">
+                <Share />
+              </SvgIcon>
+            }
+          >
+            {!isPublished ? <>Publish Campaign</> : <>Unpublish Campaign</>}
+          </Button>
+        )}
         <ApplyModal
           author={project.author}
           onApply={handleApplyModalClose}

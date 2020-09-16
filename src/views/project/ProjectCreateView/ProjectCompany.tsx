@@ -9,10 +9,13 @@ import {
 } from '@material-ui/core';
 import clsx from 'clsx';
 import { Formik } from 'formik';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import QuillEditor from 'src/components/QuillEditor';
 import useAuth from 'src/hooks/useAuth';
+import { companyCampaign, getCompany } from 'src/slices/campaign';
+import { useDispatch } from 'src/store';
 import * as Yup from 'yup';
+import { CompanyCampaign } from './CampaignTypes';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -51,23 +54,26 @@ const ProjectCompany: FC<ProjectCompanyProps> = ({
   const classes = useStyles();
 
   const { user } = useAuth();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCompany(user));
+  }, [dispatch]);
+
+  const initialValues: CompanyCampaign = {
+    companyName: user.tier === 'Company' ? user.name : '',
+    aboutCompany: user.tier === 'Company' ? user.about : ''
+  };
 
   return (
     <Formik
-      initialValues={{
-        projectName: user.tier === 'Company' ? user.name : '',
-        aboutCompany: user.tier === 'Company' ? user.about : '',
-        tags: ['Full-Time']
-      }}
+      initialValues={initialValues}
       validationSchema={Yup.object().shape({
-        projectName: Yup.string()
+        companyName: Yup.string()
           .min(3, 'Must be at least 3 characters')
           .max(255)
           .required('Required'),
-        aboutCompany: Yup.string().max(3000),
-        tags: Yup.array(),
-        startDate: Yup.date(),
-        endDate: Yup.date()
+        aboutCompany: Yup.string().max(3000)
       })}
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
@@ -76,6 +82,12 @@ const ProjectCompany: FC<ProjectCompanyProps> = ({
           // decides to continue later.
           setStatus({ success: true });
           setSubmitting(false);
+
+          let temp = values;
+          temp.aboutCompany.replace(/<[^>]*>?/gm, '');
+          const campaign: CompanyCampaign = { ...temp };
+
+          dispatch(companyCampaign(campaign));
 
           if (onNext) {
             onNext();
@@ -113,14 +125,14 @@ const ProjectCompany: FC<ProjectCompanyProps> = ({
           </Box>
           <Box mt={2}>
             <TextField
-              error={Boolean(touched.projectName && errors.projectName)}
+              error={Boolean(touched.companyName && errors.companyName)}
               fullWidth
-              helperText={touched.projectName && errors.projectName}
+              helperText={touched.companyName && errors.companyName}
               label="Name of the company"
-              name="projectName"
+              name="companyName"
               onBlur={handleBlur}
               onChange={handleChange}
-              value={values.projectName}
+              value={values.companyName}
               variant="outlined"
             />
             <Box mt={2}>

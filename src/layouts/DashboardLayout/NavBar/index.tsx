@@ -12,7 +12,7 @@ import {
   makeStyles,
   Typography
 } from '@material-ui/core';
-import React, { FC, ReactNode, useEffect } from 'react';
+import React, { FC, ReactNode, useEffect, useState } from 'react';
 import {
   Briefcase as BriefcaseIcon,
   PieChart as PieChartIcon,
@@ -22,6 +22,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Link as RouterLink, matchPath, useLocation } from 'react-router-dom';
 import Logo from 'src/components/Logo';
 import useAuth from 'src/hooks/useAuth';
+import { useSelector } from 'src/store';
 import NavItem from './NavItem';
 
 interface NavBarProps {
@@ -146,11 +147,11 @@ const sections: Section[] = [
           {
             title: 'Create Campaign',
             href: '/app/projects/create'
-          },
-          {
-            title: 'View Campaign',
-            href: '/app/projects/1'
           }
+          // {
+          //   title: 'View Campaign',
+          //   href: '/app/projects/1'
+          // }
         ]
       }
       // {
@@ -287,6 +288,50 @@ const sections: Section[] = [
   // }
 ];
 
+const userHasCreatedCampaignRoutes: Section[] = [
+  {
+    subheader: 'Reports',
+    items: [
+      {
+        title: 'Dashboard',
+        icon: PieChartIcon,
+        href: '/app/reports/dashboard-alternative'
+      }
+    ]
+  },
+  {
+    subheader: 'Applications',
+    items: [
+      {
+        title: 'Campaign Platform',
+        href: '/app/projects',
+        icon: BriefcaseIcon,
+        items: [
+          {
+            title: 'Create Campaign',
+            href: '/app/projects/create'
+          },
+          {
+            title: 'View Campaign',
+            href: '/app/projects/1'
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    subheader: 'Pages',
+    items: [
+      {
+        title: 'Account',
+        href: '/app/account',
+        icon: UserIcon
+      }
+    ]
+  }
+];
+
 const sections2: Section[] = [
   {
     subheader: 'Reports',
@@ -400,15 +445,24 @@ const NavBar: FC<NavBarProps> = ({ onMobileClose, openMobile }) => {
   const classes = useStyles();
   const location = useLocation();
   const { user } = useAuth();
+  const [routes, setRoutes] = useState<Section[]>([]);
+
+  const campaignExists = useSelector(
+    state => state.campaign.createCampaign.campaignTitle
+  );
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
       onMobileClose();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.pathname]);
-
-  const userSections = user?.tier === 'Company' ? sections : sections2;
+    if (user && user.tier) {
+      if (campaignExists && user.tier === 'Company') {
+        setRoutes(userHasCreatedCampaignRoutes);
+      } else {
+        setRoutes(user?.tier === 'Company' ? sections : sections2);
+      }
+    }
+  }, [location.pathname, campaignExists, user]);
 
   const content = (
     <Box height="100%" display="flex" flexDirection="column">
@@ -450,7 +504,7 @@ const NavBar: FC<NavBarProps> = ({ onMobileClose, openMobile }) => {
         </Box>
         <Divider />
         <Box p={2}>
-          {userSections.map(section => (
+          {routes.map(section => (
             <List
               key={section.subheader}
               subheader={
