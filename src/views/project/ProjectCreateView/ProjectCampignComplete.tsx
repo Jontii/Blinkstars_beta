@@ -10,6 +10,7 @@ import Axios from 'axios';
 import clsx from 'clsx';
 import { Formik } from 'formik';
 import moment from 'moment';
+import { useSnackbar } from 'notistack';
 import React, { FC, useState } from 'react';
 import { completeCampaign } from 'src/slices/campaign';
 import { useDispatch } from 'src/store';
@@ -57,8 +58,10 @@ const ProjectCampignComplete: FC<ProjectCampaignProps> = ({
 
   const initialValues: CompleteCampaign = {
     startDate: moment().toDate().getTime(),
-    endDate: moment().add(2, 'days').toDate().getTime()
+    endDate: moment().add(7, 'days').toDate().getTime()
   };
+
+  const { enqueueSnackbar } = useSnackbar();
 
   return (
     <Formik
@@ -83,7 +86,9 @@ const ProjectCampignComplete: FC<ProjectCampaignProps> = ({
           const campaign: CompleteCampaign = { ...values };
 
           dispatch(completeCampaign(campaign));
-
+          enqueueSnackbar('Campaign Saved! 🎉', {
+            variant: 'success'
+          });
           if (onComplete) {
             Axios.post('/api/campaign/', {
               name: 'Jontetest'

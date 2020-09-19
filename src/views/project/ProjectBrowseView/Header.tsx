@@ -67,7 +67,7 @@ const Header: FC<HeaderProps> = ({ className, ...rest }) => {
         <Button
           color="secondary"
           component={RouterLink}
-          to="/app/projects/create"
+          to="/app/campaign/create"
           variant="contained"
           startIcon={
             <SvgIcon fontSize="small">

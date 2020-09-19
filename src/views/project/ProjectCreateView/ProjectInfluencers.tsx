@@ -363,12 +363,12 @@ const ProjectInfluencers: FC<ProjectInfluencersProps> = ({
             </Box>
           )}
 
-          <Box width={'80%'} mt={6}>
+          {/* <Box width={'80%'} mt={6}>
             <Typography id="discrete-slider" gutterBottom>
               Influencer network match
             </Typography>
             <CircularProgressWithLabel value={progressValue} />
-          </Box>
+          </Box> */}
 
           <Box mt={6} display="flex">
             {onBack && (

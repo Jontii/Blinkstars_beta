@@ -12,6 +12,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { FC } from 'react';
 import Markdown from 'react-markdown/with-html';
+import useAuth from 'src/hooks/useAuth';
 import { useSelector } from 'src/store';
 import { Theme } from 'src/theme';
 import { Project } from 'src/types/project';
@@ -25,9 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   markdown: {
     fontFamily: theme.typography.fontFamily,
-    '& p': {
-      marginBottom: theme.spacing(2)
-    }
+    paddingRight: theme.spacing(2)
   },
   tag: {
     marginRight: theme.spacing(1)
@@ -39,6 +38,7 @@ const Brief: FC<BriefProps> = ({ className, project, ...rest }) => {
 
   const classes = useStyles();
   const campaign = useSelector(state => state.campaign);
+  const { user } = useAuth();
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
@@ -66,72 +66,88 @@ const Brief: FC<BriefProps> = ({ className, project, ...rest }) => {
               />
             </Box>
           </Grid>
-          <Grid item xs={12} md={6}>
-            <Box display="flex" justifyContent="space-between">
-              <Box mt={1}>
-                <Typography variant="subtitle2" color="textSecondary">
-                  Campaign Hashtags
-                </Typography>
-                <Box mt={1}>
-                  {campaign.createCampaign.hashtags.map(tag => (
-                    <Chip
-                      key={tag}
-                      className={classes.tag}
-                      variant="outlined"
-                      label={tag}
-                    />
-                  ))}
+          <Grid item xs={12} md={8}>
+            <Box display="flex">
+              <Grid item xs={12} md={6}>
+                <Box>
+                  <Typography variant="subtitle2" color="textSecondary">
+                    Campaign Hashtags
+                  </Typography>
+                  <Box mt={1}>
+                    {campaign.createCampaign.hashtags.map(tag => (
+                      <Chip
+                        key={tag}
+                        className={classes.tag}
+                        variant="outlined"
+                        label={tag}
+                      />
+                    ))}
+                  </Box>
                 </Box>
-              </Box>
-              <Box mt={3}>
-                <Typography variant="subtitle2" color="textSecondary">
-                  Campaign Url
-                </Typography>
-                <Box mt={1}>
-                  <Link href={campaign.createCampaign.campaignUrl}>
-                    {campaign.createCampaign.campaignUrl}
-                  </Link>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Box>
+                  <Typography variant="subtitle2" color="textSecondary">
+                    Campaign Url
+                  </Typography>
+                  <Box mt={1}>
+                    <Link href={campaign.createCampaign.campaignUrl}>
+                      {campaign.createCampaign.campaignUrl}
+                    </Link>
+                  </Box>
                 </Box>
-              </Box>
+              </Grid>
             </Box>
-            <Box display="flex" justifyContent="space-between">
-              <Box mt={3}>
-                <Typography variant="subtitle2" color="textSecondary">
-                  Countries
-                </Typography>
-                <Box mt={1}>
-                  {campaign.influencerCampaign.countryTags.map(tag => (
-                    <Chip
-                      key={tag}
-                      className={classes.tag}
-                      variant="outlined"
-                      label={tag}
-                    />
-                  ))}
-                </Box>
+          </Grid>
+          <Grid item xs={12} md={8}>
+            {user.tier === 'Company' && (
+              <Box display="flex">
+                <Grid item xs={12} md={6}>
+                  <Box>
+                    <Typography variant="subtitle2" color="textSecondary">
+                      Countries
+                    </Typography>
+                    <Box mt={1}>
+                      {campaign.influencerCampaign.countryTags.map(tag => (
+                        <Chip
+                          key={tag}
+                          className={classes.tag}
+                          variant="outlined"
+                          label={tag}
+                        />
+                      ))}
+                    </Box>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Box>
+                    <Typography variant="subtitle2" color="textSecondary">
+                      Roles
+                    </Typography>
+                    <Box mt={1}>
+                      {campaign.influencerCampaign.roleTags.map(tag => (
+                        <Chip
+                          key={tag}
+                          className={classes.tag}
+                          variant="outlined"
+                          label={tag}
+                        />
+                      ))}
+                    </Box>
+                  </Box>
+                </Grid>
               </Box>
-              <Box mt={3}>
+            )}
+          </Grid>
+          <Grid item xs={12} md={8}>
+            {user.tier === 'Company' && (
+              <Box>
                 <Typography variant="subtitle2" color="textSecondary">
-                  Roles
+                  Influencer Network Critieria
                 </Typography>
-                <Box mt={1}>
-                  {campaign.influencerCampaign.roleTags.map(tag => (
-                    <Chip
-                      key={tag}
-                      className={classes.tag}
-                      variant="outlined"
-                      label={tag}
-                    />
-                  ))}
-                </Box>
+                <Box mt={1}>{campaign.influencerCampaign.value}</Box>
               </Box>
-            </Box>
-            <Box mt={3}>
-              <Typography variant="subtitle2" color="textSecondary">
-                Influencer network
-              </Typography>
-              <Box mt={1}>{campaign.influencerCampaign.value}</Box>
-            </Box>
+            )}
           </Grid>
         </Grid>
       </CardContent>

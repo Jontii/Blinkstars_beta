@@ -27,7 +27,7 @@ const initialState: Campaign = {
   },
   completeCampaign: {
     startDate: moment().toDate().getTime(),
-    endDate: moment().add(2, 'days').toDate().getTime()
+    endDate: moment().add(7, 'days').toDate().getTime()
   }
 };
 
@@ -38,20 +38,20 @@ const mockState: Campaign = {
     campaignDescription:
       'Klarna grundades i Stockholm 2005, med målet att göra det enklare för människor att handla på nätet. De senaste 15 åren har tekniken utvecklat, engagerat och förändrat världen omkring oss, men vår målsättning är fortfarande lika relevant som någonsin tidigare, att göra betalningar så enkla, säkra och framförallt så smidiga som möjligt.',
     campaignBudget: '100000',
-    hashtags: ['Klarna']
+    hashtags: ['Klarna', 'Klarna Payment']
   },
   companyCampaign: {
-    companyName: '',
+    companyName: 'Klarna',
     aboutCompany: ''
   },
   influencerCampaign: {
-    roleTags: ['Agile Coach'],
-    countryTags: ['Sweden'],
-    value: 5000
+    roleTags: ['Agile Coach', 'Sales Engineer'],
+    countryTags: ['Sweden', 'Norway', 'Denmark'],
+    value: 7000
   },
   completeCampaign: {
     startDate: moment().toDate().getTime(),
-    endDate: moment().add(2, 'days').toDate().getTime()
+    endDate: moment().add(14, 'days').toDate().getTime()
   }
 };
 
@@ -64,7 +64,7 @@ interface Campaign {
 
 const slice = createSlice({
   name: 'campaign',
-  initialState,
+  initialState: mockState,
   reducers: {
     createCampaign(
       state: Campaign,

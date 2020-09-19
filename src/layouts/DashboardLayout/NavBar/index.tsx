@@ -146,7 +146,7 @@ const sections: Section[] = [
           // },
           {
             title: 'Create Campaign',
-            href: '/app/projects/create'
+            href: '/app/campaign/create'
           }
           // {
           //   title: 'View Campaign',
@@ -309,11 +309,11 @@ const userHasCreatedCampaignRoutes: Section[] = [
         items: [
           {
             title: 'Create Campaign',
-            href: '/app/projects/create'
+            href: '/app/campaign/create'
           },
           {
             title: 'View Campaign',
-            href: '/app/projects/1'
+            href: '/app/campaign/view'
           }
         ]
       }

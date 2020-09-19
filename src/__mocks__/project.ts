@@ -173,7 +173,7 @@ mock.onGet('/api/projects/projects').reply(() => {
   return [200, { projects }];
 });
 
-mock.onGet('/api/projects/projects/1').reply(() => {
+mock.onGet('/api/projects/campaign/view').reply(() => {
   const project: Project = {
     id: '5e8dcf076c50b9d8e756a5a2',
     activities: [

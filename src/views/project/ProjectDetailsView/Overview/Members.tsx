@@ -15,6 +15,7 @@ import {
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { ChangeEvent, FC } from 'react';
+import useAuth from 'src/hooks/useAuth';
 import { ProjectMember } from 'src/types/project';
 import getInitials from 'src/utils/getInitials';
 
@@ -41,6 +42,10 @@ const Members: FC<MembersProps> = ({
   ...rest
 }) => {
   const classes = useStyles();
+
+  const { user } = useAuth();
+
+  if (user.tier === 'Influencer') return <></>;
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>

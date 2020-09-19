@@ -24,6 +24,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { FC, useRef, useState } from 'react';
+import useAuth from 'src/hooks/useAuth';
 import { Theme } from 'src/theme';
 import { ProjectFile } from 'src/types/project';
 import bytesToSize from 'src/utils/bytesToSize';
@@ -76,6 +77,8 @@ const FileCard: FC<FileCardProps> = ({ className, file, ...rest }) => {
     setOpenMenu(false);
   };
 
+  const { user } = useAuth();
+
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
       {file.mimeType.includes('image/') ? (
@@ -94,18 +97,20 @@ const FileCard: FC<FileCardProps> = ({ className, file, ...rest }) => {
             {bytesToSize(file.size)}
           </Typography>
         </div>
-        <div>
-          <Tooltip title="More options">
-            <IconButton
-              edge="end"
-              onClick={handleMenuOpen}
-              ref={moreRef}
-              size="small"
-            >
-              <MoreIcon />
-            </IconButton>
-          </Tooltip>
-        </div>
+        {user.tier === 'Company' && (
+          <div>
+            <Tooltip title="More options">
+              <IconButton
+                edge="end"
+                onClick={handleMenuOpen}
+                ref={moreRef}
+                size="small"
+              >
+                <MoreIcon />
+              </IconButton>
+            </Tooltip>
+          </div>
+        )}
       </CardContent>
       <Divider />
       <CardActions>

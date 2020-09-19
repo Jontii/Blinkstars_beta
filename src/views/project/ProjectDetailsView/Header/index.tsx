@@ -81,14 +81,25 @@ const Header: FC<HeaderProps> = ({ className, project, ...rest }) => {
           alignItems="center"
           flexWrap="wrap"
         >
-          <div className={classes.badge}>
-            <SvgIcon fontSize="small" className={classes.badgeIcon}>
-              {isPublished ? <CheckIcon /> : <AlertIcon />}
-            </SvgIcon>
-            <Typography variant="body2" color="inherit" component="span">
-              {isPublished ? 'Active' : 'Draft'}
-            </Typography>
-          </div>
+          {user.tier === 'Company' ? (
+            <div className={classes.badge}>
+              <SvgIcon fontSize="small" className={classes.badgeIcon}>
+                {isPublished ? <CheckIcon /> : <AlertIcon />}
+              </SvgIcon>
+              <Typography variant="body2" color="inherit" component="span">
+                {isPublished ? 'Active' : 'Draft'}
+              </Typography>
+            </div>
+          ) : (
+            <div className={classes.badge}>
+              <SvgIcon fontSize="small" className={classes.badgeIcon}>
+                <CheckIcon />
+              </SvgIcon>
+              <Typography variant="body2" color="inherit" component="span">
+                Active
+              </Typography>
+            </div>
+          )}
           <div className={classes.badge}>
             <SvgIcon fontSize="small" className={classes.badgeIcon}>
               <CalendarIcon />

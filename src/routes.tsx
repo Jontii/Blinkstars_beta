@@ -207,14 +207,14 @@ const routes: Routes = [
       },
       {
         exact: true,
-        path: '/app/projects/create',
+        path: '/app/campaign/create',
         component: lazy(
           () => import('src/views/project/ProjectCreateView/ProjectCreateView')
         )
       },
       {
         exact: true,
-        path: '/app/projects/:id',
+        path: '/app/campaign/view',
         component: lazy(() => import('src/views/project/ProjectDetailsView'))
       },
       {

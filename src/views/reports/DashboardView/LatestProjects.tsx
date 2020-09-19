@@ -18,6 +18,7 @@ import {
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import clsx from 'clsx';
 import moment from 'moment';
+import { useSnackbar } from 'notistack';
 import numeral from 'numeral';
 import PropTypes from 'prop-types';
 import React, { FC, useCallback, useEffect, useState } from 'react';
@@ -98,6 +99,28 @@ const LatestProjects: FC<LatestProjectsProps> = ({
     }
   }, [isMountedRef]);
 
+  const { enqueueSnackbar } = useSnackbar();
+
+  const setClickAccepted = (value: boolean) => {
+    if (!value) {
+      setAccepted(value);
+
+      enqueueSnackbar(
+        'Campaign accepted, congratulations! Click on the campaign title to view the campaign. 🎉',
+        {
+          variant: 'success',
+          anchorOrigin: {
+            horizontal: 'center',
+            vertical: 'bottom'
+          },
+          transitionDuration: 500
+        }
+      );
+    } else {
+      setAccepted(value);
+    }
+  };
+
   useEffect(() => {
     getProjects();
   }, [getProjects]);
@@ -158,51 +181,57 @@ const LatestProjects: FC<LatestProjectsProps> = ({
                 ))}
               </TableBody>
             )}
-            {projects[0] && showOnlyFirst && (
-              <TableBody>
-                <TableRow hover className={classes.row}>
-                  <TableCell>
-                    {/* onClick={() => history.push('/app/projects/1')} */}
-                    <Link component={RouterLink} to="/app/projects/1">
-                      {campaign.createCampaign.campaignTitle}
-                    </Link>
-                  </TableCell>
-                  <TableCell>
-                    <Box display="flex" alignItems="center">
-                      <Avatar alt="Author" src={projects[0].author.avatar}>
-                        {getInitials(campaign.companyCampaign.companyName)}
-                      </Avatar>
-                      <Box ml={1}>{campaign.companyCampaign.companyName}</Box>
-                    </Box>
-                  </TableCell>
-                  <TableCell>
-                    {numeral(campaign.createCampaign.campaignBudget).format(
-                      `SEK0,0.00`
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    {accepted ? (
-                      <Button
-                        onClick={() => setAccepted(!accepted)}
-                        color="secondary"
-                      >
-                        Accept
-                      </Button>
-                    ) : (
-                      <Button
-                        onClick={() => setAccepted(!accepted)}
-                        color="primary"
-                      >
-                        Decline
-                      </Button>
-                    )}
-                  </TableCell>
-                  <TableCell align="right">
-                    {moment(new Date()).format('DD MMM, YYYY')}
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            )}
+            <>
+              {projects[0] &&
+                campaign.createCampaign.campaignTitle &&
+                showOnlyFirst && (
+                  <TableBody>
+                    <TableRow hover className={classes.row}>
+                      <TableCell>
+                        {/* onClick={() => history.push('/app/projects/1')} */}
+                        <Link component={RouterLink} to="/app/campaign/view">
+                          {campaign.createCampaign.campaignTitle}
+                        </Link>
+                      </TableCell>
+                      <TableCell>
+                        <Box display="flex" alignItems="center">
+                          <Avatar alt="Author" src={projects[0].author.avatar}>
+                            {getInitials(campaign.companyCampaign.companyName)}
+                          </Avatar>
+                          <Box ml={1}>
+                            {campaign.companyCampaign.companyName}
+                          </Box>
+                        </Box>
+                      </TableCell>
+                      <TableCell>
+                        {numeral(campaign.createCampaign.campaignBudget).format(
+                          `SEK0,0.00`
+                        )}
+                      </TableCell>
+                      <TableCell>
+                        {accepted ? (
+                          <Button
+                            onClick={() => setClickAccepted(!accepted)}
+                            color="secondary"
+                          >
+                            Accept
+                          </Button>
+                        ) : (
+                          <Button
+                            onClick={() => setClickAccepted(!accepted)}
+                            color="primary"
+                          >
+                            Decline
+                          </Button>
+                        )}
+                      </TableCell>
+                      <TableCell align="right">
+                        {moment(new Date()).format('DD MMM, YYYY')}
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                )}
+            </>
           </Table>
         </Box>
       </PerfectScrollbar>

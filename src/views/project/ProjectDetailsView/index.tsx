@@ -1,11 +1,4 @@
-import {
-  Box,
-  Container,
-  Divider,
-  makeStyles,
-  Tab,
-  Tabs
-} from '@material-ui/core';
+import { Box, Container, Divider, makeStyles } from '@material-ui/core';
 import React, {
   ChangeEvent,
   FC,
@@ -22,6 +15,7 @@ import Activities from './Activities';
 import Applicants from './Applicants';
 import Header from './Header';
 import Overview from './Overview';
+import TabsIndex from './Overview/Tabs';
 import Reviews from './Reviews';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -39,13 +33,6 @@ const ProjectDetailsView: FC = () => {
   const [currentTab, setCurrentTab] = useState<string>('overview');
   const [project, setProject] = useState<Project | null>(null);
 
-  const tabs = [
-    { value: 'overview', label: 'Overview' },
-    // { value: 'reviews', label: 'Reviews' },
-    { value: 'applicants', label: 'Matched Influencers' },
-    { value: 'activity', label: 'History' }
-  ];
-
   const handleTabsChange = (event: ChangeEvent<{}>, value: string): void => {
     setCurrentTab(value);
   };
@@ -53,7 +40,7 @@ const ProjectDetailsView: FC = () => {
   const getProject = useCallback(async () => {
     try {
       const response = await axios.get<{ project: Project }>(
-        '/api/projects/projects/1'
+        '/api/projects/campaign/view'
       );
 
       if (isMountedRef.current) {
@@ -77,7 +64,7 @@ const ProjectDetailsView: FC = () => {
       <Container maxWidth="lg">
         <Header project={project} />
         <Box mt={3}>
-          <Tabs
+          {/* <Tabs
             onChange={handleTabsChange}
             scrollButtons="auto"
             textColor="secondary"
@@ -87,13 +74,18 @@ const ProjectDetailsView: FC = () => {
             {tabs.map(tab => (
               <Tab key={tab.value} label={tab.label} value={tab.value} />
             ))}
-          </Tabs>
+          </Tabs> */}
+          <TabsIndex
+            handleTabsChange={handleTabsChange}
+            currentTab={currentTab}
+          />
         </Box>
         <Divider />
         <Box mt={3}>
           {currentTab === 'overview' && (
             <Overview project={project} handleTabsChange={handleTabsChange} />
           )}
+
           {currentTab === 'reviews' && <Reviews reviews={project.reviews} />}
           {currentTab === 'applicants' && (
             <Applicants
