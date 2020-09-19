@@ -71,7 +71,7 @@ const Hero: FC<HeroProps> = ({ className, ...rest }) => {
                 Introducing
               </Typography>
               <Typography variant="h1" color="textPrimary">
-                Blinkstar
+                Blinkstars
               </Typography>
               <Box mt={3}>
                 <Typography variant="body1" color="textSecondary">

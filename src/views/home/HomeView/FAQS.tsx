@@ -42,7 +42,7 @@ const FAQS: FC<FAQSProps> = ({ className, ...rest }) => {
         <Grid container spacing={3} component="dl">
           <Grid item xs={12} md={6}>
             <Typography variant="overline" color="secondary">
-              About Blinkstar
+              About Blinkstars
             </Typography>
             <Box mt={6}>
               <dt>
@@ -52,7 +52,7 @@ const FAQS: FC<FAQSProps> = ({ className, ...rest }) => {
               </dt>
               <dd>
                 <Typography variant="body1" color="textSecondary">
-                  Blinkstar is a plattform where businesses and influencers can
+                  Blinkstars is a plattform where businesses and influencers can
                   find each other.
                 </Typography>
               </dd>

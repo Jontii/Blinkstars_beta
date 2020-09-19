@@ -40,7 +40,7 @@ const Features: FC<FeaturesProps> = ({ className, ...rest }) => {
           color="secondary"
           align="center"
         >
-          Explore Blinkstar
+          Explore Blinkstars
         </Typography>
         <Typography variant="h1" align="center" color="textPrimary">
           Match with influencers

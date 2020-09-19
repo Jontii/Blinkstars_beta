@@ -45,13 +45,13 @@ const Testimonials: FC<TestimonialsProps> = ({ className, ...rest }) => {
           <Avatar src={`${process.env.PUBLIC_URL}/static/home/olivier.png`} />
           <Box ml={2}>
             <Typography variant="body1" color="textPrimary">
-              Team Blinkstar
+              Team Blinkstars
               <Typography
                 color="textSecondary"
                 display="inline"
                 component="span"
               >
-                , creator of Blinkstar.com
+                , creator of Blinkstars.com
               </Typography>
             </Typography>
           </Box>

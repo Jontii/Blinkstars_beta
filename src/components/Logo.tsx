@@ -9,7 +9,7 @@ const Logo: FC<LogoProps> = props => {
     <img
       alt="Logo"
       style={{ height: '42px' }}
-      src={`${process.env.PUBLIC_URL}/static/home/B.svg`}
+      src={`${process.env.PUBLIC_URL}/static/home/Btxtblue.svg`}
       {...props}
     />
   );
