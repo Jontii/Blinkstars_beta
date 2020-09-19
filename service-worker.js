@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Blinkstars/precache-manifest.9c51ae6b0f89469aa8b649537a03d9de.js"
+  "/Blinkstars/precache-manifest.24decf8447664e5b78f94d6884fc1834.js"
 );
 
 self.addEventListener('message', (event) => {

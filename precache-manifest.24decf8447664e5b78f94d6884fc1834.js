@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c08e2c6bea21611a92249089504df2db",
+    "revision": "ee22a46b03cc4a9a8803b319ea05728f",
     "url": "/Blinkstars/index.html"
   },
   {
@@ -320,8 +320,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Blinkstars/static/js/60.f3a684b7.chunk.js"
   },
   {
-    "revision": "d03cdc267a1398fb20dd",
-    "url": "/Blinkstars/static/js/61.6da2a70b.chunk.js"
+    "revision": "3c5c82615f3420d0967f",
+    "url": "/Blinkstars/static/js/61.fa58db1e.chunk.js"
   },
   {
     "revision": "765c78d8bd8b2dcfb635",
@@ -392,8 +392,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Blinkstars/static/js/77.5b446c2b.chunk.js"
   },
   {
-    "revision": "b13ea5e6db59bc06edb3",
-    "url": "/Blinkstars/static/js/78.fcb6e161.chunk.js"
+    "revision": "58379ddbb6e5c9e4b61b",
+    "url": "/Blinkstars/static/js/78.60f13904.chunk.js"
   },
   {
     "revision": "444733c8c4fd771a51c3",
@@ -420,11 +420,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Blinkstars/static/js/9.bec32b98.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "782ddf4593df915ad55c",
-    "url": "/Blinkstars/static/js/main.c4956beb.chunk.js"
+    "revision": "71d062d09d3c15e4438b",
+    "url": "/Blinkstars/static/js/main.36e297d5.chunk.js"
   },
   {
-    "revision": "762511c92ecc21fbc6aa",
-    "url": "/Blinkstars/static/js/runtime-main.6a41fabb.js"
+    "revision": "86d42a8493768664ea34",
+    "url": "/Blinkstars/static/js/runtime-main.24584810.js"
   }
 ]);
