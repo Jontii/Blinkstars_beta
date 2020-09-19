@@ -87,7 +87,12 @@ const ProjectCampignComplete: FC<ProjectCampaignProps> = ({
 
           dispatch(completeCampaign(campaign));
           enqueueSnackbar('Campaign Saved! 🎉', {
-            variant: 'success'
+            variant: 'success',
+            anchorOrigin: {
+              horizontal: 'center',
+              vertical: 'bottom'
+            },
+            transitionDuration: 500
           });
           if (onComplete) {
             Axios.post('/api/campaign/', {
