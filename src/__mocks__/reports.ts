@@ -1,5 +1,6 @@
 import { colors } from '@material-ui/core';
 import moment from 'moment';
+import { CampaignMock } from 'src/types/campaignmock';
 import {
   CustomerActivity,
   Order,
@@ -9,6 +10,52 @@ import {
   Task
 } from 'src/types/reports';
 import mock from 'src/utils/mock';
+
+mock.onGet('/api/campaigns').reply(() => {
+  const campaigns: CampaignMock[] = [
+    {
+      campaignTitle: 'Dagens Näthandel',
+      campaignUrl: 'www.klarna.se/payment',
+      campaignDescription:
+        'Skapa engagemang genom ett quiz där besökarna får kunskap/information om den skandinaviska b2b-näthandeln. Vi vill också att få målgruppen att ladda ner <a href="#">rapporten</a>.',
+      hashtags: [
+        '#bring',
+        '#företagsleverans',
+        '#logistik',
+        '#näthandel',
+        '#snabbaleveranser '
+      ],
+      influencerText:
+        '<strong>TESTA DINA KUNSKAPER OM DAGENS NÄTHANDEL!</strong> Spela Brings quiz! Se hur mycket du kan om näthandel och onlineshopping!  P.S Jag fick 27 rätt av 30…slå det om du kan! Ladda ner rapporten som skandinavisk näthandel här: <a href="#">www.bring.se/rapport2020</a>',
+      companyName: 'Bring',
+      roleTags: ['VD', 'E-commerce manager', 'Logistikchef', 'IT-ansvarig'],
+      files: ['test'],
+      startDate: moment().toDate().getTime(),
+      endDate: moment().add(14, 'days').toDate().getTime()
+    },
+    {
+      campaignTitle: 'Dagens Näthandel',
+      campaignUrl: 'www.klarna.se/payment',
+      campaignDescription:
+        'Skapa engagemang genom ett quiz där besökarna får kunskap/information om den skandinaviska b2b-näthandeln. Vi vill också att få målgruppen att ladda ner <a href="#">rapporten</a>.',
+      hashtags: [
+        '#bring',
+        '#företagsleverans',
+        '#logistik',
+        '#näthandel',
+        '#snabbaleveranser '
+      ],
+      influencerText:
+        '<strong>TESTA DINA KUNSKAPER OM DAGENS NÄTHANDEL!</strong> Spela Brings quiz! Se hur mycket du kan om näthandel och onlineshopping!  P.S Jag fick 27 rätt av 30…slå det om du kan! Ladda ner rapporten som skandinavisk näthandel här: <a href="#">www.bring.se/rapport2020</a>',
+      companyName: 'Bring',
+      roleTags: ['VD', 'E-commerce manager', 'Logistikchef', 'IT-ansvarig'],
+      files: ['test'],
+      startDate: moment().toDate().getTime(),
+      endDate: moment().add(14, 'days').toDate().getTime()
+    }
+  ];
+  return [200, { campaigns }];
+});
 
 mock.onGet('/api/reports/customer-activity').reply(() => {
   const activities: CustomerActivity[] = [
@@ -244,14 +291,15 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
         .toDate()
         .getTime(),
       currency: 'SEK',
+      matchScore: '83%',
       technologies: ['angular'],
       title: 'New payment solution'
     },
     {
       id: '5eff24e98e2c9107e95cb827',
       author: {
-        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_2.png`,
-        name: 'Emilee Simchenko'
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/telia.svg`,
+        name: 'Telia'
       },
       budget: 15750,
       createdAt: moment()
@@ -261,14 +309,15 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
         .toDate()
         .getTime(),
       currency: 'SEK',
+      matchScore: '79%',
       technologies: ['sketch', 'html-css'],
-      title: 'Volvo new car'
+      title: 'Nu blir Sveriges bästa nät 5G'
     },
     {
       id: '5eff24f0d97353e3576d3c26',
       author: {
-        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_10.png`,
-        name: 'Elliott Stone'
+        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/bring.svg`,
+        name: 'Bring'
       },
       budget: 8000,
       createdAt: moment()
@@ -278,43 +327,46 @@ mock.onGet('/api/reports/latest-projects').reply(() => {
         .toDate()
         .getTime(),
       currency: 'SEK',
+      matchScore: '72%',
       technologies: ['react-js'],
-      title: 'Zalando new app'
-    },
-    {
-      id: '5eff24f737bc6b191dd9bf58',
-      author: {
-        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_11.png`,
-        name: 'Shen Zhi'
-      },
-      budget: 12500,
-      createdAt: moment()
-        .subtract(4, 'days')
-        .subtract(4, 'minutes')
-        .subtract(30, 'seconds')
-        .toDate()
-        .getTime(),
-      currency: 'SEK',
-      technologies: ['vue-js'],
-      title: 'H&M new clothing line'
-    },
-    {
-      id: '5eff24fb29fc5e37bdab3b2d',
-      author: {
-        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_3.png`,
-        name: 'Adrian Stefan'
-      },
-      budget: 20000,
-      createdAt: moment()
-        .subtract(5, 'days')
-        .subtract(11, 'minutes')
-        .subtract(6, 'seconds')
-        .toDate()
-        .getTime(),
-      currency: 'SEK',
-      technologies: ['angular', 'figma'],
-      title: 'SAAB new platform'
+      title: 'Testa dina kunskaper om dagens näthandel!'
     }
+    // {
+    //   id: '5eff24f737bc6b191dd9bf58',
+    //   author: {
+    //     avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_11.png`,
+    //     name: 'Shen Zhi'
+    //   },
+    //   budget: 12500,
+    //   createdAt: moment()
+    //     .subtract(4, 'days')
+    //     .subtract(4, 'minutes')
+    //     .subtract(30, 'seconds')
+    //     .toDate()
+    //     .getTime(),
+    //   currency: 'SEK',
+    //   technologies: ['vue-js'],
+    //   matchScore: '84%',
+    //   title: 'H&M new clothing line'
+    // },
+    // {
+    //   id: '5eff24fb29fc5e37bdab3b2d',
+    //   author: {
+    //     avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_3.png`,
+    //     name: 'Adrian Stefan'
+    //   },
+    //   budget: 20000,
+    //   createdAt: moment()
+    //     .subtract(5, 'days')
+    //     .subtract(11, 'minutes')
+    //     .subtract(6, 'seconds')
+    //     .toDate()
+    //     .getTime(),
+    //   currency: 'SEK',
+    //   matchScore: '84%',
+    //   technologies: ['angular', 'figma'],
+    //   title: 'SAAB new platform'
+    // }
   ];
 
   return [200, { projects }];

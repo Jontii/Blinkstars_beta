@@ -47,6 +47,7 @@ export interface Project {
   createdAt: number;
   currency: string;
   technologies: string[];
+  matchScore: string;
   title: string;
 }
 

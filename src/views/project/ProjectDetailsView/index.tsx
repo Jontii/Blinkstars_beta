@@ -6,9 +6,11 @@ import React, {
   useEffect,
   useState
 } from 'react';
+import { useParams } from 'react-router';
 import Page from 'src/components/Page';
 import useIsMountedRef from 'src/hooks/useIsMountedRef';
 import { Theme } from 'src/theme';
+import { CampaignMock } from 'src/types/campaignmock';
 import { Project } from 'src/types/project';
 import axios from 'src/utils/axios';
 import Activities from './Activities';
@@ -32,10 +34,13 @@ const ProjectDetailsView: FC = () => {
   const isMountedRef = useIsMountedRef();
   const [currentTab, setCurrentTab] = useState<string>('overview');
   const [project, setProject] = useState<Project | null>(null);
-
+  const [campaigns, setCampaigns] = useState<CampaignMock[] | null>(null);
   const handleTabsChange = (event: ChangeEvent<{}>, value: string): void => {
     setCurrentTab(value);
   };
+
+  const { id } = useParams();
+  console.log(id);
 
   const getProject = useCallback(async () => {
     try {
@@ -51,11 +56,29 @@ const ProjectDetailsView: FC = () => {
     }
   }, [isMountedRef]);
 
+  const getCampaigns = useCallback(async () => {
+    try {
+      const response = await axios.get<{ campaigns: CampaignMock[] }>(
+        '/api/campaigns'
+      );
+
+      if (isMountedRef.current) {
+        console.log(response.data);
+        setCampaigns(response.data.campaigns);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }, [isMountedRef]);
+
   useEffect(() => {
     getProject();
-  }, [getProject]);
 
-  if (!project) {
+    getCampaigns();
+  }, [getProject, getCampaigns]);
+
+  if (!project || !campaigns) {
+    console.log(campaigns);
     return null;
   }
 
@@ -83,7 +106,11 @@ const ProjectDetailsView: FC = () => {
         <Divider />
         <Box mt={3}>
           {currentTab === 'overview' && (
-            <Overview project={project} handleTabsChange={handleTabsChange} />
+            <Overview
+              project={project}
+              campaign={campaigns[id]}
+              handleTabsChange={handleTabsChange}
+            />
           )}
 
           {currentTab === 'reviews' && <Reviews reviews={project.reviews} />}

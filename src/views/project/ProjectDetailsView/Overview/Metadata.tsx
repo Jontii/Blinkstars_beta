@@ -15,14 +15,17 @@ import numeral from 'numeral';
 import PropTypes from 'prop-types';
 import React, { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import useAuth from 'src/hooks/useAuth';
 import { useSelector } from 'src/store';
 import { Theme } from 'src/theme';
+import { CampaignMock } from 'src/types/campaignmock';
 import { Project } from 'src/types/project';
 import getInitials from 'src/utils/getInitials';
 
 interface MetadataProps {
   className?: string;
   project: Project;
+  campaign: CampaignMock;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -39,10 +42,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const Metadata: FC<MetadataProps> = ({ className, project, ...rest }) => {
+const Metadata: FC<MetadataProps> = ({
+  className,
+  project,
+  campaign,
+  ...rest
+}) => {
   const classes = useStyles();
 
-  const campaign = useSelector(state => state.campaign);
+  const campaignState = useSelector(state => state.campaign);
+  const { user } = useAuth();
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
@@ -54,7 +63,7 @@ const Metadata: FC<MetadataProps> = ({ className, project, ...rest }) => {
             src={project.author.avatar}
             to="#"
           >
-            {getInitials(campaign.companyCampaign.companyName)}
+            {getInitials(campaignState.companyCampaign.companyName)}
           </Avatar>
         }
         className={classes.header}
@@ -67,7 +76,7 @@ const Metadata: FC<MetadataProps> = ({ className, project, ...rest }) => {
             underline="none"
             variant="h6"
           >
-            {campaign.companyCampaign.companyName}
+            {campaignState.companyCampaign.companyName}
           </Link>
         }
         title={
@@ -83,19 +92,44 @@ const Metadata: FC<MetadataProps> = ({ className, project, ...rest }) => {
               Deadline
             </Typography>
             <Typography variant="h6" color="textSecondary">
-              {moment(campaign.completeCampaign.endDate).format('DD MMM YYYY')}
-            </Typography>
-          </ListItem>
-          <ListItem className={classes.listItem} disableGutters divider>
-            <Typography variant="subtitle2" color="textPrimary">
-              Budget
-            </Typography>
-            <Typography variant="h6" color="textSecondary">
-              {numeral(campaign.createCampaign.campaignBudget).format(
-                `${project.currency}0,0.00`
+              {moment(campaignState.completeCampaign.endDate).format(
+                'DD MMM YYYY'
               )}
             </Typography>
           </ListItem>
+          {user.tier === 'Company' ? (
+            <>
+              <ListItem className={classes.listItem} disableGutters divider>
+                <Typography variant="subtitle2" color="textPrimary">
+                  Budget
+                </Typography>
+                <Typography variant="h6" color="textSecondary">
+                  {numeral(campaignState.createCampaign.campaignBudget).format(
+                    `${project.currency}0,0.00`
+                  )}
+                </Typography>
+              </ListItem>
+            </>
+          ) : (
+            <>
+              <ListItem className={classes.listItem} disableGutters divider>
+                <Typography variant="subtitle2" color="textPrimary">
+                  Payment - Posts
+                </Typography>
+                <Typography variant="h6" color="textSecondary">
+                  50 SEK
+                </Typography>
+              </ListItem>
+              <ListItem className={classes.listItem} disableGutters divider>
+                <Typography variant="subtitle2" color="textPrimary">
+                  Payment - Links
+                </Typography>
+                <Typography variant="h6" color="textSecondary">
+                  100 SEK
+                </Typography>
+              </ListItem>
+            </>
+          )}
           <ListItem className={classes.listItem} disableGutters divider>
             <Typography variant="subtitle2" color="textPrimary">
               Last Update

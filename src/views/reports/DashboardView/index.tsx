@@ -1,5 +1,5 @@
 import { Container, Grid, makeStyles } from '@material-ui/core';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import Page from 'src/components/Page';
 import { THEMES } from 'src/constants';
 import useAuth from 'src/hooks/useAuth';
@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const DashboardView: FC = () => {
   const classes = useStyles();
-  const [accepted, setAccepted] = useState<boolean>(true);
 
   const { saveSettings } = useSettings();
   const { user } = useAuth();
@@ -76,14 +75,7 @@ const DashboardView: FC = () => {
             <TeamTasks />
           </Grid> */}
           <Grid item lg={9} xs={12}>
-            <LatestProjects
-              showOnlyFirst
-              setAccepted={setAccepted}
-              accepted={accepted}
-            />
-          </Grid>
-          <Grid item lg={9} xs={12}>
-            <LatestProjects showOnlyFirst={false} title="New Campaigns" />
+            <LatestProjects showOnlyFirst />
           </Grid>
         </Grid>
       </Container>

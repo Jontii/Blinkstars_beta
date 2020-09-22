@@ -47,7 +47,7 @@ const NewProjects: FC<NewProjectsProps> = ({ className, ...rest }) => {
         </Typography>
         <Box display="flex" alignItems="center" flexWrap="wrap">
           <Typography variant="h3" color="textPrimary">
-            {data.value}
+            3
           </Typography>
           {/* <Label
             className={classes.label}

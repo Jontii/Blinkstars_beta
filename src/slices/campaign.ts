@@ -55,7 +55,7 @@ const mockState: Campaign = {
   }
 };
 
-interface Campaign {
+export interface Campaign {
   createCampaign: CreateCampaign;
   companyCampaign: CompanyCampaign;
   influencerCampaign: InfluencerCampaign;

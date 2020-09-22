@@ -15,11 +15,13 @@ import Markdown from 'react-markdown/with-html';
 import useAuth from 'src/hooks/useAuth';
 import { useSelector } from 'src/store';
 import { Theme } from 'src/theme';
+import { CampaignMock } from 'src/types/campaignmock';
 import { Project } from 'src/types/project';
 
 interface BriefProps {
   className?: string;
   project: Project;
+  campaign: CampaignMock;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -33,11 +35,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const Brief: FC<BriefProps> = ({ className, project, ...rest }) => {
+const Brief: FC<BriefProps> = ({ className, project, campaign, ...rest }) => {
   //TODO: FIX Replace with br
 
   const classes = useStyles();
-  const campaign = useSelector(state => state.campaign);
+  const campaignState = useSelector(state => state.campaign);
   const { user } = useAuth();
 
   return (
@@ -46,10 +48,10 @@ const Brief: FC<BriefProps> = ({ className, project, ...rest }) => {
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
             <Typography variant="subtitle2" color="textSecondary">
-              Project Name
+              Campaign title
             </Typography>
             <Typography variant="h6" color="textPrimary">
-              {campaign.createCampaign.campaignTitle}
+              {campaignState.createCampaign.campaignTitle}
             </Typography>
           </Grid>
           <Grid item xs={12} md={12}>
@@ -58,7 +60,7 @@ const Brief: FC<BriefProps> = ({ className, project, ...rest }) => {
                 Description
               </Typography>
               <Markdown
-                source={campaign.createCampaign.campaignDescription.replace(
+                source={campaignState.createCampaign.campaignDescription.replace(
                   /<[^>]*>?/gm,
                   ''
                 )}
@@ -74,7 +76,7 @@ const Brief: FC<BriefProps> = ({ className, project, ...rest }) => {
                     Campaign Hashtags
                   </Typography>
                   <Box mt={1}>
-                    {campaign.createCampaign.hashtags.map(tag => (
+                    {campaignState.createCampaign.hashtags.map(tag => (
                       <Chip
                         key={tag}
                         className={classes.tag}
@@ -91,8 +93,8 @@ const Brief: FC<BriefProps> = ({ className, project, ...rest }) => {
                     Campaign Url
                   </Typography>
                   <Box mt={1}>
-                    <Link href={campaign.createCampaign.campaignUrl}>
-                      {campaign.createCampaign.campaignUrl}
+                    <Link href={campaignState.createCampaign.campaignUrl}>
+                      {campaignState.createCampaign.campaignUrl}
                     </Link>
                   </Box>
                 </Box>
@@ -108,7 +110,7 @@ const Brief: FC<BriefProps> = ({ className, project, ...rest }) => {
                       Countries
                     </Typography>
                     <Box mt={1}>
-                      {campaign.influencerCampaign.countryTags.map(tag => (
+                      {campaignState.influencerCampaign.countryTags.map(tag => (
                         <Chip
                           key={tag}
                           className={classes.tag}
@@ -125,7 +127,7 @@ const Brief: FC<BriefProps> = ({ className, project, ...rest }) => {
                       Roles
                     </Typography>
                     <Box mt={1}>
-                      {campaign.influencerCampaign.roleTags.map(tag => (
+                      {campaignState.influencerCampaign.roleTags.map(tag => (
                         <Chip
                           key={tag}
                           className={classes.tag}
@@ -145,7 +147,7 @@ const Brief: FC<BriefProps> = ({ className, project, ...rest }) => {
                 <Typography variant="subtitle2" color="textSecondary">
                   Influencer Network Critieria
                 </Typography>
-                <Box mt={1}>{campaign.influencerCampaign.value}</Box>
+                <Box mt={1}>{campaignState.influencerCampaign.value}</Box>
               </Box>
             )}
           </Grid>

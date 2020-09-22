@@ -2,18 +2,20 @@ import { Box, Grid, makeStyles } from '@material-ui/core';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { FC } from 'react';
+import { CampaignMock } from 'src/types/campaignmock';
 import FileCard from './FileCard';
 
 interface FilesProps {
   className?: string;
   files: any[];
+  campaign: CampaignMock;
 }
 
 const useStyles = makeStyles(() => ({
   root: {}
 }));
 
-const Files: FC<FilesProps> = ({ className, files, ...rest }) => {
+const Files: FC<FilesProps> = ({ className, files, campaign, ...rest }) => {
   const classes = useStyles();
 
   return (
