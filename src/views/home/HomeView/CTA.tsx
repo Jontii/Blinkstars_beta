@@ -8,6 +8,7 @@ import {
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { FC } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { Theme } from 'src/theme';
 
 interface CTAProps {
@@ -16,7 +17,7 @@ interface CTAProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: theme.palette.background.dark,
     paddingTop: 128,
     paddingBottom: 128
   },
@@ -32,19 +33,19 @@ const CTA: FC<CTAProps> = ({ className, ...rest }) => {
     <div className={clsx(classes.root, className)} {...rest}>
       <Container maxWidth="lg">
         <Typography variant="h1" align="center" color="textPrimary">
-          Ready to start building?
+          Ready to explore the platform?
         </Typography>
         <Typography variant="h1" align="center" color="secondary">
-          Download Devias Material Kit today.
+          Join now and explore all the possibilities of B2B
         </Typography>
         <Box mt={6} display="flex" justifyContent="center" alignItems="center">
           <Button
             color="secondary"
-            component="a"
-            href="https://material-ui.com/store/items/devias-kit-pro"
+            component={RouterLink}
+            to="/register"
             variant="contained"
           >
-            Get the kit
+            Register here
           </Button>
         </Box>
       </Container>

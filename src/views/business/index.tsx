@@ -4,7 +4,6 @@ import Page from 'src/components/Page';
 import FAQS from './FAQS';
 import Features from './Features';
 import Hero from './Hero';
-import Testimonials from './Testimonials';
 
 const useStyles = makeStyles(() => ({
   root: {}
@@ -17,7 +16,7 @@ const BusinessView: FC = () => {
     <Page className={classes.root} title="Business">
       <Hero />
       <Features />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <FAQS />
     </Page>
   );
