@@ -14,7 +14,7 @@ import moment from 'moment';
 import numeral from 'numeral';
 import PropTypes from 'prop-types';
 import React, { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useParams } from 'react-router-dom';
 import useAuth from 'src/hooks/useAuth';
 import { useSelector } from 'src/store';
 import { Theme } from 'src/theme';
@@ -50,8 +50,15 @@ const Metadata: FC<MetadataProps> = ({
 }) => {
   const classes = useStyles();
 
-  const campaignState = useSelector(state => state.campaign);
+  // const campaignState = useSelector(state => state.campaign);
   const { user } = useAuth();
+
+  const { campaignBudget } = useSelector(
+    state => state.campaign.createCampaign
+  );
+  const { endDate } = useSelector(state => state.campaign.completeCampaign);
+
+  const { id } = useParams();
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
@@ -60,10 +67,14 @@ const Metadata: FC<MetadataProps> = ({
           <Avatar
             alt="Author"
             component={RouterLink}
-            src={project.author.avatar}
+            src={
+              user.tier === 'Company' && user.name !== 'Klarna'
+                ? ''
+                : campaign.companyAvatar
+            }
             to="#"
           >
-            {getInitials(campaignState.companyCampaign.companyName)}
+            {getInitials(campaign.companyName)}
           </Avatar>
         }
         className={classes.header}
@@ -76,7 +87,7 @@ const Metadata: FC<MetadataProps> = ({
             underline="none"
             variant="h6"
           >
-            {campaignState.companyCampaign.companyName}
+            {campaign.companyName}
           </Link>
         }
         title={
@@ -92,7 +103,7 @@ const Metadata: FC<MetadataProps> = ({
               Deadline
             </Typography>
             <Typography variant="h6" color="textSecondary">
-              {moment(campaignState.completeCampaign.endDate).format(
+              {moment(id == 2 ? endDate : campaign.endDate).format(
                 'DD MMM YYYY'
               )}
             </Typography>
@@ -104,9 +115,11 @@ const Metadata: FC<MetadataProps> = ({
                   Budget
                 </Typography>
                 <Typography variant="h6" color="textSecondary">
-                  {numeral(campaignState.createCampaign.campaignBudget).format(
-                    `${project.currency}0,0.00`
-                  )}
+                  {numeral(
+                    id == 2 && user.tier === 'Company'
+                      ? campaignBudget
+                      : campaign.campaignBudget
+                  ).format(`${project.currency}0,0.00`)}
                 </Typography>
               </ListItem>
             </>

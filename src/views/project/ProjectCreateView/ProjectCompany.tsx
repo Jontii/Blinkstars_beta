@@ -58,7 +58,7 @@ const ProjectCompany: FC<ProjectCompanyProps> = ({
 
   useEffect(() => {
     dispatch(getCompany(user));
-  }, [dispatch]);
+  }, [dispatch, user]);
 
   const initialValues: CompanyCampaign = {
     companyName: user.tier === 'Company' ? user.name : '',
@@ -72,8 +72,8 @@ const ProjectCompany: FC<ProjectCompanyProps> = ({
         companyName: Yup.string()
           .min(3, 'Must be at least 3 characters')
           .max(255)
-          .required('Required'),
-        aboutCompany: Yup.string().max(3000)
+          .required('Required')
+        // aboutCompany: Yup.string().max(3000)
       })}
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
@@ -83,11 +83,7 @@ const ProjectCompany: FC<ProjectCompanyProps> = ({
           setStatus({ success: true });
           setSubmitting(false);
 
-          let temp = values;
-          temp.aboutCompany.replace(/<[^>]*>?/gm, '');
-          const campaign: CompanyCampaign = { ...temp };
-
-          dispatch(companyCampaign(campaign));
+          dispatch(companyCampaign(values));
 
           if (onNext) {
             onNext();
@@ -142,9 +138,15 @@ const ProjectCompany: FC<ProjectCompanyProps> = ({
             </Box>
             <Paper variant="outlined" component={Box}>
               <QuillEditor
-                onChange={(value: string) =>
-                  setFieldValue('aboutCompany', value)
-                }
+                id="company"
+                onChange={(
+                  content: any,
+                  delta: any,
+                  source: any,
+                  editor: any
+                ) => {
+                  setFieldValue('aboutCompany', content);
+                }}
                 value={values.aboutCompany}
                 className={classes.editor}
               />

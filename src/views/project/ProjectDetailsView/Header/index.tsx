@@ -16,15 +16,18 @@ import {
   Check as CheckIcon,
   Share
 } from 'react-feather';
+import { useParams } from 'react-router';
 import useAuth from 'src/hooks/useAuth';
 import { useSelector } from 'src/store';
 import { Theme } from 'src/theme';
+import { CampaignMock } from 'src/types/campaignmock';
 import { Project } from 'src/types/project';
 import ApplyModal from './ApplyModal';
 
 interface HeaderProps {
   className?: string;
   project: Project;
+  campaign: CampaignMock;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -45,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const Header: FC<HeaderProps> = ({ className, project, ...rest }) => {
+const Header: FC<HeaderProps> = ({ className, project, campaign, ...rest }) => {
   const classes = useStyles();
   const [isApplyModalOpen, setApplyModalOpen] = useState<boolean>(false);
 
@@ -58,9 +61,12 @@ const Header: FC<HeaderProps> = ({ className, project, ...rest }) => {
   };
 
   const [isPublished, setIsPublished] = useState<boolean>(false);
-  const campaign = useSelector(state => state.campaign);
+  const { campaignTitle } = useSelector(state => state.campaign.createCampaign);
+  const { endDate } = useSelector(state => state.campaign.completeCampaign);
 
   const { user } = useAuth();
+
+  const { id } = useParams();
 
   return (
     <Grid
@@ -72,7 +78,7 @@ const Header: FC<HeaderProps> = ({ className, project, ...rest }) => {
     >
       <Grid item>
         <Typography variant="h3" color="textPrimary">
-          {campaign.createCampaign.campaignTitle}
+          {id == 2 ? campaignTitle : campaign.campaignTitle}
         </Typography>
         <Box
           mx={-2}
@@ -106,7 +112,7 @@ const Header: FC<HeaderProps> = ({ className, project, ...rest }) => {
             </SvgIcon>
             <Typography variant="body2" color="inherit" component="span">
               {`Deadline ${moment(
-                campaign.completeCampaign.endDate
+                id == 2 ? endDate : campaign.endDate
               ).fromNow()}`}
             </Typography>
           </div>

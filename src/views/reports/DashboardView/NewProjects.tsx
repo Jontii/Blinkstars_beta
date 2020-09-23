@@ -3,6 +3,7 @@ import FolderOpenIcon from '@material-ui/icons/FolderOpenOutlined';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { FC } from 'react';
+import { useSelector } from 'src/store';
 import { Theme } from 'src/theme';
 
 interface NewProjectsProps {
@@ -34,6 +35,8 @@ const NewProjects: FC<NewProjectsProps> = ({ className, ...rest }) => {
     difference: -10
   };
 
+  const { campaignTitle } = useSelector(state => state.campaign.createCampaign);
+
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
       <Box flexGrow={1}>
@@ -47,7 +50,7 @@ const NewProjects: FC<NewProjectsProps> = ({ className, ...rest }) => {
         </Typography>
         <Box display="flex" alignItems="center" flexWrap="wrap">
           <Typography variant="h3" color="textPrimary">
-            3
+            {campaignTitle ? 3 : 2}
           </Typography>
           {/* <Label
             className={classes.label}

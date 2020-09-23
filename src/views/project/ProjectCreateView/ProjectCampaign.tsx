@@ -84,12 +84,7 @@ const ProjectCampagin: FC<ProjectCampaignProps> = ({
           setStatus({ success: true });
           setSubmitting(false);
 
-          let temp: CreateCampaign = values;
-          temp.campaignDescription.replace(/<[^>]*>?/gm, '');
-
-          const campaign: CreateCampaign = { ...temp };
-
-          dispatch(createCampaign(campaign));
+          dispatch(createCampaign(values));
           if (onNext) {
             onNext();
           }
@@ -141,6 +136,7 @@ const ProjectCampagin: FC<ProjectCampaignProps> = ({
           <Box mt={2}>
             <Paper variant="outlined" component={Box}>
               <QuillEditor
+                id="campaign"
                 onChange={(value: string) =>
                   setFieldValue('campaignDescription', value)
                 }

@@ -6,7 +6,6 @@ import {
   Typography
 } from '@material-ui/core';
 import { KeyboardDatePicker } from '@material-ui/pickers';
-import Axios from 'axios';
 import clsx from 'clsx';
 import { Formik } from 'formik';
 import moment from 'moment';
@@ -95,13 +94,13 @@ const ProjectCampignComplete: FC<ProjectCampaignProps> = ({
             transitionDuration: 500
           });
           if (onComplete) {
-            Axios.post('/api/campaign/', {
-              name: 'Jontetest'
-            })
-              .then(resp => {
-                console.log('Posted', resp);
-              })
-              .catch(error => console.log(error));
+            // Axios.post('/api/campaign/', {
+            //   name: 'Jontetest'
+            // })
+            //   .then(resp => {
+            //     console.log('Posted', resp);
+            //   })
+            //   .catch(error => console.log(error));
             onComplete();
           }
         } catch (err) {

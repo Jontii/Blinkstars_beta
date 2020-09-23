@@ -313,7 +313,7 @@ const userHasCreatedCampaignRoutes: Section[] = [
           },
           {
             title: 'View Campaign',
-            href: '/app/campaign/view'
+            href: '/app/campaign/view/2'
           }
         ]
       }

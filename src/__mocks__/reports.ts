@@ -14,30 +14,40 @@ import mock from 'src/utils/mock';
 mock.onGet('/api/campaigns').reply(() => {
   const campaigns: CampaignMock[] = [
     {
-      campaignTitle: 'Dagens Näthandel',
-      campaignUrl: 'www.klarna.se/payment',
+      campaignTitle: 'Nu blir Sveriges bästa nät 5G',
+      campaignUrl: 'www.telia.se/5G',
       campaignDescription:
-        'Skapa engagemang genom ett quiz där besökarna får kunskap/information om den skandinaviska b2b-näthandeln. Vi vill också att få målgruppen att ladda ner <a href="#">rapporten</a>.',
+        'Driva trafik till kampanj-sidan där vi vill att företagare skall upptäcka fördelarna med ett 5G –abonnemang från Telia samt registrera en intresseanmälan, de första 100 anmälningarna får 50% rabatt.',
       hashtags: [
-        '#bring',
-        '#företagsleverans',
-        '#logistik',
-        '#näthandel',
-        '#snabbaleveranser '
+        '#telia',
+        '#5G',
+        '#företagsmobil',
+        '#företagsabonnemang',
+        '#bästamobilnätet '
       ],
       influencerText:
-        '<strong>TESTA DINA KUNSKAPER OM DAGENS NÄTHANDEL!</strong> Spela Brings quiz! Se hur mycket du kan om näthandel och onlineshopping!  P.S Jag fick 27 rätt av 30…slå det om du kan! Ladda ner rapporten som skandinavisk näthandel här: <a href="#">www.bring.se/rapport2020</a>',
-      companyName: 'Bring',
-      roleTags: ['VD', 'E-commerce manager', 'Logistikchef', 'IT-ansvarig'],
-      files: ['test'],
+        '<br/> <strong>NU BLIR SVERIGES BÄSTA NÄT 5G</strong> <br/> Under våren har 15 basstationer byggts ut med 5G i Stockholm och nätet är redan igång. Ytterligare ett 60-tal ska vara klara under juni, i partnerskap med Ericsson. Därmed kommer en stor del av centrala Stockholm att ha 5G-täckning vid månadsskiftet, inklusive Norrmalm, Östermalm och Vasastan. Parallellt byggs det i ytterligare 12 städer inklusive Göteborg och Malmö med lansering senare i år. <br/> <br/> Läs mer vad Telia kan gör för ditt företag <a href="https://www.telia.se/privat/om/5g#pageSection_014">här</a>',
+      companyName: 'Telia',
+      companyAvatar: `${process.env.PUBLIC_URL}/static/images/avatars/telia.svg`,
+
+      roleTags: ['VD', 'Ekonomichefer', 'HR-chefer'],
+      files: [
+        {
+          id: '5e8dd07cbb62749296ecee1cy',
+          mimeType: 'image/png',
+          name: 'telia-materials.jpg',
+          size: 1024 * 1024 * 2,
+          url: `${process.env.PUBLIC_URL}/static/images/telia-file.png`
+        }
+      ],
       startDate: moment().toDate().getTime(),
       endDate: moment().add(14, 'days').toDate().getTime()
     },
     {
-      campaignTitle: 'Dagens Näthandel',
-      campaignUrl: 'www.klarna.se/payment',
+      campaignTitle: 'Testa dina kunskaper om dagens näthandel',
+      campaignUrl: 'www.bring.se/shopping',
       campaignDescription:
-        'Skapa engagemang genom ett quiz där besökarna får kunskap/information om den skandinaviska b2b-näthandeln. Vi vill också att få målgruppen att ladda ner <a href="#">rapporten</a>.',
+        'Skapa engagemang genom ett quiz där besökarna får kunskap/information om den skandinaviska b2b-näthandeln. <br/> Vi vill också att få målgruppen att ladda ner <a href="#">rapporten</a>.',
       hashtags: [
         '#bring',
         '#företagsleverans',
@@ -46,10 +56,55 @@ mock.onGet('/api/campaigns').reply(() => {
         '#snabbaleveranser '
       ],
       influencerText:
-        '<strong>TESTA DINA KUNSKAPER OM DAGENS NÄTHANDEL!</strong> Spela Brings quiz! Se hur mycket du kan om näthandel och onlineshopping!  P.S Jag fick 27 rätt av 30…slå det om du kan! Ladda ner rapporten som skandinavisk näthandel här: <a href="#">www.bring.se/rapport2020</a>',
+        '<br/> <strong>TESTA DINA KUNSKAPER OM DAGENS NÄTHANDEL! <br /> <br/> </strong> Spela Brings quiz! <br/>Se hur mycket du kan om näthandel och onlineshopping! <br/> <br/> P.S Jag fick 27 rätt av 30…slå det om du kan! <br/> <br/>Ladda ner rapporten som skandinavisk näthandel här: <a href="#">www.bring.se/rapport2020</a>',
       companyName: 'Bring',
+      companyAvatar: `${process.env.PUBLIC_URL}/static/images/avatars/bring.svg`,
+
       roleTags: ['VD', 'E-commerce manager', 'Logistikchef', 'IT-ansvarig'],
-      files: ['test'],
+      files: [
+        {
+          id: '5e8dd0721b9e0fab56d7238bz',
+          mimeType: 'image/png',
+          name: 'bring-materials.jpg',
+          size: 1024 * 1024 * 3,
+          url: `${process.env.PUBLIC_URL}/static/images/bring-file.png`
+        }
+      ],
+      startDate: moment().toDate().getTime(),
+      endDate: moment().add(14, 'days').toDate().getTime()
+    },
+    {
+      campaignTitle: '',
+      campaignUrl: '',
+      campaignDescription: '',
+      hashtags: [],
+      influencerText: '',
+      companyName: 'Klarna',
+      companyAvatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.svg`,
+      roleTags: [],
+      files: [
+        {
+          id: '5e8dd0721b9e0fab56d7238b',
+          mimeType: 'image/png',
+          name: 'example-design1.jpg',
+          size: 1024 * 1024 * 3,
+          url: `${process.env.PUBLIC_URL}/static/images/projects/project_4.png`
+        },
+        {
+          id: '5e8dd0784431995a30eb2586',
+          mimeType: 'application/zip',
+          name: 'docs.zip',
+          size: 1024 * 1024 * 25,
+          url: '#'
+        },
+        {
+          id: '5e8dd07cbb62749296ecee1c',
+          mimeType: 'image/png',
+          name: 'example-design1.jpg',
+          size: 1024 * 1024 * 2,
+          url: `${process.env.PUBLIC_URL}/static/images/projects/project_1.png`
+        }
+      ],
       startDate: moment().toDate().getTime(),
       endDate: moment().add(14, 'days').toDate().getTime()
     }
@@ -277,24 +332,24 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
 
 mock.onGet('/api/reports/latest-projects').reply(() => {
   const projects: Project[] = [
-    {
-      id: '5eff24e675e7b3cba23e4be7',
-      author: {
-        avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.svg`,
-        name: 'Klarna'
-      },
-      budget: 10000,
-      createdAt: moment()
-        .subtract(2, 'hours')
-        .subtract(34, 'minutes')
-        .subtract(10, 'seconds')
-        .toDate()
-        .getTime(),
-      currency: 'SEK',
-      matchScore: '83%',
-      technologies: ['angular'],
-      title: 'New payment solution'
-    },
+    // {
+    //   id: '5eff24e675e7b3cba23e4be7',
+    //   author: {
+    //     avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.svg`,
+    //     name: 'Klarna'
+    //   },
+    //   budget: 10000,
+    //   createdAt: moment()
+    //     .subtract(2, 'hours')
+    //     .subtract(34, 'minutes')
+    //     .subtract(10, 'seconds')
+    //     .toDate()
+    //     .getTime(),
+    //   currency: 'SEK',
+    //   matchScore: '83%',
+    //   technologies: ['angular'],
+    //   title: 'New payment solution'
+    // },
     {
       id: '5eff24e98e2c9107e95cb827',
       author: {

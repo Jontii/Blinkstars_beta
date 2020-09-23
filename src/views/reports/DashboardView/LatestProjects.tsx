@@ -58,6 +58,7 @@ const LatestProjects: FC<LatestProjectsProps> = ({
   const [projects, setProjects] = useState<Project[]>([]);
   const history = useHistory();
 
+  const campaign = useSelector(state => state.campaign);
   const getProjects = useCallback(async () => {
     try {
       const response = await axios.get<{ projects: Project[] }>(
@@ -69,6 +70,23 @@ const LatestProjects: FC<LatestProjectsProps> = ({
 
         if (showOnlyFirst) {
           let temp = [...response.data.projects];
+
+          if (campaign.createCampaign.campaignTitle) {
+            temp.push({
+              id: 'klarn',
+              author: {
+                avatar: `${process.env.PUBLIC_URL}/static/images/avatars/avatar_9.svg`,
+                name: campaign.companyCampaign.companyName
+              },
+              budget: parseInt(campaign.createCampaign.campaignBudget),
+              createdAt: new Date().getTime(),
+              currency: 'SEK',
+              technologies: [],
+              matchScore: '89%',
+              title: campaign.createCampaign.campaignTitle
+            });
+          }
+
           // temp.splice(0, 1);
           setProjects(temp);
         }
@@ -76,12 +94,17 @@ const LatestProjects: FC<LatestProjectsProps> = ({
     } catch (err) {
       console.error(err);
     }
-  }, [isMountedRef]);
+  }, [
+    isMountedRef,
+    campaign.createCampaign.campaignTitle,
+    campaign.createCampaign.campaignBudget,
+    campaign.companyCampaign.companyName,
+    showOnlyFirst
+  ]);
 
   useEffect(() => {
     getProjects();
   }, [getProjects]);
-  const campaign = useSelector(state => state.campaign);
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
@@ -142,10 +165,9 @@ const LatestProjects: FC<LatestProjectsProps> = ({
             <>
               <TableBody>
                 {projects &&
-                  campaign.createCampaign.campaignTitle &&
                   showOnlyFirst &&
                   projects.map((project, index) => (
-                    <Campaigns campaign={project} index={index} />
+                    <Campaigns key={index} campaign={project} index={index} />
                   ))}
               </TableBody>
             </>

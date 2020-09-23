@@ -40,7 +40,6 @@ const ProjectDetailsView: FC = () => {
   };
 
   const { id } = useParams();
-  console.log(id);
 
   const getProject = useCallback(async () => {
     try {
@@ -63,7 +62,6 @@ const ProjectDetailsView: FC = () => {
       );
 
       if (isMountedRef.current) {
-        console.log(response.data);
         setCampaigns(response.data.campaigns);
       }
     } catch (err) {
@@ -78,14 +76,13 @@ const ProjectDetailsView: FC = () => {
   }, [getProject, getCampaigns]);
 
   if (!project || !campaigns) {
-    console.log(campaigns);
     return null;
   }
 
   return (
     <Page className={classes.root} title="Campaign Details">
       <Container maxWidth="lg">
-        <Header project={project} />
+        <Header project={project} campaign={campaigns[id]} />
         <Box mt={3}>
           {/* <Tabs
             onChange={handleTabsChange}

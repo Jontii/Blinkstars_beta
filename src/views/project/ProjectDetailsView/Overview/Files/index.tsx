@@ -27,7 +27,7 @@ const Files: FC<FilesProps> = ({ className, files, campaign, ...rest }) => {
       </Card> */}
       <Box mt={3}>
         <Grid container spacing={3}>
-          {files.map(file => (
+          {campaign.files.map(file => (
             <Grid item key={file.id} lg={4} md={4} sm={6} xs={12}>
               <FileCard file={file} />
             </Grid>

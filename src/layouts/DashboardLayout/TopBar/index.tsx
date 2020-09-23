@@ -70,7 +70,7 @@ const TopBar: FC<TopBarProps> = ({ className, onMobileNavOpen, ...rest }) => {
         <Box ml={2} flexGrow={1} />
         {/* <Search />
         <Contacts /> */}
-        {user.name === 'Klarna' && <Notifications />}
+        {user.tier === 'Company' && <Notifications />}
         <Box ml={2}>
           <Account />
         </Box>

@@ -229,7 +229,7 @@ function ProjectCreateView() {
                     variant="contained"
                     color="secondary"
                     component={RouterLink}
-                    to="/app/campaign/view"
+                    to="/app/campaign/view/2"
                   >
                     View your campaign
                   </Button>
