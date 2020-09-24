@@ -21,3 +21,8 @@ export interface CompleteCampaign {
   startDate: number;
   endDate: number;
 }
+
+export interface ApprovedUsers {
+  userAccepted: boolean;
+  companyAcceptedUser: boolean;
+}

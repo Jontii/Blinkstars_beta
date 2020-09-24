@@ -119,10 +119,10 @@ const LatestProjects: FC<LatestProjectsProps> = ({
             <TableHead>
               <TableRow>
                 <TableCell>Title</TableCell>
-                <TableCell>Author</TableCell>
+                <TableCell>Campaign Owner</TableCell>
                 {/* <TableCell>Budget</TableCell> */}
                 {showOnlyFirst && <TableCell>Campaign Status</TableCell>}
-                {showOnlyFirst && <TableCell>Match Score</TableCell>}
+                {showOnlyFirst && <TableCell>Network Match Score</TableCell>}
                 <TableCell align="right" sortDirection="desc">
                   <Tooltip enterDelay={300} title="Sort">
                     <TableSortLabel active direction="desc">

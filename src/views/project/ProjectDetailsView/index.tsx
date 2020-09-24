@@ -39,6 +39,7 @@ const ProjectDetailsView: FC = () => {
     setCurrentTab(value);
   };
 
+  //@ts-ignore
   const { id } = useParams();
 
   const getProject = useCallback(async () => {

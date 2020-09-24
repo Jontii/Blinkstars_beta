@@ -110,46 +110,46 @@ const Brief: FC<BriefProps> = ({ className, project, campaign, ...rest }) => {
             </Box>
           </Grid>
           <Grid item xs={12} md={10}>
-            {user.tier === 'Company' && (
-              <Box display="flex">
-                <Grid item xs={12} md={6}>
-                  <Box>
-                    <Typography variant="subtitle2" color="textSecondary">
-                      Countries
-                    </Typography>
-                    <Box mt={1}>
-                      {campaign.countryTags &&
-                        campaign.countryTags.map(tag => (
-                          <Chip
-                            key={tag}
-                            className={classes.tag}
-                            variant="outlined"
-                            label={tag}
-                          />
-                        ))}
-                    </Box>
+            {/* {user.tier === 'Company' && ( */}
+            <Box display="flex">
+              <Grid item xs={12} md={6}>
+                <Box>
+                  <Typography variant="subtitle2" color="textSecondary">
+                    Countries
+                  </Typography>
+                  <Box mt={1}>
+                    {campaign.countryTags &&
+                      campaign.countryTags.map(tag => (
+                        <Chip
+                          key={tag}
+                          className={classes.tag}
+                          variant="outlined"
+                          label={tag}
+                        />
+                      ))}
                   </Box>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <Box>
-                    <Typography variant="subtitle2" color="textSecondary">
-                      Roles
-                    </Typography>
-                    <Box mt={1}>
-                      {campaign.roleTags &&
-                        campaign.roleTags.map(tag => (
-                          <Chip
-                            key={tag}
-                            className={classes.tag}
-                            variant="outlined"
-                            label={tag}
-                          />
-                        ))}
-                    </Box>
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Box>
+                  <Typography variant="subtitle2" color="textSecondary">
+                    Roles
+                  </Typography>
+                  <Box mt={1}>
+                    {campaign.roleTags &&
+                      campaign.roleTags.map(tag => (
+                        <Chip
+                          key={tag}
+                          className={classes.tag}
+                          variant="outlined"
+                          label={tag}
+                        />
+                      ))}
                   </Box>
-                </Grid>
-              </Box>
-            )}
+                </Box>
+              </Grid>
+            </Box>
+            {/* )} */}
           </Grid>
           <Grid item xs={12} md={10}>
             {user.tier === 'Company' && (

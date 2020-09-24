@@ -30,6 +30,8 @@ const Overview: FC<OverviewProps> = ({
   ...rest
 }) => {
   const classes = useStyles();
+
+  //@ts-ignore
   const { id } = useParams();
   const [overrideCamp, setOverrideCamp] = useState<CampaignMock>(campaign);
 

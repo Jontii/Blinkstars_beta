@@ -66,6 +66,7 @@ const Header: FC<HeaderProps> = ({ className, project, campaign, ...rest }) => {
 
   const { user } = useAuth();
 
+  //@ts-ignore
   const { id } = useParams();
 
   return (

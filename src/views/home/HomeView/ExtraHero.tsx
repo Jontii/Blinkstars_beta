@@ -16,11 +16,11 @@ interface HeroProps {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     backgroundColor: theme.palette.background.default,
-    paddingTop: 200,
-    paddingBottom: 200,
+    paddingTop: 100,
+    paddingBottom: 100,
     [theme.breakpoints.down('md')]: {
-      paddingTop: 60,
-      paddingBottom: 60
+      paddingTop: 30,
+      paddingBottom: 30
     }
   },
   technologyIcon: {

@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  Button,
   Card,
   CardContent,
   CardMedia,
@@ -8,13 +9,16 @@ import {
   Divider,
   Link,
   makeStyles,
+  SvgIcon,
   Typography
 } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { FC, useState } from 'react';
+import { UserCheck } from 'react-feather';
 import { Link as RouterLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'src/store';
 import { Theme } from 'src/theme';
 import { ProjectApplicant, ProjectAuthor } from 'src/types/project';
 interface ApplicantCardProps {
@@ -59,7 +63,7 @@ const ApplicantCard: FC<ApplicantCardProps> = ({
   const classes = useStyles();
 
   const [isApplyModalOpen, setApplyModalOpen] = useState<boolean>(false);
-  const [approve, setApprove] = useState<boolean[]>([]);
+  const [approve, setApprove] = useState<boolean>(false);
 
   const handleApplyModalOpen = (): void => {
     setApplyModalOpen(true);
@@ -67,6 +71,17 @@ const ApplicantCard: FC<ApplicantCardProps> = ({
 
   const handleApplyModalClose = (): void => {
     setApplyModalOpen(false);
+  };
+
+  const { companyAcceptedUser } = useSelector(
+    state => state.campaign.approvedUser
+  );
+
+  const dispatch = useDispatch();
+
+  const acceptInflu = () => {
+    // dispatch(companyAcceptedInfluencer(true));
+    setApprove(true);
   };
 
   return (
@@ -115,13 +130,13 @@ const ApplicantCard: FC<ApplicantCardProps> = ({
             variant="outlined"
           />
         ))}
-        {/* <Box my={2}>
+        <Box my={2}>
           <Divider />
         </Box>
         <Box display="flex" justifyContent="center">
           <Button
             className={classes.action}
-            onClick={handleApplyModalOpen}
+            onClick={() => acceptInflu()}
             variant="contained"
             color="secondary"
             startIcon={
@@ -130,10 +145,10 @@ const ApplicantCard: FC<ApplicantCardProps> = ({
               </SvgIcon>
             }
           >
-            Approve as influencer
+            {approve ? <>Approved</> : <>Approve as influencer</>}
           </Button>
         </Box>
-        <ApplyModal
+        {/* <ApplyModal
           author={author}
           onApply={handleApplyModalClose}
           onClose={handleApplyModalClose}

@@ -11,6 +11,7 @@ import moment from 'moment';
 import { useSnackbar } from 'notistack';
 import React, { FC, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'src/store';
 import { Project } from 'src/types/reports';
 import getInitials from 'src/utils/getInitials';
 
@@ -34,11 +35,31 @@ const Campaigns: FC<IProps> = ({ campaign, index }) => {
   }));
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
+
+  const { companyAcceptedUser, userAccepted } = useSelector(
+    state => state.campaign.approvedUser
+  );
+
+  // let notDemoCampaign = false;
+  // if (campaign.author.name === 'Telia') {
+  //   notDemoCampaign = false;
+  //   console.log('Enter');
+  // } else if (campaign.author.name === 'Bring') {
+  //   notDemoCampaign = false;
+  //   console.log('Enter');
+  // } else {
+  //   notDemoCampaign = true;
+  // }
+  // console.log(notDemoCampaign);
+
   const [accepted, setAccepted] = useState<boolean>(true);
+
+  const dispatch = useDispatch();
 
   const setClickAccepted = (value: boolean) => {
     if (!value) {
       setAccepted(value);
+      // dispatch(userAcceptedCampaign(true));
 
       enqueueSnackbar(
         'Applied to campaign, congratulations! Click on the campaign title to view the campaign while your status is pending. 🎉',
@@ -79,12 +100,15 @@ const Campaigns: FC<IProps> = ({ campaign, index }) => {
                         )}
                       </TableCell> */}
       <TableCell>
-        {accepted ? (
+        {!accepted ? (
           <Button onClick={() => setClickAccepted(!accepted)} color="secondary">
             Accept
           </Button>
         ) : (
-          <Button color="primary">Pending</Button>
+          <Button color="primary">
+            Pending
+            {/* {companyAcceptedUser ? <>Company Accepted</> : <>Pending</>} */}
+          </Button>
         )}
       </TableCell>
       <TableCell style={{ color: '#4caf50' }}>{campaign.matchScore}</TableCell>

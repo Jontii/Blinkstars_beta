@@ -58,6 +58,7 @@ const Metadata: FC<MetadataProps> = ({
   );
   const { endDate } = useSelector(state => state.campaign.completeCampaign);
 
+  //@ts-ignore
   const { id } = useParams();
 
   return (
@@ -100,7 +101,7 @@ const Metadata: FC<MetadataProps> = ({
         <List>
           <ListItem className={classes.listItem} disableGutters divider>
             <Typography variant="subtitle2" color="textPrimary">
-              Deadline
+              Campaign End Date
             </Typography>
             <Typography variant="h6" color="textSecondary">
               {moment(id == 2 ? endDate : campaign.endDate).format(

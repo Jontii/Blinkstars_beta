@@ -62,7 +62,7 @@ const TopBar: FC<TopBarProps> = ({ className, onMobileNavOpen, ...rest }) => {
           <RouterLink to="/app/reports/dashboard">
             <img
               alt="Logo"
-              style={{ height: '42px' }}
+              style={{ height: '52px' }}
               src={`${process.env.PUBLIC_URL}/static/home/Btxt.svg`}
             />
           </RouterLink>

@@ -215,30 +215,32 @@ const GeneralSettings: FC<GeneralSettingsProps> = ({
                     variant="outlined"
                   />
                 </Grid>
-
-                <Grid item md={12} xs={12}>
-                  <Box mb={1}>
-                    <Typography variant="subtitle2" color="textSecondary">
-                      About the Company
-                    </Typography>
-                  </Box>
-                  <Paper variant="outlined">
-                    <QuillEditor
-                      className={classes.editor}
-                      value={values.aboutCompany}
-                      onChange={(value: string) =>
-                        setFieldValue('aboutCompany', value)
-                      }
-                    />
-                  </Paper>
-                  {touched.aboutCompany && errors.aboutCompany && (
-                    <Box mt={2}>
-                      <FormHelperText error>
-                        {errors.aboutCompany}
-                      </FormHelperText>
+                {user.tier === 'Company' && (
+                  <Grid item md={12} xs={12}>
+                    <Box mb={1}>
+                      <Typography variant="subtitle2" color="textSecondary">
+                        About the Company
+                      </Typography>
                     </Box>
-                  )}
-                </Grid>
+                    <Paper variant="outlined">
+                      <QuillEditor
+                        className={classes.editor}
+                        value={values.aboutCompany}
+                        onChange={(value: string) =>
+                          setFieldValue('aboutCompany', value)
+                        }
+                      />
+                    </Paper>
+                    {touched.aboutCompany && errors.aboutCompany && (
+                      <Box mt={2}>
+                        <FormHelperText error>
+                          {errors.aboutCompany}
+                        </FormHelperText>
+                      </Box>
+                    )}
+                  </Grid>
+                )}
+
                 {user.tier !== 'Company' && (
                   <>
                     <Grid item md={6} xs={12}>

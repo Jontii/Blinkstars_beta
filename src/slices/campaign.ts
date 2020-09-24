@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import moment from 'moment';
 import { User } from 'src/types/user';
 import {
+  ApprovedUsers,
   CompanyCampaign,
   CompleteCampaign,
   CreateCampaign,
@@ -28,6 +29,10 @@ const initialState: Campaign = {
   completeCampaign: {
     startDate: moment().toDate().getTime(),
     endDate: moment().add(7, 'days').toDate().getTime()
+  },
+  approvedUser: {
+    userAccepted: false,
+    companyAcceptedUser: false
   }
 };
 
@@ -52,6 +57,10 @@ const mockState: Campaign = {
   completeCampaign: {
     startDate: moment().toDate().getTime(),
     endDate: moment().add(14, 'days').toDate().getTime()
+  },
+  approvedUser: {
+    userAccepted: false,
+    companyAcceptedUser: false
   }
 };
 
@@ -60,6 +69,7 @@ export interface Campaign {
   companyCampaign: CompanyCampaign;
   influencerCampaign: InfluencerCampaign;
   completeCampaign: CompleteCampaign;
+  approvedUser: ApprovedUsers;
 }
 
 const slice = createSlice({
@@ -105,6 +115,22 @@ const slice = createSlice({
       const { user } = action.payload;
       state.companyCampaign.companyName = user.name || '';
       state.companyCampaign.aboutCompany = user.about || '';
+    },
+    userAcceptedCampaign(
+      state: Campaign,
+      action: PayloadAction<{ bool: boolean }>
+    ) {
+      const { bool } = action.payload;
+      console.log('user accept campaign', bool);
+      state.approvedUser.userAccepted = bool;
+    },
+    companyAcceptedInfluencer(
+      state: Campaign,
+      action: PayloadAction<{ bool: boolean }>
+    ) {
+      const { bool } = action.payload;
+      console.log('Comapny accept influencer', bool);
+      state.approvedUser.companyAcceptedUser = bool;
     }
   }
 });
@@ -131,6 +157,14 @@ export const completeCampaign = (
 
 export const getCompany = (user: User) => async dispatch => {
   dispatch(slice.actions.getCompanyCampaignData({ user }));
+};
+
+export const userAcceptedCampaign = (bool: boolean) => async dispatch => {
+  dispatch(slice.actions.userAcceptedCampaign({ bool }));
+};
+
+export const companyAcceptedInfluencer = (bool: boolean) => async dispatch => {
+  dispatch(slice.actions.companyAcceptedInfluencer({ bool }));
 };
 
 export const reducer = slice.reducer;
