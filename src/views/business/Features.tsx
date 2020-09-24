@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: 128
   },
   avatar: {
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: '#E9C774',
     color: theme.palette.secondary.contrastText
   }
 }));

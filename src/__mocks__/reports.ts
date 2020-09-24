@@ -29,7 +29,7 @@ mock.onGet('/api/campaigns').reply(() => {
         '<br/> <strong>NU BLIR SVERIGES BÄSTA NÄT 5G</strong> <br/> Under våren har 15 basstationer byggts ut med 5G i Stockholm och nätet är redan igång. Ytterligare ett 60-tal ska vara klara under juni, i partnerskap med Ericsson. Därmed kommer en stor del av centrala Stockholm att ha 5G-täckning vid månadsskiftet, inklusive Norrmalm, Östermalm och Vasastan. Parallellt byggs det i ytterligare 12 städer inklusive Göteborg och Malmö med lansering senare i år. <br/> <br/> Läs mer vad Telia kan gör för ditt företag <a href="https://www.telia.se/privat/om/5g#pageSection_014">här</a>',
       companyName: 'Telia',
       companyAvatar: `${process.env.PUBLIC_URL}/static/images/avatars/telia.svg`,
-
+      countryTags: ['Sverige', 'Danmark'],
       roleTags: ['VD', 'Ekonomichefer', 'HR-chefer'],
       files: [
         {
@@ -59,6 +59,7 @@ mock.onGet('/api/campaigns').reply(() => {
         '<br/> <strong>TESTA DINA KUNSKAPER OM DAGENS NÄTHANDEL! <br /> <br/> </strong> Spela Brings quiz! <br/>Se hur mycket du kan om näthandel och onlineshopping! <br/> <br/> P.S Jag fick 27 rätt av 30…slå det om du kan! <br/> <br/>Ladda ner rapporten som skandinavisk näthandel här: <a href="#">www.bring.se/rapport2020</a>',
       companyName: 'Bring',
       companyAvatar: `${process.env.PUBLIC_URL}/static/images/avatars/bring.svg`,
+      countryTags: ['Sverige', 'Norge'],
 
       roleTags: ['VD', 'E-commerce manager', 'Logistikchef', 'IT-ansvarig'],
       files: [

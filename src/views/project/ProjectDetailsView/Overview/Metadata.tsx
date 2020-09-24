@@ -126,22 +126,33 @@ const Metadata: FC<MetadataProps> = ({
             </>
           ) : (
             <>
-              <ListItem className={classes.listItem} disableGutters divider>
+              <ListItem className={classes.listItem} disableGutters>
                 <Typography variant="subtitle2" color="textPrimary">
-                  Payment - Posts
-                </Typography>
-                <Typography variant="h6" color="textSecondary">
-                  50 SEK
+                  Earnings:
                 </Typography>
               </ListItem>
-              <ListItem className={classes.listItem} disableGutters divider>
+
+              <ListItem
+                className={classes.listItem}
+                disableGutters
+                divider
+                style={{ justifyContent: 'space-evenly' }}
+              >
+                <Typography variant="h6" color="textSecondary">
+                  Post - 50 SEK
+                </Typography>
+                <Typography variant="h6" color="textSecondary">
+                  Links - 100 SEK
+                </Typography>
+              </ListItem>
+              {/* <ListItem className={classes.listItem} disableGutters divider>
                 <Typography variant="subtitle2" color="textPrimary">
                   Payment - Links
                 </Typography>
                 <Typography variant="h6" color="textSecondary">
                   100 SEK
                 </Typography>
-              </ListItem>
+              </ListItem> */}
             </>
           )}
           <ListItem className={classes.listItem} disableGutters divider>

@@ -3,6 +3,7 @@ import {
   Card,
   CardContent,
   Chip,
+  Divider,
   Grid,
   Link,
   makeStyles,
@@ -56,9 +57,10 @@ const Brief: FC<BriefProps> = ({ className, project, campaign, ...rest }) => {
           </Grid> */}
           <Grid item xs={12} md={12}>
             <Box mt={1}>
-              <Typography variant="subtitle2" color="textSecondary">
+              <Typography variant="h4" color="textSecondary">
                 Description
               </Typography>
+              <Divider style={{ marginBottom: '5px' }} />
 
               <p
                 className={classes.markdown}

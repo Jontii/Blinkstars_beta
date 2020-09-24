@@ -100,7 +100,7 @@ const Campaigns: FC<IProps> = ({ campaign, index }) => {
                         )}
                       </TableCell> */}
       <TableCell>
-        {!accepted ? (
+        {accepted ? (
           <Button onClick={() => setClickAccepted(!accepted)} color="secondary">
             Accept
           </Button>

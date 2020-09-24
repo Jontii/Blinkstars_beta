@@ -89,7 +89,11 @@ const Hero: FC<HeroProps> = ({ className, ...rest }) => {
                     </Typography>
 
                     <Link component={RouterLink} to="/business">
-                      <Typography variant="h1" color="secondary">
+                      <Typography
+                        variant="h1"
+                        color="secondary"
+                        style={{ color: '#E9C774' }}
+                      >
                         Business
                       </Typography>
                     </Link>
