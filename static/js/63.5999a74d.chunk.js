@@ -1,0 +1,2 @@
+(this.webpackJsonpblinkstars=this.webpackJsonpblinkstars||[]).push([[63],{2109:function(e,n,t){"use strict";t.r(n);var l=t(0),a=t.n(l),s=t(316),r=Object(l.lazy)((function(){return t.e(48).then(t.bind(null,2055))}));n.default=function(){return a.a.createElement(s.a,{title:"API Calls"},a.a.createElement(l.Suspense,{fallback:null},a.a.createElement(r,null)))}}}]);
+//# sourceMappingURL=63.5999a74d.chunk.js.map

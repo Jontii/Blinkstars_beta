@@ -1,0 +1,2 @@
+(this.webpackJsonpblinkstars=this.webpackJsonpblinkstars||[]).push([[64],{2110:function(e,n,t){"use strict";t.r(n);var a=t(0),l=t.n(a),s=t(316),c=Object(a.lazy)((function(){return t.e(49).then(t.bind(null,2056))}));n.default=function(){return l.a.createElement(s.a,{title:"Analytics"},l.a.createElement(a.Suspense,{fallback:null},l.a.createElement(c,null)))}}}]);
+//# sourceMappingURL=64.dc2c13e7.chunk.js.map

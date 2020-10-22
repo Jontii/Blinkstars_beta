@@ -1,0 +1,2 @@
+(this.webpackJsonpblinkstars=this.webpackJsonpblinkstars||[]).push([[71],{2113:function(e,t,n){"use strict";n.r(t);var a=n(0),l=n.n(a),s=n(316),r=Object(a.lazy)((function(){return n.e(56).then(n.bind(null,2058))}));t.default=function(){return l.a.createElement(s.a,{title:"Settings"},l.a.createElement(a.Suspense,{fallback:null},l.a.createElement(r,null)))}}}]);
+//# sourceMappingURL=71.0469803c.chunk.js.map

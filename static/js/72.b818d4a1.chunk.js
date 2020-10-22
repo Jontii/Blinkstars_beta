@@ -1,0 +1,2 @@
+(this.webpackJsonpblinkstars=this.webpackJsonpblinkstars||[]).push([[72],{2114:function(e,t,n){"use strict";n.r(t);var a=n(0),l=n.n(a),s=n(316),r=Object(a.lazy)((function(){return n.e(57).then(n.bind(null,2059))}));t.default=function(){return l.a.createElement(s.a,{title:"State Management"},l.a.createElement(a.Suspense,{fallback:null},l.a.createElement(r,null)))}}}]);
+//# sourceMappingURL=72.b818d4a1.chunk.js.map

@@ -1,0 +1,2 @@
+(this.webpackJsonpblinkstars=this.webpackJsonpblinkstars||[]).push([[66],{2117:function(e,n,t){"use strict";t.r(n);var a=t(0),l=t.n(a),s=t(316),r=Object(a.lazy)((function(){return t.e(51).then(t.bind(null,2062))}));n.default=function(){return l.a.createElement(s.a,{title:"Changelog"},l.a.createElement(a.Suspense,{fallback:null},l.a.createElement(r,null)))}}}]);
+//# sourceMappingURL=66.b076c93c.chunk.js.map
