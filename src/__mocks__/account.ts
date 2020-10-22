@@ -3,7 +3,7 @@ import mock from 'src/utils/mock';
 import wait from 'src/utils/wait';
 import { v4 as uuidv4 } from 'uuid';
 
-const JWT_SECRET = 'devias-top-secret-key';
+const JWT_SECRET = 'blinkstars-top-secret-key';
 const JWT_EXPIRES_IN = '2 days';
 
 const users = [

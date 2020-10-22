@@ -54,9 +54,7 @@ const DashboardAlternativeView: FC = () => {
   const classes = useStyles();
 
   const { campaignTitle } = useSelector(state => state.campaign.createCampaign);
-  const [showProp, setShowProp] = useState<boolean>(
-    campaignTitle ? true : false
-  );
+  const [showProp, setShowProp] = useState<boolean>(true);
 
   const { saveSettings } = useSettings();
   const { user } = useAuth();
@@ -100,9 +98,9 @@ const DashboardAlternativeView: FC = () => {
             </Box>
           </Box>
           <Collapse in={showProp}>
-            {!campaignTitle ? (
+            {/* {!campaignTitle ? (
               <Typography variant="h3">No Active Campaigns</Typography>
-            ) : (
+            ) : ( */}
               <Grid container spacing={3}>
                 <Grid item xs={12}>
                   <Overview />
@@ -136,7 +134,7 @@ const DashboardAlternativeView: FC = () => {
             <TopReferrals />
           </Grid> */}
               </Grid>
-            )}
+            {/* )} */}
           </Collapse>
         </Box>
         <Box className={classes.root2}>

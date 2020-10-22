@@ -1,6 +1,6 @@
 # Authentication
 
-Devias Kit Pro supports 3 authentication methods: <a href="https://auth0.com/">Auth0</a>, <a href="https://firebase.google.com/docs/auth">Firebase Authentication</a>, <a href="https://jwt.io/">JSON Web Token</a>. You can switch between them at any time in a few of seconds. In our demo website we have Firebase by default, but we shipped with JWT version to allow you to start the application without having to configure the Auth0/Firebase api keys.
+blinkstars Kit Pro supports 3 authentication methods: <a href="https://auth0.com/">Auth0</a>, <a href="https://firebase.google.com/docs/auth">Firebase Authentication</a>, <a href="https://jwt.io/">JSON Web Token</a>. You can switch between them at any time in a few of seconds. In our demo website we have Firebase by default, but we shipped with JWT version to allow you to start the application without having to configure the Auth0/Firebase api keys.
 
 We've been testing multiple alternatives to support each integration easily without adding complexity to the project. We started with the concept of having all methods active at the same time under Redux with "service" utils, then we decided that is too difficult and hard to modify, and we reimplemented it using React Context API.
 

@@ -60,7 +60,7 @@ const CookiesNotification: FC = () => {
             component="a"
             color="inherit"
             underline="always"
-            href="https://devias.io/privacy-policy"
+            href="#"
             target="_blank"
           >
             Privacy Policy

@@ -221,7 +221,7 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
         .toDate()
         .getTime(),
       customer: {
-        email: 'ekaterina@devias.io',
+        email: 'ekaterina@blinkstars.io',
         name: 'Volvo'
       },
       currency: 'SEK',
@@ -259,7 +259,7 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
         .toDate()
         .getTime(),
       customer: {
-        email: 'alex.richardson@devias.io',
+        email: 'alex.richardson@blinkstars.io',
         name: 'TV4'
       },
       currency: 'SEK',
@@ -278,7 +278,7 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
         .toDate()
         .getTime(),
       customer: {
-        email: 'anje.keiser@devias.io',
+        email: 'anje.keiser@blinkstars.io',
         name: 'Tele2'
       },
       currency: 'SEK',
@@ -298,7 +298,7 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
         .getTime(),
       customer: {
         name: 'SAAB',
-        email: 'clarke.gillebert@devias.io'
+        email: 'clarke.gillebert@blinkstars.io'
       },
       currency: 'SEK',
       items: 2,
@@ -316,7 +316,7 @@ mock.onGet('/api/reports/latest-orders').reply(() => {
         .toDate()
         .getTime(),
       customer: {
-        email: 'merrile.burgett@devias.io',
+        email: 'merrile.burgett@blinkstars.io',
         name: 'SAS'
       },
       currency: 'SEK',

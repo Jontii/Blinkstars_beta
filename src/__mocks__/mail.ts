@@ -107,13 +107,13 @@ Ekaterina Tankova
     `,
     from: {
       name: 'Ekaterina Tankova',
-      email: 'ekaterina.tankova@devias.io',
+      email: 'ekaterina.tankova@blinkstars.io',
       avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_2.png`
     },
     to: [
       {
         name: 'Katarina Smith',
-        email: 'katarina.smith@devias.io',
+        email: 'katarina.smith@blinkstars.io',
         avatar: null
       }
     ],
@@ -132,13 +132,13 @@ Hey, nice projects! I really liked the one in react. What's your quote on kinda 
     `,
     from: {
       name: 'Adam Denisov',
-      email: 'adam.denisov@devias.io',
+      email: 'adam.denisov@blinkstars.io',
       avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_7.png`
     },
     to: [
       {
         name: 'Katarina Smith',
-        email: 'katarina.smith@devias.io',
+        email: 'katarina.smith@blinkstars.io',
         avatar: null
       }
     ],
@@ -157,13 +157,13 @@ Dear Shen, Your flight is coming up soon. Please don’t forget to check in for 
     `,
     from: {
       name: 'Miller Edwards',
-      email: 'miller.edwards@devias.io',
+      email: 'miller.edwards@blinkstars.io',
       avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_8.png`
     },
     to: [
       {
         name: 'Katarina Smith',
-        email: 'katarina.smith@devias.io',
+        email: 'katarina.smith@blinkstars.io',
         avatar: null
       }
     ],
@@ -182,13 +182,13 @@ My market leading client has another fantastic opportunity for an experienced So
     `,
     from: {
       name: 'Adrian Stefan',
-      email: 'cao.yu@devias.io',
+      email: 'cao.yu@blinkstars.io',
       avatar: `${process.env.PUBLIC_URL}/images/avatars/avatar_3.png`
     },
     to: [
       {
         name: 'Katarina Smith',
-        email: 'katarina.smith@devias.io',
+        email: 'katarina.smith@blinkstars.io',
         avatar: null
       }
     ],

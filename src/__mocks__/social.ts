@@ -11,10 +11,10 @@ mock.onGet('/api/social/profile').reply(() => {
     cover: `${process.env.PUBLIC_URL}/static/images/covers/cover_1.jpg`,
     currentCity: 'Bucharest',
     currentJob: {
-      company: 'Devias IO',
+      company: 'blinkstars IO',
       title: 'Product Designer'
     },
-    email: 'katarina.smith@devias.io',
+    email: 'katarina.smith@blinkstars.io',
     name: 'Katarina Smith',
     originCity: 'Rm. Valcea',
     previousJob: {

@@ -109,7 +109,7 @@ const InvoicePDF: FC<InvoicePDFProps> = ({ invoice }) => {
               source={`${process.env.PUBLIC_URL}/static/logo.jpg`}
               style={styles.brand}
             />
-            <Text style={styles.h5}>www.devias.io</Text>
+            <Text style={styles.h5}>www.blinkstars.io</Text>
           </View>
           <View>
             <Text style={styles.h1}>{invoice.status}</Text>
@@ -127,7 +127,7 @@ const InvoicePDF: FC<InvoicePDFProps> = ({ invoice }) => {
             <Text style={styles.body1}>EU VAT No. 949 67545 45</Text>
           </View>
           <View>
-            <Text style={styles.body1}>Email: accounts@devias.io</Text>
+            <Text style={styles.body1}>Email: accounts@blinkstars.io</Text>
             <Text style={styles.body1}>Tel: (+40) 652 3456 23</Text>
           </View>
         </View>

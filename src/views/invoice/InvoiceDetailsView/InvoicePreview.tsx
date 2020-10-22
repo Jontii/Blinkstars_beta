@@ -43,7 +43,7 @@ const InvoicePreview: FC<InvoicePreviewProps> = ({
             <Grid item>
               <Logo />
               <Typography variant="h5" color="textPrimary">
-                www.devias.io
+                www.blinkstars.io
               </Typography>
             </Grid>
             <Grid item>
@@ -72,7 +72,7 @@ const InvoicePreview: FC<InvoicePreviewProps> = ({
               </Grid>
               <Grid item>
                 <Typography align="right" variant="body1" color="textPrimary">
-                  Email: accounts@devias.io <br />
+                  Email: accounts@blinkstars.io <br />
                   Tel: (+40) 652 3456 23
                 </Typography>
               </Grid>
